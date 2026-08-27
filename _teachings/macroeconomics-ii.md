@@ -15,7 +15,7 @@ schedule:
     description: Course overview and some thoughts on macroeconomic theory and empirical macro.
     materials:
       - name: Lecture Slides
-        url: /assets/teaching/macroeconomics-ii/Slides/Macro II_01_Introducción.pdf
+        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_01_Introducción.pdf
 
   - week: Lecture 2
     date: 2026-08-27
@@ -23,7 +23,7 @@ schedule:
     description: Optimal decision-making by representative households and firms in a one-period model.
     materials:
       - name: Lecture Slides
-        url: /assets/teaching/macroeconomics-ii/Slides/Macro II_02_Consumidor-y-Empresa.pdf
+        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_02_Consumidor_Empresa.pdf
 ---
 
 ## Course Overview
