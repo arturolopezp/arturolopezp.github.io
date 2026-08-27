@@ -10,7 +10,7 @@ time: Tuesdays and Thursdays, 8:00-9:30 am
 course_id: macroeconomics-ii
 schedule:
   - week: Lecture 1
-    date: 2026-08-25
+    date: Aug 25
     topic: Welcome and introduction
     description: Course overview and some thoughts on macroeconomic theory and empirical macro.
     materials:
@@ -18,7 +18,7 @@ schedule:
         url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_01_Introducción.pdf
 
   - week: Lecture 2
-    date: 2026-08-27
+    date: Aug 27
     topic: Consumer and Firm Behavior
     description: Optimal decision-making by representative households and firms in a one-period model.
     materials:
@@ -35,7 +35,7 @@ The public materials are currently provided in Spanish, their original classroom
 
 You can download the syllabus/temario [here]({{ '/assets/teaching/macroeconomics-ii/Syllabus/Macro_II_Syllabus.pdf' | relative_url }}).
 
-## Primary References
+## Main References
 
 - Stephen D. Williamson (2018). _Macroeconomics_. 6th edition. Pearson Education Limited.
 - Pablo Kurlat (2020). _A Course in Modern Macroeconomics_. Self-published Lecture Notes. Stanford University.
