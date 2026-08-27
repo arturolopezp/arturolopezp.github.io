@@ -1,0 +1,1099 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 2: ELECCION DEL CONSUMIDOR Y DE LA EMPRESA
+% Compilacion normal: pdflatex (o latexmk).
+% =============================================================================
+
+% --- Idioma, tipografia y matematicas -----------------------------------------
+\usepackage[utf8]{inputenc}
+\IfFileExists{spanish.ldf}{
+  \usepackage[spanish,es-nodecimaldot]{babel}
+}{
+  \usepackage[english]{babel}
+}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{array,tabularx}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage[table]{xcolor}
+
+% --- Bibliografia opcional ----------------------------------------------------
+\newif\ifusarBibliografia
+\usarBibliografiafalse
+
+\ifusarBibliografia
+  \IfFileExists{csquotes.sty}{\usepackage{csquotes}}{}
+  \IfFileExists{apa.bbx}{
+    \usepackage[backend=biber,style=apa,sorting=nyt]{biblatex}
+  }{
+    \usepackage[backend=biber,style=authoryear,sorting=nyt]{biblatex}
+  }
+  \IfFileExists{References.bib}{
+    \addbibresource{References.bib}
+  }{
+    \addbibresource{References.bib.bib}
+  }
+\fi
+
+% --- Paleta: azul marino, blanco y grises neutros ----------------------------
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+\setbeamercolor{section in toc}{fg=CIDEBlue}
+\setbeamercolor{section in toc shaded}{fg=CIDEGray}
+
+% --- Tipografia ---------------------------------------------------------------
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+
+% --- Geometria general --------------------------------------------------------
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+% Navegacion superior con nombres de seccion y mini-indicadores consecutivos.
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+
+% Evita que Beamer distribuya las secciones a lo ancho de toda la pagina.
+\makeatletter
+\patchcmd{\insertnavigation}
+  {\hskip-1.875ex plus-1fill}
+  {\hskip-1.875ex}
+  {}{}
+\patchcmd{\sectionentry}
+  {\box\beamer@sectionbox\hskip1.875ex plus 1fill}
+  {\box\beamer@sectionbox\hskip1.875ex}
+  {}{}
+\makeatother
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+% Banda de titulo de cada diapositiva.
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,
+    ht=3.05ex,
+    dp=1.05ex,
+    leftskip=0.42cm,
+    rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+% Pie en dos niveles: autor/institucion y nombre corto/paginacion.
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+    \hbox to \paperwidth{%
+      \hfill
+      \raisebox{0.68cm}[0pt][0pt]{%
+        \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      }%
+      \hspace{0.18cm}%
+    }%
+  }%
+  \vskip0pt
+}
+
+% Logo CIDE automatico en la esquina inferior derecha.
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+
+% Portada.
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+% --- Comandos reutilizables ---------------------------------------------------
+\newcommand{\FigurasSesion}{Figuras/02_Consumidor y Empresa}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+
+% Los enlaces externos son azules; los internos conservan el color de Beamer.
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% No se generan diapositivas de contenido automaticas al cambiar de seccion.
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+% =============================================================================
+% METADATOS
+% =============================================================================
+\title[Macroeconomía II]{Sesión 2 \\ Conducta del consumidor y de la empresa}
+\subtitle{Decisiones óptimas en una economía de un periodo}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+% =============================================================================
+\begin{document}
+% =============================================================================
+
+\begin{frame}
+  \titlepage
+  \notafuentes{Williamson (2018), cap. 4; Moll, Lecture 1.}
+\end{frame}
+
+% =============================================================================
+\section{Punto de partida}
+% =============================================================================
+
+\begin{frame}{Punto de partida}
+  En esta sesión, comenzamos a construir el primer modelo macroeconómico del curso.
+
+  \vspace{0.15cm}
+
+  Este modelo es extremadamente sencillo, pero involucra los dos principales ingredientes de todo modelo moderno: 
+  \begin{enumerate}
+    \item Microfundamentos
+    \item Equilibrio general
+  \end{enumerate}
+
+  \cidehighlight{Esta sesión}: microfundamentes de las decisiones de los agentes en la economía.
+
+  \vspace{0.15cm}
+
+  El objetivo es construir modelos macroeconómicos para poder explicar el comovimiento de variables como la producción agregada, las horas trabajadas agregadas, el consumo agregado, la inversión agregada, la inflación, la tasa de desocupación, etc.
+
+  \vspace{0.15cm}
+
+  El modelo de esta sesión y la que sigue busca discutir únicamente con las primeras tres.
+\end{frame}
+
+
+\begin{frame}{Mapa de la sesión}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.55em}
+    \item El consumidor representativo: preferencias y restricción presupuestaria.
+    \item Elección óptima entre consumo y ocio.
+    \item Efectos ingreso y sustitución; oferta de trabajo.
+    \item La empresa representativa: tecnología y producto marginal.
+    \item Maximización de beneficios y demanda de trabajo.
+  \end{enumerate}
+
+  \vspace{0.35cm}
+
+  \begin{block}{Objetivo}
+    Construir los dos bloques microeconómicos básicos que después integraremos en un modelo macroeconómico de equilibrio general.
+  \end{block}
+  \notafuentes{Williamson (2018), cap. 4; Moll, Lectures 1--2.}
+\end{frame}
+
+\begin{frame}{Un modelo estático en equilibrio parcial}
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item Hay un solo periodo: las decisiones son \cidehighlight{estáticas}, no intertemporales.
+    \item Estudiamos por separado a hogares y empresas, tomando como dado el salario real \(w\).
+    \item El consumidor ofrece trabajo y demanda bienes de consumo.
+    \item La empresa demanda trabajo y ofrece bienes de consumo.
+    \item Más adelante, el salario se determinará de forma endógena al imponer equilibrio en los mercados.
+  \end{itemize}
+
+  \vspace{0.25cm}
+  \centering
+  \cidehighlight{Hoy: decisiones individuales. Próximo paso: compatibilidad entre decisiones.}
+  \notafuentes{Williamson (2018), pp. 118--119; Moll, Lecture 1.}
+\end{frame}
+
+% =============================================================================
+\section{Consumidor}
+% =============================================================================
+
+\begin{frame}{El consumidor representativo}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item \cidehighlight{Agente representativo}: Un solo agente resume el comportamiento agregado de los hogares.
+    \item El consumidor \cidehighlight{valora} dos bienes:
+      \begin{itemize}
+        \item consumo, \(c\);
+        \item ocio, \(\ell\).
+      \end{itemize}
+    \item Trabajar permite financiar consumo, pero reduce el tiempo disponible para ocio.
+    \item Las preferencias del consumidor están definidas sobre estos dos bienes: un bien de consumo (e.g. una canasta de todos los bienes y servicios disponibles) y ocio.
+  \end{itemize}
+
+  \notafuentes{Williamson (2018), pp. 119--121; Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}{Preferencias sobre consumo y ocio}
+  Representamos las preferencias mediante una función de utilidad
+  \[
+    U(c,\ell),
+  \]
+  con las siguientes propiedades:
+  \begin{itemize}
+    \setlength{\itemsep}{0.45em}
+    \item \textbf{Más es mejor:} \(U_c>0\) y \(U_{\ell}>0\).
+    \item \textbf{Utilidad marginal decreciente:} \(U_{cc}<0\) y \(U_{\ell\ell}<0\).
+    \item \textbf{Preferencia por combinaciones:} las curvas de indiferencia son convexas.
+    \item \textbf{Bienes normales:} al aumentar el ingreso, el consumidor desea más consumo y más ocio.
+  \end{itemize}
+
+  \vspace{0.15cm}
+  Una representación separable muy común es
+  \[
+    U(c,\ell)=u(c)-v(\ell),
+  \]
+  \notafuentes{Williamson (2018), pp. 120--123; Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}[t]{Curvas de indiferencia}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.46\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Cada curva reúne combinaciones de \(c\) y \(\ell\) que generan la misma utilidad.
+        \item Una curva más alta representa mayor bienestar.
+        \item Para mantener la utilidad, más ocio debe compensarse con menos consumo.
+      \end{itemize}
+
+      \vspace{0.2cm}
+      \[
+        U(c_1,\ell_1)=U(c_2,\ell_2).
+      \]
+    \end{column}
+    \begin{column}{0.50\textwidth}
+      \centering
+      \figura[5.15cm]{fig_4_1_curvas_indiferencia.png}
+      \fuentefigura{Williamson (2018), Figura 4.1.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.1 y pp. 122--123.}
+\end{frame}
+
+\begin{frame}[t]{Tasa marginal de sustitución}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.46\textwidth}
+      La tasa marginal de sustitución de ocio por consumo es
+      \[
+        \mathrm{MRS}_{\ell,c}
+        =\frac{U_{\ell}(c,\ell)}{U_c(c,\ell)}.
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.45em}
+        \item Es el consumo que compensa una unidad adicional de ocio.
+        \item Es igual al valor absoluto de la pendiente de la curva de indiferencia.
+        \item La convexidad implica una MRS decreciente conforme aumenta el ocio.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.50\textwidth}
+      \centering
+      \figura[5.2cm]{fig_4_2_propiedades_curvas.png}
+      \fuentefigura{Williamson (2018), Figura 4.2.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.2 y pp. 124--125.}
+\end{frame}
+
+\begin{frame}{Restricción presupuestaria}
+  El consumidor representativo se comporta de forma competitiva (tomador de precios).
+
+  Dispone de \(h\) unidades de tiempo, que asigna a ocio $\ell$ y horas de trabajo (oferta laboral) $N^s$:
+  \[
+    N^s+\ell=h,
+  \]
+
+  \vspace{0.15cm}
+  Las horas de trabajo son vendidas en el mercado laboral al precio $w$, que está en términos del bien de consumo: una hora de trabajo se intercambia por $w$ unidades del bien de consumo.
+  \vspace{0.15cm}
+
+  Su ingreso disponible proviene del trabajo y de ingresos no laborales:
+  \[
+    wN^s+\pi-T.
+  \]
+
+  \vspace{0.15cm}
+  El bien de consumo juega el papel de un bien \textit{numerario}: todos los precios y cantidades están denominados en dicho bien. Esta elección es arbitaria, pero común.
+
+\end{frame}
+
+\begin{frame}{Pendiente de la restricción presupuestaria}
+  Suponemos que el agente representativo busca consumir todo su ingreso disponible. 
+
+  \vspace{0.15cm}
+
+   Sustituyendo \(N^s=h-\ell\):
+  \[
+    \boxed{c=w(h-\ell)+\pi-T}
+    \qquad\Longleftrightarrow\qquad
+    c=-w\ell+w h+\pi-T.
+  \]
+
+  \begin{itemize}
+    \item Pendiente: \(-w\), el costo de oportunidad del ocio.
+    \item Intercepto vertical: \(w h+\pi-T\), consumo si no se toma ocio.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 126--129; Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}[t]{Conjunto factible}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.45\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Los puntos dentro o sobre la frontera son factibles.
+        \item Los puntos por encima requieren más recursos de los disponibles.
+        \item Si \(\pi-T>0\), el consumidor puede consumir aun cuando no trabaje.
+        \item La gráfica se trunca porque el ocio no puede exceder la dotación total de tiempo \(h\).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.51\textwidth}
+      \centering
+      \figura[5.0cm]{fig_4_4_restriccion_presupuestaria.png}
+      \fuentefigura{Williamson (2018), Figura 4.4.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.4 y pp. 127--129.}
+\end{frame}
+
+\begin{frame}{El problema del consumidor}
+  En términos de ocio:
+  \[
+    \max_{c,\ell}\; U(c,\ell)
+    \quad\text{sujeto a}\quad
+    c=w(h-\ell)+\pi-T.
+  \]
+
+  En términos de horas trabajadas:
+  \[
+    \max_{c,N^s}\; u(c)-v(N^s)
+    \quad\text{sujeto a}\quad
+    c=wN^s+\pi-T.
+  \]
+  \notafuentes{Williamson (2018), pp. 129--132; Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}[t]{Elección óptima del consumidor representativo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.52\textwidth}
+      En una solución interior, la curva de indiferencia es tangente a la restricción:
+      \[
+        \mathrm{MRS}_{\ell,c}=w
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.3em}
+        \small
+        \item La MRS es la tasa a la que el consumidor está dispuesto a intercambiar ocio por consumo.
+        \item \(w\) es el costo de oportunidad del ocio en el mercado: tasa a la que el ocio se intercambia por bienes de consumo en el mercado laboral.
+        \item Si ambas difieren, el consumidor puede reasignar tiempo y mejorar.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \figura[5.25cm]{fig_4_5_optimo_consumidor.png}
+      \fuentefigura{Williamson (2018), figura 4.5.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.5 y pp. 130--132.}
+\end{frame}
+
+
+
+\begin{frame}{Más intuición sobre la condición de optimalidad}
+  \[
+    \underbrace{\mathrm{MRS}_{\ell,c}}_{\substack{\text{costo marginal de trabajar}\\\text{medido en consumo}}}
+    =
+    \underbrace{w}_{\substack{\text{beneficio marginal}\\\text{medido en consumo}}}
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item Si \(\mathrm{MRS}_{\ell,c}<w\), una hora adicional de trabajo aumenta el bienestar.
+    \item Si \(\mathrm{MRS}_{\ell,c}>w\), conviene trabajar menos y consumir más ocio.
+    \item En el óptimo, el consumidor es indiferente ante un ajuste marginal en sus horas.
+  \end{itemize}
+
+  \begin{alertblock}{Idea que reaparecerá en todo el curso}
+    Una decisión óptima iguala un beneficio marginal con un costo marginal.
+  \end{alertblock}
+  \notafuentes{Moll, Lecture 1; Williamson (2018), cap. 4.}
+\end{frame}
+
+\begin{frame}{Nuestros primeros "experimentos"}
+  \begin{itemize}
+    \item ¿Cómo cambia la elección del consumidor representativo ante cambios en su entorno?
+
+    \item Esta simple pregunta está detrás de todas las simulaciones de modelos macroeconómicos en la práctica. En modelos dinámicos, estas respuestas suelen resumirse mediante las famosas funciones impulso-respuesta.
+
+    \item Comenzaremos con nuestros primeros experimentos teóricos (cambiar una variable, manteniendo todo lo demás constante), para identificar sus consecuencias y los mecanismos que las explican.
+
+    \item Nos interesa estudiar cómo responden el consumo y la oferta laboral, es decir, las horas trabajadas.
+
+    \item En particular, veremos que la respuesta de la oferta laboral ante cambios en el salario depende del balance entre los efectos sustitución e ingreso.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]{Choque en el ingreso no laboral genera un efecto ingreso puro}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      Si \(\pi-T\) aumenta y \(w\) permanece constante:
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item la restricción se desplaza de forma paralela;
+        \item aumenta el consumo (bien normal)
+        \item aumenta el ocio (bien normal)
+        \item disminuyen las horas trabajadas.
+      \end{itemize}
+      Efecto ingreso puro:
+      \[
+        \Delta(\pi-T)>0
+        \quad\Rightarrow\quad
+        c\uparrow,\;\ell\uparrow,\;N^s\downarrow.
+      \]
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.35cm]{fig_4_7_efecto_ingreso.png}
+      \fuentefigura{Williamson (2018), figura 4.7.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.7 y pp. 133--134.}
+\end{frame}
+
+\begin{frame}{El ingreso no laboral desplaza la oferta de trabajo}
+  Partimos de una oferta de trabajo
+  \[
+    N^{s^*}=N^{s}(w,\pi-T)
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Un aumento de \(\pi-T\) eleva la demanda de ocio.
+    \item Para cada salario real, el consumidor ofrece menos horas de trabajo.
+    \item Por tanto, la curva de oferta laboral se desplaza hacia la izquierda.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 133--139.}
+\end{frame}
+
+\begin{frame}{Un salario mayor produce dos fuerzas opuestas}
+  Un aumento de \(w\) hace más inclinada la restricción presupuestaria.
+
+  \vspace{0.15cm}
+
+  % Se usan columnas simples con \parbox para evitar incompatibilidades entre
+  % versiones de array/tabularx en instalaciones mixtas de MiKTeX.
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \parbox[t]{2.5cm}{\raggedright} &
+    \parbox[t]{5.3cm}{\raggedright Efecto sobre el ocio} &
+    \parbox[t]{5.3cm}{\raggedright Efecto sobre el trabajo} \\
+    \midrule
+    \parbox[t]{2.5cm}{\raggedright\bfseries Sustitución} &
+    \parbox[t]{5.3cm}{\raggedright El ocio se vuelve relativamente más caro: \(\ell\downarrow\).} &
+    \parbox[t]{5.3cm}{\raggedright Trabajar paga más: \(N^s\uparrow\).} \\
+    \addlinespace
+    \parbox[t]{2.5cm}{\raggedright\bfseries Ingreso} &
+    \parbox[t]{5.3cm}{\raggedright El consumidor es efectivamente más rico: \(\ell\uparrow\).} &
+    \parbox[t]{5.3cm}{\raggedright Si el ocio es normal: \(N^s\downarrow\).} \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.35cm}
+  \begin{block}{Efecto total}
+    El consumo aumenta, pero el efecto total sobre las horas trabajadas es ambiguo.
+  \end{block}
+  \notafuentes{Williamson (2018), pp. 135--138; Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}[t]{La descomposición separa sustitución e ingreso}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+        \item \(F\to O\): efecto sustitución, manteniendo constante la utilidad inicial.
+        \item \(O\to H\): efecto ingreso, manteniendo constante el nuevo salario.
+        \item Ambos efectos elevan el consumo.
+        \item Sus efectos sobre el ocio ---y el trabajo--- tienen signos opuestos.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.4cm]{fig_4_8_salario_ingreso_sustitucion.png}
+      \fuentefigura{Williamson (2018), figura 4.8.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.8 y pp. 135--137.}
+\end{frame}
+
+\begin{frame}{¿La oferta de trabajo tiene pendiente positiva?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item Si domina el \textbf{efecto sustitución}, un salario mayor aumenta las horas trabajadas.
+    \item Si domina el \textbf{efecto ingreso}, un salario mayor reduce las horas trabajadas.
+    \item En aplicaciones macroeconómicas suele suponerse que el efecto sustitución domina en el margen relevante.
+  \end{itemize}
+
+  \vspace{0.25cm}
+
+  \begin{block}{Dos márgenes de ajuste}
+    \begin{itemize}
+      \item \textbf{Margen intensivo:} cuántas horas trabaja cada persona empleada.
+      \item \textbf{Margen extensivo:} cuántas personas están empleadas.
+    \end{itemize}
+  \end{block}
+  \notafuentes{Williamson (2018), pp. 137--142; Keane y Rogerson, discusión reproducida en el cap. 4.}
+\end{frame}
+
+\begin{frame}[t]{La oferta laboral resume la decisión del consumidor}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      La función de oferta laboral indica las horas elegidas para cada salario:
+      \[
+        N^{s}=N^{s}(w;\pi-T).
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+        \item La curva de la figura supone que domina el efecto sustitución.
+        \item Un aumento del ingreso no laboral la desplaza a la izquierda.
+        \item La forma exacta depende de las preferencias.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.3cm]{fig_4_9_oferta_laboral.png}
+      \fuentefigura{Williamson (2018), figura 4.9.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.9 y pp. 137--139.}
+\end{frame}
+
+\begin{frame}{Ejemplo paramétrico: los dos efectos pueden cancelarse}
+  Considere
+  \[
+    u(c)=\log c,
+    \qquad
+    v(h)=\theta\frac{h^{1+1/\varepsilon}}{1+1/\varepsilon},
+    \qquad
+    \pi-T=0.
+  \]
+  donde $h$ son horas trabajadas (una notación muy común, alternativa a $N^s$).
+
+
+  La condición de optimalidad y la restricción son
+  \[
+    \theta h^{1/\varepsilon}c=w,
+    \qquad
+    c=wh.
+  \]
+
+  Por tanto,
+  \[
+    \boxed{h^{*}=\theta^{-\varepsilon/(1+\varepsilon)}}
+    \qquad\text{y}\qquad
+    \boxed{c^{*}=wh^{*}}.
+  \]
+
+  \begin{itemize}
+    \item En este caso, un aumento de \(w\) no cambia \(h^{*}\): los efectos ingreso y sustitución se cancelan exactamente.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Comprobación rápida: decisiones del consumidor}
+  Suponga que consumo y ocio son bienes normales.
+
+  \begin{enumerate}
+    \setlength{\itemsep}{0.7em}
+    \item ¿Qué ocurre con \(c\), \(\ell\) y \(N^s\) si aumenta \(\pi-T\)?
+    \item ¿Cómo se desplaza la oferta de trabajo?
+    \item Si aumenta \(w\), ¿qué efecto tiene signo inequívoco sobre el consumo?
+    \item ¿Por qué no puede determinarse el signo del cambio en \(N^s\) sin conocer mejor las preferencias?
+  \end{enumerate}
+
+  \vspace{0.25cm}
+  \begin{alertblock}{Idea central}
+    Un cambio de ingreso desplaza la restricción; un cambio salarial también modifica su pendiente.
+  \end{alertblock}
+  \notafuentes{Williamson (2018), sección sobre estática comparativa del consumidor.}
+\end{frame}
+
+\begin{frame}{Evidencia empírica: Estados Unidos por edad}
+  \centering
+  \figura[5.3cm]{ES_EI_01.png}
+  \fuentefigura{Kurlat (2020), Figura 7.3.1}
+\end{frame}
+
+\begin{frame}{Evidencia empírica: diferencias entre países}
+  \centering
+  \figura[5.3cm]{ES_EI_02.png}
+  \fuentefigura{Kurlat (2020), Figura 7.3.1}
+\end{frame}
+
+\begin{frame}{Evidencia empírica: ¿diferencias en política fiscal y seguridad social?}
+  \centering
+  \figura[5.3cm]{ES_EI_03.png}
+  \fuentefigura{Kurlat (2020), Figura 7.3.1}
+\end{frame}
+
+
+% =============================================================================
+\section{Empresa}
+% =============================================================================
+
+\begin{frame}{La tecnología de la empresa representativa}
+  La empresa representativa transforma capital y trabajo en producción:
+  \[
+    Y=zF(K,N^{d})
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item \(Y\): producción del bien de consumo.
+    \item \(K\): capital instalado; es fijo dentro del periodo.
+    \item \(N^{d}\): trabajo contratado; es el insumo variable.
+    \item \(z\): productividad total de los factores.
+  \end{itemize}
+
+  \vspace{0.2cm}
+  La empresa toma como dado el salario real \(w\) y elige cuánto trabajo contratar.
+  \notafuentes{Williamson (2018), pp. 142--144; Moll, Lecture 1.}
+\end{frame}
+
+
+\begin{frame}{Tecnología de la empresa representativa}
+  \begin{itemize}
+    \item El supuesto de una empresa representativa puede interpretarse como una empresa cuya tecnología \textit{representa} la tecnología utilizada por la mayoría de las empresas.
+
+    \item La tecnología empleada por distintas empresas puede variar considerablemente, incluso cuando producen un bien muy similar.
+
+    \item Un ejemplo particularmente ilustrativo es la
+    \href{https://energia.conahcyt.mx/planeas/electricidad/capacidad-generacion}
+    {generación de energía eléctrica en México}.
+
+    \item En el ejemplo anterior, supondríamos que $F(K,N^d)$ resume o representa de forma adecuada la tecnología de una empresa típica (una empresa representativa) del sector de generación eléctrica.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Propiedades de la función de producción}
+  \small
+  \begin{enumerate}
+    \setlength{\itemsep}{0.42em}
+    \item \textbf{Rendimientos constantes a escala:}
+      \[
+        F(\lambda K,\lambda N)=\lambda F(K,N), \qquad  \lambda >0.
+      \]
+    \item \textbf{Productos marginales positivos:} \(F_K>0\) y \(F_N>0\).
+    \item \textbf{Productos marginales decrecientes:} \(F_{KK}<0\) y \(F_{NN}<0\).
+    \item \textbf{Complementariedad:} más capital eleva el producto marginal del trabajo, \(F_{NK}>0\).
+  \end{enumerate}
+
+  \begin{block}{Interpretación macroeconómica}
+    La función agregada resume cómo la economía convierte insumos productivos en PIB real.
+  \end{block}
+  \notafuentes{Williamson (2018), pp. 143--148.}
+\end{frame}
+
+\begin{frame}[t]{El producto marginal es la pendiente de la tecnología}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      Manteniendo \(K\) fijo:
+      \[
+        \mathrm{MPN}
+        =\frac{\partial Y}{\partial N}
+        =zF_N(K,N).
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+        \item Mide la producción adicional de una unidad de trabajo.
+        \item La concavidad de \(F\) implica que el MPN disminuye con \(N\).
+        \item La primera unidad de trabajo es más productiva que las posteriores.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.3cm]{fig_4_12_funcion_produccion.png}
+      \fuentefigura{Williamson (2018), figura 4.12.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.12 y pp. 143--147.}
+\end{frame}
+
+\begin{frame}[t]{El producto marginal del trabajo es decreciente}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Con capital fijo, trabajadores adicionales comparten la misma planta y equipo.
+        \item La congestión reduce lo que agrega cada unidad adicional de trabajo.
+        \item Matemáticamente:
+          \[
+            \frac{\partial\mathrm{MPN}}{\partial N}
+            =zF_{NN}(K,N)<0.
+          \]
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.35cm]{fig_4_14_producto_marginal_trabajo.png}
+      \fuentefigura{Williamson (2018), figura 4.14.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.14 y pp. 146--148.}
+\end{frame}
+
+\begin{frame}[t]{Capital y productividad elevan la productividad laboral}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{Más capital, \(K\uparrow\)}
+
+      \vspace{0.08cm}
+      \figura[4.25cm]{fig_4_15_capital_y_pmn.png}
+
+      \raggedright
+      \scriptsize El trabajo dispone de más equipo con el cual producir.
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{Mayor productividad, \(z\uparrow\)}
+
+      \vspace{0.08cm}
+      \figura[4.25cm]{fig_4_17_ptf_y_pmn.png}
+
+      \raggedright
+      \scriptsize La misma combinación de insumos genera más producto.
+    \end{column}
+  \end{columns}
+
+  \fuentefigura{Williamson (2018), figuras 4.15 y 4.17.}
+  \notafuentes{Williamson (2018), figuras 4.15--4.17 y pp. 147--150.}
+\end{frame}
+
+\begin{frame}{El problema de maximización de beneficios}
+  El precio del bien de consumo se normaliza a uno. Los beneficios reales son
+  \[
+    \pi=Y-wN^{d}=zF(K,N^{d})-wN^{d}.
+  \]
+
+  La empresa resuelve
+  \[
+    \max_{N^{d}\geq 0}\left\{zF(K,N^{d})-wN^{d}\right\}.
+  \]
+
+  Para una solución interior:
+  \[
+    \boxed{zF_N(K,N^{d})=w}
+    \qquad\Longleftrightarrow\qquad
+    \boxed{\mathrm{MPN}=w}.
+  \]
+
+  \begin{itemize}
+    \item La empresa contrata trabajo hasta que su producto marginal iguala su costo real.
+    \item La condición de segundo orden se cumple porque \(F_{NN}<0\).
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 150--155; Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}[t]{La empresa maximiza la distancia entre ingresos y costos}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Ingreso real: \(zF(K,N^{d})\).
+        \item Costo variable: \(wN^{d}\).
+        \item Beneficio: distancia vertical entre ambas curvas.
+        \item En \(N^{*}\), sus pendientes coinciden:
+          \[
+            \mathrm{MPN}=w.
+          \]
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.3cm]{fig_4_19_maximizacion_beneficios.png}
+      \fuentefigura{Williamson (2018), figura 4.19.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.19 y pp. 153--155.}
+\end{frame}
+
+\begin{frame}[t]{El MPN es la curva de demanda de trabajo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      Para cada salario, la empresa elige \(N^{d}\) de modo que
+      \[
+        \mathrm{MPN}(N^{d})=w.
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+        \item Como el MPN es decreciente, la demanda de trabajo tiene pendiente negativa.
+        \item Un salario mayor reduce la cantidad de trabajo rentable.
+        \item Cambios en \(K\) o \(z\) desplazan toda la curva.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.15cm]{fig_4_20_demanda_trabajo.png}
+      \fuentefigura{Williamson (2018), figura 4.20.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 4.20 y pp. 154--156.}
+\end{frame}
+
+\begin{frame}{Ejemplo paramétrico: tecnología Cobb--Douglas}
+  Sea
+  \[
+    Y=zK^{\alpha}N^{1-\alpha},
+    \qquad 0<\alpha<1.
+  \]
+
+  El producto marginal del trabajo es
+  \[
+    \mathrm{MPN}=(1-\alpha)zK^{\alpha}N^{-\alpha}.
+  \]
+
+  Imponiendo \(\mathrm{MPN}=w\):
+  \[
+    \boxed{
+      N^{d}(w;K,z)
+      =\left(\frac{(1-\alpha)zK^{\alpha}}{w}\right)^{1/\alpha}
+    }.
+  \]
+
+  \begin{itemize}
+    \item \(N^{d}\) disminuye con \(w\).
+    \item \(N^{d}\) aumenta con \(z\) y con \(K\).
+  \end{itemize}
+  \notafuentes{Williamson (2018), sección sobre la empresa; Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}{Estática comparativa de la demanda de trabajo}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \parbox[t]{3.4cm}{\raggedright\bfseries Cambio} &
+    \parbox[t]{4.8cm}{\raggedright Mecanismo} &
+    \parbox[t]{4.9cm}{\raggedright Demanda de trabajo} \\
+    \midrule
+    \parbox[t]{3.4cm}{\raggedright\bfseries Salario real \(w\uparrow\)} &
+    \parbox[t]{4.8cm}{\raggedright Aumenta el costo marginal de contratar.} &
+    \parbox[t]{4.9cm}{\raggedright Movimiento sobre la curva: \(N^{d}\downarrow\).} \\
+    \addlinespace
+    \parbox[t]{3.4cm}{\raggedright\bfseries Productividad \(z\uparrow\)} &
+    \parbox[t]{4.8cm}{\raggedright Aumenta el producto marginal del trabajo.} &
+    \parbox[t]{4.9cm}{\raggedright La curva se desplaza a la derecha.} \\
+    \addlinespace
+    \parbox[t]{3.4cm}{\raggedright\bfseries Capital \(K\uparrow\)} &
+    \parbox[t]{4.8cm}{\raggedright El trabajo dispone de más equipo productivo.} &
+    \parbox[t]{4.9cm}{\raggedright La curva se desplaza a la derecha.} \\
+    \addlinespace
+    \parbox[t]{3.4cm}{\raggedright\bfseries Impuesto de suma fija} &
+    \parbox[t]{4.8cm}{\raggedright Reduce los beneficios, pero no el beneficio marginal de contratar.} &
+    \parbox[t]{4.9cm}{\raggedright \(N^{d}\) no cambia.} \\[0.15cm]
+    \bottomrule
+  \end{tabular}
+  \notafuentes{Williamson (2018), pp. 147--156 y problemas del cap. 4.}
+\end{frame}
+
+\begin{frame}{Comprobación rápida: decisiones de la empresa}
+  Una empresa tiene beneficios
+  \[
+    \pi=zF(K,N)-wN-\tau,
+  \]
+  donde \(\tau\) es un impuesto de suma fija.
+
+  \begin{enumerate}
+    \setlength{\itemsep}{0.65em}
+    \item ¿Cambia la condición \(\mathrm{MPN}=w\) cuando aumenta \(\tau\)?
+    \item ¿Cambia la demanda de trabajo de una empresa que continúa operando?
+    \item ¿Qué ocurriría si el gobierno subsidiara cada unidad de trabajo en \(s\), de modo que el costo efectivo fuera \(w-s\)?
+  \end{enumerate}
+
+  \vspace{0.2cm}
+  \begin{alertblock}{Pista}
+    Distinga entre cambios en el nivel de beneficios y cambios en el beneficio marginal de contratar trabajo.
+  \end{alertblock}
+  \notafuentes{Adaptado de los problemas 12--13 de Williamson (2018), cap. 4.}
+\end{frame}
+
+% =============================================================================
+\section{Síntesis}
+% =============================================================================
+
+\begin{frame}{Dos problemas con la misma lógica marginal}
+  \small
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \parbox[t]{3.4cm}{\raggedright} &
+    \parbox[t]{4.6cm}{\raggedright Consumidor} &
+    \parbox[t]{5.1cm}{\raggedright Empresa} \\
+    \midrule
+    \parbox[t]{3.4cm}{\raggedright\bfseries Objetivo} &
+    \parbox[t]{4.6cm}{\raggedright Maximizar \(u(c)-v(h)\).} &
+    \parbox[t]{5.1cm}{\raggedright Maximizar \(\pi=zF(K,N)-wN\).} \\
+    \addlinespace
+    \parbox[t]{3.4cm}{\raggedright\bfseries Restricción} &
+    \parbox[t]{4.6cm}{\raggedright \(c=wh+\Pi-T\).} &
+    \parbox[t]{5.1cm}{\raggedright Tecnología \(Y=zF(K,N)\).} \\
+    \addlinespace
+    \parbox[t]{3.4cm}{\raggedright\bfseries Elección} &
+    \parbox[t]{4.6cm}{\raggedright Consumo y trabajo.} &
+    \parbox[t]{5.1cm}{\raggedright Trabajo y producción.} \\
+    \addlinespace
+    \parbox[t]{3.4cm}{\raggedright\bfseries Condición óptima} &
+    \parbox[t]{4.6cm}{\raggedright \(v'(h)/u'(c)=w\).} &
+    \parbox[t]{5.1cm}{\raggedright \(\mathrm{MPN}=w\).} \\
+    \addlinespace
+    \parbox[t]{3.4cm}{\raggedright\bfseries Curva resultante} &
+    \parbox[t]{4.6cm}{\raggedright Oferta de trabajo \(h^{s}(w)\).} &
+    \parbox[t]{5.1cm}{\raggedright Demanda de trabajo \(N^{d}(w)\).} \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.3cm}
+  \centering
+  \cidehighlight{Ambos agentes comparan una valoración marginal con el salario real.}
+  \notafuentes{Síntesis de Williamson (2018), cap. 4, y Moll, Lecture 1.}
+\end{frame}
+
+\begin{frame}{Resultados que debemos conservar}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.6em}
+    \item El salario real es el precio relativo del ocio y el costo real del trabajo para la empresa.
+    \item La oferta laboral surge de maximizar utilidad sujeto al presupuesto.
+    \item Un cambio salarial genera efectos ingreso y sustitución; el efecto sobre las horas puede ser ambiguo.
+    \item La demanda laboral surge de maximizar beneficios y coincide con el producto marginal del trabajo.
+    \item Más capital o productividad elevan el MPN y desplazan la demanda de trabajo.
+  \end{enumerate}
+
+  \begin{block}{Puente hacia el equilibrio general}
+    En la siguiente sesión buscaremos un salario \(w^{*}\) que haga compatibles la oferta y la demanda de trabajo.
+  \end{block}
+  \notafuentes{Williamson (2018), resumen del cap. 4; Moll, Lectures 1--2.}
+\end{frame}
+
+\begin{frame}{De las decisiones individuales al equilibrio}
+  Hoy obtuvimos
+  \[
+    h^{s}=h^{s}(w;\Pi-T),
+    \qquad
+    N^{d}=N^{d}(w;K,z).
+  \]
+
+  En equilibrio del mercado de trabajo:
+  \[
+    \boxed{h^{s}(w^{*})=N^{d}(w^{*})}.
+  \]
+
+  Y en el mercado de bienes:
+  \[
+    \boxed{c^{*}=Y^{*}}.
+  \]
+
+  \vspace{0.25cm}
+  \begin{alertblock}{Siguiente paso}
+    Determinar conjuntamente precios y cantidades: nuestro primer modelo macroeconómico de equilibrio general.
+  \end{alertblock}
+  \notafuentes{Moll, Lecture 2; Williamson (2018), transición de los caps. 4 a 5.}
+\end{frame}
+
+\begin{frame}{Referencias de la sesión}
+  \begin{itemize}
+    \setlength{\itemsep}{0.75em}
+    \item Williamson, Stephen D. (2018). \textit{Macroeconomics}, 6th ed. Pearson. Capítulo 4: ``Consumer and Firm Behavior: The Work--Leisure Decision and Profit Maximization''.
+    \item Pablo Kurlat (2020). \textit{A Course in Modern Macroeconomics}. Self-published Lecture Notes. Stanford University. Extractos de Capítulos 6 y 7.
+  \end{itemize}
+\end{frame}
+
+\end{document}

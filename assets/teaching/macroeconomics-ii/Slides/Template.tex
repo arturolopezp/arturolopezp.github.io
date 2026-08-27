@@ -1,0 +1,308 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% TEMPLATE - MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% Compilacion normal: pdflatex (o latexmk).
+% Compilacion con bibliografía: pdflatex -> biber -> pdflatex -> pdflatex.
+% =============================================================================
+
+% --- Idioma, tipografia y matematicas -----------------------------------------
+\usepackage[utf8]{inputenc}
+\IfFileExists{spanish.ldf}{
+  \usepackage[spanish,es-nodecimaldot]{babel}
+}{
+  \usepackage[english]{babel}
+}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{array,tabularx}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+}
+\usepackage[table]{xcolor}
+
+% --- Bibliografia opcional ----------------------------------------------------
+% La bibliografia queda apagada para que el
+% template base compile sin ejecutar Biber ni depender de biblatex.
+% Cuando se agreguen referencias, 
+% cambiar \usarBibliografiafalse por \usarBibliografiatrue
+\newif\ifusarBibliografia
+\usarBibliografiafalse
+
+\ifusarBibliografia
+  \IfFileExists{csquotes.sty}{\usepackage{csquotes}}{}
+  \IfFileExists{apa.bbx}{
+    \usepackage[backend=biber,style=apa,sorting=nyt]{biblatex}
+  }{
+    % Respaldo para instalaciones locales sin biblatex-apa.
+    \usepackage[backend=biber,style=authoryear,sorting=nyt]{biblatex}
+  }
+  \IfFileExists{References.bib}{
+    \addbibresource{References.bib}
+  }{
+    \addbibresource{References.bib.bib}
+  }
+\fi
+
+% --- Paleta: azul marino, blanco y grises neutros ------------------
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+\setbeamercolor{section in toc}{fg=CIDEBlue}
+\setbeamercolor{section in toc shaded}{fg=CIDEGray}
+
+% --- Tipografia ---------------------------------------------------------------
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+
+% --- Geometria general --------------------------------------------------------
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+% Navegacion superior con nombres de seccion y mini-indicadores consecutivos.
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+
+% Evita que Beamer distribuya las secciones a lo ancho de toda la pagina.
+% Solo modifica el espaciado de la navegacion de miniframes.
+\makeatletter
+\patchcmd{\insertnavigation}
+  {\hskip-1.875ex plus-1fill}
+  {\hskip-1.875ex}
+  {}{}
+\patchcmd{\sectionentry}
+  {\box\beamer@sectionbox\hskip1.875ex plus 1fill}
+  {\box\beamer@sectionbox\hskip1.875ex}
+  {}{}
+\makeatother
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+% Banda de titulo de cada diapositiva.
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,
+    ht=3.05ex,
+    dp=1.05ex,
+    leftskip=0.42cm,
+    rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+% Pie en dos niveles: autor/institucion y nombre corto/paginacion.
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+    \hbox to \paperwidth{%
+      \hfill
+      \raisebox{0.68cm}[0pt][0pt]{%
+        \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      }%
+      \hspace{0.18cm}%
+    }%
+  }%
+  \vskip0pt
+}
+
+% Logo CIDE automatico en la esquina inferior derecha de todas las diapositivas.
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+
+% Portada
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+% --- Comandos reutilizables ---------------------------------------------------
+% Cambiar esta ruta una vez por cada presentacion/sesion.
+\newcommand{\FigurasSesion}{Figuras/01_Sesión de introducción}
+
+% Uso: \figura[0.65\textheight]{nombre-del-archivo.png}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+
+% Uso: \cidehighlight{concepto clave}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+
+% Hipervínculos
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+% Filas alternadas para tablas: escribe \rowcolors{2}{CIDEGrayLight}{white}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Diapositiva de contenido al comenzar cada seccion.
+% Cambia \sectiontocfalse si prefieres no generarlas automaticamente.
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+% =============================================================================
+% METADATOS DE CADA PRESENTACION
+% =============================================================================
+\title[Macroeconomía II]{Sesión 0 \\ Título de la sesión}
+\subtitle{Macroeconomía II}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+% =============================================================================
+\begin{document}
+% =============================================================================
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% \begin{frame}{Contenido}
+%   \tableofcontents
+% \end{frame}
+
+% Cambiar el nombre de la seccion y agregar diapositivas debajo.
+\section{Tema de la sesión}
+
+\begin{frame}{Idea central}
+  \begin{itemize}
+    \item Sustituir este texto por el mensaje principal de la diapositiva.
+    \item Usar \cidehighlight{azul de énfasis} para una idea que deba sobresalir.
+  \end{itemize}
+\end{frame}
+
+% --- EJEMPLOS PARA COPIAR Y PEGAR ---------------------------------------------
+%
+% BLOQUES
+% \begin{frame}{Dos resultados importantes}
+%   \begin{block}{Resultado principal}
+%     Escribe aquí el argumento o resultado.
+%   \end{block}
+%   \begin{alertblock}{Implicación}
+%     Escribe aquí la implicación económica.
+%   \end{alertblock}
+% \end{frame}
+%
+% DOS COLUMNAS
+% \begin{frame}{Mecanismo económico}
+%   \begin{columns}[T,onlytextwidth]
+%     \begin{column}{0.47\textwidth}
+%       \begin{itemize}
+%         \item Primer mecanismo.
+%         \item Segundo mecanismo.
+%       \end{itemize}
+%     \end{column}
+%     \begin{column}{0.50\textwidth}
+%       \centering
+%       \figura[0.60\textheight]{mi_figura.png}
+%     \end{column}
+%   \end{columns}
+% \end{frame}
+%
+% FIGURA COMPLETA
+% \begin{frame}{La evidencia respalda el mecanismo}
+%   \begin{figure}
+%     \centering
+%     \figura[0.61\textheight]{mi_figura.png}
+%     \caption{Título o fuente de la figura.}
+%   \end{figure}
+% \end{frame}
+%
+% TABLA
+% \begin{frame}{Comparación de escenarios}
+%   \rowcolors{2}{CIDEGrayLight}{white}
+%   \begin{tabularx}{\textwidth}{Yccc}
+%     \toprule
+%     Escenario & Producto & Inflación & Tasa real \\
+%     \midrule
+%     Base      & -- & -- & -- \\
+%     Alterno   & -- & -- & -- \\
+%     \bottomrule
+%   \end{tabularx}
+% \end{frame}
+%
+% REFERENCIAS (activa \usarBibliografiatrue y descomenta este frame)
+% \begin{frame}[allowframebreaks]{Referencias}
+%   \printbibliography[heading=none]
+% \end{frame}
+
+\end{document}
