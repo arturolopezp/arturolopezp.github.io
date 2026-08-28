@@ -1,6 +1,6 @@
 ---
 layout: page
-title: research
+title: Research
 permalink: /research/
 description: Working papers, replication materials, and research appendices.
 nav: true

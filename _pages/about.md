@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: <a href='https://www.cide.edu/'>Centro de Investigación y Docencia Económicas (CIDE)</a>
 
