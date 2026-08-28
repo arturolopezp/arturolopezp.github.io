@@ -2,7 +2,8 @@
 layout: course
 title: Macroeconomics II
 description: Modern macroeconomics through microfounded general-equilibrium models, from one-period and two-period closed-economy models to open-economy models.
-instructor: Arturo López Pérez
+instructor: Arturo López
+level: Undergraduate (Licenciatura en Economía)
 year: 2026
 term: Fall
 location: Centro de Investigación y Docencia Económicas (CIDE)
@@ -26,14 +27,16 @@ schedule:
         url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_02_Consumidor_Empresa.pdf
 ---
 
+## Level
+Undergraduate (Licenciatura en Economía)
+
 ## Course Overview
 
 This course develops the conceptual and analytical tools needed to construct, solve, and interpret modern microfounded macroeconomic models. It begins with a one-period general equilibrium model of a closed economy, introduces intertemporal decision-making in a two-period setting, and then moves to business cycle and New Keynesian models to study fiscal and monetary policy. Finally, the course extends these tools to the analysis of small open-economy macroeconomic models.
 
-
 The public materials are currently provided in Spanish, their original classroom language. Website navigation and descriptions are in English.
 
-You can download the syllabus/temario [here]({{ '/assets/teaching/macroeconomics-ii/Syllabus/Macro_II_Syllabus.pdf' | relative_url }}).
+You can download the syllabus (temario) [here]({{ '/assets/teaching/macroeconomics-ii/Syllabus/Macro_II_Syllabus.pdf' | relative_url }}).
 
 ## Main References
 
