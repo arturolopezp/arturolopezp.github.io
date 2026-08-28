@@ -41,3 +41,10 @@ html[data-theme="dark"] {
 .navbar-brand.title .font-weight-bold {
   font-weight: inherit !important;
 }
+
+/* Keep prose aligned consistently across all main content pages. */
+main article p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
