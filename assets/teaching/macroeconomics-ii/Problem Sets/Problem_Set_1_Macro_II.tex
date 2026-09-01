@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}
+\pagestyle{plain}
+
+\let\enumerateoriginal\enumerate
+\let\endenumerateoriginal\endenumerate
+\renewenvironment{enumerate}{%
+  \enumerateoriginal
+  \setlength{\itemsep}{0.35em}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\topsep}{0.35em}%
+}{\endenumerateoriginal}
+
+\newcounter{problema}
+\newenvironment{problema}[1]{%
+  \par
+  \refstepcounter{problema}%
+  \addvspace{0.9em}%
+  \noindent\textbf{Ejercicio \theproblema.}
+}{\par}
+
+\begin{document}
+
+\begin{center}
+  {\large\textbf{Centro de Investigación y Docencia Económicas}}\\[0.25em]
+  {\large\textbf{Macroeconomía II}}\\[0.2em]
+  {\large\textbf{Problem Set 1: Conducta del Consumidor y de la Empresa}}\\[0.35em]
+  LECO -- Otoño 2026
+\end{center}
+
+\vspace{0.6em}
+\hrule
+\vspace{0.6em}
+
+
+\begin{problema}{Oferta de trabajo y demanda de consumo}
+Considere un hogar representativo que dispone de 24 horas al día para distribuir entre ocio, $\ell$, y trabajo, $N^s$:
+\[
+    \ell+N^s=24,
+    \qquad
+    \ell\in[0,24].
+\]
+El hogar elige consumo $c>0$ de un bien que representa la canasta de bienes y servicios disponibles en la economía y horas de ocio $\ell$. Sus preferencias están representadas por la siguiente función de utilidad:
+\[
+    U(c,\ell)=u(c)+v(\ell),
+    \qquad
+    u(c)=\frac{c^{1-\sigma}}{1-\sigma},
+    \qquad
+    v(\ell)=-\frac{\theta\varepsilon}{1+\varepsilon}
+    (24-\ell)^{\frac{1+\varepsilon}{\varepsilon}},
+\]
+donde $\theta>0$, $\varepsilon>0$, $\sigma>0$ y $\sigma\neq 1$. Por cada hora trabajada, el hogar recibe un salario real $w>0$. Asimismo, recibe un ingreso por dividendos $\pi>0$ y paga un impuesto lump-sum $T$ sobre su ingreso. Suponga inicialmente que $\pi>T$.
+
+\begin{enumerate}
+    \item Plantee el problema de maximización del hogar y obtenga las condiciones de primer orden para la elección consumo-ocio.
+
+    \item Obtenga la condición de optimalidad. ¿Cuál es la intuición económica de esta condición?
+
+    \item Grafique la restricción presupuestaria en el plano $(\ell,c)$, indicando sus interceptos y pendiente, y muestre la elección óptima de consumo y ocio.
+
+    \item Suponga ahora que $\pi<T$. ¿Cómo cambia la elección óptima de consumo y ocio? ¿Qué ocurre si $\pi-T$ es muy negativo?
+
+    \item Suponga ahora que $\pi-T=0$. Obtenga la función de oferta laboral, $N^*(w)=24-\ell^*(w)$, y la función de demanda de consumo de bienes y servicios del hogar, $c^*(w)$.
+
+    \item Determine cómo responde la oferta laboral $N^*(w)$ ante un aumento del salario real $w$ cuando $\sigma<1$ y cuando $\sigma>1$. En particular, determine el signo de $\frac{dN^*(w)}{dw}$ en ambos casos y represéntelos gráficamente. Interprete los resultados en términos de los efectos sustitución e ingreso.
+\end{enumerate}
+\end{problema}
+
+
+\begin{problema}{Cancelación de los efectos sustitución e ingreso}
+Considere una economía cuyo hogar representativo resuelve el siguiente problema de maximización:
+\[
+    \max_{c,h} \ U(c,h) = 
+    \log(c)
+    -\theta\frac{h^{1+1/\varepsilon}}{1+1/\varepsilon}
+    \quad 
+    \text{s.a. }
+    \quad
+    c=wh
+\]
+donde $w>0$, $\theta>0$, $\varepsilon>0$ y $h$ son horas trabajadas.
+
+\begin{enumerate}
+    \item Obtenga las elecciones óptimas $h^*$ y $c^*$.
+
+    \item ¿Qué sucede con las horas trabajadas y el consumo ante un aumento del salario real? Explique este resultado en términos de los efectos sustitución e ingreso.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+\begin{problema}{Oferta de trabajo con utilidad cuasilineal}
+Suponga que las preferencias del hogar representativo en una economía están dadas por
+\[
+    U(c,\ell)=c+\theta\log(\ell),
+\]
+donde $c$ es consumo, $\ell$ es ocio y $\theta>0$.\footnote{Estas preferencias se denominan cuasilineales porque son lineales en un bien y no lineales en el otro. El ejercicio evalúa una de las predicciones empíricas de asumir que el hogar típico en una economía tiene preferencias cuasilineales.} El hogar dispone de una unidad de tiempo, es decir, $\ell+N^s=1$, y puede trabajar en un mercado laboral competitivo al salario real $w>0$. Además, no recibe ingreso no laboral.
+
+\begin{enumerate}
+    \item Obtenga la fracción de tiempo que el hogar dedica al trabajo. Considere tanto una solución interior como la posible solución de esquina.
+
+    \item Si este fuera el modelo correcto y se compararan hogares de distintos países, ¿qué relación predeciría entre el salario real y las horas trabajadas? Si se utiliza el PIB per cápita como una aproximación al nivel salarial de cada país, ¿cómo se compara esta predicción con la evidencia empírica presentada en la Figura 7.3.2 de Kurlat (2020, p.~138)?
+\end{enumerate}
+\end{problema}
+
+
+\begin{problema}{Oferta de trabajo indivisible}
+Un consumidor dispone de una unidad de tiempo y no puede variar libremente sus horas de trabajo. Debe elegir entre trabajar exactamente $q\in(0,1)$ unidades de tiempo o no trabajar. Su utilidad es $U(c,\ell)$, creciente en consumo y ocio. No recibe dividendos. Si trabaja, recibe el salario real $w$ por hora, paga un impuesto de suma fija $T$ y consume $c=wq-T$; si no trabaja, recibe una prestación por desempleo $b$ y consume $c=b$.
+\begin{enumerate}
+  \item Compare la utilidad de ambas opciones y formule la regla de participación laboral. Si aumenta el salario real, ¿cómo cambian las horas trabajadas del consumidor? ¿Qué implica este resultado para lo que observaríamos en los datos cuando cambian los salarios?
+  \item Suponga que aumenta la prestación por desempleo. ¿Cómo afecta este cambio a la decisión de trabajar? Explique las implicaciones para el diseño de programas de seguro de desempleo.
+\end{enumerate}
+\end{problema}
+
+
+
+\begin{problema}{}
+El hogar representativo tiene preferencias
+\[
+  U(c,\ell)=\log(c)+\theta\log(\ell),
+\]
+donde $c$ es consumo, $\ell$ es ocio y $\theta>0$. Dispone de una unidad de tiempo, no recibe ingreso no laboral y enfrenta la restricción $c=w(1-\ell)$. La función de producción de la empresa representativa es
+\[
+  F(K,L)=K^\alpha L^{1-\alpha},
+  \qquad 0<\alpha<1.
+\]
+El acervo de capital está fijo en $K=1$, el precio del bien es uno y las empresas contratan trabajo en un mercado competitivo al salario real $w$.
+\begin{enumerate}
+  \item Obtenga la oferta de trabajo del hogar y la demanda de trabajo de la empresa. Determine el empleo y el salario real de equilibrio.
+  \item ¿Cómo depende $w$ de $\theta$? Suponga que el hogar desarrolla repentinamente una ``ética protestante del trabajo'' y disfruta menos del ocio. ¿Qué ocurre con el empleo y con el salario real de equilibrio? Explique.
+\end{enumerate}
+\end{problema}
+
+
+
+\newpage
+\begin{problema}{Impuesto de suma fija a la empresa}
+Una empresa competitiva produce con una tecnología $Y=F(K,N)$, toma como dados el precio del producto, normalizado a uno, el capital $K$ y el salario real $w$. El gobierno cobra a la empresa un impuesto de suma fija $T_f$ si produce, por lo que sus beneficios son
+\[
+  \pi=F(K,N)-wN-T_f.
+\]
+Determine el efecto de $T_f$ sobre la demanda de trabajo de una empresa que continúa operando. ¿Puede cambiar la respuesta si la empresa tiene la opción de cerrar? Explique.
+\end{problema}
+
+\begin{problema}{Subsidio al empleo}
+Considere la empresa competitiva del ejercicio anterior. El gobierno paga a la empresa $s\geq 0$ unidades del bien de consumo por cada unidad de trabajo contratada.
+\begin{enumerate}
+  \item Escriba el problema de maximización de beneficios y obtenga la condición que determina la demanda de trabajo.
+  \item Determine cómo afecta un aumento de $s$ a la demanda de trabajo. Represente el resultado gráficamente e interprete el subsidio como una modificación del costo laboral efectivo.
+\end{enumerate}
+\end{problema}
+
+\end{document}
