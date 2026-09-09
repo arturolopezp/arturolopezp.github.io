@@ -1,0 +1,121 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=black,
+  citecolor=black
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}
+\pagestyle{plain}
+
+\let\enumerateoriginal\enumerate
+\let\endenumerateoriginal\endenumerate
+\renewenvironment{enumerate}{%
+  \enumerateoriginal
+  \setlength{\itemsep}{0.5em}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\topsep}{0.4em}%
+}{\endenumerateoriginal}
+
+\newcounter{problema}
+\newenvironment{problema}[1]{%
+  \par
+  \refstepcounter{problema}%
+  \addvspace{0.9em}%
+  \noindent\textbf{Ejercicio \theproblema. #1}
+  \par\nobreak\smallskip
+}{\par}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\MRS}{\mathrm{MRS}}
+\newcommand{\MPN}{\mathrm{MPN}}
+
+\begin{document}
+
+\begin{center}
+  {\large\textbf{Centro de Investigación y Docencia Económicas}}\\[0.25em]
+  {\large\textbf{Macroeconomía II}}\\[0.2em]
+  {\large\textbf{Problem Set 2: Equilibrio General}}\\[0.35em]
+  LECO -- Otoño 2026
+\end{center}
+
+\vspace{0.6em}
+\hrule
+\vspace{0.6em}
+
+\begin{problema}{Equilibrio general en una economía cerrada de un periodo}
+Considere una economía con un hogar representativo, una empresa representativa y un gobierno. El hogar y la empresa se comportan de forma racional, en un entorno de competencia perfecta. El bien de consumo es el bien numerario.
+
+El hogar dispone de una unidad de tiempo, que distribuye entre trabajo y ocio. Elige consumo $C>0$ y ocio $\ell\in(0,1)$, y ofrece $N^s=1-\ell$ unidades de trabajo. Sus preferencias están representadas por la siguiente función de utilidad
+\[
+  U(C,\ell)=\log C+\psi\log\ell,
+  \qquad \psi>0.
+\]
+
+La empresa demanda $N^d$ unidades de trabajo y produce de acuerdo con la tecnología
+\[
+  Y=z\sqrt{N^d},
+  \qquad z>0.
+\]
+El hogar es propietario de la empresa y recibe todos sus beneficios.
+
+El gobierno compra $G$ unidades del bien de consumo y financia este gasto mediante un impuesto de suma fija $T>0$ cobrado al hogar. El presupuesto público está balanceado: $ G=T.$ 
+
+Para que exista una solución interior, suponga que $0< G<z$.
+
+\begin{enumerate}
+  \item Defina formalmente un equilibrio competitivo en esta economía.
+
+  \item Obtenga las funciones de oferta laboral y demanda de consumo del hogar, así como las funciones de demanda laboral, oferta de bienes y beneficios de la empresa. 
+
+  \item Encuentre el equilibrio competitivo. Esto es, la asignación $(N^*,\ell^*,C^*,Y^*, \pi^*, T^*)$ y el vector de precios $(1,w^*)$.
+
+  \item Muestre que, una vez satisfechas la restricción presupuestaria del hogar, la identidad de beneficios de la empresa, el presupuesto del gobierno y el vaciado del mercado de trabajo, el mercado de bienes también se vacía: $Y^*=C^*+G$.
+
+  \item Formule el problema del planificador social para esta economía y obtenga sus condiciones de primer orden. Explique por qué la asignación competitiva coincide con la asignación del planificador.
+
+  \item Grafique el equilibrio competitivo en los siguientes tres diagramas:
+  \begin{enumerate}
+    \renewcommand{\labelenumii}{\textnormal{(\roman{enumii})}}
+    \item mercado de trabajo, en el plano $(N,w)$;
+    \item mercado de bienes, representando la producción $Y^s(w)$ y la demanda agregada $C^d(w)+G$ como funciones del salario real;
+    \item el problema de asignación en el plano $(\ell,C)$, mostrando la frontera de posibilidades
+    de producción y la curva de indiferencia que pasa por el equilibrio.
+  \end{enumerate}
+  Explique por qué el segundo diagrama no representa un mecanismo independiente de ajuste de precios.
+
+  \item \textbf{Choque de gasto público.}
+ Ante el deterioro del entorno macroeconómico internacional provocado por la crisis financiera global, el Gobierno de México anunció en octubre de 2008 el \href{https://www.eleconomista.com.mx/el-empresario/Felipe-Calderon-lanza-plan-anticrisis-financiera-20081009-0003.html}{Programa para Impulsar el Crecimiento y el Empleo (PICE)}, el cual se incorporó al Paquete Económico 2009. Entre sus medidas se encontraba un programa de \href{https://expansion.mx/expansion/2008/12/02/cartera-abierta}{gasto público, principalmente en infraestructura, por 65.1 mil millones de pesos}. La SHCP informó que el estímulo fiscal del programa equivaldría al 0.7 por ciento del PIB.\footnote{Véanse Secretaría de Hacienda y Crédito Público, \emph{Comunicado de prensa 079/2008}, 8 de octubre de 2008, e \emph{Informe de Labores de la SHCP 2009}. Ambos documentos están disponibles en el portal institucional de la SHCP.}
+  \begin{enumerate}
+    \renewcommand{\labelenumii}{\textnormal{(\roman{enumii})}}
+    \item De acuerdo con el modelo, ¿cuál es el impacto de este choque sobre la economía? Represente gráficamente la respuesta de las variables endógenas, los mecanismos de transmisión e interprete económicamente.
+    \item Si tuviera que evaluar la predicción del modelo con datos de la economía mexicana, ¿qué dirección esperaría observar en el PIB, el consumo privado, el empleo y el salario real a partir del estímulo fiscal? 
+  \end{enumerate}
+
+  \item \textbf{Choque de productividad.} Suponga que la economía experimenta un aumento de productividad, de $z$ a $z'>z$.
+  \begin{enumerate}
+    \renewcommand{\labelenumii}{\textnormal{(\roman{enumii})}}
+    \item De acuerdo con el modelo, ¿cuál es el impacto de este choque sobre la economía? Represente gráficamente la respuesta de las variables endógenas, los mecanismos de transmisión e interprete económicamente.
+    \item Compare los comovimientos producidos por el choque de productividad con los generados por el choque fiscal. ¿Qué variables permiten distinguir ambos choques dentro del modelo?
+  \end{enumerate}
+
+  \item \textbf{Identificación empírica de los choques.}
+  Construya una tabla con los signos de respuesta de $C$, $Y$, $N$, $\ell$, $w$ y $\pi$ ante los dos choques estudiados. Suponga que, en los datos, se observa un aumento simultáneo de producción, consumo y salario real. ¿Cuál de los dos choques es más consistente con ese patrón? ¿Cambiaría su
+  respuesta si la producción aumentara mientras el consumo y el salario real disminuyen? Explique qué información adicional necesitaría para interpretar estos comovimientos como evidencia de alguno de los choques.
+  \end{enumerate}
+
+  \end{problema}
+
+\end{document}

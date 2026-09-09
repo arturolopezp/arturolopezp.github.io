@@ -1,0 +1,1426 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% los paquetes Beamer/Hyperref instalados. En formatos recientes, estas
+% definiciones no alteran nada porque \providecommand conserva las originales.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+% Esta sesión usa únicamente PNG; evita cargar el conversor EPS de una
+% instalación MiKTeX incompleta (grfext.sty no es necesario aquí).
+\makeatletter
+\@namedef{ver@epstopdf-base.sty}{9999/12/31}
+\makeatother
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 3: EQUILIBRIO GENERAL EN UNA ECONOMIA CERRADA
+% Compilacion normal: pdflatex (o latexmk).
+% =============================================================================
+
+
+% --- Idioma, tipografia y matematicas -----------------------------------------
+\usepackage[utf8]{inputenc}
+\IfFileExists{spanish.ldf}{
+  \usepackage[spanish,es-nodecimaldot]{babel}
+}{
+  \usepackage[english]{babel}
+}
+% Traducciones de los entornos de Beamer
+\uselanguage{Spanish}
+\languagepath{Spanish}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+
+
+\newtheorem{proposition}[theorem]{\translate{Proposition}}
+\newtheorem{remark}[theorem]{\translate{Remark}}
+\newtheorem{assumption}[theorem]{Supuesto}
+
+% --- Justificación del contenido ---------------------------------------------
+% Beamer restablece \raggedright al iniciar listas, columnas y bloques. Estos
+% parches sustituyen esa instrucción dentro de los comandos internos de Beamer.
+\AtBeginDocument{\justifying}
+\patchcmd{\itemize}{\raggedright}{\justifying}{}{}
+\patchcmd{\enumerate}{\raggedright}{\justifying}{}{}
+\patchcmd{\description}{\raggedright}{\justifying}{}{}
+
+\addtobeamertemplate{block begin}{}{\justifying}
+\addtobeamertemplate{block alerted begin}{}{\justifying}
+\addtobeamertemplate{block example begin}{}{\justifying}
+
+\makeatletter
+\patchcmd{\beamer@columnenv}{\raggedright}{\justifying}{}{}
+\patchcmd{\beamer@columncom}{\raggedright}{\justifying}{}{}
+\makeatother
+
+% --- Bibliografia opcional ----------------------------------------------------
+\newif\ifusarBibliografia
+\usarBibliografiafalse
+
+\ifusarBibliografia
+  \IfFileExists{csquotes.sty}{\usepackage{csquotes}}{}
+  \IfFileExists{apa.bbx}{
+    \usepackage[backend=biber,style=apa,sorting=nyt]{biblatex}
+  }{
+    \usepackage[backend=biber,style=authoryear,sorting=nyt]{biblatex}
+  }
+  \IfFileExists{References.bib}{
+    \addbibresource{References.bib}
+  }{
+    \addbibresource{References.bib.bib}
+  }
+\fi
+
+% --- Paleta: azul marino, blanco y grises neutros ----------------------------
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+\setbeamercolor{section in toc}{fg=CIDEBlue}
+\setbeamercolor{section in toc shaded}{fg=CIDEGray}
+
+% --- Tipografia ---------------------------------------------------------------
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+
+% --- Geometria general --------------------------------------------------------
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+% Navegacion superior con nombres de seccion y mini-indicadores consecutivos.
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+% Colores explícitos: evita que algunas versiones de Beamer hereden el color
+% del contenido de la diapositiva y vuelvan invisibles secciones futuras.
+\setbeamertemplate{section in head/foot}{\color{white}\insertsectionhead}
+\setbeamertemplate{section in head/foot shaded}{\color{white!55}\insertsectionhead}
+
+% Barra superior determinista. Conserva el aspecto de miniframes y evita la
+% oscilación de anchuras que presentan algunas versiones recientes de Beamer.
+% Si se agregan o eliminan frames, sólo hay que actualizar estos rangos.
+\newcount\cidenavdot
+\newcommand{\cidenavdots}[2]{%
+  \cidenavdot=#1\relax
+  \loop
+    \ifnum\value{framenumber}=\cidenavdot
+      {\color{white}\raisebox{0.12ex}{\fontsize{4}{4}\selectfont$\bullet$}}%
+    \else
+      {\color{white!65}\raisebox{0.12ex}{\fontsize{4}{4}\selectfont$\circ$}}%
+    \fi
+    \kern-0.02em
+    \ifnum\cidenavdot<#2\relax
+      \advance\cidenavdot by 1\relax
+  \repeat
+}
+\newcommand{\cidenavitem}[4]{%
+  \parbox[c]{#1}{%
+    \centering
+    \ifnum\value{framenumber}<#2\relax
+      \color{white!55}%
+    \else
+      \ifnum\value{framenumber}>#3\relax
+        \color{white!55}%
+      \else
+        \color{white}%
+      \fi
+    \fi
+    {\tiny\strut #4}\par\vspace{-0.55ex}%
+    \cidenavdots{#2}{#3}%
+  }%
+}
+\setbeamertemplate{headline}{%
+  \leavevmode
+  \begin{beamercolorbox}[wd=\paperwidth,ht=4.55ex,dp=0.95ex,leftskip=0.16cm,rightskip=0.16cm]{section in head/foot}
+    \hbox to \dimexpr\paperwidth-0.32cm\relax{%
+      \cidenavitem{1.62cm}{2}{5}{Punto de partida}\hfill
+      \cidenavitem{2.22cm}{6}{16}{Equilibrio competitivo}\hfill
+      \cidenavitem{1.18cm}{17}{22}{Optimalidad}\hfill
+      \cidenavitem{1.16cm}{23}{29}{Gasto público}\hfill
+      \cidenavitem{1.32cm}{30}{36}{Productividad}\hfill
+      \cidenavitem{2.55cm}{37}{44}{Impuestos distorsionantes}\hfill
+      \cidenavitem{1.35cm}{45}{48}{Bienes públicos}\hfill
+      \cidenavitem{0.84cm}{49}{52}{Síntesis}%
+    }%
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+% Banda de titulo de cada diapositiva.
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,
+    ht=3.05ex,
+    dp=1.05ex,
+    leftskip=0.42cm,
+    rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+% Pie en dos niveles: autor/institucion y nombre corto/paginacion.
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+  }%
+  \vskip0pt
+}
+
+% Logo CIDE automatico en la esquina inferior derecha.
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+\setbeamertemplate{background}{%
+  \vbox to \paperheight{%
+    \vfill
+    \hbox to \paperwidth{%
+      \hfill
+      \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      \hspace{0.18cm}%
+    }%
+    \vspace{0.68cm}%
+  }%
+}
+
+% Portada.
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+% --- Comandos reutilizables ---------------------------------------------------
+\newcommand{\FigurasSesion}{Figuras/03_Equilibrio General Estático}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+
+% Los enlaces externos son azules; los internos conservan el color de Beamer.
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+% No se generan diapositivas automaticas al cambiar de seccion.
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+% =============================================================================
+% METADATOS
+% =============================================================================
+\title[Macroeconomía II]{Sesión 3 \\ Equilibrio general en una economía cerrada}
+\subtitle{Un modelo macroeconómico de un periodo}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+% =============================================================================
+\begin{document}
+% =============================================================================
+
+\begin{frame}
+  \titlepage
+  \notafuentes{Williamson (2018), cap. 5.}
+\end{frame}
+
+% =============================================================================
+\section{Punto de partida}
+% =============================================================================
+
+\begin{frame}{De las decisiones individuales al equilibrio}
+  En el capítulo anterior obtuvimos dos relaciones:
+  \[
+    N^s=N^s(w;\pi-T),
+    \qquad
+    N^d=N^d(w;K,z).
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item El consumidor elige consumo y oferta de trabajo.
+    \item La empresa elige producción y demanda de trabajo.
+    \item Ambas decisiones se estudiaron tomando el salario real como dado.
+  \end{itemize}
+
+  \begin{alertblock}{El paso de esta sesión}
+    Determinar conjuntamente el salario real y las cantidades que hacen compatibles todas las decisiones.
+  \end{alertblock}
+  \notafuentes{Williamson (2018), transición de los caps. 4 a 5.}
+\end{frame}
+
+\begin{frame}{¿Qué construiremos en esta sesión?}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.55em}
+    \item Un equilibrio competitivo para una economía cerrada y de un periodo.
+    \item La frontera de posibilidades de producción de la economía.
+    \item La equivalencia entre equilibrio competitivo y óptimo de Pareto.
+    \item Los efectos del gasto público y de la productividad.
+    \item Las distorsiones generadas por un impuesto proporcional al trabajo.
+    \item Una extensión en la que el gobierno produce bienes públicos.
+  \end{enumerate}
+  \notafuentes{Williamson (2018), objetivos de aprendizaje del cap. 5.}
+\end{frame}
+
+\begin{frame}{Una economía cerrada y de un solo periodo}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item \textbf{Economía cerrada:} no hay comercio ni flujos financieros con el resto del mundo.
+    \item \textbf{Un periodo:} no existen ahorro, inversión ni decisiones intertemporales.
+    \item \textbf{Bien único:} el producto puede destinarse a consumo privado o compras públicas.
+    \item \textbf{Dos insumos:} capital \(K\), fijo en el periodo, y trabajo \(N\), determinado en equilibrio.
+    \item \textbf{Competencia perfecta:} consumidor y empresa toman el salario real \(w\) como dado.
+  \end{itemize}
+
+  \vspace{0.2cm}
+  \centering
+  \cidehighlight{Es un laboratorio mínimo para estudiar mecanismos macroeconómicos.}
+  \notafuentes{Williamson (2018), pp. 142--145.}
+\end{frame}
+
+\begin{frame}[t]{Un modelo transforma supuestos en resultados}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+        \item Variables exógenas: \(G\), \(z\) y \(K\).
+        \item El modelo determina \(C\), \(Y\), \(N\), \(w\), \(T\) y \(\pi\).
+        \item Un experimento modifica una variable exógena y sigue la respuesta del equilibrio.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[4.0cm]{fig_5_1_modelo_exogenas_endogenas.png}
+      \fuentefigura{Williamson (2018), figura 5.1.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.1 y pp. 144--146.}
+\end{frame}
+
+% =============================================================================
+\section{Equilibrio competitivo}
+% =============================================================================
+
+\begin{frame}{Agentes y mercados}
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item \textbf{Consumidor representativo:} ofrece trabajo y demanda un bien de consumo.
+    \item \textbf{Empresa representativa:} demanda trabajo y produce el bien.
+    \item \textbf{Gobierno:} compra \(G\) unidades del bien y recauda impuestos \(T\).
+  \end{itemize}
+
+  \vspace{0.25cm}
+  Dos mercados deben vaciarse simultáneamente:
+  \[
+    \underbrace{N^s=N^d}_{\text{mercado de trabajo}},
+    \qquad
+    \underbrace{Y = C+G}_{\text{mercado de bienes}}.
+  \]
+  \notafuentes{Williamson (2018), pp. 143--147.}
+\end{frame}
+
+\begin{frame}{El gobierno también enfrenta una restricción}
+  El gobierno compra \(G\) unidades del bien y las financia con un impuesto de suma fija:
+  \[
+    \boxed{G=T}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item \(G\) es exógeno: la política fiscal se fija fuera del modelo.
+    \item \(T\) se ajusta para satisfacer el presupuesto gubernamental.
+    \item Un impuesto de suma fija reduce el ingreso, pero no altera las decisiones del consumidor (y por lo tanto es un impuesto no distorsionante).
+  \end{itemize}
+  \notafuentes{Williamson (2018), sección ``Government'', pp. 143--144.}
+\end{frame}
+
+
+\begin{frame}{Definición general de equilibrio competitivo}
+  Un \textbf{equilibrio competitivo} o \textbf{equilibrio walrasiano} es una asignación de recursos y un vector de precios tales que, dadas las variables exógenas:
+
+  \begin{enumerate}
+    \setlength{\itemsep}{0.45em}
+    \item cada agente optimiza su objetivo sujeto a sus restricciones (conducta racional), tomando los precios como dados;
+    
+    \item todos los mercados se vacían.
+  \end{enumerate}
+  Cuando se nos pide definir un equilibrio competitivo para una economía en particular, debemos traducir estas condiciones a las características de la economía en cuestión.
+\end{frame}
+
+\begin{frame}{Propiedades de un equilibrio competitivo}
+  La idea de equilibrio competitivo es que se cumplan las siguientes propiedades:
+  \begin{enumerate}
+    \item Todos los agentes están, individualmente, tomando las mejores decisiones que pueden.
+    \item Las decisiones de todos los agentes son compatibles entre sí. Es decir, el vector de precios de equilibrio coordina dichas decisiones y garantiza que los mercados se vacíen de forma simultánea.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Equilibrio general \textit{en general}}
+  \begin{itemize}
+    \item Lo que definimos anteriormente como equilibrio competitivo es un caso particular de equilibrio general.
+    \item \cidehighlight{Equilibrio general} es un concepto más amplio.
+    \item El \textbf{equilibrio competitivo} es un modelo de equilibrio general en el que hay competencia perfecta: todos los agentes son tomadores de precios.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Definición de equilibrio competitivo para esta economía}
+  Un equilibrio competitivo en esta economía es una asignación
+  \[
+    \{C^*,N^{s*},N^{d*},Y^*,w^*,T^*,\pi^*\}
+  \]
+  y un vector de precios $(w^*)$ tales que, dadas las variables exógenas \((G,z,K)\):
+  \begin{enumerate}
+    \setlength{\itemsep}{0.45em}
+    \item el consumidor maximiza su utilidad sujeto a sus restricciones, dado \(w^*\);
+    \item la empresa maximiza beneficios sujeta a su tecnología, dado \(w^*\);
+    \item el gobierno satisface \(G=T^*\);
+    \item los mercados de trabajo y bienes se vacían.
+  \end{enumerate}
+
+  \notafuentes{Williamson (2018), pp. 144--147.}
+\end{frame}
+
+\begin{frame}{Ley de Walras}
+  \begin{itemize}
+    \item Sean \(M\) mercados y \(M\) ecuaciones de equilibrio. 
+    \item La \cidehighlight{ley de Walras} establece que, si \(M-1\) mercados se vacían, el último mercado también se vacía.
+    \item Es decir, la ley de Walras establece que una de las ecuaciones de equilibrio es redundante.
+    \item En nuestro modelo, \(M=2\). Por lo tanto, si se vacía un mercado, el otro mercado también se vacía.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Definición formal de la Ley de Walras}
+  \textit{Definición.} Sea una economía con \(M\) mercados y sea \(z_m(\mathbf{p}) \equiv q_m^d(\mathbf{p})-q_m^s(\mathbf{p})\) el exceso de demanda en el mercado \(m\), donde \(\mathbf{p}\in\mathbb{R}_{++}^{M}\) es el vector de precios de la economía.
+
+  Cuando se satisfacen las restricciones presupuestarias de todos los
+  agentes, la \cidehighlight{ley de Walras} establece que, para cualquier vector de precios \(\mathbf{p}\),
+  \[
+    \sum_{m=1}^{M} p_m z_m(\mathbf{p})=0.
+  \]
+
+  \begin{itemize}
+    \item Por lo tanto, si \(M-1\) mercados se vacían, el mercado restante
+    también debe vaciarse.
+
+    \item En nuestro modelo existen dos mercados: bienes y trabajo.
+    Definiendo $z_Y \equiv C+G-Y $ y $z_N \equiv N^d-N^s$, y tomando el bien como numerario, la ley de Walras implica
+    \[
+      z_Y+wz_N=0.
+    \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Ley de Walras en esta economía}
+  \begin{proposition}
+    Si el mercado laboral se vacía, el mercado de bienes también se vacía.
+  \end{proposition}
+  
+  \textit{Demostración.} Sea \(N^{s*}=N^{d*}=N\) el nivel de empleo de equilibrio del mercado laboral. A partir de la recta presupuestaria del consumidor en equilibrio se tiene que
+  $$
+  C^*=w^*N^{s*} + \pi^* - T^* = w^*N + \pi^* - T^*
+  $$
+  Como en equilibrio se cumple que
+  $$
+  \pi^* = Y^* - w^*N, \quad G=T^*,
+  $$
+  entonces
+  $$
+  C^* = w^*N + Y^* - w^*N - G = Y^* - G.
+  $$
+  Por lo tanto, si se vacía el mercado laboral, también se vacía el mercado de bienes:
+  $$Y^* = C^* + G.$$
+\end{frame}
+
+
+
+\begin{frame}[t]{De la función de producción a la FPP}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.46\textwidth}
+      En equilibrio, \(N=h-\ell\). Por tanto,
+      \[
+        Y=zF(K,h-\ell).
+      \]
+      Usando \(C=Y-G\):
+      \[
+        \boxed{C=zF(K,h-\ell)-G}.
+      \]
+
+      Esta relación es la frontera de posibilidades de producción (FPP) entre consumo y ocio.
+    \end{column}
+    \begin{column}{0.50\textwidth}
+      \centering
+      \figura[5.4cm]{fig_5_2_funcion_y_fpp.png}
+      \fuentefigura{Williamson (2018), figura 5.2.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.2 y pp. 147--149.}
+\end{frame}
+
+\begin{frame}{La pendiente de la FPP es el producto marginal del trabajo}
+  Partiendo de
+  \[
+    C(\ell)=zF(K,h-\ell)-G,
+  \]
+  se obtiene
+  \[
+    \frac{dC}{d\ell}
+    =-zF_N(K,h-\ell)
+    =-\mathrm{MPN}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Una hora adicional de ocio reduce el empleo en una hora.
+    \item El costo tecnológico es la producción que deja de generarse: el MPN.
+    \item Como el MPN aumenta cuando cae el empleo, la FPP se vuelve más inclinada conforme aumenta el ocio.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 147--150.}
+\end{frame}
+
+
+\begin{frame}[t]{Representación gráfica del equilibrio competitivo}
+\begin{columns}[T,onlytextwidth]
+\small
+\begin{column}{0.43\textwidth}
+En el punto \(J\):
+\[
+  \mathrm{MRS}_{\ell,C}(C^*,\ell^*)
+  =
+  w^*
+  =
+  \mathrm{MPN}(K,N^{d*}).
+\]
+
+\begin{itemize}
+  \item La empresa elige \(N^{d*}\) de modo que
+  $
+    \mathrm{MPN}(K,N^{d*})=w^*.
+  $
+  \item El consumidor elige consumo y ocio de modo que
+  $
+    \mathrm{MRS}_{\ell,C}(C^*,\ell^*)=w^*.
+  $
+  \item El salario real \(w^*\) vacía el mercado de trabajo:
+  $
+    N^{d*}=N^{s*}=h-\ell^*.
+  $
+  \item En consecuencia, también se vacía el mercado de bienes:
+  $
+    Y^*=C^*+G.
+  $
+\end{itemize}
+\end{column}
+
+\begin{column}{0.53\textwidth}
+  \centering
+  \figura[5.35cm]{fig_5_3_equilibrio_competitivo.png}
+  \fuentefigura{Williamson (2018), figura 5.3.}
+\end{column}
+
+\end{columns}
+
+\notafuentes{Williamson (2018), figura 5.3 y pp. 149--151.}
+\end{frame}
+
+% =============================================================================
+\section{Optimalidad}
+% =============================================================================
+
+\begin{frame}{Optimalidad}
+  \begin{itemize}
+    \item En la sección anterior caracterizamos el equilibrio competitivo de la economía.
+    \item Ahora nos preguntamos si la asignación de recursos generada por el equilibrio competitivo es \textit{deseable}: para esto necesitamos algún criterio de evaluación.
+    \item En economía, el principal criterio de eficiencia es el \cidehighlight{óptimo de Pareto}.
+    \item Una asignación es \cidehighlight{eficiente en el sentido de Pareto} si no es posible mejorar la situación de un agente sin empeorar la de otro.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Definición de Óptimo de Pareto}
+  \textit{Definición.} Sea una economía con \(I\) agentes $i \in \mathcal{I} = \{1, \ldots, I\}$, $L$ bienes $l \in \mathcal{L} = \{1, \ldots, L\}$ y sea \(u^i(\mathbf{x}^i)\) la función de utilidad del agente \(i\), donde \(\mathbf{x}^i \in \mathbb{R}^L_+\) es una asignación factible de bienes para el agente \(i\). Una asignación factible \(\{\mathbf{x}^{i*}\}_{i=1}^I\) es un \cidehighlight{óptimo de Pareto} si no existe otra asignación factible \(\{\mathbf{\hat x}^i\}_{i=1}^I\) tal que
+  $$
+  u^i(\mathbf{\hat x}^i) \geq u^i(\mathbf{x}^{i*}) \quad \forall i \in \mathcal{I} \quad \text{y} \quad u^j(\mathbf{\hat x}^j) > u^j(\mathbf{x}^{j*}) \quad \text{para algún } j \in \mathcal{I}.
+  $$
+\end{frame}
+
+\begin{frame}{Planificador social benevolente}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+
+    \item ¿Cómo encontramos la asignación eficiente en el sentido
+    de Pareto para esta economía?
+    \item Utilizaremos el recurso teórico de un \cidehighlight{planificador social benevolente}.
+    \item El planificador social es una autoridad que busca maximizar el bienestar social de la economía.
+    \item En nuestra economía con consumidor representativo, el bienestar
+    social está dado por su función de utilidad. En una economía con varios
+    consumidores, el planificador maximizaría una función de bienestar
+    social que pondera la utilidad de cada uno.
+
+    \item El planificador conoce las preferencias y la tecnología de producción. No tiene ningún tipo de restricción más que las restricciones de recursos de la propia economía. Tiene el poder de redistribuir y elegir la asignación que maximiza la utilidad social.
+
+    \item Es posible demostrar que la asignación elegida por el planificador es eficiente en el sentido de Pareto.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{El problema del planificador}
+
+  \vspace{0.2cm}
+  El planificador social resuelve el siguiente problema:
+  \[
+    \max_{C,\ell}\ U(C,\ell)
+    \quad\text{sujeto a}\quad
+    C+G\leq zF(K,N), \ \ N \leq h-\ell.
+  \]
+
+  Para una solución interior y dado que $U_C > 0$ y $U_\ell > 0$, las C.P.O. son
+  \[
+  \begin{aligned}
+    U_C(C,\ell)-\lambda &=0,\\
+    U_\ell(C,\ell)-\lambda zF_N(K,h-\ell)&=0,\\
+    zF(K,h-\ell)-C-G&=0.
+  \end{aligned}
+  \]
+  
+  Por lo tanto,
+  \[
+    \boxed{
+      \mathrm{MRS}_{\ell,C}
+      =
+      \mathrm{MPN}
+    }
+  \]
+\end{frame}
+
+\begin{frame}[t]{Representación gráfica del óptimo de Pareto}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item La asignación eficiente está en la tangencia con la FPP.
+        \item Los puntos interiores a la FPP desperdician recursos.
+        \item Sobre la frontera, el planificador elige la curva de indiferencia más alta alcanzable.
+        \item En esta asignación, la MRS es igual a la tasa marginal de transformación, que es MPN.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.35cm]{fig_5_4_optimo_pareto.png}
+      \fuentefigura{Williamson (2018), figura 5.4.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.4 y pp. 151--153.}
+\end{frame}
+
+\begin{frame}{El planificador y el mercado asignan recursos de la misma manera}
+  \begin{itemize}
+  \item Esto parece redundante, pues hemos encontrado que la condición de tangencia del planificador es la misma que la condición de equilibrio competitivo.
+  \item Esto no es una coincidencia. Las asignaciones que resultan de un equilibrio competitivo cumplen siempre con la condición de la asignación del planificador.
+  \item El siguiente resultado demuestra que, \cidehighlight{en general}, la asignación de recursos que resulta de un equilibrio competitivo es eficiente en el sentido de Pareto.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Primer teorema fundamental del bienestar}
+\begin{theorem}{Primer teorema fundamental del bienestar.}
+  Sea $\left(\mathbf{p}^*, \{\mathbf{x}^{i*}\}_{i=1}^I\right)$ un equilibrio competitivo. Si las preferencias de todos los agentes son convexas y localmente no saciables, entonces la asignación $\{\mathbf{x}^{i*}\}_{i=1}^I$ es eficiente en el sentido de Pareto.
+\end{theorem}  
+\end{frame}
+
+\begin{frame}{Primer teorema fundamental del bienestar}
+\small
+\textit{Demostración.} Procedemos por contradicción. Supongamos que la asignación $\{\mathbf{x}^{i*}\}_{i=1}^I$ no es eficiente en el sentido de Pareto. Entonces existe otra asignación factible $\{\mathbf{\hat x}^i\}_{i=1}^I$ tal que
+$$
+  u^i(\hat{\mathbf{x}}^i)
+  \geq
+  u^i(\mathbf{x}^{i*})
+  \quad\forall i,
+  \qquad
+  u^j(\hat{\mathbf{x}}^j)
+  >
+  u^j(\mathbf{x}^{j*})
+  \quad\text{para algún }j.
+$$
+
+Como \(\mathbf{x}^{i*}\) maximiza la utilidad del consumidor \(i\)
+sujeto a su restricción presupuestaria, entonces
+\[
+  \mathbf{p}^*\cdot\mathbf{x}^{i*}
+  =
+  \mathbf{p}^*\cdot\mathbf{e}^i.
+\]
+La no saciedad local implica
+\[
+  \mathbf{p}^*\cdot\hat{\mathbf{x}}^i
+  \geq
+  \mathbf{p}^*\cdot\mathbf{e}^i
+  \quad\forall i,
+\]
+con desigualdad estricta para el consumidor \(j\). Por lo tanto,
+\[
+  \mathbf{p}^*\cdot\sum_{i=1}^{I}\hat{\mathbf{x}}^i
+  >
+  \mathbf{p}^*\cdot\sum_{i=1}^{I}\mathbf{e}^i.
+\]
+
+Lo cual viola la factibilidad y llegamos a una contradicción. Por lo tanto,
+\(\{\mathbf{x}^{i*}\}_{i=1}^{I}\) es eficiente en el sentido de Pareto.
+\hfill\(\square\)
+
+\end{frame}
+
+
+\begin{frame}{Interpretación del PTF}
+  \begin{itemize}
+    \item ¿Cuál es la lógica económica detrás del primer teorema fundamental del bienestar? ¿Por qué las elecciones del planificador social son las mismas que las que produce el mercado?
+    \item El planificador social elige una asignación para maximizar la utilidad sujeta a las posibilidades tecnológicas. En una economía competitiva, cada hogar maximiza su utilidad sujeta a los precios. Sin embargo, esos precios reflejan a su vez las posibilidades tecnológicas. Por lo tanto, el hogar también está, indirectamente, maximizando la utilidad sujeta a las posibilidades tecnológicas.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Segundo teorema fundamental del bienestar}
+
+\begin{theorem}
+Suponga que las preferencias son continuas, localmente no saciadas y
+convexas, y que los conjuntos de consumo y de producción son convexos. Entonces, para toda asignación Pareto eficiente existe un vector de precios \(\mathbf{p}^*\neq\mathbf{0}\) y un sistema de transferencias de suma fija \(\{\tau_i\}_{i=1}^{I}\), con \(\sum_i\tau_i=0\), tal que dicha asignación puede sostenerse con un equilibrio competitivo.
+\end{theorem}
+
+\begin{itemize}
+  \item En nuestro modelo, las transferencias de suma fija desplazan la restricción presupuestaria sin modificar su pendiente \(-w^*\). Por ello, permiten redistribuir riqueza sin distorsionar las decisiones marginales.
+\end{itemize}
+
+\end{frame}
+
+% =============================================================================
+\section{Gasto público}
+% =============================================================================
+
+\begin{frame}{Política fiscal}
+  Considere un aumento permanente de \(G_1\) a \(G_2\), financiado con impuestos de suma fija:
+  \[
+    \Delta T=\Delta G>0.
+  \]
+
+  La FPP cambia de
+  \[
+    C=zF(K,h-\ell)-G_1
+  \]
+  a
+  \[
+    C=zF(K,h-\ell)-G_2.
+  \]
+
+  \begin{itemize}
+    \item Para cada nivel de ocio, el consumo privado factible cae exactamente en \(\Delta G\).
+    \item La pendiente de la FPP no cambia para un mismo \(\ell\).
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 157--160.}
+\end{frame}
+
+\begin{frame}[t]{Más gasto público genera un efecto ingreso negativo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.48em}
+        \item La FPP se desplaza hacia abajo.
+        \item El consumidor reduce \(C\) y \(\ell\).
+        \item Menos ocio implica más empleo.
+        \item La producción aumenta, pero el salario real cae.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.45cm]{fig_5_6_gasto_publico.png}
+      \fuentefigura{Williamson (2018), figura 5.6.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.6 y pp. 157--160.}
+\end{frame}
+
+\begin{frame}{Predicciones de un aumento en \(G\)}
+  \begin{center}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \parbox[t]{3.2cm}{\raggedright\bfseries Variable} &
+    \parbox[t]{2.8cm}{\raggedright\bfseries Respuesta} &
+    \parbox[t]{7.1cm}{\raggedright\bfseries Mecanismo}\\
+    \midrule
+    \parbox[t]{3.2cm}{\raggedright Consumo \(C\)} &
+    \parbox[t]{2.8cm}{\raggedright Disminuye} &
+    \parbox[t]{7.1cm}{\raggedright Menor riqueza disponible para el sector privado.}\\[0.15cm]
+    \parbox[t]{3.2cm}{\raggedright Empleo \(N\)} &
+    \parbox[t]{2.8cm}{\raggedright Aumenta} &
+    \parbox[t]{7.1cm}{\raggedright El consumidor reduce ocio para sostener consumo.}\\[0.15cm]
+    \parbox[t]{3.2cm}{\raggedright Producción \(Y\)} &
+    \parbox[t]{2.8cm}{\raggedright Aumenta} &
+    \parbox[t]{7.1cm}{\raggedright Más trabajo eleva la producción.}\\[0.15cm]
+    \parbox[t]{3.2cm}{\raggedright Salario \(w\)} &
+    \parbox[t]{2.8cm}{\raggedright Disminuye} &
+    \parbox[t]{7.1cm}{\raggedright Con más empleo, cae el MPN.}\\[0.15cm]
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \notafuentes{Williamson (2018), pp. 157--160.}
+\end{frame}
+
+\begin{frame}{Crowding out y multiplicador del gasto}
+  La identidad de recursos implica
+  \[
+    \Delta C=\Delta Y-\Delta G.
+  \]
+
+  Como el modelo predice \(\Delta C<0\) y \(\Delta Y>0\), entonces
+  \[
+    0<\Delta Y<\Delta G.
+  \]
+
+  Por tanto, para un cambio marginal,
+  \[
+    \boxed{0<\frac{dY}{dG}<1}.
+  \]
+
+  \begin{itemize}
+    \item El gasto público desplaza parcialmente al consumo privado.
+    \item El aumento en la producción evita un desplazamiento uno a uno.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 158--160.}
+\end{frame}
+
+\begin{frame}[t]{La Segunda Guerra Mundial como experimento fiscal}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.38\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.45em}
+        \item Las compras públicas aumentaron de forma extraordinaria.
+        \item La producción se elevó con fuerza.
+        \item El consumo privado cayó sólo moderadamente.
+        \item El patrón cualitativo coincide con el modelo.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.25cm]{fig_5_7_segunda_guerra.png}
+      \fuentefigura{Williamson (2018), figura 5.7.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.7 y pp. 160--161.}
+\end{frame}
+
+
+\begin{frame}[t]{Compras públicas y egresos totales no son lo mismo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{Compras de bienes y servicios}
+
+      \vspace{0.08cm}
+      \figura[4.3cm]{fig_5_12_gasto_publico_pib.png}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{Egresos públicos totales}
+
+      \vspace{0.08cm}
+      \figura[4.3cm]{fig_5_13_egresos_publicos_pib.png}
+    \end{column}
+  \end{columns}
+
+  \fuentefigura{Williamson (2018), figuras 5.12 y 5.13.}
+  \notafuentes{Williamson (2018), figuras 5.12--5.13 y pp. 167--170.}
+\end{frame}
+
+% =============================================================================
+\section{Productividad}
+% =============================================================================
+
+\begin{frame}{Experimento: aumenta la productividad total de los factores}
+  Considere
+  \[
+    z_2>z_1.
+  \]
+
+  Para cualquier cantidad de trabajo,
+  \[
+    z_2F(K,N)>z_1F(K,N),
+  \]
+  y también aumenta el producto marginal del trabajo:
+  \[
+    z_2F_N(K,N)>z_1F_N(K,N).
+  \]
+
+  \begin{itemize}
+    \item La economía puede producir más con los mismos insumos.
+    \item Trabajar se vuelve más productivo y el salario real de equilibrio aumenta.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 159--165.}
+\end{frame}
+
+\begin{frame}[t]{Mayor productividad desplaza la tecnología}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item La función de producción se desplaza hacia arriba.
+        \item Para cada \(N\), aumenta \(Y\).
+        \item Para cada \(N\), también aumenta el MPN.
+        \item En términos de \(C\) y \(\ell\), la FPP se expande y se vuelve más inclinada.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[5.0cm]{fig_5_8_productividad.png}
+      \fuentefigura{Williamson (2018), figura 5.8.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.8 y pp. 161--163.}
+\end{frame}
+
+\begin{frame}[t]{El nuevo equilibrio tiene más consumo y producción}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      El equilibrio se mueve de \(F\) a \(H\).
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.48em}
+        \item \(C\) aumenta.
+        \item \(Y=C+G\) aumenta.
+        \item El bienestar aumenta.
+        \item El salario real aumenta.
+        \item El efecto sobre \(\ell\) y \(N\) es ambiguo.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.35cm]{fig_5_9_productividad_equilibrio.png}
+      \fuentefigura{Williamson (2018), figura 5.9.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.9 y pp. 162--164.}
+\end{frame}
+
+\begin{frame}{Predicciones de un aumento en \(z\)}
+  \begin{center}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    \parbox[t]{3.0cm}{\raggedright\bfseries Variable} &
+    \parbox[t]{3.0cm}{\raggedright\bfseries Respuesta} &
+    \parbox[t]{7.2cm}{\raggedright\bfseries Razón}\\
+    \midrule
+    \parbox[t]{3.0cm}{\raggedright \(C,Y\)} &
+    \parbox[t]{3.0cm}{\raggedright Aumentan} &
+    \parbox[t]{7.2cm}{\raggedright Se expande el conjunto factible.}\\[0.15cm]
+    \parbox[t]{3.0cm}{\raggedright Bienestar} &
+    \parbox[t]{3.0cm}{\raggedright Aumenta} &
+    \parbox[t]{7.2cm}{\raggedright Se alcanza una curva de indiferencia más alta.}\\[0.15cm]
+    \parbox[t]{3.0cm}{\raggedright \(w\)} &
+    \parbox[t]{3.0cm}{\raggedright Aumenta} &
+    \parbox[t]{7.2cm}{\raggedright Aumenta la productividad marginal del trabajo.}\\[0.15cm]
+    \parbox[t]{3.0cm}{\raggedright \(N\)} &
+    \parbox[t]{3.0cm}{\raggedright Ambigua} &
+    \parbox[t]{7.2cm}{\raggedright Se oponen los efectos ingreso y sustitución.}\\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \notafuentes{Williamson (2018), pp. 162--165.}
+\end{frame}
+
+\begin{frame}[t]{Productividad: efectos sustitución e ingreso}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.42em}
+        \item \(A\to D\): sustitución.
+          \begin{itemize}
+            \item el ocio se encarece;
+            \item \(\ell\downarrow\), \(N\uparrow\).
+          \end{itemize}
+        \item \(D\to B\): ingreso.
+          \begin{itemize}
+            \item aumenta la riqueza;
+            \item \(\ell\uparrow\), \(N\downarrow\).
+          \end{itemize}
+        \item Ambos efectos elevan \(C\).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.35cm]{fig_5_10_productividad_efectos.png}
+      \fuentefigura{Williamson (2018), figura 5.10.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.10 y pp. 163--165.}
+\end{frame}
+
+\begin{frame}[t]{El PIB y el residuo de Solow se mueven juntos}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.47em}
+        \item El residuo de Solow es una medida contable de la PTF.
+        \item Sus desviaciones respecto a tendencia comueven con el PIB real.
+        \item Este patrón motiva modelos de ciclos reales impulsados por productividad.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.35cm]{fig_5_11_pib_residuo_solow.png}
+      \fuentefigura{Williamson (2018), figura 5.11.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.11 y pp. 165--166.}
+\end{frame}
+
+\begin{frame}{Interpretar la productividad con cautela}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item El residuo de Solow se calcula como la parte del crecimiento que no explican los insumos medidos.
+    \item Por ello puede capturar tecnología, pero también utilización del capital, errores de medición y variaciones no observadas en la calidad de los insumos.
+    \item Que \(z\) y \(Y\) comuevan no prueba por sí mismo que los choques tecnológicos causen todas las fluctuaciones.
+    \item La teoría produce una predicción conjunta para \(C,Y,N,w\) y bienestar; el contraste debe considerar todas esas variables.
+  \end{itemize}
+
+  \begin{alertblock}{Lección}
+    Una variable residual no debe interpretarse mecánicamente como un choque tecnológico exógeno.
+  \end{alertblock}
+  \notafuentes{Williamson (2018), pp. 165--166 y discusión del residuo de Solow del cap. 4.}
+\end{frame}
+
+% =============================================================================
+\section{Impuestos distorsionantes}
+% =============================================================================
+
+\begin{frame}{El impuesto de suma fija es un punto de referencia}
+  Con un impuesto de suma fija, trabajar una hora adicional sigue generando \(w\) unidades de consumo:
+  \[
+    \mathrm{MRS}_{\ell,C}=w=\mathrm{MPN}.
+  \]
+
+  Con un impuesto proporcional \(t\) sobre el ingreso laboral, el consumidor recibe sólo
+  \[
+    w(1-t)
+  \]
+  por cada hora adicional de trabajo.
+
+  \begin{alertblock}{Cuña fiscal}
+    El impuesto separa el rendimiento social del trabajo, \(\mathrm{MPN}\), del rendimiento privado, \(w(1-t)\).
+  \end{alertblock}
+  \notafuentes{Williamson (2018), pp. 170--174.}
+\end{frame}
+
+\begin{frame}{El impuesto al trabajo modifica la decisión marginal}
+  El consumidor enfrenta
+  \[
+    C=w(1-t)(h-\ell)+\pi.
+  \]
+
+  Su condición de optimalidad es
+  \[
+    \mathrm{MRS}_{\ell,C}=w(1-t).
+  \]
+
+  La empresa continúa fijando
+  \[
+    w=\mathrm{MPN}.
+  \]
+
+  Por tanto,
+  \[
+    \boxed{\mathrm{MRS}_{\ell,C}=(1-t)\mathrm{MPN}<\mathrm{MPN}}.
+  \]
+
+  \begin{itemize}
+    \item El consumidor trabaja menos de lo socialmente eficiente.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 171--175.}
+\end{frame}
+
+\begin{frame}{Un modelo simplificado hace visible la distorsión}
+  Suponga una tecnología lineal:
+  \[
+    Y=zN.
+  \]
+
+  Entonces
+  \[
+    \mathrm{MPN}=z,
+    \qquad
+    w=z,
+    \qquad
+    \pi=0.
+  \]
+
+  La restricción de recursos es
+  \[
+    C=z(h-\ell)-G,
+  \]
+  y el presupuesto del consumidor es
+  \[
+    C=z(1-t)(h-\ell).
+  \]
+
+  El presupuesto público exige
+  \[
+    \boxed{G=zt(h-\ell)}.
+  \]
+  \notafuentes{Williamson (2018), ecuaciones 5-7 a 5-12 y pp. 171--176.}
+\end{frame}
+
+\begin{frame}[t]{Tecnología lineal: FPP y demanda de trabajo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{FPP lineal}
+
+      \vspace{0.08cm}
+      \figura[4.45cm]{fig_5_14_fpp_simplificado.png}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{Demanda laboral perfectamente elástica}
+
+      \vspace{0.08cm}
+      \figura[4.45cm]{fig_5_15_demanda_trabajo_simplificado.png}
+    \end{column}
+  \end{columns}
+
+  \fuentefigura{Williamson (2018), figuras 5.14 y 5.15.}
+  \notafuentes{Williamson (2018), figuras 5.14--5.15 y pp. 171--173.}
+\end{frame}
+
+\begin{frame}[t]{El equilibrio con impuesto no es eficiente}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+        \item \(AB\): FPP de la economía.
+        \item \(DF\): presupuesto después de impuestos.
+        \item \(H\): equilibrio competitivo.
+        \item \(E\): óptimo de Pareto.
+        \item En \(H\), consumo, empleo y producción son demasiado bajos.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.35cm]{fig_5_16_impuesto_trabajo.png}
+      \fuentefigura{Williamson (2018), figura 5.16.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.16 y pp. 173--175.}
+\end{frame}
+
+\begin{frame}[t]{La recaudación no aumenta indefinidamente con la tasa}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \[
+        R(t)=zt\,[h-\ell(t)].
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.46em}
+        \item \(t=0\): no existe recaudación.
+        \item \(t=1\): desaparece el rendimiento privado de trabajar.
+        \item \(t^*\): maximiza la recaudación.
+        \item Para \(G<R(t^*)\), pueden existir dos tasas que financien el mismo gasto.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.05cm]{fig_5_17_laffer.png}
+      \fuentefigura{Williamson (2018), figura 5.17.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.17 y pp. 175--177.}
+\end{frame}
+
+\begin{frame}{La curva de Laffer no implica que reducir \(t\) siempre recaude más}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item A la izquierda de \(t^*\), una tasa mayor eleva la recaudación.
+    \item A la derecha de \(t^*\), una tasa mayor reduce tanto la base gravable que la recaudación cae.
+    \item Saber de qué lado se encuentra una economía es una pregunta empírica.
+    \item La forma y el máximo dependen de la elasticidad de la oferta laboral y de otros márgenes de respuesta.
+  \end{itemize}
+
+  \begin{block}{Punto central}
+    La recaudación depende de la tasa y de la respuesta endógena de la base tributaria.
+  \end{block}
+  \notafuentes{Williamson (2018), pp. 175--177.}
+\end{frame}
+
+\begin{frame}[t]{Dos tasas pueden financiar el mismo gasto}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      Para \(t_1<t_2\):
+      \begin{itemize}
+        \setlength{\itemsep}{0.47em}
+        \item ambas tasas recaudan \(G\);
+        \item con \(t_1\), el rendimiento de trabajar es mayor;
+        \item el equilibrio \(F\) tiene más \(C,N,Y\);
+        \item el consumidor alcanza mayor bienestar que en \(H\).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.35cm]{fig_5_18_dos_equilibrios.png}
+      \fuentefigura{Williamson (2018), figura 5.18.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.18 y pp. 176--177.}
+\end{frame}
+
+% =============================================================================
+\section{Bienes públicos}
+% =============================================================================
+
+\begin{frame}{Ahora el gasto público genera utilidad}
+  Para separar la elección del tamaño del gobierno, suponga una dotación fija \(Y\) y preferencias
+  \[
+    U(C,G).
+  \]
+
+  El gobierno transforma impuestos \(T\) en bienes públicos con eficiencia \(q\):
+  \[
+    G=qT.
+  \]
+
+  Como el consumidor enfrenta
+  \[
+    C+T=Y,
+  \]
+  la FPP entre consumo privado y bienes públicos es
+  \[
+    \boxed{C+\frac{G}{q}=Y}.
+  \]
+  \notafuentes{Williamson (2018), sección ``A Model of Public Goods'', pp. 177--181.}
+\end{frame}
+
+\begin{frame}[t]{El tamaño óptimo del gobierno equilibra costos y beneficios}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      En una solución interior,
+      \[
+        \frac{U_G}{U_C}=\frac{1}{q}.
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.45em}
+        \item \(U_G/U_C\): beneficio marginal del bien público.
+        \item \(1/q\): consumo privado sacrificado por una unidad de \(G\).
+        \item \(G^*\) maximiza el bienestar, no la recaudación.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.25cm]{fig_5_19_gasto_optimo.png}
+      \fuentefigura{Williamson (2018), figura 5.19.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.19 y pp. 178--180.}
+\end{frame}
+
+\begin{frame}[t]{Una economía más rica demanda más bienes públicos}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      Si aumenta \(Y\):
+      \begin{itemize}
+        \setlength{\itemsep}{0.52em}
+        \item la FPP se desplaza hacia afuera en forma paralela;
+        \item si \(C\) y \(G\) son normales, ambos aumentan;
+        \item la participación \(G/Y\) depende de la elasticidad ingreso de los bienes públicos.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.25cm]{fig_5_20_aumento_pib.png}
+      \fuentefigura{Williamson (2018), figura 5.20.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.20 y pp. 179--181.}
+\end{frame}
+
+\begin{frame}[t]{Un gobierno más eficiente puede ser más grande}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      Si \(q\) aumenta:
+      \begin{itemize}
+        \setlength{\itemsep}{0.46em}
+        \item la FPP rota hacia afuera;
+        \item producir \(G\) cuesta menos consumo privado;
+        \item el efecto sustitución eleva \(G\) y reduce \(C\);
+        \item el efecto ingreso eleva ambos;
+        \item \(G\) aumenta y \(C\) puede subir o bajar.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.25cm]{fig_5_21_eficiencia_gobierno.png}
+      \fuentefigura{Williamson (2018), figura 5.21.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 5.21 y pp. 180--181.}
+\end{frame}
+
+% =============================================================================
+\section{Síntesis}
+% =============================================================================
+
+\begin{frame}{Tres experimentos, tres mecanismos}
+  \small
+  \centering
+  \begin{tabular}{@{}lllll@{}}
+    \toprule
+    \parbox[t]{2.4cm}{\raggedright\bfseries Cambio} &
+    \parbox[t]{1.5cm}{\raggedright\bfseries \(C\)} &
+    \parbox[t]{1.5cm}{\raggedright\bfseries \(Y\)} &
+    \parbox[t]{1.5cm}{\raggedright\bfseries \(N\)} &
+    \parbox[t]{4.5cm}{\raggedright\bfseries Mecanismo principal}\\
+    \midrule
+    \parbox[t]{2.4cm}{\raggedright \(G\uparrow\), impuesto de suma fija} &
+    \parbox[t]{1.5cm}{\raggedright Baja} &
+    \parbox[t]{1.5cm}{\raggedright Sube} &
+    \parbox[t]{1.5cm}{\raggedright Sube} &
+    \parbox[t]{4.5cm}{\raggedright Efecto ingreso negativo.}\\[0.2cm]
+    \parbox[t]{2.4cm}{\raggedright \(z\uparrow\)} &
+    \parbox[t]{1.5cm}{\raggedright Sube} &
+    \parbox[t]{1.5cm}{\raggedright Sube} &
+    \parbox[t]{1.5cm}{\raggedright Ambiguo} &
+    \parbox[t]{4.5cm}{\raggedright Ingreso y sustitución opuestos sobre trabajo.}\\[0.2cm]
+    \parbox[t]{2.4cm}{\raggedright \(t\uparrow\), modelo simplificado} &
+    \parbox[t]{1.5cm}{\raggedright Baja} &
+    \parbox[t]{1.5cm}{\raggedright Baja} &
+    \parbox[t]{1.5cm}{\raggedright Baja} &
+    \parbox[t]{4.5cm}{\raggedright Cuña entre rendimiento privado y social.}\\
+    \bottomrule
+  \end{tabular}
+  \notafuentes{Síntesis de Williamson (2018), cap. 5.}
+\end{frame}
+
+\begin{frame}{Resultados que debemos conservar}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.48em}
+    \item El equilibrio general exige consistencia entre decisiones óptimas y vaciado de mercados.
+    \item La FPP resume la tecnología y la restricción agregada de recursos.
+    \item Con competencia perfecta e impuestos de suma fija, el equilibrio es eficiente.
+    \item El gasto público no productivo desplaza consumo, pero aumenta empleo y producción.
+    \item La productividad eleva consumo, producción, salario y bienestar; su efecto laboral es ambiguo.
+    \item Los impuestos proporcionales crean una cuña y generan pérdidas de eficiencia.
+  \end{enumerate}
+  \notafuentes{Williamson (2018), resumen del cap. 5.}
+\end{frame}
+
+\begin{frame}{El modelo ya permite hacer macroeconomía}
+  Comenzamos con decisiones individuales:
+  \[
+    \text{preferencias} + \text{tecnología} + \text{política}.
+  \]
+
+  El equilibrio las traduce en resultados agregados:
+  \[
+    (C^*,Y^*,N^*,w^*).
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Los precios coordinan las decisiones descentralizadas.
+  \end{itemize}
+  \notafuentes{Williamson (2018), transición de los caps. 5 a 6.}
+\end{frame}
+
+\begin{frame}{Referencias de la sesión}
+  \begin{itemize}
+    \setlength{\itemsep}{0.75em}
+    \item Williamson, Stephen D. (2018). \textit{Macroeconomics}, 6th ed. Pearson. Capítulo 5: ``A Closed-Economy One-Period Macroeconomic Model''.
+  \end{itemize}
+\end{frame}
+
+\end{document}
