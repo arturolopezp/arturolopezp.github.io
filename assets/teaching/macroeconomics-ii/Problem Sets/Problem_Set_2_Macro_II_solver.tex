@@ -66,56 +66,364 @@ y un vector de precios $(1,w^*)$ tales que:\footnote{El precio del bien de consu
   \]
 \end{enumerate}
 
+
+
+
+
 \subsection*{(b) Decisiones óptimas del hogar y de la empresa}
 
-El Lagrange asociado al problema del hogar es
+
+En este inciso buscamos expresar las decisiones óptimas de los agentes como funciones del salario real y de las variables exógenas del modelo. Las reglas de decisión obtenidas son
 \[
-  \mathcal L(C,\ell, \lambda)
-  =\log C+\psi\log\ell
-  +\lambda\left[w(1-\ell)+\pi-T-C\right].
+\ell(w), \qquad C^d(w), \qquad  N^d(w).
 \]
-Las C.P.O. de una solución interior son
+A partir de ellas se construyen las funciones microfundamentadas de oferta y demanda de los mercados de trabajo y de bienes y servicios:
+\[
+N^s(w) = 1 - \ell(w),\qquad N^d(w),\qquad
+Y^s(w) = z \sqrt{N^d(w)},\qquad Y^d(w)=C^d(w)+G.
+\]
+
+En el siguiente inciso utilizaremos estas funciones e impondremos simultáneamente las condiciones de vaciado de mercado para determinar el salario real de equilibrio \(w^*\) y, por consecuencia, la asignación de equilibrio.
+
+
+\medskip
+
+\subsubsection*{El problema del hogar}
+
+Como la utilidad del hogar es estrictamente creciente en el consumo, la restricción presupuestaria se satisface con igualdad:
+\[
+C=w(1-\ell)+\pi-T.
+\]
+
+El lagrangiano asociado al problema del hogar es entonces
+\[
+\mathcal L(C,\ell,\lambda)
+=
+\log C+\psi\log\ell
++\lambda\left[w(1-\ell)+\pi-T-C\right].
+\]
+
+Las condiciones de primer orden de una solución interior son
 \begin{align*}
-  \frac{\partial\mathcal L}{\partial C}
-  &=\frac{1}{C}-\lambda=0, \\
-  \frac{\partial\mathcal L}{\partial\ell}
-  &=\frac{\psi}{\ell}-\lambda w=0, \\
-  \frac{\partial\mathcal L}{\partial\lambda}
-  &=w(1-\ell)+\pi-T-C=0.
+\frac{\partial\mathcal L}{\partial C}
+&=\frac{1}{C}-\lambda=0,\\
+\frac{\partial\mathcal L}{\partial\ell}
+&=\frac{\psi}{\ell}-\lambda w=0,\\
+\frac{\partial\mathcal L}{\partial\lambda}
+&=w(1-\ell)+\pi-T-C=0.
 \end{align*}
 
-De la primera condición, $\lambda=1/C$. Al introducirla en la segunda condición se obtiene
+De la primera condición se obtiene
 \[
-  \frac{\psi}{\ell}=\frac{w}{C},
+\lambda=\frac{1}{C}.
 \]
-por lo que
+Al sustituir esta expresión en la segunda condición,
 \[
-  C=\frac{w\ell}{\psi}.
+\frac{\psi}{\ell}=\frac{w}{C}.
 \]
-Al sustituir esta expresión en la tercera condición, se obtiene
+Por lo tanto,
 \[
-  \frac{w\ell}{\psi}=w(1-\ell)+\pi-T.
+C=\frac{w\ell}{\psi}.
 \]
-Multiplicando por $\psi$ y reuniendo los términos que contienen $\ell$,
+
+Sustituyendo esta expresión en la tercera condición,
 \[
-  w\ell=\psi w-\psi w\ell+\psi\pi-\psi T,
+\frac{w\ell}{\psi}=w(1-\ell)+\pi-T.
+\]
+Multiplicando ambos lados por \(\psi\),
+\[
+w\ell=\psi w(1-\ell)+\psi\pi-\psi T,
+\]
+de modo que
+\[
+w\ell=\psi w-\psi w\ell+\psi\pi-\psi T.
+\]
+Reuniendo los términos que contienen \(\ell\),
+\[
+(1+\psi)w\ell=\psi(w+\pi-T).
+\]
+Por lo tanto,
+\[
+\ell(w,\pi,T)
+=
+\frac{\psi(w+\pi-T)}{(1+\psi)w}.
+\]
+
+Sustituyendo esta expresión en \(C=w\ell/\psi\):
+\begin{align*}
+C^d(w,\pi,T)
+&=
+\frac{w}{\psi}
+\frac{\psi(w+\pi-T)}{(1+\psi)w}\\
+&=
+\frac{w+\pi-T}{1+\psi}.
+\end{align*}
+
+Sustituyendo en la oferta laboral,
+\begin{align*}
+N^s(w,\pi,T)
+&=1-\ell(w,\pi,T)\\
+&=1-\frac{\psi(w+\pi-T)}{(1+\psi)w}\\
+&=\frac{(1+\psi)w-\psi(w+\pi-T)}
+        {(1+\psi)w}\\
+&=
+\frac{w-\psi\pi+\psi T}{(1+\psi)w}.
+\end{align*}
+
+Estas expresiones describen las decisiones óptimas del hogar tomando \(w\), \(\pi\) y \(T\) como dados. Sin embargo, todavía no son las funciones relevantes, pues \(\pi\) y \(T\) son variables endógenas en equilibrio general.
+
+En particular, el impuesto de suma fija se determina mediante la
+restricción presupuestaria del gobierno:
+$
+G = T.
+$
+Por su parte, los beneficios se determinan endógenamente a partir del problema de maximización de la empresa. Por lo tanto, para expresar la oferta de trabajo y la demanda de bienes únicamente como funciones del precio \(w\) y de las variables exógenas \((z,G)\), primero es necesario resolver el problema de la empresa y obtener \(\pi=\pi(w)\).
+
+\subsubsection*{El problema de la empresa}
+
+La empresa representativa elige su demanda de trabajo para maximizar
+beneficios:
+\[
+\max_{N^d\geq 0}
+\left\{
+z\sqrt{N^d}-wN^d
+\right\}.
+\]
+
+La condición de primer orden es
+\[
+\frac{z}{2\sqrt{N^d}}-w=0.
+\]
+
+Despejando \(N^d\),
+\[
+\frac{z}{2\sqrt{N^d}}=w,
 \]
 \[
-  (1+\psi)w\ell=\psi(w+\pi-T).
+z=2w\sqrt{N^d},
 \]
-Por lo tanto, la demanda de ocio es
 \[
-  \boxed{
-  \ell(w,\pi,T)
-  =\frac{\psi(w+\pi-T)}{(1+\psi)w}
-  }
+\sqrt{N^d}=\frac{z}{2w}.
 \]
-Notemos que:
-$$
-\frac{\partial \ell }{\partial w} = -\frac{\psi(\pi-T)}{(1+\psi)w^2} < 0, 
-\quad \frac{\partial \ell }{\partial \pi} = \frac{\psi}{(1+\psi)w} > 0, \quad \frac{\partial \ell }{\partial T} = -\frac{\psi}{(1+\psi)w} < 0.
-$$
-lo que muestra que el efecto sustitución domina al efecto ingreso en la oferta de ocio que resulta de estas preferencias, de modo que la oferta laboral tiene pendiente positiva respecto del salario. Además, al incrementar con los beneficios y disminuir con los impuestos se demuestra que el ocio es un bien normal.
+Por tanto, la función de demanda de trabajo es
+\[
+\boxed{
+N^d(w)=\frac{z^2}{4w^2}
+}.
+\]
+
+La demanda de trabajo tiene pendiente negativa respecto del salario
+real:
+\[
+\frac{\partial N^d(w)}{\partial w}
+=
+-\frac{z^2}{2w^3}<0.
+\]
+
+La función de oferta de bienes se obtiene sustituyendo la demanda de
+trabajo en la función de producción:
+\begin{align*}
+Y^s(w)
+&=z\sqrt{N^d(w)}\\
+&=z\sqrt{\frac{z^2}{4w^2}}\\
+&=z\frac{z}{2w}\\
+&=
+\boxed{
+\frac{z^2}{2w}
+}.
+\end{align*}
+
+Su pendiente respecto del salario real es
+\[
+\frac{\partial Y^s(w)}{\partial w}
+=
+-\frac{z^2}{2w^2}<0.
+\]
+
+Los beneficios de la empresa son
+\begin{align*}
+\pi(w)
+&=Y^s(w)-wN^d(w)\\
+&=\frac{z^2}{2w}
+-w\left(\frac{z^2}{4w^2}\right)\\
+&=\frac{z^2}{2w}-\frac{z^2}{4w}\\
+&=
+\boxed{
+\frac{z^2}{4w}
+}.
+\end{align*}
+
+\subsubsection*{Oferta de trabajo en equilibrio general}
+
+Para obtener la oferta de trabajo como función únicamente del salario
+real y de las variables exógenas, sustituimos
+\[
+\pi(w)=\frac{z^2}{4w}
+\qquad\text{y}\qquad
+G = T
+\]
+en la demanda de ocio del hogar:
+\begin{align*}
+\ell(w)
+&=
+\frac{\psi\left[w+\pi(w;z)-G\right]}
+     {(1+\psi)w}\\
+&=
+\boxed{
+\frac{\psi\left(
+w+\dfrac{z^2}{4w}-G
+\right)}
+{(1+\psi)w}
+}.
+\end{align*}
+
+La función de oferta de trabajo es
+\begin{align*}
+N^s(w)
+&=1-\ell(w)\\
+&=
+1-
+\frac{\psi\left(
+w+\dfrac{z^2}{4w}-G
+\right)}
+{(1+\psi)w}.
+\end{align*}
+
+Desarrollando la expresión,
+\[
+\boxed{
+N^s(w)
+=
+\frac{1}{1+\psi}
++\frac{\psi G}{(1+\psi)w}
+-\frac{\psi z^2}{4(1+\psi)w^2}
+}.
+\]
+
+La pendiente de esta función es
+\begin{align*}
+\frac{\partial N^s(w)}{\partial w}
+&=
+-\frac{\psi G}{(1+\psi)w^2}
++\frac{\psi z^2}{2(1+\psi)w^3}\\
+&=
+\boxed{
+\frac{\psi(z^2-2Gw)}
+     {2(1+\psi)w^3}
+}.
+\end{align*}
+
+En consecuencia, la oferta de trabajo no tiene pendiente positiva para
+todo \(w>0\). Su pendiente es positiva cuando
+\[
+w<\frac{z^2}{2G}.
+\]
+Bajo el supuesto \(0<G<z\), esta condición se satisface en el equilibrio
+interior de esta economía.
+
+\subsubsection*{Demanda de bienes en equilibrio general}
+
+La demanda privada de bienes se obtiene sustituyendo
+\[
+\pi(w)=\frac{z^2}{4w}
+\qquad\text{y}\qquad
+T=G
+\]
+en la demanda condicional de consumo:
+\begin{align*}
+C^d(w)
+&=
+\frac{w+\pi(w)-G}{1+\psi}\\
+&=
+\boxed{
+\frac{
+w+\dfrac{z^2}{4w}-G
+}{1+\psi}
+}.
+\end{align*}
+
+Su pendiente respecto del salario real es
+\begin{align*}
+\frac{\partial C^d(w)}{\partial w}
+&=
+\frac{1}{1+\psi}
+\left(
+1-\frac{z^2}{4w^2}
+\right).
+\end{align*}
+
+Como
+\[
+N^d(w)=\frac{z^2}{4w^2},
+\]
+también puede escribirse como
+\[
+\frac{\partial C^d(w)}{\partial w}
+=
+\frac{1-N^d(w)}{1+\psi}.
+\]
+Por tanto, en un equilibrio interior en el que
+\(N^{d*}<1\), la demanda privada de consumo tiene pendiente positiva
+respecto del salario real.
+
+El gobierno también demanda \(G\) unidades del bien. Por tanto, la
+demanda agregada de bienes, o absorción interna, es
+\[
+Y^d(w;\psi,z,G)=C^d(w;\psi,z,G)+G.
+\]
+Sustituyendo la función de consumo,
+\begin{align*}
+Y^d(w;\psi,z,G)
+&=
+\frac{
+w+\dfrac{z^2}{4w}-G
+}{1+\psi}
++G\\
+&=
+\frac{
+w+\dfrac{z^2}{4w}-G+(1+\psi)G
+}{1+\psi}\\
+&=
+\boxed{
+\frac{
+w+\dfrac{z^2}{4w}+\psi G
+}{1+\psi}
+}.
+\end{align*}
+
+De esta manera, todas las funciones relevantes para resolver el
+equilibrio general están expresadas únicamente en términos del precio
+relativo \(w\) y de las variables exógenas \((\psi,z,G)\):
+\[
+N^s(w)
+\frac{1}{1+\psi}
++\frac{\psi G}{(1+\psi)w}
+-\frac{\psi z^2}{4(1+\psi)w^2},
+\]
+\[
+N^d(w;z)=\frac{z^2}{4w^2},
+\]
+\[
+Y^s(w;z)=\frac{z^2}{2w},
+\]
+\[
+Y^d(w;\psi,z,G)
+=
+\frac{
+w+\dfrac{z^2}{4w}+\psi G
+}{1+\psi}.
+\]
+
+El salario real de equilibrio \(w^*\) puede encontrarse imponiendo el
+vaciado del mercado de trabajo,
+\[
+N^s(w^*;\psi,z,G)=N^d(w^*;z),
+\]
+o, equivalentemente, el vaciado del mercado de bienes,
+\[
+Y^s(w^*;z)=Y^d(w^*;\psi,z,G).
+\]
+
 
 La función de oferta laboral es por lo tanto:
 \[
@@ -137,37 +445,11 @@ Finalmente, al introducir la demanda de ocio en $C=w\ell/\psi$, obtenemos la fun
   }.
 \]
 
-La empresa elige $N^d$ para maximizar
-\[
-  \pi=z\sqrt{N^d}-wN^d.
-\]
-La C.P.O. es:
-\[
-  \frac{z}{2\sqrt{N^d}}-w=0,
-\]
-Despejando, obtenemos la función de demanda laboral:
-\[
-  \boxed{
-  N^d(w)=\frac{z^2}{4w^2}
-  }.
-\]
-Con pendiente negativa respecto al salario:
-$$
-  \frac{dN^{d}}{dw}=-\frac{z^2}{2w^3}<0.
-$$
 
-La oferta de bienes se obtiene sustituyendo la demanda de trabajo en la función de producción:
-\[
-  Y^s(w)
-  =z\sqrt{\frac{z^2}{4w^2}}
-  =\boxed{\frac{z^2}{2w}}.
-\]
-Los beneficios son
-\[
-  \pi(w)
-  =\frac{z^2}{2w}-w\frac{z^2}{4w^2}
-  =\boxed{\frac{z^2}{4w}}.
-\]
+Con la función de beneficios y dado que $G=T$, entonces podemos encontrar las funciones restantes:\footnote{Recuerden que la solución del modelo debe dejar a las variables endógenas en términs únicamente de parámetros y variables exógenas}
+
+
+
 
 \subsection*{(c) Solución explícita del equilibrio competitivo}
 En el inciso anterior encontramos las elecciones óptimas del hogar y de la empresa como funciones del salario real, de las variables exógenas y de variables que cada agente toma como dadas. Estas funciones \textbf{no son la solución del modelo}. La solución del modelo tiene que dejar a las variables endógenas en términos únicamente de parámetros y variables exógenas. 
