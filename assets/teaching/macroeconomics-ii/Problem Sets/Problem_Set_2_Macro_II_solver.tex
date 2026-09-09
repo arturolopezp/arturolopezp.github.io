@@ -1,0 +1,769 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\pagestyle{plain}
+\allowdisplaybreaks
+
+\newcommand{\MRS}{\mathrm{MRS}}
+\newcommand{\MPN}{\mathrm{MPN}}
+
+\begin{document}
+
+\begin{center}
+  {\large\textbf{Centro de Investigación y Docencia Económicas}}\\[0.25em]
+  {\large\textbf{Macroeconomía II}}\\[0.2em]
+  {\large\textbf{Problem Set 2: Equilibrio General}}\\[0.2em]
+  {\large\textbf{Solver}}\\[0.35em]
+  LECO -- Otoño 2026
+\end{center}
+
+\vspace{0.6em}
+\hrule
+\vspace{0.8em}
+
+\noindent\textbf{Ejercicio 1. Equilibrio general en una economía cerrada de un periodo}
+
+\subsection*{(a) Definición del equilibrio competitivo}
+
+Dadas las variables exógenas $(z,G)$, un equilibrio competitivo es una asignación
+\[
+  \left(C^*,\ell^*,N^{s*},N^{d*},Y^*,T^*\right)
+\]
+y un vector de precios $(1,w^*)$ tales que:\footnote{El precio del bien de consumo se normaliza a uno por ser el numerario. Por lo tanto, el vector de precios de equilibrio es $(1,w^*)$ y el salario real $w^*$ es el único precio relativo endógeno de esta economía.}
+\begin{enumerate}
+  \item $(C^*,\ell^*)$ resuelve el problema del hogar:
+  \[
+    \max_{C,\ell}
+    \ \log C+\psi\log\ell
+    \quad 
+    \text{s.a.}
+    \quad 
+    C\leq w^*(1-\ell)+\pi^*-T^*,
+  \]
+  tomando $w^*$ como dado;
+
+  \item $N^{d*}$ resuelve el problema de la empresa:
+  \[
+    \max_{N^d}
+    \ z\sqrt{N^d}-w^*N^d,
+  \]
+  tomando $w^*$ como dado;
+  \item El gobierno cumple con su restricción $G = T^*$;
+  \item El mercado de trabajo y el mercado de bienes se vacían:
+  \[
+    N^{s*}=1-\ell^*=N^{d*},
+  \]
+  \[
+    Y^*=C^*+G.
+  \]
+\end{enumerate}
+
+\subsection*{(b) Decisiones óptimas del hogar y de la empresa}
+
+El Lagrange asociado al problema del hogar es
+\[
+  \mathcal L(C,\ell, \lambda)
+  =\log C+\psi\log\ell
+  +\lambda\left[w(1-\ell)+\pi-T-C\right].
+\]
+Las C.P.O. de una solución interior son
+\begin{align*}
+  \frac{\partial\mathcal L}{\partial C}
+  &=\frac{1}{C}-\lambda=0, \\
+  \frac{\partial\mathcal L}{\partial\ell}
+  &=\frac{\psi}{\ell}-\lambda w=0, \\
+  \frac{\partial\mathcal L}{\partial\lambda}
+  &=w(1-\ell)+\pi-T-C=0.
+\end{align*}
+
+De la primera condición, $\lambda=1/C$. Al introducirla en la segunda condición se obtiene
+\[
+  \frac{\psi}{\ell}=\frac{w}{C},
+\]
+por lo que
+\[
+  C=\frac{w\ell}{\psi}.
+\]
+Al sustituir esta expresión en la tercera condición, se obtiene
+\[
+  \frac{w\ell}{\psi}=w(1-\ell)+\pi-T.
+\]
+Multiplicando por $\psi$ y reuniendo los términos que contienen $\ell$,
+\[
+  w\ell=\psi w-\psi w\ell+\psi\pi-\psi T,
+\]
+\[
+  (1+\psi)w\ell=\psi(w+\pi-T).
+\]
+Por lo tanto, la demanda de ocio es
+\[
+  \boxed{
+  \ell(w,\pi,T)
+  =\frac{\psi(w+\pi-T)}{(1+\psi)w}
+  }
+\]
+Notemos que:
+$$
+\frac{\partial \ell }{\partial w} = -\frac{\psi(\pi-T)}{(1+\psi)w^2} < 0, 
+\quad \frac{\partial \ell }{\partial \pi} = \frac{\psi}{(1+\psi)w} > 0, \quad \frac{\partial \ell }{\partial T} = -\frac{\psi}{(1+\psi)w} < 0.
+$$
+lo que muestra que el efecto sustitución domina al efecto ingreso en la oferta de ocio que resulta de estas preferencias, de modo que la oferta laboral tiene pendiente positiva respecto del salario. Además, al incrementar con los beneficios y disminuir con los impuestos se demuestra que el ocio es un bien normal.
+
+La función de oferta laboral es por lo tanto:
+\[
+  N^s(w,\pi,T)
+  =1-\frac{\psi(w+\pi-T)}{(1+\psi)w},
+\]
+equivalentemente,
+\[
+  \boxed{ 
+  N^s(w,\pi,T)
+  =\frac{w-\psi\pi+\psi T}{(1+\psi)w}
+  }.
+\]
+Finalmente, al introducir la demanda de ocio en $C=w\ell/\psi$, obtenemos la función de demanda de bienes de consumo:
+\[
+  \boxed{
+  C^d(w,\pi,T)
+  =\frac{w+\pi-T}{1+\psi}
+  }.
+\]
+
+La empresa elige $N^d$ para maximizar
+\[
+  \pi=z\sqrt{N^d}-wN^d.
+\]
+La C.P.O. es:
+\[
+  \frac{z}{2\sqrt{N^d}}-w=0,
+\]
+Despejando, obtenemos la función de demanda laboral:
+\[
+  \boxed{
+  N^d(w)=\frac{z^2}{4w^2}
+  }.
+\]
+Con pendiente negativa respecto al salario:
+$$
+  \frac{dN^{d}}{dw}=-\frac{z^2}{2w^3}<0.
+$$
+
+La oferta de bienes se obtiene sustituyendo la demanda de trabajo en la función de producción:
+\[
+  Y^s(w)
+  =z\sqrt{\frac{z^2}{4w^2}}
+  =\boxed{\frac{z^2}{2w}}.
+\]
+Los beneficios son
+\[
+  \pi(w)
+  =\frac{z^2}{2w}-w\frac{z^2}{4w^2}
+  =\boxed{\frac{z^2}{4w}}.
+\]
+
+\subsection*{(c) Solución explícita del equilibrio competitivo}
+En el inciso anterior encontramos las elecciones óptimas del hogar y de la empresa como funciones del salario real, de las variables exógenas y de variables que cada agente toma como dadas. Estas funciones \textbf{no son la solución del modelo}. La solución del modelo tiene que dejar a las variables endógenas en términos únicamente de parámetros y variables exógenas. 
+
+Para resolver el modelo (encontrar el equilibrio competitivo), necesitamos encontrar el salario real $w^*$ de equilibrio, en términos de los parámetros del modelo, para así poder sustituirlo en las funciones de oferta y demanda de los agentes y encontrar las cantidades de equilibrio.
+
+Para encontrar el salario real de equilibrio, utilizamos la condición de vaciado del mercado de trabajo:
+$$
+N^s(w^*) = N^d(w^*)
+$$
+
+En equilibrio, $G = T^*$ y los beneficios que recibe el hogar son
+\[
+  \pi^*=\frac{z^2}{4w^*}.
+\]
+Al sustituir estas expresiones en la función de oferta de trabajo del hogar se obtiene
+\[
+  N^s\left(w,\frac{z^2}{4w},G\right)
+  =\frac{w-\dfrac{\psi z^2}{4w}+\psi G}{(1+\psi)w}.
+\]
+Igualando así oferta y demanda laboral:
+\[
+  \frac{w-\dfrac{\psi z^2}{4w}+\psi G}{(1+\psi)w}
+  =\frac{z^2}{4w^2}.
+\]
+Multiplicando ambos lados por $(1+\psi)w$,
+\[
+  w-\frac{\psi z^2}{4w}+\psi G
+  =\frac{(1+\psi)z^2}{4w}.
+\]
+Multiplicando ahora por $4w$,
+\[
+  4w^2-\psi z^2+4\psi Gw=(1+\psi)z^2.
+\]
+Reuniendo todos los términos,
+\[
+  4w^2+4\psi Gw-(1+2\psi)z^2=0.
+\]
+La fórmula general produce dos raíces
+\[
+  w
+  =\frac{-4\psi G\pm
+  \sqrt{16\psi^2G^2+16(1+2\psi)z^2}}{8}.
+\]
+Como el salario debe ser positivo, se descarta la raíz negativa. Por lo tanto,
+\[
+  \boxed{
+  w^*
+  =\frac{-\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}{2}
+  }.
+\]
+Sustituyendo en la función de demanda laboral, obtenemos el empleo de equilibrio:
+\[
+  \boxed{
+  N^*
+  =\left[
+  \frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  {(1+2\psi)z}
+  \right]^2
+  }.
+\]
+El ocio de equilibrio es
+\[
+  \boxed{
+  \ell^*
+  =1-\left[
+  \frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  {(1+2\psi)z}
+  \right]^2
+  }.
+\]
+La producción de equilibrio es
+\[
+  Y^*=z\sqrt{N^*}
+  =\boxed{
+  \frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  {1+2\psi}
+  }.
+\]
+El consumo se obtiene del vaciado del mercado de bienes:
+\[
+  C^*=Y^*-G,
+\]
+por lo que
+\[
+  \boxed{
+  C^*
+  =\frac{\sqrt{\psi^2G^2+(1+2\psi)z^2}-(1+\psi)G}
+  {1+2\psi}
+  }.
+\]
+Finalmente,
+\[
+  \boxed{G = T^*}.
+\]
+
+Así econtramos el equilibrio competitivo.\footnote{Noten que resolver el equilirbio competitio es encontrar la asignación y el salario real de equilibrio en términos únicamente del parámetro $\psi$ y de las variables exógenas $G$ y $z$.}
+
+La condición $G<z$ garantiza una solución interior para el problema del hogar. 
+Para ver esto, veamos que $C^*>0$ si y solo si
+\[
+  \sqrt{\psi^2G^2+(1+2\psi)z^2}>(1+\psi)G
+\]
+Y dado que
+\[
+  \psi^2G^2+(1+2\psi)z^2-(1+\psi)^2G^2
+  =(1+2\psi)(z^2-G^2)>0,
+\]
+entonces $C^*>0$. Asimismo,
+\[
+  \left[(1+2\psi)z-\psi G\right]^2
+  -\left[\psi^2G^2+(1+2\psi)z^2\right]
+  =2\psi(1+2\psi)z(z-G)>0.
+\]
+Esto implica
+\[
+  \psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}<(1+2\psi)z,
+\]
+de modo que $0<N^*<1$ y $0<\ell^*<1$, lo que descarta soluciones de equina.
+
+\subsection*{(d) Vaciado del mercado de bienes}
+
+En equilibrio, la restricción presupuestaria del hogar se satisface con igualdad:
+\[
+  C^*=w^*N^{s*}+\pi^*-T^*.
+\]
+La identidad de beneficios de la empresa es
+\[
+  \pi^*=Y^*-w^*N^{d*}.
+\]
+El presupuesto del gobierno satisface $G = T^*$ y el mercado de trabajo se vacía, por lo que
+\[
+  N^{s*}=N^{d*}=N^*.
+\]
+Sustituyendo estas tres condiciones en el presupuesto del hogar,
+\[
+  C^*
+  =w^*N^*+Y^*-w^*N^*-G,
+\]
+\[
+  C^*=Y^*-G.
+\]
+Por lo tanto,
+\[
+  \boxed{Y^*=C^*+G}.
+\]
+Así, si el mercado de trabajo se vacía, el mercado de bienes se vacía automáticamente (ley de Walras).
+
+\subsection*{(e) Problema del planificador social}
+
+El planificador social busca maximizar el bienestar del consumidor dadas las restricciones materiales de la economía:
+\begin{align*}
+  \max_{C,\ell}
+  &\left\{\log C+\psi\log \ell \right\} \\
+  \text{s.a.} \quad &C+G\leq z\sqrt N, \\
+  &N + \ell \leq 1
+\end{align*}
+Sustituyendo la segunda restricción en la función de utilidad, reducimos las dos restricciones a una.
+
+El Lagrangeano asociado entonces es:
+\[
+  \mathcal L(C, N, \mu)
+  =\log C+\psi\log(1-N)
+  +\mu\left(z\sqrt N-C-G\right).
+\]
+Las condiciones de primer orden son
+\[
+  \frac{1}{C}-\mu=0,
+\]
+\[
+  -\frac{\psi}{1-N}+\mu\frac{z}{2\sqrt N}=0,
+\]
+\[
+  z\sqrt N-C-G=0.
+\]
+De la primera condición, $\mu=1/C$. Al introducirla en la segunda,
+\[
+  \frac{\psi}{1-N}=\frac{z}{2C\sqrt N}.
+\]
+Por lo tanto,
+\[
+  C=\frac{z(1-N)}{2\psi\sqrt N}.
+\]
+Sustituyendo en la tercera condición, se obtiene que
+\[
+  z\sqrt N-G=\frac{z(1-N)}{2\psi\sqrt N}.
+\]
+Multiplicando por $2\psi\sqrt N$,
+\[
+  2\psi zN-2\psi G\sqrt N=z-zN.
+\]
+Reuniendo términos,
+\[
+  (1+2\psi)zN-2\psi G\sqrt N-z=0.
+\]
+Esta ecuación es cuadrática en $\sqrt N$. Su raíz positiva es
+\[
+  \sqrt{N^*}
+  =\frac{2\psi G+\sqrt{4\psi^2G^2+4(1+2\psi)z^2}}
+  {2(1+2\psi)z},
+\]
+es decir,
+\[
+  \sqrt{N^*}
+  =\frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  {(1+2\psi)z}.
+\]
+Por consiguiente, el planificador elige exactamente
+\[
+  N^*
+  =\left[
+  \frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  {(1+2\psi)z}
+  \right]^2,
+\]
+\[
+  C^*
+  =\frac{\sqrt{\psi^2G^2+(1+2\psi)z^2}-(1+\psi)G}
+  {1+2\psi},
+\]
+y $\ell^*=1-N^*$. Estas son las mismas cantidades obtenidas en el equilibrio competitivo.
+
+La razón es que el planificador social asigna recursos de tal forma que la relación marginal de sustitución del hogar sea igual a la productividad marginal del trabajo. Esto, como lo sabemos, también caracteriza a la asignación del equilibrio competitivo.
+
+\subsection*{(f) Construcción de los tres diagramas}
+
+\subsubsection*{Mercado de trabajo}
+
+Para representar el equilibrio únicamente en función de $(N,w)$, se introducen en la oferta de
+trabajo los beneficios de la empresa, $\pi(w)=z^2/(4w)$, y el presupuesto público, $T=G$.
+Las dos funciones que deben graficarse son
+\[
+  \boxed{N^d(w)=\frac{z^2}{4w^2}}
+\]
+y
+\[
+  \boxed{
+  N^s(w)
+  =\frac{w-\dfrac{\psi z^2}{4w}+\psi G}{(1+\psi)w}
+  =\frac{1}{1+\psi}
+  +\frac{\psi G}{(1+\psi)w}
+  -\frac{\psi z^2}{4(1+\psi)w^2}
+  }.
+\]
+En un plano con $N$ en el eje horizontal y $w$ en el eje vertical, pueden trazarse los puntos
+$(N^d(w),w)$ y $(N^s(w),w)$ para distintos valores positivos de $w$.
+
+La pendiente de la demanda de trabajo respecto del salario es
+\[
+  \frac{dN^d(w)}{dw}
+  =-\frac{z^2}{2w^3}<0.
+\]
+Por tanto, la curva de demanda de trabajo tiene pendiente negativa en el plano $(N,w)$.
+
+La pendiente de la oferta de trabajo reducida es
+\[
+  \frac{dN^s(w)}{dw}
+  =-\frac{\psi G}{(1+\psi)w^2}
+  +\frac{\psi z^2}{2(1+\psi)w^3},
+\]
+o, equivalentemente,
+\[
+  \frac{dN^s(w)}{dw}
+  =\frac{\psi(z^2-2Gw)}{2(1+\psi)w^3}.
+\]
+La pendiente es positiva siempre que $w<z^2/(2G)$. Esta condición se cumple en el equilibrio.
+En efecto, la ecuación que determina $w^*$ es
+\[
+  4(w^*)^2+4\psi Gw^*-(1+2\psi)z^2=0.
+\]
+El lado izquierdo es estrictamente creciente para $w>0$. Evaluado en $z^2/(2G)$ es
+\[
+  4\left(\frac{z^2}{2G}\right)^2
+  +4\psi G\left(\frac{z^2}{2G}\right)
+  -(1+2\psi)z^2
+  =z^2\left(\frac{z^2}{G^2}-1\right)>0,
+\]
+mientras que evaluado en cero es negativo. Por ello,
+\[
+  w^*<\frac{z^2}{2G}
+\]
+y la oferta de trabajo tiene pendiente positiva alrededor del equilibrio. La intersección de ambas
+curvas debe marcarse como $(N^*,w^*)$.
+
+\subsubsection*{Mercado de bienes}
+
+Coloque $w$ en el eje horizontal y las unidades del bien en el eje vertical. La producción ofrecida
+por la empresa es
+\[
+  \boxed{Y^s(w)=\frac{z^2}{2w}},
+\]
+mientras que el consumo privado, después de introducir $\pi(w)=z^2/(4w)$ y $T=G$, es
+\[
+  C^d(w)=\frac{w+\dfrac{z^2}{4w}-G}{1+\psi}.
+\]
+La absorción total que debe graficarse es
+\[
+  \boxed{
+  C^d(w)+G
+  =\frac{w+\dfrac{z^2}{4w}+\psi G}{1+\psi}
+  }.
+\]
+La pendiente de la producción es
+\[
+  \frac{dY^s(w)}{dw}=-\frac{z^2}{2w^2}<0.
+\]
+La pendiente de la absorción es
+\[
+  \frac{d[C^d(w)+G]}{dw}
+  =\frac{1-\dfrac{z^2}{4w^2}}{1+\psi}.
+\]
+En el equilibrio, $z^2/[4(w^*)^2]=N^*$, de modo que
+\[
+  \left.\frac{d[C^d(w)+G]}{dw}\right|_{w=w^*}
+  =\frac{1-N^*}{1+\psi}
+  =\frac{\ell^*}{1+\psi}>0.
+\]
+Por tanto, alrededor del equilibrio, $Y^s(w)$ es decreciente y $C^d(w)+G$ es creciente. Su
+intersección es $(w^*,Y^*)$, donde $Y^*=C^*+G$.
+
+Este diagrama no representa un segundo mecanismo independiente de determinación de precios. El
+precio del bien ya fue normalizado a uno y $w$ es el precio relativo entre trabajo y bienes. Cuando
+el presupuesto del hogar, los beneficios de la empresa y el presupuesto público se satisfacen, el
+salario que vacía el mercado de trabajo también garantiza, por la ley de Walras, el vaciado del
+mercado de bienes.
+
+\subsubsection*{Asignación en el plano $(\ell,C)$}
+
+Como $N=1-\ell$, la frontera de posibilidades de producción es
+\[
+  \boxed{
+  C=z\sqrt{1-\ell}-G
+  }.
+\]
+Su pendiente es
+\[
+  \frac{dC}{d\ell}
+  =-\frac{z}{2\sqrt{1-\ell}}<0,
+\]
+y su segunda derivada es
+\[
+  \frac{d^2C}{d\ell^2}
+  =-\frac{z}{4(1-\ell)^{3/2}}<0.
+\]
+Por tanto, la frontera es decreciente y cóncava.
+
+Una curva de indiferencia correspondiente a un nivel de utilidad $\overline U$ satisface
+\[
+  \log C+\psi\log\ell=\overline U.
+\]
+Despejando el consumo,
+\[
+  \boxed{
+  C=\frac{\exp(\overline U)}{\ell^{\psi}}
+  }.
+\]
+Su pendiente es
+\[
+  \frac{dC}{d\ell}
+  =-\frac{\psi C}{\ell}<0,
+\]
+y su segunda derivada es
+\[
+  \frac{d^2C}{d\ell^2}
+  =\frac{\psi(1+\psi)C}{\ell^2}>0.
+\]
+La curva de indiferencia es decreciente y convexa. En el punto de tangencia,
+\[
+  \frac{\psi C^*}{\ell^*}
+  =\frac{z}{2\sqrt{1-\ell^*}},
+\]
+por lo que las pendientes de la curva de indiferencia y de la frontera coinciden. Deben marcarse
+la asignación $(\ell^*,C^*)$ y la curva de indiferencia que pasa por ella.
+
+\subsection*{(g) Choque de gasto público}
+
+Para representar el episodio dentro del modelo, se considera un aumento exógeno de $G$ financiado
+por un aumento de igual magnitud en $T$. Se mantienen constantes $z$ y $\psi$.
+
+La respuesta del salario real se obtiene diferenciando su expresión de equilibrio:
+\[
+  \frac{\partial w^*}{\partial G}
+  =\frac{1}{2}
+  \left[
+  -\psi
+  \frac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  \right].
+\]
+Como
+\[
+  \sqrt{\psi^2G^2+(1+2\psi)z^2}>\psi G,
+\]
+se cumple
+\[
+  \boxed{\frac{\partial w^*}{\partial G}<0}.
+\]
+
+La respuesta del empleo es
+\[
+  \frac{\partial N^*}{\partial G}
+  =\frac{2\left[\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}\right]}
+  {(1+2\psi)^2z^2}
+  \left[
+  \psi+\frac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  \right]>0.
+\]
+Por tanto,
+\[
+  \boxed{\frac{\partial N^*}{\partial G}>0},
+  \qquad
+  \boxed{\frac{\partial\ell^*}{\partial G}<0}.
+\]
+
+La respuesta de la producción es
+\[
+  \frac{\partial Y^*}{\partial G}
+  =\frac{
+  \psi+\dfrac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  }{1+2\psi}>0.
+\]
+Además,
+\[
+  \psi+\frac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  <2\psi<1+2\psi,
+\]
+de modo que
+\[
+  \boxed{
+  0<\frac{\partial Y^*}{\partial G}<1
+  }.
+\]
+El multiplicador del gasto es positivo, pero menor que uno.
+
+La respuesta del consumo privado puede obtenerse de $C^*=Y^*-G$:
+\[
+  \frac{\partial C^*}{\partial G}
+  =\frac{\partial Y^*}{\partial G}-1,
+\]
+o directamente,
+\[
+  \frac{\partial C^*}{\partial G}
+  =\frac{
+  \dfrac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  -(1+\psi)
+  }{1+2\psi}<0.
+\]
+Así,
+\[
+  \boxed{\frac{\partial C^*}{\partial G}<0}.
+\]
+Como $\pi^*=Y^*/2$,
+\[
+  \boxed{
+  \frac{\partial\pi^*}{\partial G}
+  =\frac{1}{2}\frac{\partial Y^*}{\partial G}>0
+  },
+\]
+y, dado que $T^*=G$,
+\[
+  \boxed{\frac{\partial T^*}{\partial G}=1}.
+\]
+
+El mecanismo económico es el siguiente. El aumento de $G$ requiere un aumento equivalente de impuestos de suma fija. Esto genera un choque negativo en el ingreso disponible del hogar. Esto se traduce en un efecto ingreso negativo, lo que hace que el hogar se sienta más pobre con el nuevo nivel de consumo y se le generen incentivos para trabajar, de modo que aumenta su oferta laboral. Lo anterior genera un desplazamiento de la curva de oferta en el mercado laboral hacia la derecha, lo que genera presiones en el salario real. El salario real así se ajusta a la baja, generano un movimiento sobre la curva de demanda que genera un incremento en la demanda laboral. Todo lo anterior se traduce en un aumento en el nivel de empleo de la economía. El mayor empleo eleva la producción agregada, lo cual a su vez eleva el consumo privado. Sin embargo, este se eleva en menor proporción que el producto agregado.
+
+
+El nuevo equilibrio tiene un salario menor y una producción mayor. 
+
+\subsection*{(h) Choque de productividad}
+
+Considere ahora un aumento de $z$ a $z'>z$, manteniendo constantes $G$ y $\psi$. La respuesta del
+salario es
+\[
+  \boxed{
+  \frac{\partial w^*}{\partial z}
+  =\frac{(1+2\psi)z}
+  {2\sqrt{\psi^2G^2+(1+2\psi)z^2}}>0
+  }.
+\]
+La producción y el consumo responden de acuerdo con
+\[
+  \boxed{
+  \frac{\partial Y^*}{\partial z}
+  =\frac{z}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}>0
+  },
+\]
+\[
+  \boxed{
+  \frac{\partial C^*}{\partial z}
+  =\frac{z}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}>0
+  }.
+\]
+Como los beneficios son la mitad de la producción,
+\[
+  \boxed{
+  \frac{\partial\pi^*}{\partial z}
+  =\frac{z}{2\sqrt{\psi^2G^2+(1+2\psi)z^2}}>0
+  }.
+\]
+
+La respuesta del empleo se obtiene diferenciando su expresión explícita:
+\[
+  \boxed{
+  \frac{\partial N^*}{\partial z}
+  =-
+  \frac{
+  2\psi G
+  \left[\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}\right]^2
+  }
+  {(1+2\psi)^2z^3\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  <0
+  }.
+\]
+Por lo tanto,
+\[
+  \boxed{\frac{\partial\ell^*}{\partial z}>0}.
+\]
+Si $G=0$, la derivada del empleo respecto de la productividad es cero: con estas preferencias, los
+efectos ingreso y sustitución se cancelan exactamente. Como el ejercicio supone $G>0$, el efecto
+ingreso domina en el margen y el hogar elige más ocio y menos trabajo.
+
+El choque se origina en la tecnología de la empresa. A un salario dado, la productividad marginal
+del trabajo, la demanda laboral, la producción y los beneficios aumentan. El incremento de los
+beneficios eleva la riqueza del hogar y desplaza su oferta de trabajo hacia la izquierda. En el nuevo
+equilibrio, el salario real aumenta y el empleo disminuye. A pesar de la caída del empleo, la mayor
+productividad eleva la producción, el consumo y los beneficios.
+
+En el mercado de trabajo,
+\[
+  \frac{\partial N^d(w)}{\partial z}
+  =\frac{z}{2w^2}>0,
+\]
+por lo que la demanda de trabajo se desplaza hacia la derecha; equivalentemente, la curva inversa
+$w=z/(2\sqrt N)$ se desplaza hacia arriba. Por su parte,
+\[
+  \frac{\partial N^s(w)}{\partial z}
+  =-\frac{\psi z}{2(1+\psi)w^2}<0,
+\]
+por lo que la oferta reducida de trabajo se desplaza hacia la izquierda debido al aumento de los
+beneficios. El nuevo punto de equilibrio debe ubicarse arriba y a la izquierda del original:
+$w$ aumenta y $N$ disminuye.
+
+En el mercado de bienes, ambas curvas se desplazan hacia arriba. Para la producción,
+\[
+  \frac{\partial Y^s(w)}{\partial z}=\frac{z}{w}>0,
+\]
+y para la absorción,
+\[
+  \frac{\partial[C^d(w)+G]}{\partial z}
+  =\frac{z}{2(1+\psi)w}>0.
+\]
+El desplazamiento directo de la producción es mayor que el desplazamiento de la absorción a un
+salario dado. El salario aumenta hasta restablecer la igualdad $Y=C+G$. Deben mostrarse tanto los
+desplazamientos de las dos curvas como el movimiento hacia un salario y una producción mayores.
+
+En el plano $(\ell,C)$,
+\[
+  \frac{\partial[z\sqrt{1-\ell}-G]}{\partial z}
+  =\sqrt{1-\ell}>0.
+\]
+La frontera de posibilidades se desplaza hacia arriba y se vuelve más inclinada en valor absoluto,
+pues
+\[
+  \frac{\partial}{\partial z}
+  \left[-\frac{z}{2\sqrt{1-\ell}}\right]
+  =-\frac{1}{2\sqrt{1-\ell}}<0.
+\]
+La nueva tangencia se encuentra arriba y a la derecha de la original: aumentan el consumo y el ocio,
+mientras disminuye el trabajo.
+
+\subsection*{(i) Identificación empírica de los choques}
+
+Las respuestas predichas por el modelo, manteniendo constantes las demás variables exógenas, son
+\[
+\begin{array}{c|cccccc}
+  \hline
+  \text{Choque} & C & Y & N & \ell & w & \pi \\
+  \hline
+  G\uparrow & - & + & + & - & - & + \\
+  z\uparrow\;(G>0) & + & + & - & + & + & + \\
+  \hline
+\end{array}
+\]
+
+Un aumento simultáneo de producción, consumo y salario real es consistente, dentro de este modelo,
+con un choque positivo de productividad. Un aumento de producción acompañado por disminuciones del
+consumo y del salario real es consistente con un aumento del gasto público financiado mediante
+impuestos de suma fija. Los beneficios aumentan en ambos casos, por lo que su signo no permite
+distinguir los dos choques. El empleo sí ayuda a distinguirlos: aumenta con el choque fiscal y
+disminuye con el choque de productividad cuando $G>0$.
+
+Estos patrones son condiciones de consistencia interna y no identifican por sí solos un choque causal.
+Para realizar una evaluación empírica se requerirían, entre otros elementos, una medida directa del
+gasto público y de la productividad, información sobre el momento y el carácter anticipado o no
+anticipado de las innovaciones, controles para otros choques externos y financieros, y una estrategia
+de identificación que aísle variación exógena. También sería necesario considerar la respuesta de la
+política monetaria, el método de financiamiento del gasto y la incertidumbre estadística alrededor de
+las respuestas estimadas.
+
+\end{document}
