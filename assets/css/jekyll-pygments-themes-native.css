@@ -49,7 +49,10 @@
 } /* Literal.String */ /* Name.Attribute */ /* Name.Builtin */ /* Name.Class */
 .highlight .no {
   color: #40ffff;
-} /* Name.Constant */ /* Name.Decorator */ /* Name.Entity */ /* Name.Exception */ /* Name.Function */ /* Name.Label */ /* Name.Namespace */ /* Name.Other */
+} /* Name.Constant */
+.highlight .nd {
+  color: #ffa500;
+} /* Name.Decorator */ /* Name.Entity */ /* Name.Exception */ /* Name.Function */ /* Name.Label */ /* Name.Namespace */ /* Name.Other */
 .highlight .py {
   color: #d0d0d0;
 } /* Name.Property */

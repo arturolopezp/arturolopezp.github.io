@@ -29,7 +29,11 @@
 } /* Literal.String */ /* Name.Attribute */ /* Name.Builtin */ /* Name.Class */
 .highlight .no {
   color: #008080;
-} /* Name.Constant */ /* Name.Decorator */ /* Name.Entity */ /* Name.Exception */ /* Name.Function */ /* Name.Label */ /* Name.Namespace */
+} /* Name.Constant */
+.highlight .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+} /* Name.Decorator */ /* Name.Entity */ /* Name.Exception */ /* Name.Function */ /* Name.Label */ /* Name.Namespace */
 .highlight .nt {
   color: #000080;
 } /* Name.Tag */ /* Name.Variable */ /* Operator.Word */
