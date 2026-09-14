@@ -38,11 +38,10 @@ La interacción entre hogares y empresas determina el equilibrio macroeconómico
 
 \subsection*{(a) Definición del equilibrio competitivo}
 
-Un equilibrio competitivo es una asignación
+Un \textbf{equilibrio competitivo} es una asignación
 $
-  \left(C^*,\ell^*, N^{d*}, N^{s*}, Y^*, T^*\right)
-$
-y un vector de precios $(1,w^*)$ tales que, dadas las variables exógenas $(z,G)$:\footnote{El precio del bien de consumo se normaliza a uno por ser el numerario. Por lo tanto, el vector de precios de equilibrio es $(1,w^*)$ y el salario real $w^*$ es el único precio relativo endógeno de esta economía.}
+  \left(C^*,\ell^*, N^{d*}\right)
+$, un sistema impositivo $T^*$ y un vector de precios $(1,w^*)$ tales que, dadas las variables exógenas $(z,G)$:\footnote{El precio del bien de consumo se normaliza a uno por ser el numerario. Por lo tanto, el vector de precios de equilibrio es $(1,w^*)$ y el salario real $w^*$ es el único precio relativo endógeno de esta economía.}
 \begin{enumerate}
   \item $(C^*,\ell^*)$ resuelve el problema del hogar:
   \[
@@ -65,8 +64,8 @@ y un vector de precios $(1,w^*)$ tales que, dadas las variables exógenas $(z,G)
     \quad 
     Y = z\sqrt{N^d}
   \]
-  tomando $w^*$ como dado, determinando $\pi^* = Y^* - w^*N^{d*}$;
-  \item El gobierno cumple con su restricción $G = T^*$;
+  tomando $w^*$ como dado;
+  \item El gobierno cumple con su restricción presupuestaria $G = T^*$;
   \item El mercado laboral y el mercado de bienes se vacían:
   \[
     N^{s*} = N^{d*},
@@ -81,8 +80,13 @@ y un vector de precios $(1,w^*)$ tales que, dadas las variables exógenas $(z,G)
 
 \subsection*{(b) Reglas de decisión del hogar y de la empresa}
 
+En cursos anteriores estudiaron la macroeconomía imponiendo directamente relaciones entre variables agregadas. Por ejemplo, se postulaba que el consumo privado depende del ingreso disponible, \(C=C(Y^D)\), suponiendo además que \(\partial C/\partial Y^D>0\). Una especificación habitual de esta relación es una función lineal del tipo $C=c_0+c_1Y^D.$\footnote{Los parámetros \(c_0\) y \(c_1\) son coeficientes de una relación agregada en \textit{forma reducida}. Las \textit{ecuaciones en forma reducida} describen cómo se relacionan las variables observadas, pero no identifican directamente los parámetros y mecanismos económicos que la generan (e.g. parámetros asociados a las preferencias, tecnología u otros mecanismos económicos). Las \textit{ecuaciones estructurales}, en cambio, especifican esos mecanismos de manera explícita. Un sistema compuesto por ecuaciones estructurales constituye un \textit{modelo estructural}. Al resolver un modelo estructural, los coeficientes de su forma reducida resultan de la interacción entre sus parámetros estructurales. Una característica importante de las ecuaciones en forma reducida es que sus parámetros pueden cambiar cuando cambia la política económica, mientras que los parámetros estructurales son invariantes respecto a la política económica (\textit{policy-invariant}). El modelo de este ejercicio, y en general todos los modelos del curso, son modelos estructurales que en primera instancia son invariantes ante cambios en la política. Volveremos a esta discusión al estudiar la crítica de Lucas en el tema de ciclos económicos reales.}
 
-En este inciso buscamos expresar las decisiones óptimas de los agentes como funciones del salario real, de parámetros y de las variables exógenas del modelo. El salario real es el único precio relativo de esta economía y, por lo tanto, la única variable de ajuste. Las variables exógenas, denominadas \textit{shifters} en la literatura, son variables determinadas fuera del modelo que generan desplazamientos de las curvas en el mercado laboral y en el mercado de bienes y servicios. Por otro lado, los parámetros asociados a las funciones determinan características como curvatura, puntos críticos, etc.
+En la macroeconomía microfundamentada buscamos explicar el consumo agregado a partir de las decisiones óptimas de los hogares, las cuáles dependen de sus preferencias y restricciones, en lugar de postular directamente una función agregada de consumo. En un modelo con varios hogares, el consumo agregado es la suma de esas elecciones óptimas individuales: \(C=\sum_i C_i\). En un modelo de agente representativo, el consumo agregado es simplemente la elección óptima del hogar representativo.
+
+
+
+En este inciso buscamos expresar las decisiones óptimas de los agentes como funciones del salario real, de parámetros y de las variables exógenas del modelo. El salario real es el único precio relativo de esta economía y, por lo tanto, la única variable de ajuste. Las variables exógenas, denominadas \textit{shifters} en la literatura, son variables determinadas fuera del modelo que generan desplazamientos de las curvas. Por otro lado, los parámetros asociados a las funciones determinan características como curvatura, puntos críticos, etc.
 
 Las funciones que buscamos, normalmente conocidas como \textit{reglas de decisión}, son entonces:
 \[
@@ -558,7 +562,7 @@ Por lo tanto, el \textbf{equilibrio competitivo} de la economía es:
     \end{aligned}
   }
 \end{equation}
-En equilibrio, el precio $w^*$ es tal que: la oferta y demanda laboral coinciden, generando un nivel de empleo de equilibrio $E^*$; la oferta y demanda agregada de bienes y servicios coinciden, generando un nivel de producción de equilibrio $Y^*$.
+En equilibrio, el precio $w^*$ es tal que: la oferta y demanda laboral coinciden, generando un nivel de empleo de equilibrio $N^*$; la oferta y demanda agregada de bienes y servicios coinciden, generando un nivel de producción de equilibrio $Y^*$.
 
 
 \subsubsection*{Análisis del equilibrio competitivo}
@@ -780,19 +784,37 @@ Esta es la gráfica que une la FPP con las curvas de indiferencia del agente y s
 
 
 \subsection*{(g) Choque de gasto público}
-Primero, nos preguntamos: ¿qué sucede con las cantidades y precios de equilibrio en la economía?
 
+Este tipo de incisos buscan analizar el impacto de un choque exógeno sobre el equilibrio competitivo de la economía, así como sus canales de transmisión. Primero nos preguntamos: ¿qué sucede con las cantidades y precios de equilibrio en la economía?
+
+Hay dos formas equivalentes de responder a esta pregunta: analíticamente y gráficamente. Analíticamente lo podemos hacer a través de derivar las variables en equilibrio respecto a la variación exógena. Gráficamente lo hacemos al analizar desplazamientos de y sobre las curvas en los mercados involucrados.
+
+Comenzaremos con el estudio analítico.\footnote{Para efectos de examen, es recomendable que dominen la intuición gráfica, pues les tomará mucho menos tiempo que hacerlo de forma analítica y es un procedimiento equivalente. Para efectos de tareas y ejercicios de estudio, es recomendable hacer ambos.}
 
 La respuesta del salario real es:
 \[
   \frac{\partial w^*}{\partial G}
   =\frac{1}{2}
   \left[
-  -\psi
+  -\psi + 
   \frac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
   \right].
 \]
-Es decir, el salario real de equilibrio cae con aumentos en el gasto público:
+Por lo tanto, 
+\begin{align*}
+  \frac{\partial w^*}{\partial G} <0 
+  &\iff -\psi + 
+  \frac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}} <0 \\
+  &\iff 
+  \frac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}} < \psi \\
+  &\iff
+  \psi G  < \sqrt{\psi^2G^2+(1+2\psi)z^2} \\
+  &\iff
+  \psi^2 G^2  < \psi^2G^2+(1+2\psi)z^2 \\
+  &\iff
+  0 < (1+2\psi)z^2 \\
+\end{align*}
+Como $z>0$ y $\psi > 0$, entonces $0 < (1+2\psi)z^2$ se cumple siempre. Por lo tanto, el salario real de equilibrio cae sin ambigüedad con aumentos en el gasto público:
 \[
   \boxed{\frac{\partial w^*}{\partial G}<0}.
 \]
@@ -816,25 +838,55 @@ La respuesta de la producción es positiva
 \[
 \boxed{
   \frac{\partial Y^*}{\partial G}
-  =\frac{
-  \psi+\dfrac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
-  }{1+2\psi}>0
-}.
-\]
-y la del consumo negativa: 
-\[
-\boxed{
-  \frac{\partial C^*}{\partial G}
-  =\frac{
-  \dfrac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
-  -(1+\psi)
-  }{1+2\psi}<0
+  = \frac{
+  1}{1+2\psi} \left[
+  \psi+\frac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  \right] >0
 }.
 \]
 
-Además, como $Y^* = C^* + G$, entonces $C^* = Y^* - G$, de modo que si $\tfrac{\partial Y^*}{\partial G} >0$ y $\tfrac{\partial C^*}{\partial G} <0$, entonces
+
+La respuesta del consumo es:
 \[
-\frac{\partial C^*}{\partial G} = \frac{\partial Y^*}{\partial G}  - 1 < 0 \implies 0 < \frac{\partial Y^*}{\partial G} < 1
+  \frac{\partial C^*}{\partial G} 
+  =
+  \frac{
+  1}{1+2\psi} \left[
+  \dfrac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  -(1+\psi)
+  \right].
+\]
+Por lo tanto,
+\begin{align*}
+  \frac{\partial C^*}{\partial G} < 0 
+  &\iff 
+  \dfrac{\psi^2G}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}
+  -(1+\psi) < 0 \\
+  &\iff 
+  \psi^2G < (1+\psi)\sqrt{\psi^2G^2+(1+2\psi)z^2} \\
+  &\iff 
+  \psi^4 G^2 < (1+\psi)^2\left(\psi^2G^2+(1+2\psi)z^2\right) \\
+  &\iff 
+  \psi^4 G^2 - (1+\psi)^2\psi^2 G^2 < (1+\psi)^2(1+2\psi) z^2 \\
+  &\iff 
+  \psi^2 G^2\left[\psi^2 - (1+\psi)^2\right] < (1+\psi)^2(1+2\psi) z^2 \\
+  &\iff 
+  \psi^2 G^2\left[\psi^2 - (\psi^2 + 2 \psi + 1)\right] < (1+\psi)^2(1+2\psi) z^2 \\
+  &\iff 
+  -\psi^2 G^2 (1+2\psi) < (1+\psi)^2(1+2\psi) z^2 \\
+  &\iff 
+  0< \psi^2 G^2 (1+2\psi) + (1+\psi)^2(1+2\psi) z^2 \\
+  &\iff 
+  (1+2\psi)\left[\psi^2 G^2 + (1+\psi)^2 z^2\right] > 0.
+\end{align*}
+Como $z>0$ y $\psi > 0$, entonces $(1+2\psi)\left[\psi^2 G^2 + (1+\psi)^2 z^2\right] > 0$ se cumple siempre. Por lo tanto, el consumo cae sin ambigüedad con aumentos en el gasto público:
+\[
+  \boxed{\frac{\partial C^*}{\partial G} < 0.}
+\]
+
+Por último, como $Y^* = C^* + G$, entonces $C^* = Y^* - G$, de modo que si $\tfrac{\partial Y^*}{\partial G} >0$ y $\tfrac{\partial C^*}{\partial G} <0$, entonces
+\[
+\frac{\partial C^*}{\partial G} = \frac{\partial Y^*}{\partial G}  - 1 < 0 \implies  < \frac{\partial Y^*}{\partial G} < 1
 \]
 Es decir, el multiplicador fiscal es positivo, pero menor que uno.
 \[
@@ -843,22 +895,37 @@ Es decir, el multiplicador fiscal es positivo, pero menor que uno.
   }.
 \]
 
+Después de este análisis gráfico, se analiza el choque y su propagación en la economía a través de las funciones que obtuvimos en incisos anteriores y sus gráficas asociadas. Es decir, la propagación a través del mercado laboral, del mercado de bienes y servicios, y del diagrama que muestra la asignación de equilibrio competitivo en el espacio $(\ell, C)$.
 
-Con esta exploración analítica y con las funciones que obtuvimos en incisos anteriores y sus gráficas asociadas, es posible analizar el choque de política fiscal y su propagación en la economía. 
+\paragraph{Interpretación.}
 
-El mecanismo económico es el siguiente. El aumento en el gasto público requiere forzosamente ser financiado con un aumento de impuestos. Esto genera un choque negativo en el ingreso disponible de los hogares, lo cual se traduce en un efecto ingreso negativo que hace que el hogar se sienta más pobre con el nuevo nivel de consumo y se le generen incentivos para trabajar, de modo que aumenta su oferta laboral. Lo anterior genera un desplazamiento de la curva de oferta en el mercado laboral hacia la derecha, lo que genera presiones a la baja en el salario real. El salario real así se ajusta a la baja, generando un movimiento sobre la curva de demanda que genera un incremento en la demanda laboral. Formalmente, esto se mostró al ver que $\partial w^*/\partial G<0$: el salario de equilibrio cae con el gasto público. Por lo tanto, el mercado laboral se ajusta a un nuevo equilibrio con menor nivel salarial pero mayor empleo, resultado que también se confirma analíticamente ($\partial N^*/\partial G>0$).
+El mecanismo económico es el siguiente. El aumento en el gasto público requiere forzosamente ser financiado con un aumento de impuestos. Esto genera un choque negativo en el ingreso disponible de los hogares, lo cual se traduce en un efecto ingreso negativo que hace que el hogar se sienta más pobre con el nuevo nivel de consumo y se le generen incentivos para trabajar, de modo que aumenta su oferta laboral. Lo anterior genera un desplazamiento hacia la derecha de la curva de oferta en el mercado laboral:
+\[
+  \frac{\partial N^s(w)}{\partial G}
+  =\frac{\psi}{(1 + \psi)w} > 0
+\]
+lo que genera presiones a la baja en el salario real. Formalmente, esto se mostró al ver que $\partial w^*/\partial G<0$. El salario real así se ajusta a la baja, lo que genera una aumento en la demanda de trabajo que se traduce como un movimiento sobre la curva de demanda laboral:
+\[
+  \frac{\partial N^d(w)}{\partial w}
+  = -\frac{z^2}{2w^3} < 0
+\]
+Por lo tanto, el mercado laboral se ajusta a un nuevo equilibrio con menor nivel salarial pero mayor empleo, resultado que también se confirma analíticamente ($\partial N^*/\partial G>0$).
 
-Este incremento en el empleo resulta en un incremento de la producción de bienes y servicios ($\partial Y^*/\partial G>0$), de modo que la oferta agregada aumenta. Sin embargo, este incremento es \textit{menor} que el propio incremento del gasto público (puede probarse que $\partial Y^*/\partial G<1$), de modo que, usando la identidad $C^*=Y^*-G$, el consumo privado de equilibrio \textit{cae} ante el choque ($\partial C^*/\partial G<0$), aunque en una magnitud menor a la del propio choque de gasto. Es decir, el ajuste endógeno del empleo y la producción amortigua, pero no revierte, la caída inicial en el ingreso disponible: el gasto público desplaza parcialmente al consumo privado (\textit{crowding-out} parcial), en lugar de complementarlo.
+Este incremento en el empleo resulta en un incremento de la producción de bienes y servicios. Sin embargo, este incremento es \textit{menor} que el propio incremento del gasto público, pues $\partial Y^*/\partial G<1$. Además, el consumo privado de equilibrio \textit{cae} ante el choque ($\partial C^*/\partial G<0$), aunque en una magnitud menor a la del propio choque de gasto. Es decir, el ajuste endógeno del empleo y la producción amortigua, pero no revierte, la caída inicial en el ingreso disponible.
 
-Toda esta interpretación descansa en el supuesto $0<G<z$, que garantiza la existencia de una solución interior del problema del hogar ($\ell^*\in(0,1)$) y, como mostramos en el inciso anterior, asegura que el salario de equilibrio se ubique siempre en la región de pendiente positiva de la oferta laboral ($w^*<z^2/(2G)$). Cabe destacar que, dentro de este rango admisible de $G$, un aumento del gasto público \textit{nunca} puede generar una caída del empleo de equilibrio: la derivada $\partial N^*/\partial G$ es estrictamente positiva para todo $G\in(0,z)$, sin importar cuán cerca esté $G$ de su cota superior $z$. De hecho, en el límite $G\to z^-$ se tiene $N^*\to1$ (y $\ell^*\to0$): el hogar destinaría la totalidad de su dotación de tiempo al trabajo. Esto revela que el supuesto $G<z$ no es solo una restricción técnica, sino la condición que garantiza que exista una asignación interior de ocio positivo; si el gasto público se elevara hasta igualar o superar a $z$, el modelo dejaría de tener una solución interior válida, en lugar de transitar hacia un régimen alternativo en el que la oferta laboral se contrae ante el estímulo fiscal. Por lo tanto, dentro de los límites en los que este modelo es aplicable, un mayor estímulo fiscal siempre se traduce en mayor empleo y producción, a costa de un salario real menor y de un consumo privado parcialmente desplazado.
-
-
-El nuevo equilibrio tiene un salario menor y una producción mayor. 
+El incremento en el gasto público se traduce en un incremento en la demanda agregada de la economía, desplazando hacia la derecha la curva de demanda en el mercado de bienes y servicios:
+$$
+\frac{\partial Y^d(w)}{\partial G} = \frac{\psi}{1 + \psi} >0
+$$
+Por otro lado, el incremento en el nivel de empleo resulta en un incremento de la producción de bienes y servicios. Este nuevo equilibrio en el mercado laboral reduce el nivel de salario real, lo que genera un movimiento hacia la derecha sobre la curva de oferta agregada en el mercado de bienes y servicios:
+$$
+\frac{\partial Y^s(w)}{\partial w} = -\frac{z^2}{2w^2} <0
+$$
+Todo lo anterior resulta en un nivel de producción de equilibrio mayor, aunque con un gasto en consumo privado menor.\footnote{Toda esta interpretación descansa en el supuesto $0<G<z$, que como mostramos en el inciso anterior, asegura que el salario de equilibrio se ubique siempre en la región de pendiente positiva de la oferta laboral ($w^*<z^2/(2G)$). Cabe destacar que, dentro de este rango de $G$, un aumento del gasto público \textit{nunca} puede generar una caída del empleo de equilibrio: la derivada $\partial N^*/\partial G$ es estrictamente positiva para todo $G\in(0,z)$, sin importar cuán cerca esté $G$ de su cota superior $z$. Sin embargo, en el límite $G\to z^-$ se tiene $N^*\to1$ (y $\ell^*\to0$), de modo que el hogar destinaría la totalidad de su dotación de tiempo al trabajo. Esto revela que el supuesto $G<z$ no es solo una restricción técnica, sino la condición que garantiza que exista una asignación interior de ocio positivo; si el gasto público se elevara hasta igualar o superar a la productividad $z$, los hogares destinarían todo su tiempo a trabajar para poder recuperar en mayor medida posible el poder adquisitivo perdido por el nivel tan alto de gasto público.}
 
 \subsection*{(h) Choque de productividad}
 
-Considere ahora un aumento de $z$ a $z'>z$, manteniendo constantes $G$ y $\psi$. La respuesta del
-salario es
+La respuesta del salario es
 \[
   \boxed{
   \frac{\partial w^*}{\partial z}
@@ -879,83 +946,80 @@ La producción y el consumo responden de acuerdo con
   =\frac{z}{\sqrt{\psi^2G^2+(1+2\psi)z^2}}>0
   }.
 \]
-Como los beneficios son la mitad de la producción,
-\[
-  \boxed{
-  \frac{\partial\pi^*}{\partial z}
-  =\frac{z}{2\sqrt{\psi^2G^2+(1+2\psi)z^2}}>0
-  }.
-\]
-
-La respuesta del empleo se obtiene diferenciando su expresión explícita:
-\[
-  \boxed{
+La respuesta del empleo es:
+\begin{align*}
   \frac{\partial N^*}{\partial z}
-  =-
-  \frac{
-  2\psi G
-  \left[\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}\right]^2
-  }
-  {(1+2\psi)^2z^3\sqrt{\psi^2G^2+(1+2\psi)z^2}}
-  <0
-  }.
-\]
-Por lo tanto,
+  = 2 \left[\frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}{(1+2\psi)z}\right] \cdot \frac{\partial}{\partial z}\left[\frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}{(1+2\psi)z}\right]
+\end{align*}
+Como $2 \left[\frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}{(1+2\psi)z}\right] > 0$, entonces la dirección de respuesta del empleo depende del signo de $\frac{\partial}{\partial z}\left[\frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}{(1+2\psi)z}\right]$.
+
+Por regla del cociente,
+\begin{align*}
+  \frac{\partial}{\partial z}\left[\frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}{(1+2\psi)z}\right] &= \frac{\dfrac{(2(1+2\psi)z)(1+2\psi)z}{2\sqrt{\psi^2G^2+(1+2\psi)z^2}} - (1+2\psi) \left( \psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2} \right)}{(1+2\psi)^2 z^2} \\[4pt]
+  &= \frac{\dfrac{(1+2\psi)^2 z^2}{\sqrt{\psi^2G^2+(1+2\psi)z^2}} - (1+2\psi) \left( \psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2} \right)}{(1+2\psi)^2 z^2} \\[4pt]
+  &= \frac{1}{\sqrt{\psi^2G^2+(1+2\psi)z^2}} - \frac{ \psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2} }{(1+2\psi) z^2} \\[4pt]
+  &= \frac{(1+2\psi)z^2 - \sqrt{\psi^2G^2+(1+2\psi)z^2}\left(\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}\right)}{(1+2\psi)z^2\sqrt{\psi^2G^2+(1+2\psi)z^2}} \\[4pt]
+  &= \frac{(1+2\psi)z^2 - \psi G\sqrt{\psi^2G^2+(1+2\psi)z^2} - \left[\psi^2G^2+(1+2\psi)z^2\right]}{(1+2\psi)z^2\sqrt{\psi^2G^2+(1+2\psi)z^2}} \\[4pt]
+  &= \frac{-\psi^2G^2 - \psi G\sqrt{\psi^2G^2+(1+2\psi)z^2}}{(1+2\psi)z^2\sqrt{\psi^2G^2+(1+2\psi)z^2}} \\[4pt]
+  &= \frac{-\psi G\left[\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}\right]}{(1+2\psi)z^2\sqrt{\psi^2G^2+(1+2\psi)z^2}}.
+\end{align*}
+Sustituyendo de vuelta,
+\begin{align*}
+  \frac{\partial N^*}{\partial z}
+  &= 2 \left[\frac{\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}}{(1+2\psi)z}\right] \cdot \frac{-\psi G\left[\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}\right]}{(1+2\psi)z^2\sqrt{\psi^2G^2+(1+2\psi)z^2}} \\[4pt]
+  &= -\,\frac{2\psi G\left[\psi G+\sqrt{\psi^2G^2+(1+2\psi)z^2}\right]^2}{(1+2\psi)^2 z^3 \sqrt{\psi^2G^2+(1+2\psi)z^2}}.
+\end{align*}
+
+
+Por lo tanto, para todo $z>0$:
 \[
-  \boxed{\frac{\partial\ell^*}{\partial z}>0}.
+\boxed{
+  \frac{\partial N^*}{\partial z} < 0
+}.
 \]
-Si $G=0$, la derivada del empleo respecto de la productividad es cero: con estas preferencias, los
-efectos ingreso y sustitución se cancelan exactamente. Como el ejercicio supone $G>0$, el efecto
-ingreso domina en el margen y el hogar elige más ocio y menos trabajo.
 
-El choque se origina en la tecnología de la empresa. A un salario dado, la productividad marginal
-del trabajo, la demanda laboral, la producción y los beneficios aumentan. El incremento de los
-beneficios eleva la riqueza del hogar y desplaza su oferta de trabajo hacia la izquierda. En el nuevo
-equilibrio, el salario real aumenta y el empleo disminuye. A pesar de la caída del empleo, la mayor
-productividad eleva la producción, el consumo y los beneficios.
+Es decir, ante un aumento en la productividad $z$, el empleo de equilibrio \textbf{disminuye}. Esto se debe a que, \textbf{para este tipo de preferencias, el efecto ingreso domina al efecto sustitución}: al ser el trabajador más productivo, un mismo nivel de consumo se puede sostener trabajando menos horas, y en equilibrio el hogar decide convertir parte del mayor ingreso que genera esa productividad en ocio.
 
-En el mercado de trabajo,
+Nótese que si $G=0$, la derivada del empleo respecto de la productividad es cero: sin gasto público, el efecto ingreso desaparece del canal de $N^*$ y el empleo de equilibrio se vuelve insensible (localmente) a cambios en $z$.
+
+\paragraph{Interpretación.} El incremento en la productividad resulta en un incremento en el producto marginal del trabajo: dado el nivel salarial inicial, el nivel de empleo produce una cantidad mayor que antes. Esto le genera incentivos a las empresas para aumentar su demanda laboral, dado que ahora el producto marginal del trabajo es mayor. Esto desplaza la curva de demanda laboral hacia la derecha:
 \[
   \frac{\partial N^d(w)}{\partial z}
   =\frac{z}{2w^2}>0,
 \]
-por lo que la demanda de trabajo se desplaza hacia la derecha; equivalentemente, la curva inversa
-$w=z/(2\sqrt N)$ se desplaza hacia arriba. Por su parte,
+lo que genera presiones al alza en el salario de equilibrio. Por otro lado, la mayor demanda laboral y el ajuste subsecuente al alza del salario genera un incremento en el ingreso laboral del hogar. Este \textbf{incremento en el ingreso laboral genera un efecto sustitución y un efecto ingreso condicionales a las preferencias del hogar}.
+Para este caso, observemos que
 \[
   \frac{\partial N^s(w)}{\partial z}
   =-\frac{\psi z}{2(1+\psi)w^2}<0,
 \]
-por lo que la oferta reducida de trabajo se desplaza hacia la izquierda debido al aumento de los
-beneficios. El nuevo punto de equilibrio debe ubicarse arriba y a la izquierda del original:
-$w$ aumenta y $N$ disminuye.
+por lo que la curva de oferta laboral se desplaza hacia la izquierda. Esto indica que el efecto ingreso domina al efecto sustitución, de tal forma que, dado que el hogar más productivo ahora puede alcanzar mayores niveles de consumo con un mismo nivel de empleo, entonces reduce su oferta laboral.
 
 En el mercado de bienes, ambas curvas se desplazan hacia arriba. Para la producción,
 \[
   \frac{\partial Y^s(w)}{\partial z}=\frac{z}{w}>0,
 \]
-y para la absorción,
+y para la demanda agregada,
 \[
-  \frac{\partial[C^d(w)+G]}{\partial z}
+  \frac{\partial Y^d(w)}{\partial z}
   =\frac{z}{2(1+\psi)w}>0.
 \]
-El desplazamiento directo de la producción es mayor que el desplazamiento de la absorción a un
-salario dado. El salario aumenta hasta restablecer la igualdad $Y=C+G$. Deben mostrarse tanto los
-desplazamientos de las dos curvas como el movimiento hacia un salario y una producción mayores.
+El desplazamiento directo de la producción es mayor que el desplazamiento de la demanda agregada a un salario dado. El salario aumenta hasta restablecer la igualdad $Y=C+G$. Deben mostrarse tanto los desplazamientos de las dos curvas como el movimiento hacia un salario y una producción mayores.
 
 En el plano $(\ell,C)$,
 \[
   \frac{\partial[z\sqrt{1-\ell}-G]}{\partial z}
   =\sqrt{1-\ell}>0.
 \]
-La frontera de posibilidades se desplaza hacia arriba y se vuelve más inclinada en valor absoluto,
-pues
-\[
+La frontera de posibilidades se desplaza hacia arriba y se vuelve más inclinada en valor absoluto, pues
+\[\frac{\partial}{\partial z}
+  PMN 
+  =
   \frac{\partial}{\partial z}
   \left[-\frac{z}{2\sqrt{1-\ell}}\right]
   =-\frac{1}{2\sqrt{1-\ell}}<0.
 \]
-La nueva tangencia se encuentra arriba y a la derecha de la original: aumentan el consumo y el ocio,
-mientras disminuye el trabajo.
+La nueva tangencia se encuentra arriba y a la derecha de la original: aumentan el consumo y el ocio.
 
 \subsection*{(i) Identificación empírica de los choques}
 
@@ -971,19 +1035,8 @@ Las respuestas predichas por el modelo, manteniendo constantes las demás variab
 \end{array}
 \]
 
-Un aumento simultáneo de producción, consumo y salario real es consistente, dentro de este modelo,
-con un choque positivo de productividad. Un aumento de producción acompañado por disminuciones del
-consumo y del salario real es consistente con un aumento del gasto público financiado mediante
-impuestos de suma fija. Los beneficios aumentan en ambos casos, por lo que su signo no permite
-distinguir los dos choques. El empleo sí ayuda a distinguirlos: aumenta con el choque fiscal y
-disminuye con el choque de productividad cuando $G>0$.
+Un aumento simultáneo de producción, consumo y salario real es consistente, dentro de este modelo, con un choque positivo de productividad. Un aumento de producción acompañado por disminuciones del consumo y del salario real es consistente con un aumento del gasto público financiado mediante impuestos de suma fija. Los beneficios aumentan en ambos casos, por lo que su signo no permite distinguir los dos choques. 
 
-Estos patrones son condiciones de consistencia interna y no identifican por sí solos un choque causal.
-Para realizar una evaluación empírica se requerirían, entre otros elementos, una medida directa del
-gasto público y de la productividad, información sobre el momento y el carácter anticipado o no
-anticipado de las innovaciones, controles para otros choques externos y financieros, y una estrategia
-de identificación que aísle variación exógena. También sería necesario considerar la respuesta de la
-política monetaria, el método de financiamiento del gasto y la incertidumbre estadística alrededor de
-las respuestas estimadas.
+Para este caso, el empleo sí ayuda a distinguirlos: aumenta con el choque fiscal y disminuye con el choque de productividad cuando $G>0$. Sin embargo, este depende de las preferencias del hogar, pues si estas fueran tales que el hogar decide aumentar su oferta laboral dado el incremento en la productividad, entonces el nivel de empleo de equilibrio aumentaría, al igual que con el choque de gasto público.
 
 \end{document}

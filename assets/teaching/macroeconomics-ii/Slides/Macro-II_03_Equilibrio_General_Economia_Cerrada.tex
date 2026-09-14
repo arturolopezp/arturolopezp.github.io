@@ -173,21 +173,6 @@
     \cidenavdots{#2}{#3}%
   }%
 }
-\setbeamertemplate{headline}{%
-  \leavevmode
-  \begin{beamercolorbox}[wd=\paperwidth,ht=4.55ex,dp=0.95ex,leftskip=0.16cm,rightskip=0.16cm]{section in head/foot}
-    \hbox to \dimexpr\paperwidth-0.32cm\relax{%
-      \cidenavitem{1.62cm}{2}{5}{Punto de partida}\hfill
-      \cidenavitem{2.22cm}{6}{16}{Equilibrio competitivo}\hfill
-      \cidenavitem{1.18cm}{17}{22}{Optimalidad}\hfill
-      \cidenavitem{1.16cm}{23}{29}{Gasto público}\hfill
-      \cidenavitem{1.32cm}{30}{36}{Productividad}\hfill
-      \cidenavitem{2.55cm}{37}{44}{Impuestos distorsionantes}\hfill
-      \cidenavitem{1.35cm}{45}{48}{Bienes públicos}\hfill
-      \cidenavitem{0.84cm}{49}{52}{Síntesis}%
-    }%
-  \end{beamercolorbox}%
-}
 
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{section in toc}[circle]
@@ -884,7 +869,6 @@ convexas, y que los conjuntos de consumo y de producción son convexos. Entonces
         \item Las compras públicas aumentaron de forma extraordinaria.
         \item La producción se elevó con fuerza.
         \item El consumo privado cayó sólo moderadamente.
-        \item El patrón cualitativo coincide con el modelo.
       \end{itemize}
     \end{column}
     \begin{column}{0.58\textwidth}
@@ -897,33 +881,12 @@ convexas, y que los conjuntos de consumo y de producción son convexos. Entonces
 \end{frame}
 
 
-\begin{frame}[t]{Compras públicas y egresos totales no son lo mismo}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{Compras de bienes y servicios}
-
-      \vspace{0.08cm}
-      \figura[4.3cm]{fig_5_12_gasto_publico_pib.png}
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{Egresos públicos totales}
-
-      \vspace{0.08cm}
-      \figura[4.3cm]{fig_5_13_egresos_publicos_pib.png}
-    \end{column}
-  \end{columns}
-
-  \fuentefigura{Williamson (2018), figuras 5.12 y 5.13.}
-  \notafuentes{Williamson (2018), figuras 5.12--5.13 y pp. 167--170.}
-\end{frame}
 
 % =============================================================================
 \section{Productividad}
 % =============================================================================
 
-\begin{frame}{Experimento: aumenta la productividad total de los factores}
+\begin{frame}{Aumento la productividad total de los factores}
   Considere
   \[
     z_2>z_1.
@@ -976,7 +939,7 @@ convexas, y que los conjuntos de consumo y de producción son convexos. Entonces
         \item \(Y=C+G\) aumenta.
         \item El bienestar aumenta.
         \item El salario real aumenta.
-        \item El efecto sobre \(\ell\) y \(N\) es ambiguo.
+        \item El efecto sobre \(\ell\) y \(N\) es ambiguo: depende de las preferencias del consumidor representativo.
       \end{itemize}
     \end{column}
     \begin{column}{0.54\textwidth}
@@ -1041,370 +1004,16 @@ convexas, y que los conjuntos de consumo y de producción son convexos. Entonces
   \notafuentes{Williamson (2018), figura 5.10 y pp. 163--165.}
 \end{frame}
 
-\begin{frame}[t]{El PIB y el residuo de Solow se mueven juntos}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.39\textwidth}
-      \begin{itemize}
-        \setlength{\itemsep}{0.47em}
-        \item El residuo de Solow es una medida contable de la PTF.
-        \item Sus desviaciones respecto a tendencia comueven con el PIB real.
-        \item Este patrón motiva modelos de ciclos reales impulsados por productividad.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.57\textwidth}
-      \centering
-      \figura[5.35cm]{fig_5_11_pib_residuo_solow.png}
-      \fuentefigura{Williamson (2018), figura 5.11.}
-    \end{column}
-  \end{columns}
-  \notafuentes{Williamson (2018), figura 5.11 y pp. 165--166.}
-\end{frame}
 
-\begin{frame}{Interpretar la productividad con cautela}
-  \begin{itemize}
-    \setlength{\itemsep}{0.58em}
-    \item El residuo de Solow se calcula como la parte del crecimiento que no explican los insumos medidos.
-    \item Por ello puede capturar tecnología, pero también utilización del capital, errores de medición y variaciones no observadas en la calidad de los insumos.
-    \item Que \(z\) y \(Y\) comuevan no prueba por sí mismo que los choques tecnológicos causen todas las fluctuaciones.
-    \item La teoría produce una predicción conjunta para \(C,Y,N,w\) y bienestar; el contraste debe considerar todas esas variables.
-  \end{itemize}
-
-  \begin{alertblock}{Lección}
-    Una variable residual no debe interpretarse mecánicamente como un choque tecnológico exógeno.
-  \end{alertblock}
-  \notafuentes{Williamson (2018), pp. 165--166 y discusión del residuo de Solow del cap. 4.}
-\end{frame}
-
-% =============================================================================
-\section{Impuestos distorsionantes}
-% =============================================================================
-
-\begin{frame}{El impuesto de suma fija es un punto de referencia}
-  Con un impuesto de suma fija, trabajar una hora adicional sigue generando \(w\) unidades de consumo:
-  \[
-    \mathrm{MRS}_{\ell,C}=w=\mathrm{MPN}.
-  \]
-
-  Con un impuesto proporcional \(t\) sobre el ingreso laboral, el consumidor recibe sólo
-  \[
-    w(1-t)
-  \]
-  por cada hora adicional de trabajo.
-
-  \begin{alertblock}{Cuña fiscal}
-    El impuesto separa el rendimiento social del trabajo, \(\mathrm{MPN}\), del rendimiento privado, \(w(1-t)\).
-  \end{alertblock}
-  \notafuentes{Williamson (2018), pp. 170--174.}
-\end{frame}
-
-\begin{frame}{El impuesto al trabajo modifica la decisión marginal}
-  El consumidor enfrenta
-  \[
-    C=w(1-t)(h-\ell)+\pi.
-  \]
-
-  Su condición de optimalidad es
-  \[
-    \mathrm{MRS}_{\ell,C}=w(1-t).
-  \]
-
-  La empresa continúa fijando
-  \[
-    w=\mathrm{MPN}.
-  \]
-
-  Por tanto,
-  \[
-    \boxed{\mathrm{MRS}_{\ell,C}=(1-t)\mathrm{MPN}<\mathrm{MPN}}.
-  \]
-
-  \begin{itemize}
-    \item El consumidor trabaja menos de lo socialmente eficiente.
-  \end{itemize}
-  \notafuentes{Williamson (2018), pp. 171--175.}
-\end{frame}
-
-\begin{frame}{Un modelo simplificado hace visible la distorsión}
-  Suponga una tecnología lineal:
-  \[
-    Y=zN.
-  \]
-
-  Entonces
-  \[
-    \mathrm{MPN}=z,
-    \qquad
-    w=z,
-    \qquad
-    \pi=0.
-  \]
-
-  La restricción de recursos es
-  \[
-    C=z(h-\ell)-G,
-  \]
-  y el presupuesto del consumidor es
-  \[
-    C=z(1-t)(h-\ell).
-  \]
-
-  El presupuesto público exige
-  \[
-    \boxed{G=zt(h-\ell)}.
-  \]
-  \notafuentes{Williamson (2018), ecuaciones 5-7 a 5-12 y pp. 171--176.}
-\end{frame}
-
-\begin{frame}[t]{Tecnología lineal: FPP y demanda de trabajo}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{FPP lineal}
-
-      \vspace{0.08cm}
-      \figura[4.45cm]{fig_5_14_fpp_simplificado.png}
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{Demanda laboral perfectamente elástica}
-
-      \vspace{0.08cm}
-      \figura[4.45cm]{fig_5_15_demanda_trabajo_simplificado.png}
-    \end{column}
-  \end{columns}
-
-  \fuentefigura{Williamson (2018), figuras 5.14 y 5.15.}
-  \notafuentes{Williamson (2018), figuras 5.14--5.15 y pp. 171--173.}
-\end{frame}
-
-\begin{frame}[t]{El equilibrio con impuesto no es eficiente}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
-      \begin{itemize}
-        \setlength{\itemsep}{0.5em}
-        \item \(AB\): FPP de la economía.
-        \item \(DF\): presupuesto después de impuestos.
-        \item \(H\): equilibrio competitivo.
-        \item \(E\): óptimo de Pareto.
-        \item En \(H\), consumo, empleo y producción son demasiado bajos.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.54\textwidth}
-      \centering
-      \figura[5.35cm]{fig_5_16_impuesto_trabajo.png}
-      \fuentefigura{Williamson (2018), figura 5.16.}
-    \end{column}
-  \end{columns}
-  \notafuentes{Williamson (2018), figura 5.16 y pp. 173--175.}
-\end{frame}
-
-\begin{frame}[t]{La recaudación no aumenta indefinidamente con la tasa}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
-      \[
-        R(t)=zt\,[h-\ell(t)].
-      \]
-
-      \begin{itemize}
-        \setlength{\itemsep}{0.46em}
-        \item \(t=0\): no existe recaudación.
-        \item \(t=1\): desaparece el rendimiento privado de trabajar.
-        \item \(t^*\): maximiza la recaudación.
-        \item Para \(G<R(t^*)\), pueden existir dos tasas que financien el mismo gasto.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.54\textwidth}
-      \centering
-      \figura[5.05cm]{fig_5_17_laffer.png}
-      \fuentefigura{Williamson (2018), figura 5.17.}
-    \end{column}
-  \end{columns}
-  \notafuentes{Williamson (2018), figura 5.17 y pp. 175--177.}
-\end{frame}
-
-\begin{frame}{La curva de Laffer no implica que reducir \(t\) siempre recaude más}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item A la izquierda de \(t^*\), una tasa mayor eleva la recaudación.
-    \item A la derecha de \(t^*\), una tasa mayor reduce tanto la base gravable que la recaudación cae.
-    \item Saber de qué lado se encuentra una economía es una pregunta empírica.
-    \item La forma y el máximo dependen de la elasticidad de la oferta laboral y de otros márgenes de respuesta.
-  \end{itemize}
-
-  \begin{block}{Punto central}
-    La recaudación depende de la tasa y de la respuesta endógena de la base tributaria.
-  \end{block}
-  \notafuentes{Williamson (2018), pp. 175--177.}
-\end{frame}
-
-\begin{frame}[t]{Dos tasas pueden financiar el mismo gasto}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
-      Para \(t_1<t_2\):
-      \begin{itemize}
-        \setlength{\itemsep}{0.47em}
-        \item ambas tasas recaudan \(G\);
-        \item con \(t_1\), el rendimiento de trabajar es mayor;
-        \item el equilibrio \(F\) tiene más \(C,N,Y\);
-        \item el consumidor alcanza mayor bienestar que en \(H\).
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.54\textwidth}
-      \centering
-      \figura[5.35cm]{fig_5_18_dos_equilibrios.png}
-      \fuentefigura{Williamson (2018), figura 5.18.}
-    \end{column}
-  \end{columns}
-  \notafuentes{Williamson (2018), figura 5.18 y pp. 176--177.}
-\end{frame}
-
-% =============================================================================
-\section{Bienes públicos}
-% =============================================================================
-
-\begin{frame}{Ahora el gasto público genera utilidad}
-  Para separar la elección del tamaño del gobierno, suponga una dotación fija \(Y\) y preferencias
-  \[
-    U(C,G).
-  \]
-
-  El gobierno transforma impuestos \(T\) en bienes públicos con eficiencia \(q\):
-  \[
-    G=qT.
-  \]
-
-  Como el consumidor enfrenta
-  \[
-    C+T=Y,
-  \]
-  la FPP entre consumo privado y bienes públicos es
-  \[
-    \boxed{C+\frac{G}{q}=Y}.
-  \]
-  \notafuentes{Williamson (2018), sección ``A Model of Public Goods'', pp. 177--181.}
-\end{frame}
-
-\begin{frame}[t]{El tamaño óptimo del gobierno equilibra costos y beneficios}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
-      En una solución interior,
-      \[
-        \frac{U_G}{U_C}=\frac{1}{q}.
-      \]
-
-      \begin{itemize}
-        \setlength{\itemsep}{0.45em}
-        \item \(U_G/U_C\): beneficio marginal del bien público.
-        \item \(1/q\): consumo privado sacrificado por una unidad de \(G\).
-        \item \(G^*\) maximiza el bienestar, no la recaudación.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.54\textwidth}
-      \centering
-      \figura[5.25cm]{fig_5_19_gasto_optimo.png}
-      \fuentefigura{Williamson (2018), figura 5.19.}
-    \end{column}
-  \end{columns}
-  \notafuentes{Williamson (2018), figura 5.19 y pp. 178--180.}
-\end{frame}
-
-\begin{frame}[t]{Una economía más rica demanda más bienes públicos}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
-      Si aumenta \(Y\):
-      \begin{itemize}
-        \setlength{\itemsep}{0.52em}
-        \item la FPP se desplaza hacia afuera en forma paralela;
-        \item si \(C\) y \(G\) son normales, ambos aumentan;
-        \item la participación \(G/Y\) depende de la elasticidad ingreso de los bienes públicos.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.54\textwidth}
-      \centering
-      \figura[5.25cm]{fig_5_20_aumento_pib.png}
-      \fuentefigura{Williamson (2018), figura 5.20.}
-    \end{column}
-  \end{columns}
-  \notafuentes{Williamson (2018), figura 5.20 y pp. 179--181.}
-\end{frame}
-
-\begin{frame}[t]{Un gobierno más eficiente puede ser más grande}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
-      Si \(q\) aumenta:
-      \begin{itemize}
-        \setlength{\itemsep}{0.46em}
-        \item la FPP rota hacia afuera;
-        \item producir \(G\) cuesta menos consumo privado;
-        \item el efecto sustitución eleva \(G\) y reduce \(C\);
-        \item el efecto ingreso eleva ambos;
-        \item \(G\) aumenta y \(C\) puede subir o bajar.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.54\textwidth}
-      \centering
-      \figura[5.25cm]{fig_5_21_eficiencia_gobierno.png}
-      \fuentefigura{Williamson (2018), figura 5.21.}
-    \end{column}
-  \end{columns}
-  \notafuentes{Williamson (2018), figura 5.21 y pp. 180--181.}
-\end{frame}
-
-% =============================================================================
 \section{Síntesis}
-% =============================================================================
 
-\begin{frame}{Tres experimentos, tres mecanismos}
-  \small
-  \centering
-  \begin{tabular}{@{}lllll@{}}
-    \toprule
-    \parbox[t]{2.4cm}{\raggedright\bfseries Cambio} &
-    \parbox[t]{1.5cm}{\raggedright\bfseries \(C\)} &
-    \parbox[t]{1.5cm}{\raggedright\bfseries \(Y\)} &
-    \parbox[t]{1.5cm}{\raggedright\bfseries \(N\)} &
-    \parbox[t]{4.5cm}{\raggedright\bfseries Mecanismo principal}\\
-    \midrule
-    \parbox[t]{2.4cm}{\raggedright \(G\uparrow\), impuesto de suma fija} &
-    \parbox[t]{1.5cm}{\raggedright Baja} &
-    \parbox[t]{1.5cm}{\raggedright Sube} &
-    \parbox[t]{1.5cm}{\raggedright Sube} &
-    \parbox[t]{4.5cm}{\raggedright Efecto ingreso negativo.}\\[0.2cm]
-    \parbox[t]{2.4cm}{\raggedright \(z\uparrow\)} &
-    \parbox[t]{1.5cm}{\raggedright Sube} &
-    \parbox[t]{1.5cm}{\raggedright Sube} &
-    \parbox[t]{1.5cm}{\raggedright Ambiguo} &
-    \parbox[t]{4.5cm}{\raggedright Ingreso y sustitución opuestos sobre trabajo.}\\[0.2cm]
-    \parbox[t]{2.4cm}{\raggedright \(t\uparrow\), modelo simplificado} &
-    \parbox[t]{1.5cm}{\raggedright Baja} &
-    \parbox[t]{1.5cm}{\raggedright Baja} &
-    \parbox[t]{1.5cm}{\raggedright Baja} &
-    \parbox[t]{4.5cm}{\raggedright Cuña entre rendimiento privado y social.}\\
-    \bottomrule
-  \end{tabular}
-  \notafuentes{Síntesis de Williamson (2018), cap. 5.}
-\end{frame}
-
-\begin{frame}{Resultados que debemos conservar}
-  \begin{enumerate}
-    \setlength{\itemsep}{0.48em}
-    \item El equilibrio general exige consistencia entre decisiones óptimas y vaciado de mercados.
-    \item La FPP resume la tecnología y la restricción agregada de recursos.
-    \item Con competencia perfecta e impuestos de suma fija, el equilibrio es eficiente.
-    \item El gasto público no productivo desplaza consumo, pero aumenta empleo y producción.
-    \item La productividad eleva consumo, producción, salario y bienestar; su efecto laboral es ambiguo.
-    \item Los impuestos proporcionales crean una cuña y generan pérdidas de eficiencia.
-  \end{enumerate}
-  \notafuentes{Williamson (2018), resumen del cap. 5.}
-\end{frame}
-
-\begin{frame}{El modelo ya permite hacer macroeconomía}
+\begin{frame}{El modelo de esta sesión}
   Comenzamos con decisiones individuales:
   \[
-    \text{preferencias} + \text{tecnología} + \text{política}.
+    \text{preferencias} - \text{tecnología} - \text{política}.
   \]
 
-  El equilibrio las traduce en resultados agregados:
+  El equilibrio las traduce en variables agregadas:
   \[
     (C^*,Y^*,N^*,w^*).
   \]
@@ -1416,7 +1025,9 @@ convexas, y que los conjuntos de consumo y de producción son convexos. Entonces
   \notafuentes{Williamson (2018), transición de los caps. 5 a 6.}
 \end{frame}
 
-\begin{frame}{Referencias de la sesión}
+
+
+\begin{frame}{Referencias}
   \begin{itemize}
     \setlength{\itemsep}{0.75em}
     \item Williamson, Stephen D. (2018). \textit{Macroeconomics}, 6th ed. Pearson. Capítulo 5: ``A Closed-Economy One-Period Macroeconomic Model''.
