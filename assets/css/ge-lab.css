@@ -1,0 +1,456 @@
+/* Styles are scoped to the course lab and do not change the rest of the site. */
+#ge-lab {
+  --ge-blue: #005ea8;
+  --ge-red: #b54a45;
+  --ge-green: #167a62;
+  --ge-amber: #a16b16;
+  --ge-muted: #687482;
+  --ge-border: #d8e0e8;
+  --ge-panel: #f7f9fc;
+  --ge-grid: #e9edf2;
+  color: var(--global-text-color, #20242a);
+}
+
+html[data-theme="dark"] #ge-lab {
+  --ge-blue: #71b5e8;
+  --ge-red: #f18b85;
+  --ge-green: #69c7a9;
+  --ge-amber: #e8b96b;
+  --ge-muted: #a4b0bd;
+  --ge-border: #3a4653;
+  --ge-panel: #202b36;
+  --ge-grid: #35404b;
+}
+
+#ge-lab .ge-intro {
+  font-size: 1.07rem;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+}
+
+#ge-lab .ge-note {
+  border-left: 4px solid var(--ge-blue);
+  background: var(--ge-panel);
+  padding: 1rem 1.2rem;
+  line-height: 1.6;
+  border-radius: 0 8px 8px 0;
+}
+
+#ge-lab .ge-section {
+  margin-top: 2.2rem;
+}
+
+#ge-lab h2 {
+  font-size: 1.65rem;
+  margin: 0 0 0.35rem;
+  font-weight: 500;
+}
+
+#ge-lab .ge-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+#ge-lab .ge-section-heading p {
+  color: var(--ge-muted);
+  margin: 0;
+}
+
+#ge-lab .ge-button {
+  border: 1px solid var(--ge-blue);
+  background: var(--ge-blue);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.55rem 0.85rem;
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#ge-lab .ge-button:hover,
+#ge-lab .ge-button:focus-visible {
+  filter: brightness(1.13);
+}
+
+#ge-lab .ge-button-secondary {
+  background: transparent;
+  color: var(--ge-blue);
+}
+
+#ge-lab .ge-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+#ge-lab .ge-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.4rem;
+  border: 1px solid var(--ge-border);
+  border-radius: 10px;
+  padding: 1.15rem;
+}
+
+#ge-lab .ge-field {
+  min-width: 0;
+}
+
+#ge-lab .ge-model-formula {
+  min-height: 2.6rem;
+  margin: 0.55rem 0 0;
+  padding: 0.55rem 0.7rem;
+  border-left: 2px solid var(--ge-blue);
+  border-radius: 0 5px 5px 0;
+  background: var(--ge-panel);
+  text-align: left;
+  overflow-x: auto;
+}
+
+#ge-lab .ge-field label,
+#ge-lab .ge-prediction {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.35rem;
+}
+
+#ge-lab .ge-range-field label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+#ge-lab .ge-field label .ge-parameter-value {
+  color: var(--ge-blue);
+  font-variant-numeric: tabular-nums;
+}
+
+#ge-lab select {
+  width: 100%;
+  min-height: 2.4rem;
+  border: 1px solid var(--ge-border);
+  border-radius: 5px;
+  padding: 0.35rem 0.5rem;
+  color: var(--global-text-color, #20242a);
+  background: var(--global-bg-color, #fff);
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+#ge-lab input[type="range"] {
+  width: 100%;
+  accent-color: var(--ge-blue);
+  cursor: pointer;
+}
+
+#ge-lab small,
+#ge-lab .ge-caption {
+  color: var(--ge-muted);
+  font-size: 0.83rem;
+}
+
+#ge-lab .ge-status {
+  color: var(--ge-muted);
+  font-size: 0.86rem;
+  margin: 0.7rem 0 0;
+}
+
+#ge-lab .ge-results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+#ge-lab .ge-result {
+  border: 1px solid var(--ge-border);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+#ge-lab .ge-result-name {
+  color: var(--ge-muted);
+  font-size: 0.82rem;
+}
+
+#ge-lab .ge-result strong {
+  font-size: 1.45rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+#ge-lab .ge-result-change {
+  font-size: 0.78rem;
+  color: var(--ge-muted);
+}
+
+#ge-lab .ge-positive {
+  color: var(--ge-green);
+}
+
+#ge-lab .ge-negative {
+  color: var(--ge-red);
+}
+
+#ge-lab .ge-plots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+#ge-lab .ge-plot-card {
+  margin: 0;
+  border: 1px solid var(--ge-border);
+  border-radius: 9px;
+  padding: 0.7rem;
+  min-width: 0;
+}
+
+#ge-lab .ge-plot-wide {
+  grid-column: 1 / -1;
+}
+
+#ge-lab figcaption {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0.1rem 0.25rem;
+}
+
+#ge-lab figcaption span {
+  color: var(--ge-muted);
+  font-size: 0.77rem;
+  font-weight: normal;
+}
+
+#ge-lab svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#ge-lab .ge-grid {
+  stroke: var(--ge-grid);
+  stroke-width: 1;
+}
+
+#ge-lab .ge-axis {
+  stroke: var(--ge-muted);
+  stroke-width: 1.4;
+}
+
+#ge-lab .ge-tick,
+#ge-lab .ge-axis-label {
+  fill: var(--ge-muted);
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+}
+
+#ge-lab .ge-axis-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#ge-lab .ge-curve {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#ge-lab .ge-demand {
+  stroke: var(--ge-red);
+}
+
+#ge-lab .ge-supply,
+#ge-lab .ge-frontier {
+  stroke: var(--ge-blue);
+}
+
+#ge-lab .ge-budget-line {
+  stroke: var(--ge-green);
+  stroke-width: 2.2;
+}
+
+#ge-lab .ge-indifference-line {
+  stroke: var(--ge-amber);
+  stroke-width: 2.2;
+}
+
+#ge-lab .ge-curve-old {
+  stroke-dasharray: 6 6;
+  opacity: 0.62;
+  stroke-width: 2.3;
+}
+
+#ge-lab .ge-guide {
+  stroke: var(--ge-muted);
+  stroke-width: 1.3;
+  stroke-dasharray: 3 4;
+}
+
+#ge-lab .ge-marker {
+  fill: var(--ge-green);
+  stroke: var(--global-bg-color, #fff);
+  stroke-width: 2;
+}
+
+#ge-lab .ge-marker-old {
+  fill: var(--global-bg-color, #fff);
+  stroke: var(--ge-muted);
+  stroke-width: 2;
+}
+
+#ge-lab .ge-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  color: var(--ge-muted);
+  font-size: 0.76rem;
+  margin: 0 0.25rem 0.15rem;
+}
+
+#ge-lab .ge-legend span::before {
+  content: "";
+  display: inline-block;
+  width: 1.1rem;
+  height: 0;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+  border-top: 3px solid currentColor;
+}
+
+#ge-lab .ge-legend .ge-demand {
+  color: var(--ge-red);
+}
+
+#ge-lab .ge-legend .ge-supply {
+  color: var(--ge-blue);
+}
+
+#ge-lab .ge-legend .ge-budget {
+  color: var(--ge-green);
+}
+
+#ge-lab .ge-legend .ge-indifference {
+  color: var(--ge-amber);
+}
+
+#ge-lab .ge-legend .ge-baseline::before {
+  border-top-style: dashed;
+}
+
+#ge-lab .ge-equations {
+  border: 1px solid var(--ge-border);
+  border-radius: 9px;
+  padding: 1rem 1.15rem;
+  line-height: 1.65;
+  overflow-x: auto;
+}
+
+#ge-lab .ge-equations p {
+  text-align: left;
+  margin: 0 0 0.75rem;
+}
+
+#ge-lab .ge-equations p:last-child {
+  margin-bottom: 0;
+}
+
+#ge-lab .ge-solution-box {
+  background: var(--ge-panel);
+  border-radius: 7px;
+  padding: 0.9rem 1rem;
+  margin-top: 1rem;
+}
+
+#ge-lab .ge-practice {
+  border-top: 1px solid var(--ge-border);
+  padding-top: 1.4rem;
+}
+
+#ge-lab .ge-exercise-prompt {
+  font-weight: 600;
+  background: var(--ge-panel);
+  border-radius: 7px;
+  padding: 0.8rem 1rem;
+}
+
+#ge-lab .ge-predictions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0;
+}
+
+#ge-lab .ge-prediction {
+  margin-bottom: 0;
+}
+
+#ge-lab .ge-prediction select {
+  display: block;
+  margin-top: 0.35rem;
+  font-weight: 400;
+}
+
+#ge-lab .ge-feedback {
+  margin-top: 1rem;
+}
+
+#ge-lab .ge-feedback ul {
+  columns: 2;
+  padding-left: 1.2rem;
+}
+
+#ge-lab .ge-correct {
+  color: var(--ge-green);
+}
+
+#ge-lab .ge-incorrect {
+  color: var(--ge-red);
+}
+
+#ge-lab .ge-back {
+  margin: 2.5rem 0 0;
+}
+
+@media (max-width: 760px) {
+  #ge-lab .ge-section-heading {
+    flex-direction: column;
+  }
+
+  #ge-lab .ge-controls,
+  #ge-lab .ge-plots {
+    grid-template-columns: 1fr;
+  }
+
+  #ge-lab .ge-plot-wide {
+    grid-column: auto;
+  }
+
+  #ge-lab .ge-results,
+  #ge-lab .ge-predictions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  #ge-lab .ge-results,
+  #ge-lab .ge-predictions {
+    grid-template-columns: 1fr;
+  }
+
+  #ge-lab .ge-feedback ul {
+    columns: 1;
+  }
+}
