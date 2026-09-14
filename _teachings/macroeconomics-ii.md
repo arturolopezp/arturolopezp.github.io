@@ -25,6 +25,14 @@ schedule:
     materials:
       - name: Lecture Slides
         url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_02_Consumidor_Empresa.pdf
+
+  - week: Lecture 3
+    date: Sept 3 and Sept 8
+    topic: General Equilibrium in a One-Period Economy
+    description: General equilibrium in a two-agents-one-period model.
+    materials:
+      - name: Lecture Slides
+        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_03_Equilibrio_General_Economia_Cerrada.pdf
 ---
 
 ## Level
