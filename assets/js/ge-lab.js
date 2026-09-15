@@ -7,16 +7,15 @@
 
   const $ = (id) => document.getElementById(id);
   const svgNS = "http://www.w3.org/2000/svg";
-  const fields = ["z", "g", "psi", "sigma", "eta", "alpha"];
+  const fields = ["z", "g", "psi", "sigma", "alpha", "phi"];
   const initial = {
-    preferences: "log",
-    technology: "power",
+    preferences: "kpr",
     z: 2,
     g: 0.3,
-    psi: 1,
-    sigma: 2,
-    eta: 2,
+    psi: 1.5,
+    sigma: 1,
     alpha: 0.5,
+    phi: 1,
   };
   let baseline = { ...initial };
   let exercise = null;
@@ -28,7 +27,6 @@
   function configuration() {
     const result = {
       preferences: $("ge-preferences").value,
-      technology: $("ge-technology").value,
     };
     fields.forEach((name) => {
       result[name] = Number($("ge-" + name).value);
@@ -38,7 +36,6 @@
 
   function setConfiguration(config) {
     $("ge-preferences").value = config.preferences;
-    $("ge-technology").value = config.technology;
     fields.forEach((name) => {
       $("ge-" + name).value = config[name];
     });
@@ -46,21 +43,11 @@
 
   function production(n, p) {
     if (n < 0) return NaN;
-    if (p.technology === "power") return p.z * Math.pow(n, p.alpha);
-    return p.z * Math.sqrt(n);
+    return p.z * Math.pow(n, p.alpha);
   }
 
   function marginalProduct(n, p) {
-    if (p.technology === "power") return p.z * p.alpha * Math.pow(n, p.alpha - 1);
-    return p.z / (2 * Math.sqrt(n));
-  }
-
-  function effectiveSigma(p) {
-    return p.preferences === "log" ? 1 : p.sigma;
-  }
-
-  function effectiveEta(p) {
-    return p.preferences === "log" ? 1 : p.eta;
+    return p.z * p.alpha * Math.pow(n, p.alpha - 1);
   }
 
   function crraUtility(value, curvature) {
@@ -69,14 +56,32 @@
 
   function utility(c, leisure, p) {
     if (c <= 0 || leisure <= 0) return NaN;
-    return crraUtility(c, effectiveSigma(p)) + p.psi * crraUtility(leisure, effectiveEta(p));
+    if (p.preferences === "ghh") {
+      const n = 1 - leisure;
+      const x = c - (p.psi / (1 + p.phi)) * Math.pow(n, 1 + p.phi);
+      return x > 0 ? crraUtility(x, p.sigma) : NaN;
+    }
+    if (p.preferences === "kpr") return crraUtility(c * Math.pow(leisure, p.psi), p.sigma);
+    const n = 1 - leisure;
+    return crraUtility(c, p.sigma) - Math.pow(n, 1 + p.phi) / (1 + p.phi);
   }
 
-  function inverseConsumptionUtility(value, p) {
-    const sigma = effectiveSigma(p);
+  function inverseCrraUtility(value, sigma) {
     if (Math.abs(sigma - 1) < 1e-10) return Math.exp(value);
     const inside = 1 + (1 - sigma) * value;
     return inside > 0 ? Math.pow(inside, 1 / (1 - sigma)) : NaN;
+  }
+
+  // Consumption along the indifference curve through (c*, leisure*) at utility level uStar.
+  function indifferenceConsumption(leisure, uStar, p) {
+    if (p.preferences === "ghh") {
+      const level = inverseCrraUtility(uStar, p.sigma);
+      const n = Math.min(1 - 1e-9, Math.max(0, 1 - leisure));
+      return level + (p.psi / (1 + p.phi)) * Math.pow(n, 1 + p.phi);
+    }
+    if (p.preferences === "kpr") return inverseCrraUtility(uStar, p.sigma) / Math.pow(leisure, p.psi);
+    const n = Math.min(1 - 1e-9, Math.max(0, 1 - leisure));
+    return inverseCrraUtility(uStar + Math.pow(n, 1 + p.phi) / (1 + p.phi), p.sigma);
   }
 
   function bisect(fn, lo, hi) {
@@ -90,39 +95,67 @@
 
   function equilibrium(p) {
     if (p.g >= production(1, p)) return null;
-    const lowerFeasible = p.g === 0 ? 0 : bisect((n) => p.g - production(n, p), 0, 1);
-    const lo = Math.max(1e-10, lowerFeasible + 1e-10);
-    const hi = 1 - 1e-10;
-    const foc = (n) => {
-      const c = production(n, p) - p.g;
-      return marginalProduct(n, p) * Math.pow(c, -effectiveSigma(p)) - p.psi * Math.pow(1 - n, -effectiveEta(p));
-    };
-    if (!(foc(lo) > 0 && foc(hi) < 0)) return null;
-    const n = bisect(foc, lo, hi);
+    let n;
+    if (p.preferences === "ghh") {
+      n = Math.pow((p.alpha * p.z) / p.psi, 1 / (1 + p.phi - p.alpha));
+    } else if (p.preferences === "kpr") {
+      const lowerFeasible = p.g === 0 ? 0 : bisect((candidate) => p.g - production(candidate, p), 0, 1);
+      const lo = Math.max(1e-10, lowerFeasible + 1e-10);
+      const hi = 1 - 1e-10;
+      const laborClearing = (candidate) =>
+        marginalProduct(candidate, p) * (1 - candidate) - p.psi * (production(candidate, p) - p.g);
+      if (!(laborClearing(lo) > 0 && laborClearing(hi) < 0)) return null;
+      n = bisect(laborClearing, lo, hi);
+    } else {
+      const lowerFeasible = p.g === 0 ? 0 : bisect((candidate) => p.g - production(candidate, p), 0, 1);
+      const lo = Math.max(1e-10, lowerFeasible + 1e-10);
+      const hi = 1 - 1e-10;
+      const householdCondition = (candidate) =>
+        marginalProduct(candidate, p) * Math.pow(production(candidate, p) - p.g, -p.sigma) -
+        Math.pow(candidate, p.phi);
+      if (!(householdCondition(lo) > 0 && householdCondition(hi) < 0)) return null;
+      n = bisect(householdCondition, lo, hi);
+    }
+    if (!(n > 0 && n < 1)) return null;
     const y = production(n, p);
     const w = marginalProduct(n, p);
-    return { n, y, w, c: y - p.g, leisure: 1 - n, profit: y - w * n, tax: p.g };
+    const c = y - p.g;
+    const leisure = 1 - n;
+    if (c <= 0 || !Number.isFinite(utility(c, leisure, p))) return null;
+    return { n, y, w, c, leisure, profit: y - w * n, tax: p.g };
   }
 
   function firmAtWage(w, p) {
-    let n;
-    if (p.technology === "power") n = Math.pow((p.z * p.alpha) / w, 1 / (1 - p.alpha));
-    else n = Math.pow(p.z / (2 * w), 2);
+    const n = Math.pow((p.z * p.alpha) / w, 1 / (1 - p.alpha));
     const y = production(n, p);
     return { n, y, profit: y - w * n };
   }
 
   function householdAtWage(w, profit, p) {
+    if (p.preferences === "ghh") {
+      const n = Math.pow(w / p.psi, 1 / p.phi);
+      const leisure = 1 - n;
+      const c = w * n + profit - p.g;
+      if (!(n > 0 && n < 1) || !Number.isFinite(utility(c, leisure, p))) return null;
+      return { n, c };
+    }
+    if (p.preferences === "kpr") {
+      const c = (w + profit - p.g) / (1 + p.psi);
+      const leisure = (p.psi * (w + profit - p.g)) / ((1 + p.psi) * w);
+      const n = 1 - leisure;
+      if (!(n > 0 && n < 1) || c <= 0) return null;
+      return { n, c };
+    }
     const nonlaborIncome = profit - p.g;
-    if (nonlaborIncome + w <= 0) return null;
     const lo = Math.max(0, -nonlaborIncome / w + 1e-10);
     const hi = 1 - 1e-10;
     if (lo >= hi) return null;
-    const foc = (n) => {
+    const householdCondition = (n) => {
       const c = w * n + nonlaborIncome;
-      return w * Math.pow(c, -effectiveSigma(p)) - p.psi * Math.pow(1 - n, -effectiveEta(p));
+      return w * Math.pow(c, -p.sigma) - Math.pow(n, p.phi);
     };
-    const n = foc(lo) <= 0 ? lo : bisect(foc, lo, hi);
+    if (!(householdCondition(lo) > 0 && householdCondition(hi) < 0)) return null;
+    const n = bisect(householdCondition, lo, hi);
     return { n, c: w * n + nonlaborIncome };
   }
 
@@ -158,23 +191,30 @@
   }
 
   function utilityTex(p) {
-    const consumption = effectiveSigma(p) === 1 ? String.raw`\log C` : String.raw`\frac{C^{1-\sigma}-1}{1-\sigma}`;
-    const leisure = effectiveEta(p) === 1 ? String.raw`\log\ell` : String.raw`\frac{\ell^{1-\eta}-1}{1-\eta}`;
-    return String.raw`U(C,\ell)=${consumption}+\psi ${leisure}`;
+    if (p.preferences === "crra") {
+      const consumption =
+        Math.abs(p.sigma - 1) < 1e-10 ? String.raw`\log C` : String.raw`\frac{C^{1-\sigma}}{1-\sigma}`;
+      return String.raw`U(C,N)=${consumption}-\frac{N^{1+\varphi}}{1+\varphi}`;
+    }
+    if (p.preferences === "ghh") {
+      return Math.abs(p.sigma - 1) < 1e-10
+        ? String.raw`U(C,N)=\log\left(C-\frac{\psi}{1+\varphi}N^{1+\varphi}\right)`
+        : String.raw`U(C,N)=\frac{\left[C-\frac{\psi}{1+\varphi}N^{1+\varphi}\right]^{1-\sigma}-1}{1-\sigma}`;
+    }
+    return Math.abs(p.sigma - 1) < 1e-10
+      ? String.raw`U(C,\ell)=\log C+\psi\log\ell`
+      : String.raw`U(C,\ell)=\frac{\left(C\ell^\psi\right)^{1-\sigma}-1}{1-\sigma}`;
   }
 
   function renderSelectionFormulas(p) {
-    const preferenceKey = `${p.preferences}-${effectiveSigma(p) === 1}-${effectiveEta(p) === 1}`;
+    const preferenceKey = `${p.preferences}-${Math.abs(p.sigma - 1) < 1e-10}`;
     if (preferenceFormulaKey !== preferenceKey) {
       preferenceFormulaKey = preferenceKey;
       replaceMath($("ge-preference-formula"), String.raw`\(${utilityTex(p)}\)`);
     }
-    if (productionFormulaKey !== p.technology) {
-      productionFormulaKey = p.technology;
-      replaceMath(
-        $("ge-production-formula"),
-        p.technology === "power" ? String.raw`\(Y=zN^\alpha\)` : String.raw`\(Y=z\sqrt N\)`
-      );
+    if (productionFormulaKey !== "power") {
+      productionFormulaKey = "power";
+      replaceMath($("ge-production-formula"), String.raw`\(Y=zN^\alpha\)`);
     }
   }
 
@@ -195,21 +235,27 @@
     const right = 568;
     const top = 28;
     const bottom = 298;
-    const x = (value) => left + (value / xMax) * (right - left);
-    const y = (value) => bottom - (value / yMax) * (bottom - top);
+    const xPad = Math.max(xMax * 0.04, 1e-6);
+    const yPad = Math.max(yMax * 0.05, 1e-6);
+    const x = (value) => left + ((value + xPad) / (xMax + 2 * xPad)) * (right - left);
+    const y = (value) => bottom - ((value + yPad) / (yMax + 2 * yPad)) * (bottom - top);
+    const dataLeft = x(0);
+    const dataRight = x(xMax);
+    const dataTop = y(yMax);
+    const dataBottom = y(0);
     svg.replaceChildren();
     for (let tick = 0; tick <= 4; tick++) {
       const xx = x((tick / 4) * xMax);
       const yy = y((tick / 4) * yMax);
-      svg.appendChild(svgNode("line", { x1: xx, y1: top, x2: xx, y2: bottom, class: "ge-grid" }));
-      svg.appendChild(svgNode("line", { x1: left, y1: yy, x2: right, y2: yy, class: "ge-grid" }));
-      appendText(svg, xx, bottom + 17, number((tick / 4) * xMax, 1), "ge-tick");
-      appendText(svg, left - 8, yy + 4, number((tick / 4) * yMax, 1), "ge-tick", "end");
+      svg.appendChild(svgNode("line", { x1: xx, y1: dataTop, x2: xx, y2: dataBottom, class: "ge-grid" }));
+      svg.appendChild(svgNode("line", { x1: dataLeft, y1: yy, x2: dataRight, y2: yy, class: "ge-grid" }));
+      appendText(svg, xx, dataBottom + 17, number((tick / 4) * xMax, 1), "ge-tick");
+      appendText(svg, dataLeft - 8, yy + 4, number((tick / 4) * yMax, 1), "ge-tick", "end");
     }
-    svg.appendChild(svgNode("line", { x1: left, y1: bottom, x2: right, y2: bottom, class: "ge-axis" }));
-    svg.appendChild(svgNode("line", { x1: left, y1: top, x2: left, y2: bottom, class: "ge-axis" }));
+    svg.appendChild(svgNode("line", { x1: dataLeft, y1: dataBottom, x2: dataRight, y2: dataBottom, class: "ge-axis" }));
+    svg.appendChild(svgNode("line", { x1: dataLeft, y1: dataTop, x2: dataLeft, y2: dataBottom, class: "ge-axis" }));
     appendText(svg, 313, 344, xLabel, "ge-axis-label");
-    appendText(svg, left, 17, yLabel, "ge-axis-label", "start");
+    appendText(svg, dataLeft, 17, yLabel, "ge-axis-label", "start");
     return { x, y, xMax, yMax };
   }
 
@@ -273,19 +319,35 @@
 
   function allocationPlot(current, currentEq, old, oldEq) {
     const svg = $("ge-allocation-plot");
-    const yMax = Math.max(production(1, current), production(1, old)) * 1.2;
-    const scale = axes(svg, 1, yMax, "Leisure", "Consumption");
+    const currentBudgetIntercept = currentEq.w + currentEq.profit - current.g;
+    const oldBudgetIntercept = oldEq.w + oldEq.profit - old.g;
+    const currentFrontierIntercept = production(1, current) - current.g;
+    const oldFrontierIntercept = production(1, old) - old.g;
+    const uStar = utility(currentEq.c, currentEq.leisure, current);
+    const indifferenceStart = current.preferences === "kpr" ? Math.max(1e-4, currentEq.leisure * 0.55) : 0;
+    const indifferenceCeiling = indifferenceConsumption(Math.max(indifferenceStart, 1e-5), uStar, current);
+    const yMax =
+      Math.max(
+        currentEq.c,
+        oldEq.c,
+        currentBudgetIntercept,
+        oldBudgetIntercept,
+        currentFrontierIntercept,
+        oldFrontierIntercept,
+        Number.isFinite(indifferenceCeiling) ? indifferenceCeiling : 0,
+        0.1
+      ) * 1.35;
+    const scale = axes(svg, 1.1, yMax, "Leisure", "Consumption");
     const frontier = (p, suffix) => plotPath(svg, (t) => [t, production(1 - t, p) - p.g], scale, `ge-curve ge-frontier${suffix}`, 240);
     const changed = JSON.stringify(current) !== JSON.stringify(old);
     if (changed) frontier(old, " ge-curve-old");
     frontier(current, "");
     plotPath(svg, (t) => [t, currentEq.w * (1 - t) + currentEq.profit - current.g], scale, "ge-curve ge-budget-line");
-    const uStar = utility(currentEq.c, currentEq.leisure, current);
     plotPath(
       svg,
       (t) => {
-        const leisure = Math.max(t, 1e-5);
-        return [t, inverseConsumptionUtility(uStar - current.psi * crraUtility(leisure, effectiveEta(current)), current)];
+        const leisure = indifferenceStart + t * (1 - indifferenceStart);
+        return [leisure, indifferenceConsumption(Math.max(leisure, 1e-5), uStar, current)];
       },
       scale,
       "ge-curve ge-indifference-line",
@@ -306,74 +368,179 @@
     });
   }
 
-  function renderEquations(p) {
-    const squareRoot = p.technology === "sqrt" || Math.abs(p.alpha - 0.5) < 1e-10;
-    const bothLogs = effectiveSigma(p) === 1 && effectiveEta(p) === 1;
-    const key = `${p.preferences}-${p.technology}-${bothLogs}-${effectiveSigma(p) === 1}-${effectiveEta(p) === 1}-${squareRoot}`;
+  function householdUtilityTex(p) {
+    if (p.preferences === "crra") {
+      const consumption =
+        Math.abs(p.sigma - 1) < 1e-10 ? String.raw`\log C` : String.raw`\frac{C^{1-\sigma}}{1-\sigma}`;
+      return String.raw`U(C,N^s)=${consumption}-\frac{(N^s)^{1+\varphi}}{1+\varphi}`;
+    }
+    if (p.preferences === "ghh") {
+      return Math.abs(p.sigma - 1) < 1e-10
+        ? String.raw`U(C,N^s)=\log\left[C-\frac{\psi}{1+\varphi}(N^s)^{1+\varphi}\right]`
+        : String.raw`U(C,N^s)=\frac{\left[C-\frac{\psi}{1+\varphi}(N^s)^{1+\varphi}\right]^{1-\sigma}-1}{1-\sigma}`;
+    }
+    return utilityTex(p);
+  }
+
+  function optimizationSetupHtml(p) {
+    const householdChoice = p.preferences === "kpr" ? String.raw`\max_{C,\ell}` : String.raw`\max_{C,N^s}`;
+    let householdCondition;
+    let householdNote;
+    if (p.preferences === "ghh") {
+      householdCondition = String.raw`\(w=\psi(N^s)^\varphi\)`;
+      householdNote = `Labor supply is independent of consumption, profits, and lump-sum taxes: GHH preferences eliminate the wealth effect on labor supply. Its wage elasticity is ${String.raw`\(1/\varphi\)`}, while ${String.raw`\(\sigma\)`} does not affect the static labor choice.`;
+    } else if (p.preferences === "crra") {
+      householdCondition = String.raw`\(wC^{-\sigma}=(N^s)^\varphi\)`;
+      householdNote = `Consumption enters the condition through its marginal utility. Changes in profits or lump-sum taxes therefore affect labor supply through a wealth effect. Holding marginal utility of wealth constant, the Frisch elasticity is ${String.raw`\(1/\varphi\)`}.`;
+    } else {
+      householdCondition = String.raw`\(w\ell=\psi C\)`;
+      householdNote = `Consumption enters the condition, so profits and lump-sum taxes generate wealth effects on labor supply. The curvature parameter ${String.raw`\(\sigma\)`} changes only the cardinal representation: it does not affect the preference ranking or the household's static choices.`;
+    }
+    return `
+      <p><em>Household:</em></p>
+      <p>${String.raw`\(${householdChoice}\;${householdUtilityTex(p)}\)`}</p>
+      <p><em>subject to</em></p>
+      <p>${String.raw`\(C=wN^s+\pi-T\)`}</p>
+      <p>${String.raw`\(N^s+\ell=1\)`}</p>
+      <p><strong>Intratemporal condition:</strong></p>
+      <p>${householdCondition}</p>
+      <p>${householdNote}</p>
+
+      <p><em>Firm:</em></p>
+      <p>${String.raw`\(\max_{N^d}\;\pi=Y-wN^d\)`}</p>
+      <p><em>subject to</em></p>
+      <p>${String.raw`\(Y=zf(N^d)=z(N^d)^\alpha\)`}</p>
+      <p><strong>Intratemporal condition:</strong></p>
+      <p>${String.raw`\(w=zf_N(N^d)=\alpha z(N^d)^{\alpha-1}\)`}</p>
+      <p>Because ${String.raw`\(0<\alpha<1\)`}, diminishing marginal productivity makes labor demand downward sloping in the real wage. Higher productivity ${String.raw`\(z\)`} shifts labor demand outward.</p>
+
+      <p><em>Government:</em></p>
+      <p>${String.raw`\(G=T\)`}</p>
+
+      <p><strong>Market clearing:</strong></p>
+      <p>${String.raw`\(N^s=N^d=N^*\)`}</p>
+      <p>${String.raw`\(Y^*=C^*+G\)`}</p>
+    `;
+  }
+
+  function renderKprEquations(p) {
+    const target = $("ge-equations");
+    const key = `${p.preferences}-${Math.abs(p.sigma - 1) < 1e-10}`;
     if (equationKey === key) return;
     equationKey = key;
-    const target = $("ge-equations");
-    const utilityEquation = String.raw`\(${utilityTex(p)}\)`;
-    const technologyEquation = squareRoot
-      ? String.raw`\(F(N)=z\sqrt N,\quad F_N(N)=\frac{z}{2\sqrt N}\)`
-      : String.raw`\(F(N)=zN^\alpha,\quad F_N(N)=\alpha zN^{\alpha-1}\)`;
-    const firmSchedules = squareRoot
-      ? String.raw`\(N^d(w)=\frac{z^2}{4w^2},\quad Y^s(w)=\frac{z^2}{2w},\quad \pi(w)=\frac{z^2}{4w}\)`
-      : String.raw`\(N^d(w)=\left(\frac{\alpha z}{w}\right)^{\frac{1}{1-\alpha}},\quad Y^s(w)=z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}},\quad \pi(w)=(1-\alpha)Y^s(w)\)`;
-    const fullIncome = squareRoot
-      ? String.raw`\(I(w)=w+\frac{z^2}{4w}-G\)`
-      : String.raw`\(I(w)=w+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}-G\)`;
-    const householdSchedules = bothLogs
-      ? `<p>${String.raw`\(\ell^d(w)=\min\left\{1,\frac{\psi I(w)}{(1+\psi)w}\right\},\quad N^s(w)=1-\ell^d(w),\quad C^d(w)=I(w)-w\ell^d(w)\)`}</p>
-         <p>${squareRoot ? String.raw`\(Y^d(w)=\frac{w+z^2/(4w)+\psi G}{1+\psi}\quad\text{when }0&lt;N^s(w)&lt;1\)` : String.raw`\(Y^d(w)=C^d(w)+G=wN^s(w)+\pi(w)\)`}</p>`
-      : `<p>${String.raw`\(\Phi_w(\ell)=w\ell+\left(\frac{w}{\psi}\right)^{1/\sigma}\ell^{\eta/\sigma},\quad \ell^d(w)=\min\{1,\Phi_w^{-1}(I(w))\}\)`}</p>
-         <p>${String.raw`\(N^s(w)=1-\ell^d(w),\quad C^d(w)=I(w)-w\ell^d(w),\quad Y^d(w)=wN^s(w)+\pi(w)\)`}</p>
-         <p>The inverse is the unique root of ${String.raw`\(w\ell+\left(w/\psi\right)^{1/\sigma}\ell^{\eta/\sigma}=I(w)\)`} on the interior. It also applies when either curvature equals ${String.raw`\(1\)`}.</p>`;
-    const equilibriumCondition = squareRoot
-      ? String.raw`\(\frac{z}{2\sqrt{N^*}}(z\sqrt{N^*}-G)^{-\sigma}=\psi(1-N^*)^{-\eta}\)`
-      : String.raw`\(\alpha z(N^*)^{\alpha-1}\left[z(N^*)^\alpha-G\right]^{-\sigma}=\psi(1-N^*)^{-\eta}\)`;
-    const equilibriumSolution = bothLogs && squareRoot
-      ? `<strong>Closed-form competitive equilibrium</strong>
-         <p>${String.raw`\(D=\sqrt{\psi^2G^2+(1+2\psi)z^2},\qquad w^*=\frac{-\psi G+D}{2},\qquad Y^*=\frac{\psi G+D}{1+2\psi}\)`}</p>
-         <p>${String.raw`\(N^*=\left[\frac{\psi G+D}{(1+2\psi)z}\right]^2,\qquad \ell^*=1-N^*\)`}</p>
-         <p>${String.raw`\(C^*=\frac{D-(1+\psi)G}{1+2\psi},\qquad \pi^*=\frac{\psi G+D}{2(1+2\psi)},\qquad T^*=G\)`}</p>`
-      : squareRoot
-        ? `<strong>Fully specified equilibrium for the square-root model</strong>
-           <p>Let ${String.raw`\(Y^*\)`} be the unique solution of ${String.raw`\(\frac{z^2}{2Y^*}(Y^*-G)^{-\sigma}=\psi\left[1-\left(\frac{Y^*}{z}\right)^2\right]^{-\eta},\quad G&lt;Y^*&lt;z\)`}.</p>
-           <p>${String.raw`\(N^*=\left(\frac{Y^*}{z}\right)^2,\quad w^*=\frac{z^2}{2Y^*},\quad C^*=Y^*-G,\quad \ell^*=1-\left(\frac{Y^*}{z}\right)^2,\quad \pi^*=\frac{Y^*}{2},\quad T^*=G\)`}</p>
-           <p>For arbitrary ${String.raw`\(\sigma\)`} and ${String.raw`\(\eta\)`}, the scalar root is computed numerically; no general elementary closed form is claimed.</p>`
-        : `<strong>Fully specified equilibrium for power production</strong>
-           <p>Let ${String.raw`\(N^*\)`} be the unique solution of the equilibrium condition above with ${String.raw`\(0&lt;N^*&lt;1\)`} and ${String.raw`\(z(N^*)^\alpha&gt;G\)`}.</p>
-           <p>${String.raw`\(w^*=\alpha z(N^*)^{\alpha-1},\quad Y^*=z(N^*)^\alpha,\quad C^*=z(N^*)^\alpha-G,\quad \ell^*=1-N^*,\quad \pi^*=(1-\alpha)z(N^*)^\alpha,\quad T^*=G\)`}</p>
-           <p>The scalar root is computed numerically for general ${String.raw`\(\alpha\)`} and curvatures.</p>`;
+    const schedules = `
+      <p>${String.raw`\(N^d(w)=\left(\frac{\alpha z}{w}\right)^{\frac{1}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(Y^s(w)=z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(\pi(w)=(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(\ell^d(w)=\frac{\psi}{(1+\psi)w}\left[w+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}-G\right]\)`}</p>
+      <p>${String.raw`\(N^s(w)=\frac{1}{1+\psi}+\frac{\psi G}{(1+\psi)w}-\frac{\psi(1-\alpha)z}{(1+\psi)w}\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(C^d(w)=\frac{1}{1+\psi}\left[w+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}-G\right]\)`}</p>
+      <p>${String.raw`\(Y^d(w)=\frac{1}{1+\psi}\left[w+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}+\psi G\right]\)`}</p>
+    `;
+    const equilibriumSolution = `
+      <p>${String.raw`\((w^*)^{\frac{1}{1-\alpha}}+\psi G(w^*)^{\frac{\alpha}{1-\alpha}}-(\alpha+\psi)z(\alpha z)^{\frac{\alpha}{1-\alpha}}=0\)`}</p>
+      <p>${String.raw`\(N^*=\left(\frac{\alpha z}{w^*}\right)^{\frac{1}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(\ell^*=1-\left(\frac{\alpha z}{w^*}\right)^{\frac{1}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(Y^*=z\left(\frac{\alpha z}{w^*}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(C^*=\frac{1}{1+\psi}\left[w^*+(1-\alpha)z\left(\frac{\alpha z}{w^*}\right)^{\frac{\alpha}{1-\alpha}}-G\right]\)`}</p>
+      <p>${String.raw`\(\pi^*=(1-\alpha)z\left(\frac{\alpha z}{w^*}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+      <p>${String.raw`\(T^*=G\)`}</p>
+    `;
     const html = `
-      <p><strong>Preferences:</strong> ${utilityEquation}</p>
-      <p><strong>Production:</strong> ${technologyEquation}</p>
-      <p><strong>Household budget:</strong> ${String.raw`\(C=wN+\pi-G,\quad \ell=1-N\)`}. <strong>Firm:</strong> ${String.raw`\(w=F_N(N^d),\quad \pi=F(N^d)-wN^d\)`}.</p>
-      <p><strong>Market clearing:</strong> ${String.raw`\(N^s=N^d=N^*,\quad Y^*=C^*+G,\quad T=G\)`}.</p>
-      <p><strong>Equilibrium condition:</strong> ${equilibriumCondition}. ${bothLogs ? String.raw`\(\sigma=\eta=1\)` : "The two CRRA curvatures enter separately."}</p>
-      <div class="ge-solution-box"><strong>Functions at a given real wage</strong>
-        <p>${firmSchedules}</p><p>${fullIncome}</p>${householdSchedules}
-        <p>These are notional schedules at each wage. If the household chooses the leisure corner ${String.raw`\(\ell^d(w)=1\)`}, then ${String.raw`\(N^s(w)=0,\ C^d(w)=\pi(w)-G,\ Y^d(w)=\pi(w)\)`}.</p>
-      </div>
-      <div class="ge-solution-box">${equilibriumSolution}</div>
+      ${optimizationSetupHtml(p)}
+      <div class="ge-solution-box"><strong>Functions at a given real wage</strong>${schedules}</div>
+      <div class="ge-solution-box"><strong>Competitive equilibrium</strong>${equilibriumSolution}</div>
     `;
     replaceMath(target, html);
+  }
+
+  function renderSeparableCrraEquations(p) {
+    const target = $("ge-equations");
+    const key = `crra-${Math.abs(p.sigma - 1) < 1e-10}`;
+    if (equationKey === key) return;
+    equationKey = key;
+    const html = `
+      ${optimizationSetupHtml(p)}
+      <div class="ge-solution-box"><strong>Functions at a given real wage</strong>
+        <p>${String.raw`\(N^d(w)=\left(\frac{\alpha z}{w}\right)^{\frac{1}{1-\alpha}}\)`}</p>
+        <p>${String.raw`\(Y^s(w)=z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+        <p>${String.raw`\(\pi(w)=(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+        <p>${String.raw`\(N^s(w)\in(0,1)\)`} is the interior solution of</p>
+        <p>${String.raw`\(wN^s(w)+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}-G=w^{\frac{1}{\sigma}}\left[N^s(w)\right]^{-\frac{\varphi}{\sigma}}\)`}</p>
+        <p>${String.raw`\(\ell^d(w)=1-N^s(w)\)`}</p>
+        <p>${String.raw`\(C^d(w)=w^{\frac{1}{\sigma}}\left[N^s(w)\right]^{-\frac{\varphi}{\sigma}}\)`}</p>
+        <p>${String.raw`\(Y^d(w)=w^{\frac{1}{\sigma}}\left[N^s(w)\right]^{-\frac{\varphi}{\sigma}}+G\)`}</p>
+      </div>
+      <div class="ge-solution-box"><strong>Competitive equilibrium</strong>
+        <p>${String.raw`\(N^*\)`} is the feasible interior solution of</p>
+        <p>${String.raw`\(\alpha z(N^*)^{\alpha-1}\left[z(N^*)^\alpha-G\right]^{-\sigma}=(N^*)^\varphi\)`}</p>
+        <p>${String.raw`\(N^*\in(0,1)\)`}</p>
+        <p>${String.raw`\(w^*=\alpha z(N^*)^{\alpha-1}\)`}</p>
+        <p>${String.raw`\(\ell^*=1-N^*\)`}</p>
+        <p>${String.raw`\(Y^*=z(N^*)^\alpha\)`}</p>
+        <p>${String.raw`\(C^*=z(N^*)^\alpha-G\)`}</p>
+        <p>${String.raw`\(\pi^*=(1-\alpha)z(N^*)^\alpha\)`}</p>
+        <p>${String.raw`\(T^*=G\)`}</p>
+      </div>
+      <p><em>Logarithmic case:</em> when ${String.raw`\(\sigma=1\)`}, the consumption term is ${String.raw`\(\log C\)`}. For ${String.raw`\(\sigma\neq1\)`}, the omitted CRRA normalization constant has no effect on choices. The labor-disutility term remains isoelastic with curvature ${String.raw`\(\varphi\)`}.</p>
+    `;
+    replaceMath(target, html);
+  }
+
+  function renderEquations(p) {
+    if (p.preferences === "ghh") {
+      const key = `ghh-${Math.abs(p.sigma - 1) < 1e-10}`;
+      if (equationKey === key) return;
+      equationKey = key;
+      const target = $("ge-equations");
+      const html = `
+        ${optimizationSetupHtml(p)}
+        <div class="ge-solution-box"><strong>Functions at a given real wage</strong>
+          <p>${String.raw`\(N^d(w)=\left(\frac{\alpha z}{w}\right)^{\frac{1}{1-\alpha}}\)`}</p>
+          <p>${String.raw`\(Y^s(w)=z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+          <p>${String.raw`\(\pi(w)=(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+          <p>${String.raw`\(N^s(w)=\left(\frac{w}{\psi}\right)^{\frac{1}{\varphi}}\)`}</p>
+          <p>${String.raw`\(\ell^d(w)=1-\left(\frac{w}{\psi}\right)^{\frac{1}{\varphi}}\)`}</p>
+          <p>${String.raw`\(C^d(w)=w\left(\frac{w}{\psi}\right)^{\frac{1}{\varphi}}+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}-G\)`}</p>
+          <p>${String.raw`\(Y^d(w)=w\left(\frac{w}{\psi}\right)^{\frac{1}{\varphi}}+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}\)`}</p>
+        </div>
+        <div class="ge-solution-box"><strong>Competitive equilibrium</strong>
+          <p>${String.raw`\(w^*=\psi^{\frac{1-\alpha}{1+\varphi-\alpha}}(\alpha z)^{\frac{\varphi}{1+\varphi-\alpha}}\)`}</p>
+          <p>${String.raw`\(N^*=\left(\frac{\alpha z}{\psi}\right)^{\frac{1}{1+\varphi-\alpha}}\)`}</p>
+          <p>${String.raw`\(\ell^*=1-\left(\frac{\alpha z}{\psi}\right)^{\frac{1}{1+\varphi-\alpha}}\)`}</p>
+          <p>${String.raw`\(Y^*=z\left(\frac{\alpha z}{\psi}\right)^{\frac{\alpha}{1+\varphi-\alpha}}\)`}</p>
+          <p>${String.raw`\(C^*=z\left(\frac{\alpha z}{\psi}\right)^{\frac{\alpha}{1+\varphi-\alpha}}-G\)`}</p>
+          <p>${String.raw`\(\pi^*=(1-\alpha)z\left(\frac{\alpha z}{\psi}\right)^{\frac{\alpha}{1+\varphi-\alpha}}\)`}</p>
+          <p>${String.raw`\(T^*=G\)`}</p>
+        </div>
+      `;
+      replaceMath(target, html);
+      return;
+    }
+
+    if (p.preferences === "crra") {
+      renderSeparableCrraEquations(p);
+      return;
+    }
+
+    renderKprEquations(p);
   }
 
   function refreshControlLabels(p) {
     fields.forEach((name) => {
       $("ge-" + name + "-value").textContent = number(p[name], name === "g" || name === "alpha" ? 2 : 1);
     });
-    $("ge-sigma-field").hidden = p.preferences !== "crra";
-    $("ge-eta-field").hidden = p.preferences !== "crra";
-    $("ge-alpha-field").hidden = p.technology !== "power";
+    $("ge-psi-field").hidden = p.preferences === "crra";
+    $("ge-sigma-field").hidden = false;
+    $("ge-phi-field").hidden = p.preferences !== "ghh" && p.preferences !== "crra";
+    $("ge-alpha-field").hidden = false;
   }
 
   function render() {
     const p = configuration();
     refreshControlLabels(p);
     renderSelectionFormulas(p);
+    renderEquations(p);
     const currentEq = equilibrium(p);
     const oldEq = equilibrium(baseline);
     if (!currentEq || !oldEq) {
@@ -385,7 +552,6 @@
     marketPlot("ge-labor-plot", "labor", p, currentEq, baseline, oldEq);
     marketPlot("ge-goods-plot", "goods", p, currentEq, baseline, oldEq);
     allocationPlot(p, currentEq, baseline, oldEq);
-    renderEquations(p);
   }
 
   const predictionItems = [
@@ -495,7 +661,7 @@
     $("ge-check-exercise").disabled = true;
   }
 
-  ["ge-preferences", "ge-technology", ...fields.map((name) => "ge-" + name)].forEach((id) => {
+  ["ge-preferences", ...fields.map((name) => "ge-" + name)].forEach((id) => {
     $(id).addEventListener("input", () => {
       if (exercise) {
         exercise = null;

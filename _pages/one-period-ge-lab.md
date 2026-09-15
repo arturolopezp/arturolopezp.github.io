@@ -1,0 +1,180 @@
+---
+layout: page
+title: One-Period General Equilibrium Lab
+permalink: /tools/one-period-general-equilibrium/
+description: Explore shocks, market curves, equilibrium allocations, and the equations behind a one-period economy.
+nav: false
+---
+
+<link rel="stylesheet" href="{{ '/assets/css/ge-lab.css' | relative_url }}" />
+
+<div id="ge-lab">
+  <p class="ge-intro">
+    Explore the one-period closed-economy model from Macroeconomics II. Change preferences, technology, and government spending; compare equilibria; then test your predictions before revealing a shock.
+  </p>
+
+  <div class="ge-note" role="note">
+    <strong>Model setup:</strong> Household preferences over consumption &#92;(C&#92;) and leisure &#92;(\ell&#92;) are represented by the utility
+    function &#92;(U(C,\ell)&#92;). The household allocates its unit time endowment between labor &#92;(N&#92;) and leisure, so &#92;(N+\ell=1&#92;). A representative firm produces output according to &#92;(Y=z f(N)&#92;), where &#92;(z&#92;) denotes productivity. The government finances public spending through lump-sum taxes, &#92;(T=G&#92;). The consumption good is the numeraire.
+  </div>
+
+  <section class="ge-section" aria-labelledby="ge-controls-heading">
+    <div class="ge-section-heading">
+      <div>
+        <h2 id="ge-controls-heading">Model and calibration</h2>
+        <p>Move a control to see the new equilibrium. The dashed curves retain the comparison baseline.</p>
+      </div>
+      <button id="ge-set-baseline" class="ge-button ge-button-secondary" type="button">Set current as baseline</button>
+    </div>
+
+    <div class="ge-controls">
+      <div class="ge-field">
+        <label for="ge-preferences">Preferences</label>
+        <select id="ge-preferences">
+          <option value="crra">Separable CRRA consumption and labor</option>
+          <option value="kpr">King–Plosser–Rebelo (KPR)</option>
+          <option value="ghh">Greenwood–Hercowitz–Huffman (GHH)</option>
+        </select>
+        <p id="ge-preference-formula" class="ge-model-formula" aria-live="polite"></p>
+      </div>
+      <div class="ge-field">
+        <strong>Production</strong>
+        <p id="ge-production-formula" class="ge-model-formula" aria-live="polite"></p>
+      </div>
+
+      <div class="ge-field ge-range-field">
+        <label for="ge-z"><span class="ge-parameter-name">Productivity &#92;(z&#92;)</span><span class="ge-parameter-value" id="ge-z-value"></span></label>
+        <input id="ge-z" type="range" min="1" max="4" step="0.05" value="2" />
+      </div>
+      <div class="ge-field ge-range-field">
+        <label for="ge-g"><span class="ge-parameter-name">Government spending &#92;(G&#92;)</span><span class="ge-parameter-value" id="ge-g-value"></span></label>
+        <input id="ge-g" type="range" min="0" max="0.8" step="0.01" value="0.3" />
+        <small>&#92;(G=T&#92;)</small>
+      </div>
+      <div id="ge-psi-field" class="ge-field ge-range-field">
+        <label for="ge-psi"><span class="ge-parameter-name">Preference weight &#92;(\psi&#92;)</span><span class="ge-parameter-value" id="ge-psi-value"></span></label>
+        <input id="ge-psi" type="range" min="0.3" max="3" step="0.05" value="1.5" />
+      </div>
+      <div id="ge-sigma-field" class="ge-field ge-range-field">
+        <label for="ge-sigma"><span class="ge-parameter-name">Utility curvature &#92;(\sigma&#92;)</span><span class="ge-parameter-value" id="ge-sigma-value"></span></label>
+        <input id="ge-sigma" type="range" min="0.5" max="2.5" step="0.1" value="1" />
+        <small>The logarithmic limit is &#92;(\sigma=1&#92;).</small>
+      </div>
+      <div id="ge-phi-field" class="ge-field ge-range-field" hidden>
+        <label for="ge-phi"><span class="ge-parameter-name">Labor curvature &#92;(\varphi&#92;)</span><span class="ge-parameter-value" id="ge-phi-value"></span></label>
+        <input id="ge-phi" type="range" min="0.2" max="3" step="0.05" value="1" />
+        <small>&#92;(\varphi&#92;) controls the curvature of labor disutility and the Frisch elasticity.</small>
+      </div>
+      <div id="ge-alpha-field" class="ge-field ge-range-field">
+        <label for="ge-alpha"><span class="ge-parameter-name">Labor exponent &#92;(\alpha&#92;)</span><span class="ge-parameter-value" id="ge-alpha-value"></span></label>
+        <input id="ge-alpha" type="range" min="0.3" max="0.8" step="0.01" value="0.5" />
+        <small>&#92;(\alpha=0.5&#92;) gives square-root production.</small>
+      </div>
+    </div>
+    <p class="ge-status">Government budget: &#92;(T=G&#92;). Goods market: &#92;(Y^*=C^*+G&#92;).</p>
+    <p id="ge-error" class="ge-status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="ge-section" aria-labelledby="ge-equilibrium-heading">
+    <div class="ge-section-heading">
+      <div>
+        <h2 id="ge-equilibrium-heading">Competitive equilibrium</h2>
+        <p>Current values and changes relative to the dashed comparison baseline.</p>
+      </div>
+    </div>
+    <div id="ge-results" class="ge-results" aria-live="polite">
+      <div class="ge-result" data-result="w">
+        <span class="ge-result-name">Real wage &#92;(w^*&#92;)</span><strong></strong><span class="ge-result-change"></span>
+      </div>
+      <div class="ge-result" data-result="n">
+        <span class="ge-result-name">Employment &#92;(N^*&#92;)</span><strong></strong><span class="ge-result-change"></span>
+      </div>
+      <div class="ge-result" data-result="y">
+        <span class="ge-result-name">Output &#92;(Y^*&#92;)</span><strong></strong><span class="ge-result-change"></span>
+      </div>
+      <div class="ge-result" data-result="c">
+        <span class="ge-result-name">Consumption &#92;(C^*&#92;)</span><strong></strong><span class="ge-result-change"></span>
+      </div>
+      <div class="ge-result" data-result="leisure">
+        <span class="ge-result-name">Leisure &#92;(\ell^*&#92;)</span><strong></strong><span class="ge-result-change"></span>
+      </div>
+      <div class="ge-result" data-result="profit">
+        <span class="ge-result-name">Firm profits &#92;(\pi^*&#92;)</span><strong></strong><span class="ge-result-change"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="ge-section" aria-labelledby="ge-graphs-heading">
+    <div class="ge-section-heading">
+      <div>
+        <h2 id="ge-graphs-heading">Three views of the same equilibrium</h2>
+        <p>Solid lines show the current model; dashed lines show the comparison baseline. Market curves are traced as the real wage changes.</p>
+      </div>
+    </div>
+    <div class="ge-plots">
+      <figure class="ge-plot-card">
+        <figcaption>Labor market <span>Labor &#92;(N&#92;) on the horizontal axis; real wage &#92;(w&#92;) on the vertical axis</span></figcaption>
+        <svg id="ge-labor-plot" viewBox="0 0 600 350" role="img" aria-label="Labor supply and demand curves"></svg>
+        <div class="ge-legend">
+          <span class="ge-demand">Demand</span><span class="ge-supply">Supply</span><span class="ge-baseline">Baseline</span>
+        </div>
+      </figure>
+      <figure class="ge-plot-card">
+        <figcaption>Goods market <span>Output &#92;(Y&#92;) on the horizontal axis; real wage &#92;(w&#92;) on the vertical axis</span></figcaption>
+        <svg id="ge-goods-plot" viewBox="0 0 600 350" role="img" aria-label="Goods supply and demand curves"></svg>
+        <div class="ge-legend">
+          <span class="ge-demand">Demand</span><span class="ge-supply">Supply</span><span class="ge-baseline">Baseline</span>
+        </div>
+      </figure>
+      <figure class="ge-plot-card ge-plot-wide">
+        <figcaption>
+          Allocation <span>Leisure &#92;(\ell&#92;) on the horizontal axis; consumption &#92;(C&#92;) on the vertical axis</span>
+        </figcaption>
+        <svg
+          id="ge-allocation-plot"
+          viewBox="0 0 600 350"
+          role="img"
+          aria-label="Production possibilities, budget line, and indifference curve"
+        ></svg>
+        <div class="ge-legend">
+          <span class="ge-supply">Feasible frontier</span><span class="ge-budget">Budget</span><span class="ge-indifference">Indifference curve</span
+          ><span class="ge-baseline">Baseline frontier</span>
+        </div>
+      </figure>
+    </div>
+    <p class="ge-caption">
+      All curves use the firm's wage-dependent profits and the household's optimal labor choice. A dotted baseline is omitted when it exactly overlaps
+      the current curve.
+    </p>
+  </section>
+
+  <section class="ge-section" aria-labelledby="ge-equations-heading">
+    <h2 id="ge-equations-heading">Equations and solution</h2>
+    <div id="ge-equations" class="ge-equations"></div>
+  </section>
+
+  <section class="ge-section ge-practice" aria-labelledby="ge-practice-heading">
+    <div class="ge-section-heading">
+      <div>
+        <h2 id="ge-practice-heading">Practice: predict a shock</h2>
+        <p>
+          Generate a productivity or government-spending shock. Predict which curves move and how the equilibrium changes before revealing the answer.
+        </p>
+      </div>
+      <button id="ge-new-exercise" class="ge-button" type="button">New exercise</button>
+    </div>
+    <div id="ge-exercise" hidden>
+      <p id="ge-exercise-prompt" class="ge-exercise-prompt"></p>
+      <div id="ge-predictions" class="ge-predictions"></div>
+      <button id="ge-check-exercise" class="ge-button" type="button">Check predictions</button>
+      <div id="ge-feedback" class="ge-feedback" role="status" aria-live="polite"></div>
+    </div>
+    <p class="ge-caption">
+      Curve shifts mean a change in quantity at the original real wage; equilibrium changes compare the old and new market-clearing allocations.
+    </p>
+  </section>
+
+  <p class="ge-back"><a href="{{ '/teachings/macroeconomics-ii/' | relative_url }}">← Back to Macroeconomics II</a></p>
+</div>
+
+<script defer src="{{ '/assets/js/ge-lab.js' | relative_url }}"></script>
