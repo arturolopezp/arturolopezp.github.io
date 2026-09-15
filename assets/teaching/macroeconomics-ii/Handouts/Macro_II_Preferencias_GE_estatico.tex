@@ -1,0 +1,2180 @@
+\documentclass[11pt]{article}
+
+% ------------------------------------------------------------------------------
+% Packages
+% ------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{geometry}
+\usepackage{enumitem}
+% \usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\geometry{
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.7cm,
+    right=2.7cm
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7em}
+
+% ------------------------------------------------------------------------------
+% Commands
+% ------------------------------------------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+
+% ------------------------------------------------------------------------------
+% Document
+% ------------------------------------------------------------------------------
+\begin{document}
+
+\begin{center}
+    {\Large Centro de Investigación y Docencia Económicas \\[0.3em] \large Macroeconomía II - Otoño 2026 \\[0.3em]
+    Prof. Arturo López}\\[0.3em]
+    {\large Equilibrio General Estático: Ejemplos de Parametrización}
+\end{center}
+
+\vspace{1em}
+
+\tableofcontents
+
+\newpage
+
+% ==============================================================================
+\section{Preferencias Greenwood--Hercowitz--Huffman (GHH)}
+% ==============================================================================
+
+Suponga que las preferencias del hogar están representadas por la siguiente función de utilidad:\footnote{Estas preferencias fueron propuestas por \href{https://www.jstor.org/stable/1809141}{Greenwood et al. (1988)}. Una de sus principales propiedades es que eliminan el efecto riqueza sobre la oferta laboral de los hogares, además de resolver otros problemas presentes en especificaciones de preferencias más tradicionales. Por estas razones, las preferencias GHH son ampliamente utilizadas en la literatura macroeconómica. Para una discusión más detallada, véase \href{https://www.sciencedirect.com/science/article/abs/pii/S0165188913001991}{Dey (2014)} y \href{https://www.nber.org/system/files/working_papers/w22215/w22215.pdf}{Boppart y Krusell (2016)}.}
+\[
+U(C,N)
+=
+\frac{
+\left[
+C-\frac{\psi}{1+\varphi}N^{1+\varphi}
+\right]^{1-\sigma}-1
+}{
+1-\sigma
+},
+\qquad
+\psi>0,\quad \varphi>0,\quad \sigma>0.
+\]
+El hogar está sujeto a su restricción presupuestaria:
+\[
+C=wN+\pi-T.
+\]
+El Lagrangiano es
+\[
+\mathcal{L}(C,N, \lambda)
+=
+\frac{
+\left[
+C-\frac{\psi}{1+\varphi}N^{1+\varphi}
+\right]^{1-\sigma}-1
+}{
+1-\sigma
+}
++
+\lambda
+\left(
+wN+\pi-T - C
+\right).
+\]
+Resolviendo las condiciones de primer orden para una solución interior se tiene que:
+\[
+w-\psi N^\varphi=0,
+\]
+Despejando $N$, obtenemos la \textbf{oferta laboral}:
+\[
+\boxed{
+N^s(w)
+=
+\left(\frac{w}{\psi}\right)^{1/\varphi}
+}.
+\]
+Como $\ell=1-N$, entonces la \textbf{demanda de ocio} es:
+\[
+\boxed{
+\ell(w)
+=
+1-\left(\frac{w}{\psi}\right)^{1/\varphi}
+}.
+\]
+
+Nótese que el ingreso no laboral $\pi-T$ no aparece en la oferta de trabajo. Esta es una propiedad fundamental de las preferencias GHH: no existe efecto riqueza sobre la oferta laboral.
+
+% ==============================================================================
+\subsection{GHH con tecnología $Y=zN^\alpha$}
+% ==============================================================================
+
+Suponga ahora que la empresa produce de acuerdo con
+\[
+Y=zN^\alpha,
+\qquad
+z>0,
+\qquad
+0<\alpha<1.
+\]
+\subsubsection*{Problema de la empresa}
+La empresa representativa toma el salario real como dado y resuelve
+\[
+\max_N
+\quad
+zN^\alpha-wN.
+\]
+A partir de la condición de primer orden, se obtiene que en el óptimo se cumple que:
+\[
+w=\alpha zN^{\alpha-1}.
+\]
+Despejando $N$ obtenemos la \textbf{demanda laboral}:
+\[
+\boxed{
+N^d(w)
+=
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{1}{1-\alpha}}
+}.
+\]
+La \textbf{oferta agregada de bienes} es entonces:
+\[
+\boxed{
+Y^s(w)
+=
+z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+Los beneficios de la empresa son
+\[
+\pi(w)
+=
+z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+-
+w
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{1}{1-\alpha}}.
+\]
+De la condición de primer orden de la empresa,
+\[
+wN=\alpha zN^\alpha.
+\]
+Por lo tanto,
+\[
+\pi
+=
+zN^\alpha-\alpha zN^\alpha
+=
+(1-\alpha)zN^\alpha.
+\]
+De modo que la \textbf{función de beneficios} es:
+\[
+\boxed{
+\pi(w)
+=
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+
+\subsubsection*{Problema del hogar}
+
+Sustituyendo la oferta laboral bajo preferencias GHH y los beneficios en la restricción presupuestaria del hogar, obtenemos la \textbf{demanda de consumo}:
+\[
+\boxed{
+C^d(w)
+=
+w
+\left(\frac{w}{\psi}\right)^{1/\varphi}
++
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+-G
+}.
+\]
+A partir del equilibrio en el mercado de bienes,
+\[
+Y^d=C^d+G.
+\]
+obtenemos la \textbf{demanda agregada de bienes}:
+\[
+\boxed{
+Y^d(w)
+=
+w
+\left(\frac{w}{\psi}\right)^{1/\varphi}
++
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+
+\subsubsection*{Equilibrio competitivo}
+
+El mercado de trabajo se vacía cuando la oferta y la demanda de trabajo son iguales:
+\[
+N^s(w)=N^d(w).
+\]
+Es decir,
+\[
+\left(\frac{w}{\psi}\right)^{1/\varphi}
+=
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{1}{1-\alpha}}.
+\]
+Despejando $w$,
+\[
+w^{1+\varphi-\alpha}
+=
+\psi^{1-\alpha}(\alpha z)^\varphi.
+\]
+Elevando ambos lados a la potencia $\frac{1}{1+\varphi-\alpha}$, obtenemos el \textbf{salario real de equilibrio}:
+\[
+\boxed{
+w^*
+=
+\left[
+\psi^{1-\alpha}(\alpha z)^\varphi
+\right]^{\frac{1}{1+\varphi-\alpha}}
+}.
+\]
+Una vez determinado el salario real de equilibrio, las asignaciones de equilibrio competitivo se obtienen evaluando las funciones de oferta y demanda en $w^*$.
+
+El empleo de equilibrio puede obtenerse a partir de la oferta laboral:
+\[
+N^*
+=
+N^s(w^*)
+=
+\left(
+\frac{w^*}{\psi}
+\right)^{1/\varphi}.
+\]
+Sustituyendo $w^*$,
+\[
+N^*
+=
+\left[
+\frac{
+\psi^{\frac{1-\alpha}{1+\varphi-\alpha}}
+(\alpha z)^{\frac{\varphi}{1+\varphi-\alpha}}
+}{
+\psi
+}
+\right]^{1/\varphi}.
+\]
+Agrupando las potencias de $\psi$,
+\[
+N^*
+=
+\left[
+\psi^{
+\frac{1-\alpha}{1+\varphi-\alpha}-1
+}
+(\alpha z)^{
+\frac{\varphi}{1+\varphi-\alpha}
+}
+\right]^{1/\varphi}.
+\]
+Como
+\[
+\frac{1-\alpha}{1+\varphi-\alpha}-1
+=
+-\frac{\varphi}{1+\varphi-\alpha},
+\]
+se obtiene
+\[
+N^*
+=
+\left[
+\left(
+\frac{\alpha z}{\psi}
+\right)^{
+\frac{\varphi}{1+\varphi-\alpha}
+}
+\right]^{1/\varphi}.
+\]
+Por lo tanto, el nivel de \textbf{empleo de equilibrio} es
+\[
+\boxed{
+N^*
+=
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{1}{1+\varphi-\alpha}}
+}.
+\]
+El \textbf{ocio de equilibrio} entonces es
+\[
+\boxed{
+\ell^*
+=
+1-
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{1}{1+\varphi-\alpha}}
+}.
+\]
+
+La \textbf{producción de equilibrio} se obtiene evaluando la función de producción en el nivel de empleo de equilibrio:
+\[
+\boxed{
+Y^*
+=
+z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+}.
+\]
+
+Los beneficios de equilibrio se obtienen evaluando la función de beneficios en $w^*$:
+\[
+\pi^*
+=
+(1-\alpha)z
+\left[
+\frac{
+\alpha z
+}{
+\psi^{\frac{1-\alpha}{1+\varphi-\alpha}}
+(\alpha z)^{\frac{\varphi}{1+\varphi-\alpha}}
+}
+\right]^{\frac{\alpha}{1-\alpha}}.
+\]
+Agrupando las potencias de $\alpha z$,
+\[
+\pi^*
+=
+(1-\alpha)z
+\left[
+\frac{
+(\alpha z)^{
+1-\frac{\varphi}{1+\varphi-\alpha}
+}
+}{
+\psi^{\frac{1-\alpha}{1+\varphi-\alpha}}
+}
+\right]^{\frac{\alpha}{1-\alpha}}.
+\]
+Como
+\[
+1-\frac{\varphi}{1+\varphi-\alpha}
+=
+\frac{1-\alpha}{1+\varphi-\alpha},
+\]
+tenemos que
+\[
+\pi^*
+=
+(1-\alpha)z
+\left[
+\left(
+\frac{\alpha z}{\psi}
+\right)^{
+\frac{1-\alpha}{1+\varphi-\alpha}
+}
+\right]^{\frac{\alpha}{1-\alpha}}.
+\]
+Por lo tanto, los \textbf{beneficios de equilibrio} son:
+\[
+\boxed{
+\pi^*
+=
+(1-\alpha)z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+}.
+\]
+
+El consumo de equilibrio puede obtenerse evaluando la demanda de consumo en el salario de equilibrio:
+\[
+C^*
+=
+C^d(w^*)
+=
+w^*
+\left(
+\frac{w^*}{\psi}
+\right)^{1/\varphi}
++
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+-G.
+\]
+Equivalentemente,
+\[
+C^*
+=
+w^*N^*
++
+(1-\alpha)z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+-G.
+\]
+El primer término es
+\[
+w^*N^*
+=
+\psi^{\frac{1-\alpha}{1+\varphi-\alpha}}
+(\alpha z)^{\frac{\varphi}{1+\varphi-\alpha}}
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{1}{1+\varphi-\alpha}}.
+\]
+Agrupando términos,
+\[
+w^*N^*
+=
+\psi^{
+\frac{1-\alpha}{1+\varphi-\alpha}
+-
+\frac{1}{1+\varphi-\alpha}
+}
+(\alpha z)^{
+\frac{\varphi+1}{1+\varphi-\alpha}
+}.
+\]
+
+Por lo tanto,
+\[
+w^*N^*
+=
+\psi^{-\frac{\alpha}{1+\varphi-\alpha}}
+(\alpha z)^{
+\frac{1+\varphi}{1+\varphi-\alpha}
+}.
+\]
+Separando una potencia de $\alpha z$,
+\[
+w^*N^*
+=
+\alpha z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}.
+\]
+Así, el consumo de equilibrio es
+\[
+C^*
+=
+\alpha z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
++
+(1-\alpha)z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+-G.
+\]
+Agrupando términos,
+\[
+C^*
+=
+[\alpha+(1-\alpha)]
+z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+-G.
+\]
+Por lo tanto, el \textbf{consumo de equilibrio} es
+\[
+\boxed{
+C^*
+=
+z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+-G
+}.
+\]
+
+Por último, en equilibrio el presupuesto del gobierno debe estar balanceado:
+\[
+\boxed{
+T^*=G
+}.
+\]
+
+Por lo tanto, el \textbf{equilibrio competitivo} de la economía está dado por
+
+$$
+\boxed{
+    \begin{aligned}
+w^*
+&=
+\psi^{\frac{1-\alpha}{1+\varphi-\alpha}}
+(\alpha z)^{\frac{\varphi}{1+\varphi-\alpha}}
+\\
+N^*
+&=
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{1}{1+\varphi-\alpha}}
+\\
+\ell^*
+&=
+1-
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{1}{1+\varphi-\alpha}}
+\\
+Y^*
+&=
+z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+\\
+C^*
+&=
+z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+-G
+\\
+\pi^*
+&=
+(1-\alpha)z
+\left(
+\frac{\alpha z}{\psi}
+\right)^{\frac{\alpha}{1+\varphi-\alpha}}
+\\
+T^*&=G
+    \end{aligned}
+}
+$$
+
+% ==============================================================================
+\subsection{GHH con tecnología $Y=z\sqrt{N}$}
+% ==============================================================================
+
+Considere ahora la tecnología
+
+La condición de primer orden de la empresa es
+\[
+\frac{z}{2\sqrt{N}}-w=0.
+\]
+
+Por lo tanto, la \textbf{demanda laboral} es
+\[
+\boxed{
+N^d(w)=\frac{z^2}{4w^2}
+}.
+\]
+
+La \textbf{oferta agregada de bienes} es
+\[
+\boxed{
+Y^s(w)=\frac{z^2}{2w}
+}.
+\]
+
+La \textbf{función de beneficios} es
+\[
+\pi(w)
+=
+z\sqrt{\frac{z^2}{4w^2}}
+-
+w\frac{z^2}{4w^2},
+\]
+de modo que
+\[
+\boxed{
+\pi(w)=\frac{z^2}{4w}
+}.
+\]
+
+La \textbf{oferta de trabajo} del hogar sigue siendo
+\[
+\boxed{
+N^s(w)
+=
+\left(\frac{w}{\psi}\right)^{1/\varphi}
+},
+\]
+mientras que su \textbf{demanda de ocio} es
+\[
+\boxed{
+\ell(w)
+=
+1-
+\left(\frac{w}{\psi}\right)^{1/\varphi}
+}.
+\]
+
+La \textbf{demanda de consumo} es
+\[
+\boxed{
+C^d(w)
+=
+w
+\left(\frac{w}{\psi}\right)^{1/\varphi}
++
+\frac{z^2}{4w}
+-G
+}.
+\]
+
+La \textbf{demanda agregada de bienes} es
+\[
+\boxed{
+Y^d(w)
+=
+w
+\left(\frac{w}{\psi}\right)^{1/\varphi}
++
+\frac{z^2}{4w}
+}.
+\]
+
+\subsubsection*{Equilibrio competitivo}
+
+El mercado de trabajo se vacía cuando la oferta y la demanda de trabajo son
+iguales:
+\[
+N^s(w)=N^d(w).
+\]
+Por lo tanto,
+\[
+\left(\frac{w}{\psi}\right)^{1/\varphi}
+=
+\frac{z^2}{4w^2}.
+\]
+Despejando $w$, obtenemos el \textbf{salario real de equilibrio}:
+\[
+\boxed{
+w^*
+=
+\left(
+\frac{\psi z^{2\varphi}}{4^\varphi}
+\right)^{\frac{1}{1+2\varphi}}
+}.
+\]
+Equivalentemente,
+\[
+\boxed{
+w^*
+=
+\psi^{\frac{1}{1+2\varphi}}
+\left(\frac{z}{2}\right)^{\frac{2\varphi}{1+2\varphi}}
+}.
+\]
+Una vez determinado el salario real de equilibrio, las asignaciones de equilibrio competitivo se obtienen evaluando las funciones de oferta y demanda en $w^*$.
+
+El empleo de equilibrio puede obtenerse a partir de la oferta de trabajo:
+\[
+N^*
+=
+N^s(w^*)
+=
+\left(
+\frac{w^*}{\psi}
+\right)^{1/\varphi}.
+\]
+Sustituyendo $w^*$,
+\[
+N^*
+=
+\left[
+\frac{
+\psi^{\frac{1}{1+2\varphi}}
+\left(\frac{z}{2}\right)^{\frac{2\varphi}{1+2\varphi}}
+}{
+\psi
+}
+\right]^{1/\varphi}.
+\]
+Agrupando las potencias de $\psi$,
+\[
+N^*
+=
+\left[
+\psi^{
+\frac{1}{1+2\varphi}-1
+}
+\left(\frac{z}{2}\right)^{\frac{2\varphi}{1+2\varphi}}
+\right]^{1/\varphi}.
+\]
+Como
+\[
+\frac{1}{1+2\varphi}-1
+=
+-\frac{2\varphi}{1+2\varphi},
+\]
+tenemos
+\[
+N^*
+=
+\left[
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{2\varphi}{1+2\varphi}}
+\right]^{1/\varphi}.
+\]
+Por lo tanto,
+\[
+\boxed{
+N^*
+=
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{2}{1+2\varphi}}
+}.
+\]
+El ocio de equilibrio es
+\[
+\boxed{
+\ell^*
+=
+1-
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{2}{1+2\varphi}}
+}.
+\]
+
+La producción de equilibrio se obtiene evaluando la oferta agregada de bienes en el salario de equilibrio:
+\[
+Y^*
+=
+Y^s(w^*)
+=
+\frac{z^2}{2w^*}.
+\]
+Sustituyendo $w^*$,
+\[
+Y^*
+=
+\frac{z^2}{
+2
+\psi^{\frac{1}{1+2\varphi}}
+\left(\frac{z}{2}\right)^{\frac{2\varphi}{1+2\varphi}}
+}.
+\]
+Simplificando,
+\[
+\boxed{
+Y^*
+=
+z
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
+}.
+\]
+Los beneficios de equilibrio se obtienen evaluando la función de beneficios en $w^*$:
+\[
+\pi^*
+=
+\pi(w^*)
+=
+\frac{z^2}{4w^*}.
+\]
+Sustituyendo el salario real de equilibrio,
+\[
+\pi^*
+=
+\frac{z^2}{
+4
+\psi^{\frac{1}{1+2\varphi}}
+\left(\frac{z}{2}\right)^{\frac{2\varphi}{1+2\varphi}}
+}.
+\]
+Simplificando,
+\[
+\boxed{
+\pi^*
+=
+\frac{z}{2}
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
+}.
+\]
+En equilibrio, el presupuesto del gobierno debe estar balanceado:
+\[
+\boxed{
+T^*=G
+}.
+\]
+
+Finalmente, el consumo de equilibrio se obtiene evaluando la demanda de consumo en el salario real de equilibrio:
+\[
+C^*
+=
+C^d(w^*)
+=
+w^*
+\left(
+\frac{w^*}{\psi}
+\right)^{1/\varphi}
++
+\frac{z^2}{4w^*}
+-G.
+\]
+Como
+\[
+\left(
+\frac{w^*}{\psi}
+\right)^{1/\varphi}
+=
+N^*
+=
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{2}{1+2\varphi}},
+\]
+el primer término es
+\[
+w^*N^*
+=
+\psi^{\frac{1}{1+2\varphi}}
+\left(\frac{z}{2}\right)^{\frac{2\varphi}{1+2\varphi}}
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{2}{1+2\varphi}}.
+\]
+Agrupando términos,
+\[
+w^*N^*
+=
+\frac{z}{2}
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}.
+\]
+Por otra parte,
+\[
+\frac{z^2}{4w^*}
+=
+\frac{z}{2}
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}.
+\]
+Por lo tanto,
+\[
+C^*
+=
+\frac{z}{2}
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
++
+\frac{z}{2}
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
+-G,
+\]
+y finalmente,
+\[
+\boxed{
+C^*
+=
+z
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
+-G
+}.
+\]
+Por lo tanto, el \textbf{equilibrio competitivo} de la economía está dado por
+
+\[
+\boxed{
+\begin{aligned}
+w^*
+&=
+\psi^{\frac{1}{1+2\varphi}}
+\left(\frac{z}{2}\right)^{\frac{2\varphi}{1+2\varphi}}
+\\[0.8em]
+N^*
+&=
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{2}{1+2\varphi}}
+\\[0.8em]
+\ell^*
+&=
+1-
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{2}{1+2\varphi}}
+\\[0.8em]
+Y^*
+&=
+z
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
+\\[0.8em]
+C^*
+&=
+z
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
+-G
+\\[0.8em]
+\pi^*
+&=
+\frac{z}{2}
+\left(
+\frac{z}{2\psi}
+\right)^{\frac{1}{1+2\varphi}}
+\\[0.8em]
+T^*
+&=G
+\end{aligned}
+}
+\]
+
+% ==============================================================================
+\section{Preferencias King--Plosser--Rebelo (KPR)}
+% ==============================================================================
+
+Suponga que las preferencias del hogar están representadas por la siguiente función de utilidad:
+\[
+U(C,\ell)
+=
+\frac{
+\left(C \ell^{\psi} \right)^{1-\sigma} - 1
+}{
+1-\sigma
+},
+\qquad
+\psi>0.
+\]
+
+Estas preferencias pertenecen a la clase propuesta por
+\href{https://www.sciencedirect.com/science/article/abs/pii/030439328890030X}
+{King, Plosser y Rebelo (1988, KPR)}. De forma general, KPR muestran que las
+preferencias compatibles con una senda de crecimiento balanceado pertenecen a
+la clase
+\[
+U(C,\ell)
+=
+\frac{1}{1-\sigma}C^{1-\sigma}v(\ell),
+\qquad
+0<\sigma<1
+\quad \text{o} \quad
+\sigma>1,
+\]
+donde $v(\ell)$ es una función del ocio que satisface las condiciones necesarias
+para garantizar preferencias bien comportadas. Para el caso límite
+$\sigma=1$, esta clase toma la forma
+\[
+U(C,\ell)
+=
+\log C+v(\ell).
+\]
+
+La principal motivación de esta clase de preferencias es su compatibilidad con una senda de crecimiento balanceado. En particular, la elasticidad intertemporal de sustitución en el consumo es constante e independiente del nivel de consumo. Además, los efectos ingreso y sustitución sobre la oferta laboral asociados al crecimiento sostenido de la productividad se compensan exactamente. Esto permite que, a lo largo de la senda de crecimiento balanceado, el consumo y la productividad crezcan mientras que las horas trabajadas permanezcan constantes.
+
+
+
+
+
+La especificación utilizada en este ejemplo constituye un caso particular de esta clase:
+\[
+U(C,\ell)
+=
+\frac{
+\left(C\ell^\psi\right)^{1-\sigma}-1
+}{
+1-\sigma
+}
+=
+\frac{
+C^{1-\sigma}\ell^{\psi(1-\sigma)}-1
+}{
+1-\sigma
+}.
+\]
+
+Además, en el límite cuando $\sigma\rightarrow1$, se obtiene
+\[
+U(C,\ell)
+=
+\log C+\psi\log\ell.
+\]
+
+El Lagrangiano es
+\[
+\mathcal{L}(C,\ell,\lambda)
+=
+\frac{
+\left(C\ell^\psi\right)^{1-\sigma}-1
+}{
+1-\sigma
+}
++
+\lambda
+\left(
+w+\pi-T-C-w\ell
+\right).
+\]
+
+La condición de primer orden respecto al consumo es
+\[
+\frac{\partial\mathcal{L}}{\partial C}
+=
+\left(C\ell^\psi\right)^{-\sigma}\ell^\psi
+-\lambda
+=
+0.
+\]
+Por lo tanto,
+\[
+\lambda
+=
+\left(C\ell^\psi\right)^{-\sigma}\ell^\psi.
+\]
+La condición de primer orden respecto al ocio es
+\[
+\frac{\partial\mathcal{L}}{\partial \ell}
+=
+\left(C\ell^\psi\right)^{-\sigma}
+\psi C\ell^{\psi-1}
+-\lambda w
+=
+0.
+\]
+Por lo tanto,
+\[
+\left(C\ell^\psi\right)^{-\sigma}
+\psi C\ell^{\psi-1}
+=
+\lambda w.
+\]
+
+Sustituyendo la expresión obtenida para $\lambda$,
+\[
+\left(C\ell^\psi\right)^{-\sigma}
+\psi C\ell^{\psi-1}
+=
+w
+\left(C\ell^\psi\right)^{-\sigma}
+\ell^\psi.
+\]
+Simplificando, se obtiene la condición de optimalidad del hogar:
+\[
+\boxed{
+w\ell=\psi C
+}.
+\]
+Nótese que el parámetro $\sigma$ no aparece en esta condición. En este problema (estático), $\sigma$ no afecta la elección \textit{intratemporal} entre consumo y ocio. Sin embargo, en problemas dinámicos, el parámetro $\sigma$ afectará la elección \textit{intertemporal} de consumo-ahorro. En particular, sera la elasticidad de sustitución de consumo entre distintos periodos.
+
+Sustituyendo $w\ell=\psi C$ en la restricción presupuestaria, obtenemos
+\[
+C+\psi C=w+\pi-T.
+\]
+Despejando $C$, 
+\[
+\boxed{
+C
+=
+\frac{1}{1+\psi}
+\left(
+w+\pi-T
+\right)
+}.
+\]
+De este modo, necesitamos obtener la función de beneficios y la política pública óptima para encontrar la función de demanda de consumo de bienes.
+
+Utilizando nuevamente
+\[
+w\ell=\psi C,
+\]
+tenemos
+\[
+w\ell
+=
+\frac{\psi}{1+\psi}
+\left(
+w+\pi-T
+\right).
+\]
+
+Por lo tanto,
+\[
+\boxed{
+\ell
+=
+\frac{\psi}{(1+\psi)w}
+\left(
+w+\pi-T
+\right)
+}.
+\]
+Además,
+\[
+\boxed{
+N^s
+=
+1-
+\frac{\psi}{(1+\psi)w}
+\left(
+w+\pi-T
+\right)
+}.
+\]
+Todas estas funciones dependen de los beneficios y la política fiscal del gobierno, que en equilibrio general son endógenos. Por lo tanto, necesitamos resolver el problema de la empresa para cada tecnología que usemos.
+
+% ==============================================================================
+\subsection{KPR con tecnología $Y=zN^\alpha$}
+% ==============================================================================
+
+Suponga que la empresa produce de acuerdo con
+\[
+Y=zN^\alpha,
+\qquad
+z>0,
+\qquad
+0<\alpha<1.
+\]
+De la condición de primer orden se obtiene que, en el óptimo:
+\[
+\alpha zN^{\alpha-1}=w.
+\]
+Despejando $N$, se obtiene la \textbf{demanda laboral}:
+\[
+\boxed{
+N^d(w)
+=
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{1}{1-\alpha}}
+}.
+\]
+
+La \textbf{oferta agregada} de bienes se obtiene sustituyendo la demanda de trabajo en la función de producción:
+\[
+\boxed{
+Y^s(w)
+=
+z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+
+Los beneficios son
+\[
+\boxed{
+\pi(w)
+=
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+
+La \textbf{demanda de ocio} del hogar es entonces
+\[
+\boxed{
+\ell(w)
+=
+\frac{\psi}{(1+\psi)w}
+\left[
+w+
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+-G
+\right]
+}.
+\]
+Para encontrar la oferta laboral, sustituimos la demanda de ocio en $N^s=1-\ell$:
+\[
+N^s(w)
+=
+1-
+\frac{\psi}{(1+\psi)w}
+\left[
+w+
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+-G
+\right].
+\]
+Distribuyendo los términos,
+\[
+N^s(w)
+=
+1
+-
+\frac{\psi}{1+\psi}
+-
+\frac{\psi(1-\alpha)z}{(1+\psi)w}
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
++
+\frac{\psi G}{(1+\psi)w}.
+\]
+Como
+\[
+1-\frac{\psi}{1+\psi}
+=
+\frac{1}{1+\psi},
+\]
+obtenemos entonces la \textbf{oferta laboral} del hogar:
+\[
+\boxed{
+N^s(w)
+=
+\frac{1}{1+\psi}
++
+\frac{\psi G}{(1+\psi)w}
+-
+\frac{\psi(1-\alpha)z}{(1+\psi)w}
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+Sustituyendo los beneficios en la elección óptima de consumo del hogar, obtenemos la función de \textbf{demanda de consumo}:
+\[
+\boxed{
+C^d(w)
+=
+\frac{1}{1+\psi}
+\left[
+w+
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+-G
+\right]
+}.
+\]
+La \textbf{demanda agregada de bienes} es
+\[
+Y^d(w)=C^d(w)+G.
+\]
+Por lo tanto,
+\[
+\boxed{
+Y^d(w)
+=
+\frac{1}{1+\psi}
+\left[
+w+
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
++\psi G
+\right]
+}.
+\]
+
+
+\subsubsection*{Equilibrio competitivo}
+
+El mercado de trabajo se vacía cuando la oferta y la demanda de trabajo son
+iguales:
+\[
+N^s(w)=N^d(w).
+\]
+Sustituyendo,
+\[
+\frac{1}{1+\psi}
++
+\frac{\psi G}{(1+\psi)w}
+-
+\frac{\psi(1-\alpha)z}{(1+\psi)w}
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+=
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{1}{1-\alpha}}.
+\]
+
+Multiplicando ambos lados por $(1+\psi)w$,
+\[
+w+\psi G
+-
+\psi(1-\alpha)z
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{\alpha}{1-\alpha}}
+=
+(1+\psi)w
+\left(
+\frac{\alpha z}{w}
+\right)^{\frac{1}{1-\alpha}}.
+\]
+Escribiendo explícitamente las potencias,
+\[
+w+\psi G
+-
+\psi(1-\alpha)z
+\frac{(\alpha z)^{\frac{\alpha}{1-\alpha}}}
+{w^{\frac{\alpha}{1-\alpha}}}
+=
+(1+\psi)
+\frac{(\alpha z)^{\frac{1}{1-\alpha}}}
+{w^{\frac{\alpha}{1-\alpha}}}.
+\]
+Multiplicando ambos lados por
+$w^{\frac{\alpha}{1-\alpha}}$,
+\[
+w^{\frac{1}{1-\alpha}}
++
+\psi G
+w^{\frac{\alpha}{1-\alpha}}
+-
+\psi(1-\alpha)z
+(\alpha z)^{\frac{\alpha}{1-\alpha}}
+=
+(1+\psi)
+(\alpha z)^{\frac{1}{1-\alpha}}.
+\]
+Como
+\[
+(\alpha z)^{\frac{1}{1-\alpha}}
+=
+\alpha z
+(\alpha z)^{\frac{\alpha}{1-\alpha}},
+\]
+podemos agrupar los términos del lado derecho:
+\[
+w^{\frac{1}{1-\alpha}}
++
+\psi G
+w^{\frac{\alpha}{1-\alpha}}
+=
+\left[
+\psi(1-\alpha)+\alpha(1+\psi)
+\right]
+z
+(\alpha z)^{\frac{\alpha}{1-\alpha}}.
+\]
+Dado que
+\[
+\psi(1-\alpha)+\alpha(1+\psi)
+=
+\alpha+\psi,
+\]
+obtenemos
+\[
+\boxed{
+w^{\frac{1}{1-\alpha}}
++
+\psi G
+w^{\frac{\alpha}{1-\alpha}}
+=
+(\alpha+\psi)z
+(\alpha z)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+
+Por lo tanto, el \textbf{salario real de equilibrio} $w^*$ está determinado implícitamente por
+\[
+\boxed{
+(w^*)^{\frac{1}{1-\alpha}}
++
+\psi G
+(w^*)^{\frac{\alpha}{1-\alpha}}
+-
+(\alpha+\psi)z
+(\alpha z)^{\frac{\alpha}{1-\alpha}}
+=
+0
+}.
+\]
+
+Para un valor arbitrario de $\alpha$, esta ecuación no admite, en general, una solución cerrada elemental para $w^*$. El salario real de equilibrio está determinado implícitamente por esta ecuación.
+
+Dado un valor de $\alpha$, el nivel salarial de equilibrio $w^*$ queda determinado, y las asignaciones de equilibrio competitivo se obtienen evaluando las funciones anteriores en el salario real de equilibrio.
+
+El empleo de equilibrio es
+\[
+\boxed{
+N^*
+=
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{1}{1-\alpha}}
+}.
+\]
+
+El ocio de equilibrio es
+\[
+\boxed{
+\ell^*
+=
+1-
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{1}{1-\alpha}}
+}.
+\]
+
+La producción de equilibrio es
+\[
+\boxed{
+Y^*
+=
+z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+
+El consumo de equilibrio se obtiene evaluando la demanda de consumo en $w^*$:
+\[
+\boxed{
+C^*
+=
+\frac{1}{1+\psi}
+\left[
+w^*
++
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+-G
+\right]
+}.
+\]
+
+Los beneficios de equilibrio son
+\[
+\boxed{
+\pi^*
+=
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+}.
+\]
+
+Finalmente,
+\[
+\boxed{
+T^*=G
+}.
+\]
+
+Por lo tanto, el \textbf{equilibrio competitivo} de la economía está dado por
+\[
+\boxed{
+\begin{aligned}
+w^*+\psi G
+&=
+(\alpha+\psi)z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+\\[0.8em]
+N^*
+&=
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{1}{1-\alpha}}
+\\[0.8em]
+\ell^*
+&=
+1-
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{1}{1-\alpha}}
+\\[0.8em]
+Y^*
+&=
+z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+\\[0.8em]
+C^*
+&=
+\frac{1}{1+\psi}
+\left[
+w^*
++
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+-G
+\right]
+\\[0.8em]
+\pi^*
+&=
+(1-\alpha)z
+\left(
+\frac{\alpha z}{w^*}
+\right)^{\frac{\alpha}{1-\alpha}}
+\\[0.8em]
+T^*
+&=G
+\end{aligned}
+}
+\]
+
+
+% ==============================================================================
+\subsection{KPR con tecnología $Y=z\sqrt{N}$}
+% ==============================================================================
+
+Considere ahora la tecnología
+\[
+Y=z\sqrt{N}.
+\]
+De la condición de primer orden, obtenemos que en el óptimo:
+\[
+\frac{z}{2\sqrt{N}}=w.
+\]
+
+Despejando $N$, obtenemos la \textbf{demanda laboral}:
+\[
+\boxed{
+N^d(w)=\frac{z^2}{4w^2}
+}.
+\]
+
+La \textbf{oferta agregada de bienes} es:
+\[
+\boxed{
+Y^s(w)=\frac{z^2}{2w}
+}.
+\]
+Los \textbf{beneficios} son:
+\[
+\boxed{
+\pi(w)=\frac{z^2}{4w}
+}.
+\]
+Por lo tanto, la \textbf{demanda de ocio} es:
+\[
+\boxed{
+\ell(w)
+=
+\frac{\psi}{(1+\psi)w}
+\left[
+w+\frac{z^2}{4w}-G
+\right]
+}.
+\]
+
+La \textbf{oferta laboral} es
+\[
+N^s(w)
+=
+1-
+\frac{\psi}{(1+\psi)w}
+\left[
+w+\frac{z^2}{4w}-G
+\right].
+\]
+Distribuyendo,
+\[
+N^s(w)
+=
+1
+-\frac{\psi}{1+\psi}
+-\frac{\psi z^2}{4(1+\psi)w^2}
++\frac{\psi G}{(1+\psi)w}.
+\]
+Como
+\[
+1-\frac{\psi}{1+\psi}
+=
+\frac{1}{1+\psi},
+\]
+obtenemos
+\[
+\boxed{
+N^s(w)
+=
+\frac{1}{1+\psi}
++
+\frac{\psi G}{(1+\psi)w}
+-
+\frac{\psi z^2}{4(1+\psi)w^2}
+}.
+\]
+La \textbf{demanda de consumo} es:
+\[
+\boxed{
+C^d(w)
+=
+\frac{1}{1+\psi}
+\left[
+w+\frac{z^2}{4w}-G
+\right]
+}.
+\]
+La \textbf{demanda agregada de bienes} es
+\[
+Y^d(w)=C^d(w)+G.
+\]
+Por lo tanto,
+\[
+\boxed{
+Y^d(w)
+=
+\frac{1}{1+\psi}
+\left[
+w+\frac{z^2}{4w}+\psi G
+\right]
+}.
+\]
+
+
+\subsubsection*{Equilibrio competitivo}
+
+El mercado de trabajo se vacía cuando la oferta y la demanda de trabajo son
+iguales:
+\[
+N^s(w)=N^d(w).
+\]
+Por lo tanto,
+\[
+\frac{1}{1+\psi}
++
+\frac{\psi G}{(1+\psi)w}
+-
+\frac{\psi z^2}{4(1+\psi)w^2}
+=
+\frac{z^2}{4w^2}.
+\]
+Multiplicando ambos lados por $1+\psi$,
+\[
+1
++
+\frac{\psi G}{w}
+-
+\frac{\psi z^2}{4w^2}
+=
+\frac{(1+\psi)z^2}{4w^2}.
+\]
+Multiplicando ambos lados por $4w^2$,
+\[
+4w^2+4\psi Gw-\psi z^2
+=
+(1+\psi)z^2.
+\]
+Reordenando,
+\[
+4w^2+4\psi Gw-(1+2\psi)z^2=0.
+\]
+Dividiendo entre cuatro,
+\[
+w^2+\psi Gw-\frac{(1+2\psi)z^2}{4}=0.
+\]
+Aplicando la fórmula general,
+\[
+w
+=
+\frac{
+-\psi G
+\pm
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{2}.
+\]
+
+Como el salario real debe ser positivo, seleccionamos la raíz positiva. 
+
+Por lo tanto, el \textbf{salario real de equilibrio} es:
+\[
+\boxed{
+w^*
+=
+\frac{
+-\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{2}
+}.
+\]
+
+Una vez determinado el salario real de equilibrio, las asignaciones de
+equilibrio competitivo se obtienen evaluando las funciones anteriores en
+$w^*$.
+El empleo de equilibrio es
+\[
+N^*
+=
+N^d(w^*)
+=
+\frac{z^2}{4(w^*)^2}.
+\]
+Sustituyendo el salario real de equilibrio,
+\[
+N^*
+=
+\frac{
+z^2
+}{
+\left[
+-\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+\right]^2
+}.
+\]
+Racionalizando,
+\[
+\boxed{
+N^*
+=
+\left[
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+(1+2\psi)z
+}
+\right]^2
+}.
+\]
+Dado que
+\[
+\ell^*=1-N^*,
+\]
+el ocio de equilibrio es
+\[
+\boxed{
+\ell^*
+=
+1-
+\left[
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+(1+2\psi)z
+}
+\right]^2
+}.
+\]
+La producción de equilibrio se obtiene evaluando la oferta agregada de bienes en $w^*$:
+\[
+Y^*
+=
+\frac{
+z^2
+}{
+-\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}.
+\]
+Racionalizando,
+\[
+Y^*
+=
+\frac{
+z^2
+\left[
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+\right]
+}{
+(1+2\psi)z^2
+}.
+\]
+Por lo tanto,
+\[
+\boxed{
+Y^*
+=
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+1+2\psi
+}
+}.
+\]
+
+Los beneficios de equilibrio se obtienen evaluando la función de beneficios en $w^*$:
+\[
+\boxed{
+\pi^*
+=
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+2(1+2\psi)
+}
+}.
+\]
+
+El presupuesto del gobierno está balanceado, por lo que
+\[
+\boxed{
+T^*=G
+}.
+\]
+
+Finalmente, el consumo de equilibrio se obtiene evaluando la demanda de consumo
+en $w^*$:
+\[
+C^*
+=
+C^d(w^*)
+=
+\frac{1}{1+\psi}
+\left[
+w^*
++
+\frac{z^2}{4w^*}
+-G
+\right].
+\]
+
+Sustituyendo las expresiones de equilibrio,
+\[
+C^*
+=
+\frac{1}{1+\psi}
+\left[
+\frac{
+-\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{2}
++
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+2(1+2\psi)
+}
+-G
+\right].
+\]
+
+Simplificando,
+\[
+\boxed{
+C^*
+=
+\frac{
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+-(1+\psi)G
+}{
+1+2\psi
+}
+}.
+\]
+
+Por lo tanto, el \textbf{equilibrio competitivo} de la economía está dado por
+\[
+\boxed{
+\begin{aligned}
+w^*
+&=
+\frac{
+-\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{2}
+\\[0.8em]
+N^*
+&=
+\left[
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+(1+2\psi)z
+}
+\right]^2
+\\[0.8em]
+\ell^*
+&=
+1-
+\left[
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+(1+2\psi)z
+}
+\right]^2
+\\[0.8em]
+Y^*
+&=
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+1+2\psi
+}
+\\[0.8em]
+C^*
+&=
+\frac{
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+-(1+\psi)G
+}{
+1+2\psi
+}
+\\[0.8em]
+\pi^*
+&=
+\frac{
+\psi G+
+\sqrt{
+\psi^2G^2+(1+2\psi)z^2
+}
+}{
+2(1+2\psi)
+}
+\\[0.8em]
+T^*
+&=G
+\end{aligned}
+}
+\]
+
+
+
+
+% ==============================================================================
+\section{Comparación entre GHH y KPR}
+% ==============================================================================
+
+La diferencia central entre ambas especificaciones de preferencias aparece en la \textit{regla de decisión} del hogar y, en particular, en la presencia o ausencia de un efecto riqueza sobre la oferta laboral.
+
+Con preferencias GHH, la regla de decisión del hogar, que es la condición de optimalidad de su problema de maximización, es:
+\[
+w=\psi N^\varphi.
+\]
+Por lo tanto, la oferta laboral depende únicamente del salario real y no de la riqueza del hogar. En particular, un incremento en el gasto público financiado mediante impuestos de suma fija reduce la riqueza disponible y el consumo privado, pero no desplaza la oferta laboral. Dado que la demanda laboral tampoco depende de $G$, el salario real y el empleo de equilibrio permanecen sin cambios. En consecuencia,
+\[
+\frac{\partial w^*}{\partial G}=0,
+\qquad
+\frac{\partial N^*}{\partial G}=0,
+\qquad
+\frac{\partial Y^*}{\partial G}=0,
+\qquad
+\frac{\partial C^*}{\partial G}=-1.
+\]
+
+Esta propiedad refleja la característica central de las preferencias GHH: la ausencia de un efecto riqueza sobre la oferta laboral. El incremento en $G$ genera un efecto riqueza negativo para el hogar, pero este efecto no altera
+su decisión de oferta de trabajo.
+
+Adicionalmente, dado que la regla de decisión no depende del nivel de consumo, cambios en la productividad no desplazan directamente la curva de oferta laboral. Estos cambios desplazan la demanda laboral y modifican el salario real de equilibrio, generando un movimiento a lo largo de la curva de oferta laboral.
+
+Con preferencias KPR, en cambio, la regla de decisión del hogar es
+\[
+w\ell=\psi C.
+\]
+Por lo tanto, la demanda laboral depende del nivel de consumo. De este modo, choques exógenos que afecten el nivel de consumo del hogar afectarán también a su oferta laboral. 
+
+En particular, utilizando la restricción presupuestaria y $T=G$, la oferta laboral puede escribirse como
+\[
+N^s(w)
+=
+1-
+\frac{\psi}{(1+\psi)w}
+\left[
+w+\pi(w)-G
+\right].
+\]
+
+En este caso, la oferta laboral sí depende de la riqueza del hogar. Manteniendo el salario real constante, un incremento en $G$ financiado mediante impuestos de suma fija reduce la riqueza disponible del hogar y, por lo tanto, su demanda
+de ocio. Formalmente,
+\[
+\frac{\partial N^s(w)}{\partial G}
+=
+\frac{\psi}{(1+\psi)w}
+>0.
+\]
+
+Por lo tanto, el incremento en el gasto público desplaza la oferta de trabajo hacia la derecha. En equilibrio, el empleo aumenta y, dada una productividad marginal del trabajo decreciente, el salario real disminuye. La mayor utilización del factor trabajo incrementa también la producción de equilibrio. Así,
+\[
+\frac{\partial N^*}{\partial G}>0,
+\qquad
+\frac{\partial Y^*}{\partial G}>0,
+\qquad
+\frac{\partial w^*}{\partial G}<0.
+\]
+
+La presencia de este efecto riqueza no contradice las propiedades de largo plazo de las preferencias KPR. Estas preferencias no eliminan el efecto riqueza sobre la oferta laboral. Su propiedad relevante es que, a lo largo de una senda de crecimiento balanceado, los efectos ingreso y sustitución asociados al crecimiento sostenido de la productividad se compensan, permitiendo que las horas trabajadas permanezcan constantes. Esto es distinto del experimento estático considerado aquí, en el que un aumento de $G$ reduce la riqueza del hogar y genera una respuesta de la oferta laboral.
+
+\paragraph{Conclusión}
+Aun manteniendo la misma tecnología, estructura de mercados y política fiscal, la respuesta de equilibrio al gasto público depende de manera fundamental de la especificación de las preferencias. Con GHH, el efecto riqueza sobre la oferta laboral está ausente y el incremento en $G$ desplaza completamente al consumo privado. Con KPR, el efecto riqueza induce una mayor oferta de trabajo, de modo que parte del incremento en el gasto público se acompaña de un aumento endógeno de la producción.
+
+
+\section{Preferencias con Aversión Relativa al Riesgo Constante (CRRA)}
+
+Suponga ahora que las preferencias del hogar están representadas por la siguiente función de utilidad:
+\[
+U(C,N)
+=
+\frac{C^{1-\sigma}-1}{1-\sigma}
+-
+\frac{N^{1+\varphi}}{1+\varphi},
+\]
+donde $\sigma>0, \ \sigma\neq 1, \ \varphi>0$.
+
+Estas preferencias son ampliamente utilizadas en macroeconomía, particularmente en modelos dinámicos de política monetaria y en modelos de \textit{asset pricing}.
+La especificación CRRA tiene la propiedad de que la elasticidad intertemporal de sustitución del consumo es constante e igual a $\dfrac{1}{\sigma}$. Por lo tanto, $\sigma$ determina qué tan dispuestos están los hogares a sustituir consumo entre distintos periodos ante cambios en su precio relativo. En un modelo dinámico, este precio relativo está determinado por la tasa de interés real; en particular, es igual a $\dfrac{1}{1+r}$. De este modo, $1/\sigma$ determina la sensibilidad de las decisiones de consumo-ahorro ante cambios en la tasa de interés real.
+
+Esta propiedad es particularmente importante en modelos de política monetaria. En el modelo Nuevo Keynesiano básico, la ecuación de Euler del hogar puede expresarse como una curva IS dinámica, cuya sensibilidad a la tasa de interés real depende precisamente de $1/\sigma$. Es decir, $\sigma$ determina la pendiente de la curva IS.
+
+A diferencia de las preferencias GHH, estas preferencias sí generan un efecto ingreso sobre la oferta laboral, por lo que cambios en la riqueza del hogar pueden desplazar su curva de oferta de trabajo.
+
+El Lagrangiano asociado es:
+$$
+\mathcal{L}(C,N,\lambda)
+=
+\frac{C^{1-\sigma}-1}{1-\sigma} - \frac{N^{1+\varphi}}{1+\varphi} + 
+\lambda
+\left[ 
+    wN + \pi - T - C
+\right]
+$$
+
+Las condiciones de primer orden para una solución interior son:
+\begin{align*}
+    C^{-\sigma} - \lambda &= 0 \\[0.3em]
+    -N^{\varphi} + w\lambda &= 0 \\[0.3em]
+    wN + \pi - T - C &= 0
+\end{align*}
+Sustituyendo la primera fila en la segunda, obtenemos la regla de decisión de oferta laboral del hogar:
+$$
+N^{\varphi} = w C^{-\sigma}
+$$
+Por lo tanto, la oferta laboral depende del nivel de consumo y, en consecuencia, existe un efecto ingreso sobre la oferta de trabajo a través de $C$. Para un salario real dado, un mayor nivel de consumo reduce la utilidad marginal del consumo y, por tanto, reduce la oferta laboral.
+
+Despejando el consumo,
+\[
+C
+=
+\left(
+\frac{N^{\varphi}}{w}
+\right)^{-\frac{1}{\sigma}}.
+\]
+
+Sustituyendo en la restricción presupuestaria,
+
+\[
+\left(
+\frac{N^{\varphi}}{w}
+\right)^{-\frac{1}{\sigma}}
+=
+wN+\pi-T.
+\]
+
+Simplificando esta expresión, obtenemos:
+
+\[
+N^{\varphi}
+\left(
+wN+\pi-T
+\right)^{\sigma}
+=
+w.
+\]
+
+Esta expresión define de forma implícita la oferta laboral del hogar. Para valores generales de $\sigma$ y $\varphi$, no es posible despejar analíticamente $N$ para obtener una función de oferta laboral en forma cerrada. Por lo tanto,
+\[
+\boxed{
+N^s(w):
+\qquad
+N^{\varphi}
+\left[
+wN+\pi(w)-T
+\right]^{\sigma}
+=
+w.
+}
+\]
+
+Este tipo de situación es común en modelos macroeconómicos. En general, las condiciones de optimalidad y equilibrio no permiten obtener soluciones analíticas en forma cerrada. En estos casos, es habitual caracterizar la solución de manera implícita y utilizar aproximaciones locales o métodos numéricos para estudiar el comportamiento del modelo.
+
+
+La oferta laboral entonces depende tanto del salario real como de la riqueza disponible del hogar, a través de los beneficios y los impuestos. En particular, cambios en estas variables modifican el consumo, generando un efecto ingreso que desplaza la curva de oferta laboral.
+
+\subsection{CRRA con tecnología $Y = zN^\alpha$}
+
+De la condición de primer orden del problema de la empresa, obtenemos que, en el óptimo:
+$$
+\alpha z N^{\alpha-1} = w
+$$
+Por lo tanto, la \textbf{demanda laboral} es:
+$$
+N^{d}(w) = \left( \frac{\alpha z}{w}\right)^{\tfrac{1}{1-\alpha}}
+$$
+ 
+\end{document}
