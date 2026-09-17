@@ -1,0 +1,1309 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% los paquetes Beamer/Hyperref instalados.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+\makeatletter
+\@namedef{ver@epstopdf-base.sty}{9999/12/31}
+\makeatother
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 4: CONSUMO INTERTEMPORAL Y MERCADOS DE CREDITO
+% =============================================================================
+
+% --- Idioma, tipografia y matematicas -----------------------------------------
+\usepackage[utf8]{inputenc}
+\IfFileExists{spanish.ldf}{
+  \usepackage[spanish,es-nodecimaldot]{babel}
+}{
+  \usepackage[english]{babel}
+}
+\uselanguage{Spanish}
+\languagepath{Spanish}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{remark}[theorem]{Observación}
+\newtheorem{assumption}[theorem]{Supuesto}
+
+% --- Justificacion del contenido ---------------------------------------------
+\AtBeginDocument{\justifying}
+\patchcmd{\itemize}{\raggedright}{\justifying}{}{}
+\patchcmd{\enumerate}{\raggedright}{\justifying}{}{}
+\patchcmd{\description}{\raggedright}{\justifying}{}{}
+\addtobeamertemplate{block begin}{}{\justifying}
+\addtobeamertemplate{block alerted begin}{}{\justifying}
+\addtobeamertemplate{block example begin}{}{\justifying}
+\makeatletter
+\patchcmd{\beamer@columnenv}{\raggedright}{\justifying}{}{}
+\patchcmd{\beamer@columncom}{\raggedright}{\justifying}{}{}
+\makeatother
+
+% --- Paleta ------------------------------------------------------------------
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+
+% --- Tipografia y geometria --------------------------------------------------
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+\setbeamertemplate{section in head/foot}{\color{white}\insertsectionhead}
+\setbeamertemplate{section in head/foot shaded}{\color{white!55}\insertsectionhead}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,ht=3.05ex,dp=1.05ex,
+    leftskip=0.42cm,rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+  }%
+  \vskip0pt
+}
+
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+\setbeamertemplate{background}{%
+  \vbox to \paperheight{%
+    \vfill
+    \hbox to \paperwidth{%
+      \hfill
+      \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      \hspace{0.18cm}%
+    }%
+    \vspace{0.68cm}%
+  }%
+}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+% --- Comandos reutilizables --------------------------------------------------
+\newcommand{\FigurasSesion}{Figuras/04_Consumo Intertemporal}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+% =============================================================================
+% METADATOS
+% =============================================================================
+\title[Macroeconomía II]{Sesión 4 \\ Consumo intertemporal y mercados de crédito}
+\subtitle{Un modelo macroeconómico de dos periodos}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+% =============================================================================
+\begin{document}
+% =============================================================================
+
+\begin{frame}
+  \titlepage
+  \notafuentes{Williamson (2018), cap. 9; Kurlat (2020), cap. 6.}
+\end{frame}
+
+% =============================================================================
+\section{Punto de partida}
+% =============================================================================
+
+\begin{frame}{Objetivos de la sesión}
+  \begin{itemize}
+    \item Desarrollaremos una \textbf{teoría sobre las decisiones de gasto de los hogares}.
+    \item En el modelo de un periodo, el consumidor decidía cuánto consumir y cuánto trabajar. 
+    \item En esta sesión introducimos una nueva decisión: consumo-ahorro.
+    \item Comenzaremos el estudio de la toma de \textbf{decisiones intertemporales} y sus implicaciones para la actividad macroeconómica.
+    \item Las decisiones intertemporales involucran \textit{trade-offs} a lo largo del tiempo: consumir hoy implica sacrificar consumo futuro, y viceversa.
+    \item Introduciremos por primera vez un mercado financiero: el \textbf{mercado de deuda}.
+    \item Verémos cómo el acceso a instrumentos de deuda permite al hogar distribuir su consumo de manera óptima entre periodos, mejorando su bienestar.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{La visión keynesiana del consumo}
+  Keynes (1936, citado en Kurlat, 2020, p. 103) hizo la siguiente observación sobre las decisiones de consumo:
+
+  \vspace{0.5em}
+  \textit{"La ley psicológica fundamental, en la que podemos confiar con gran seguridad tanto \textit{a priori}, por nuestro conocimiento de la naturaleza humana, como por los hechos detallados de la experiencia, es que las personas están dispuestas, por regla general y en promedio, a aumentar su consumo a medida que aumenta su ingreso, pero no en la misma medida en que aumenta el ingreso."}
+  \vspace{0.5em}
+
+  ¿Qué significa esto? ¿Es correcta esta teoría?
+\end{frame}
+
+
+\begin{frame}[t]{Keynes y la función de consumo}
+  Traduzcamos la idea de Keynes al lenguaje matemático.
+  \[
+    C=c(Y),
+    \qquad 0<c'(Y)<1.
+  \]
+
+  Una interpretación diferente de su argumento es que
+  \[
+    0<\frac{c'(Y)Y}{c(Y)}<1.
+  \]
+  \begin{itemize}
+  \item La primera idea define una \cidehighlight{propensión marginal a consumir} positiva y menor que uno.
+  \item La segunda idea propone que la elasticidad-ingreso del consumo es menor a 1.
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}[t]{Evidencia de la función de consumo Keynesiana}
+      \centering
+      \figura[5.5cm]{fig_6_1_1_keynes_hogares.png}
+      \fuentefigura{Kurlat (2020), figura 6.1.1; Consumer Expenditure Survey, 2014.}
+\end{frame}
+
+
+
+
+\begin{frame}{Implicación: sobreproducción}
+  Si la función keynesiana es correcta y la elasticidad ingreso del consumo es menor que uno, entonces conforme la economía crece la razón \(C/Y\) debería ir cayendo.
+
+
+  Supongamos \(C = c_0 + c_1 Y\), con \(c_0 = 100\) y \(c_1 = 0.8\):
+
+  \vspace{0.3em}
+  \begin{center}
+  \begin{tabular}{cccc}
+    \toprule
+    \(Y\) & \(C = 100 + 0.8Y\) & \(C/Y\) & Consumo del ingreso \textit{nuevo} \\
+    \midrule
+    500     & 500   & 1.00 & --- \\
+    1{,}000  & 900   & 0.90 & de los \(+500\) nuevos, se consumió el 80\% \\
+    2{,}000  & 1{,}700 & 0.85 & de los \(+1{,}000\) nuevos, se consumió el 80\% \\
+    10{,}000 & 8{,}100 & 0.81 & de los \(+8{,}000\) nuevos, se consumió el 80\% \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+
+  \vspace{0.5em}
+  En \textbf{cada fila} se consume exactamente el 80\% del ingreso adicional. Sin embargo, \(C/Y\) cae de todos modos.
+
+  \cidehighlight{La PMgC describe el margen; la PMeC describe el promedio acumulado.}
+\end{frame}
+
+
+% ---------- Slide 1: la conjetura ----------
+\begin{frame}[t]{Implicación: sobreproducción}
+\vspace{1.5cm}
+  \begin{block}{La preocupación de mediados del siglo XX}
+    ¿La economía va a producir cada vez más bienes que nadie quiere consumir?
+    ¿Habrá desempleo masivo porque nadie desea todo lo que produciríamos si
+    todos trabajaran?
+  \end{block}
+  
+\end{frame}
+
+% ---------- Slide 2: la evidencia ----------
+\begin{frame}[t]{Evidencia agregada de la función de consumo}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.44\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item EE.UU., 1929--2018: la elasticidad estimada es \(\approx 0.97\).
+        \item Corte transversal entre países, 2011: \(\approx 0.85\).
+        \item Explicación simple: el consumo ha sido una fracción casi
+          constante del PIB (\(\approx 65\%\)). Si \(c(Y)=0.65\,Y\), entonces
+          \(\dfrac{c'(Y)\,Y}{c(Y)} = 1\).
+        \item Los países \textbf{no} consumen una fracción menor de su ingreso
+          conforme se enriquecen.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[4.2cm]{fig_6_1_2_keynes_agregado.png}
+      \fuentefigura{Kurlat (2020), fig.\ 6.1.2; NIPA y Feenstra et al.\ (2015).}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{¿Por qué necesitamos una teoría intertemporal del consumo?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item El ingreso cambia a lo largo de la vida y del ciclo económico.
+    \item Los hogares utilizan activos y deuda para separar el momento en que reciben ingreso del momento en que consumen.
+    \item Las expectativas sobre el ingreso futuro afectan las decisiones actuales.
+    \item La tasa de interés modifica el precio relativo entre consumo presente y futuro.
+    \item La respuesta del consumo determina un canal central de transmisión de la política fiscal y monetaria.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 306--308; Kurlat (2020), pp. 105--106.}
+\end{frame}
+
+
+% =============================================================================
+\section{Modelo}
+% =============================================================================
+
+\begin{frame}{Una economía de dos periodos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item Los periodos son el presente y el futuro.
+    \item El hogar recibe ingresos exógenos \(y\) y \(y'\), y paga impuestos de suma fija \(t\) y \(t'\).
+    \item Elige consumo \(c\), consumo futuro \(c'\) y ahorro \(s\).
+    \item Puede comprar o emitir un bono real con rendimiento \(r\).
+    \item No hay incertidumbre, incumplimiento de deuda, acumulación de capital ni herencias.
+    \item El hogar puede prestar y pedir prestado a la misma tasa \(r\).
+  \end{itemize}
+
+  \vspace{0.12cm}
+  Las primas denotan variables del periodo futuro.
+  \notafuentes{Williamson (2018), pp. 308--310.}
+\end{frame}
+
+
+
+\begin{frame}{Función de utilidad intertemporal}
+  \vspace{0.5em}
+  Suponemos que las preferencias del hogar están representadas por:
+  \[
+    U(c_1, c_2) = u(c_1) + \beta\, u(c_2)
+  \]
+
+  \vspace{0.3em}
+  \begin{itemize}
+    \item Es matemáticamente idéntico al problema de dos bienes de microeconomía: aquí los ``bienes'' son \(c_1\) (bienes hoy) y \(c_2\) (bienes en el futuro).
+    \item Al hogar \textbf{valora consumir hoy}, pero tambien \textbf{valora ahorrar}, porque le permite consumir más mañana.
+    \item La utilidad es \textit{aditivamente separable}: la única diferencia en cómo valora cada periodo es el término \(\beta\).
+    \item \(\beta\) es el \textbf{factor de descuento}, típicamente \(\beta < 1\). Representa \textit{impaciencia}: el mismo nivel de consumo da más utilidad hoy que en el futuro.
+  \end{itemize}
+
+  \notafuentes{Kurlat (2020), sección 6.2.}
+\end{frame}
+
+
+\begin{frame}{La secuencia de decisiones}
+  \begin{center}
+    \begin{tabular}{p{0.43\textwidth}p{0.43\textwidth}}
+      \toprule
+      \textbf{Periodo actual} & \textbf{Periodo futuro}\\
+      \midrule
+      Recibe \(y\) y paga \(t\). & Recibe \(y'\) y paga \(t'\).\\[0.15cm]
+      Elige \(c\) y \(s\). & Recibe o paga \((1+r)s\).\\[0.15cm]
+      Compra bonos si \(s>0\). & Consume todos sus recursos.\\[0.15cm]
+      Emite bonos si \(s<0\). & Termina sin activos ni deuda.\\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \[
+    \underbrace{c+s=y-t}_{\text{periodo actual}},
+    \qquad
+    \underbrace{c'=y'-t'+(1+r)s}_{\text{periodo futuro}}.
+  \]
+  \notafuentes{Williamson (2018), ecuaciones 9-1 y 9-2.}
+\end{frame}
+
+\begin{frame}{De dos restricciones a una sola restricción intertemporal}
+  \begin{block}{Restricción presupuestaria intertemporal}
+    El valor presente del consumo debe ser igual al valor presente del ingreso disponible.
+  \end{block}
+  De la restricción actual,
+  \[
+    s=y-t-c.
+  \]
+  Sustituyendo en la restricción futura,
+  \[
+    c'=y'-t'+(1+r)(y-t-c).
+  \]
+  Dividiendo entre \(1+r\) y reordenando,
+  \[
+    \boxed{
+    c+\frac{c'}{1+r}
+    =y-t+\frac{y'-t'}{1+r}
+    }.
+  \]
+  \notafuentes{Williamson (2018), pp. 310--311; Kurlat (2020), ecuación 6.2.4.}
+\end{frame}
+
+
+
+\begin{frame}{La intuición del valor presente}
+  \textbf{El problema:} no se puede sumar \(y + y'\) directamente. Un bien del periodo 1 y un bien del periodo 2 son bienes \textit{distintos}, así como no sumarías manzanas con naranjas o dolares con euros.
+
+  \vspace{0.4em}
+  \textbf{La solución:} convertir todo a una misma unidad usando el precio relativo entre ambos bienes, \(\frac{1}{1+r}\), y luego sí sumar.
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \item Si prestas un bien de hoy, el mercado te da \((1+r)\) bienes del futuro a cambio.
+    \item Por lo tanto, un bien del futuro vale \(\frac{1}{1+r}\) bienes de hoy.
+    \item El valor presente \(y + \frac{1}{1+r}y'\) es la cantidad total de bienes en el tiempo a \textbf{valor de hoy}.
+  \end{itemize}
+  \vspace{0.4em}
+  \cidehighlight{\(\frac{1}{1+r}\) es un \textbf{precio}: nos dice la tasa a la que el mercado está dispuesto a intercambiar un bien por otro.}
+
+  \notafuentes{Kurlat (2020), sección 6.2.}
+\end{frame}
+
+\begin{frame}{Un ejemplo numérico}
+  Supongamos \(r = 10\%\).
+
+  \vspace{0.4em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Si tienes \$100 hoy y los prestas, mañana tienes
+      \[
+        \$100 \times (1+r) = \$100 \times 1.1 = \$110.
+      \]
+      Es decir: \textbf{\$100 hoy son \$110 mañana.}
+    \item Al revés: ¿cuánto valen hoy \$110 que voy a recibir mañana? Es la
+      pregunta inversa, así que dividimos entre \((1+r)\):
+      \[
+        \frac{\$110}{1+r} = \frac{\$110}{1.1} = \$100.
+      \]
+      Es decir: \textbf{\$110 mañana son \$100 hoy.}
+  \end{itemize}
+
+  \notafuentes{Kurlat (2020), sección 6.2.}
+\end{frame}
+
+\begin{frame}{La idea general del valor presente}
+    \vspace{0.5em}
+  \begin{block}{La idea general}
+    \[
+      \underbrace{y}_{\text{hoy}} \;\times\; (1+r) \;=\; \underbrace{y'}_{\text{mañana}}
+      \qquad\Longleftrightarrow\qquad
+      \underbrace{y'}_{\text{mañana}} \;\times\; \frac{1}{1+r} \;=\; \underbrace{y}_{\text{hoy}}
+    \]
+  \end{block}
+
+  \cidehighlight{Multiplicar por \((1+r)\) lleva pesos de hoy a pesos de
+  mañana; multiplicar por \(\dfrac{1}{1+r}\) trae pesos de mañana a pesos de
+  hoy. Por eso \(\dfrac{1}{1+r}\) es el \textbf{precio} del consumo futuro.}
+\end{frame}
+
+
+\begin{frame}{Precio relativo de bienes en el tiempo}
+  \small
+  El precio del consumo actual se normaliza a uno. El precio de una unidad de
+  consumo futuro, medido en unidades de consumo actual, es
+  \[
+    q=\frac{1}{1+r}.
+  \]
+
+  \vspace{0.5em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Renunciar hoy a una unidad de consumo permite obtener \(1+r\) unidades mañana.
+    \item \(r\) \textbf{alto} \(\Rightarrow\) el consumo presente es \textit{caro} en relación al consumo futuro: el mercado ofrece muchas unidades futuras a cambio de una unidad presente.
+    \item \(r\) \textbf{bajo} \(\Rightarrow\) el consumo presente es \textit{barato}: equivalentemente, \(q\) sube y el consumo futuro se vuelve relativamente más caro.
+    \item La tasa real coordina la oferta de ahorro y la demanda de crédito.
+  \end{itemize}
+
+  \notafuentes{Williamson (2018), pp. 309--312; Kurlat (2020), p. 106.}
+\end{frame}
+
+\begin{frame}[t]{La restricción presupuestaria intertemporal}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      El punto de dotación es
+      \[
+        E=(y-t,\,y'-t').
+      \]
+      \begin{itemize}
+        \item Al noroeste de \(E\): \(c<y-t\), por lo que \(s>0\).
+        \item Al sureste de \(E\): \(c>y-t\), por lo que \(s<0\).
+        \item La frontera reúne todas las canastas financiables mediante ahorro o deuda.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.15cm]{fig_9_1_restriccion_intertemporal.png}
+      \fuentefigura{Williamson (2018), figura 9.1.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.1 y pp. 311--313.}
+\end{frame}
+
+% =============================================================================
+\section{Elección óptima}
+% =============================================================================
+
+
+\begin{frame}{El problema del hogar}
+  El hogar resuelve
+  \[
+    \max_{c,c'>0}
+    \left\{u(c)+\beta u(c')\right\}
+  \]
+  sujeto a
+  \[
+    c+\frac{c'}{1+r}
+    \leq
+    y-t+\frac{y'-t'}{1+r}.
+  \]
+
+  El lagrangiano es
+  \[
+    \mathcal L
+    =u(c)+\beta u(c')
+    +\lambda\left[
+      y-t+\frac{y'-t'}{1+r}
+      -c-\frac{c'}{1+r}
+    \right].
+  \]
+  \notafuentes{Kurlat (2020), ecuación 6.2.5.}
+\end{frame}
+
+\begin{frame}{Condiciones de primer orden}
+  Para una solución interior,
+  \begin{align*}
+    u'(c)-\lambda&=0,\\
+    \beta u'(c')-\frac{\lambda}{1+r}&=0,\\
+    y-t+\frac{y'-t'}{1+r}-c-\frac{c'}{1+r}&=0.
+  \end{align*}
+
+  Eliminando \(\lambda\), obtenemos
+  \[
+    \boxed{u'(c)=\beta(1+r)u'(c')}.
+  \]
+
+  Esta condición se conoce como la \cidehighlight{ecuación de Euler del consumo}.
+  \notafuentes{Kurlat (2020), ecuaciones 6.2.6--6.2.8.}
+\end{frame}
+
+\begin{frame}{Interpretación de la ecuación de Euler}
+  Considere reducir marginalmente el consumo actual y ahorrar esa unidad.
+  \[
+    \underbrace{u'(c)}_{\substack{\text{costo marginal}\\\text{en utilidad}}}
+    =
+    \underbrace{\beta(1+r)u'(c')}_{\substack{\text{beneficio marginal}\\\text{descontado}}}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Consumir una unidad hoy genera \(u'(c)\).
+    \item Ahorrarla genera \(1+r\) unidades futuras.
+    \item Su utilidad futura marginal vale \(\beta(1+r)u'(c')\) desde la perspectiva actual.
+  \end{itemize}
+
+  \begin{block}{Condición de tangencia}
+    \small
+    La tasa marginal de sustitución intertemporal es igual al precio relativo: \(u'(c)/[\beta u'(c')]=1+r\).
+  \end{block}
+  \notafuentes{Kurlat (2020), pp. 107--108.}
+\end{frame}
+
+\begin{frame}{Suavización del consumo}
+  La utilidad marginal decreciente hace costoso concentrar el consumo en un solo periodo.
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Si el ingreso es alto hoy y bajo mañana, el hogar ahorra.
+    \item Si el ingreso es bajo hoy y alto mañana, el hogar se endeuda.
+    \item El consumo responde al valor presente de los recursos, no únicamente al ingreso actual.
+  \end{itemize}
+
+  Si \(\beta(1+r)=1\), la ecuación de Euler implica
+  \[
+    u'(c)=u'(c')
+    \quad\Longrightarrow\quad
+    c=c'.
+  \]
+  \notafuentes{Williamson (2018), pp. 315--317; Kurlat (2020), pp. 108--109.}
+\end{frame}
+
+\begin{frame}[t]{Prestamistas y deudores}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \figura[4.4cm]{fig_9_3_prestamista.png}
+      \fuentefigura{Williamson (2018), figura 9.3.}
+      \vspace{0.08cm}
+      \small\(c^*<y-t\Rightarrow s^*>0\): el hogar es prestamista.
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \figura[4.4cm]{fig_9_4_deudor.png}
+      \fuentefigura{Williamson (2018), figura 9.4.}
+      \vspace{0.08cm}
+      \small\(c^*>y-t\Rightarrow s^*<0\): el hogar es deudor.
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figuras 9.3--9.4 y pp. 315--317.}
+\end{frame}
+
+\begin{frame}{Una solución explícita: preferencias CRRA}
+  Suponga
+  \[
+    u(c)=\frac{c^{1-\sigma}-1}{1-\sigma},
+    \qquad \sigma>0,
+  \]
+  cuyo límite cuando \(\sigma\to 1\) es la utilidad logarítmica. Entonces,
+  \[
+    c^{-\sigma}=\beta(1+r)(c')^{-\sigma},
+  \]
+  por lo que
+  \[
+    \boxed{\frac{c'}{c}=[\beta(1+r)]^{1/\sigma}}.
+  \]
+
+  \begin{itemize}
+    \item \(1/\sigma\) es la elasticidad de sustitución intertemporal.
+    \item Un \(\sigma\) alto implica poca disposición a sustituir consumo entre fechas.
+  \end{itemize}
+  \notafuentes{Kurlat (2020), pp. 110--111.}
+\end{frame}
+
+\begin{frame}{La regla de decisión bajo preferencias CRRA}
+  Sustituyendo
+  \(
+    c'=[\beta(1+r)]^{1/\sigma}c
+  \)
+  en la restricción intertemporal,
+  \[
+    \boxed{
+    c(y,y',t,t',r;\beta,\sigma)
+    =
+    \frac{
+      y-t+\dfrac{y'-t'}{1+r}
+    }{
+      1+\beta^{1/\sigma}(1+r)^{1/\sigma-1}
+    }
+    }.
+  \]
+
+  \begin{itemize}
+    \item El numerador es la riqueza intertemporal.
+    \item El denominador distribuye esa riqueza entre ambos periodos.
+    \item La regla depende de parámetros estructurales: \(\beta\) y \(\sigma\).
+  \end{itemize}
+  \notafuentes{Kurlat (2020), ecuación 6.2.9.}
+\end{frame}
+
+\begin{frame}{Caso logarítmico}
+  Cuando \(u(c)=\log c\), es decir, \(\sigma=1\),
+  \[
+    c
+    =\frac{1}{1+\beta}
+    \left(
+      y-t+\frac{y'-t'}{1+r}
+    \right),
+  \]
+  \[
+    c'
+    =\frac{\beta(1+r)}{1+\beta}
+    \left(
+      y-t+\frac{y'-t'}{1+r}
+    \right).
+  \]
+  El ahorro actual es
+  \[
+    s=y-t-c.
+  \]
+
+  \begin{block}{Implicación}
+    El hogar asigna una fracción constante de su riqueza intertemporal a cada periodo, valorada a precios presentes.
+  \end{block}
+  \notafuentes{Derivación a partir de Kurlat (2020), sec. 6.2.}
+\end{frame}
+
+\begin{frame}{De dos periodos a muchos periodos}
+  En un horizonte de \(T+1\) periodos, el hogar resuelve
+  \[
+    \max_{\{c_t,a_{t+1}\}_{t=0}^{T}}
+    \sum_{t=0}^{T}\beta^t u(c_t)
+  \]
+  sujeto a
+  \[
+    a_{t+1}=(1+r_t)a_t+y_t-t_t-c_t,
+    \qquad a_{T+1}=0.
+  \]
+  Para cada par de periodos consecutivos, la condición óptima es
+  \[
+    \boxed{u'(c_t)=\beta(1+r_{t+1})u'(c_{t+1})}.
+  \]
+
+  \begin{itemize}
+    \item La ecuación de Euler determina la trayectoria completa del consumo.
+    \item Con incertidumbre, el beneficio marginal futuro se reemplaza por su valor esperado condicional.
+  \end{itemize}
+  \notafuentes{Kurlat (2020), sec. 6.3.}
+\end{frame}
+
+% =============================================================================
+\section{Ingreso}
+% =============================================================================
+
+\begin{frame}{Un aumento del ingreso actual}
+  Considere \(\Delta y>0\), manteniendo \(y'\), \(t\), \(t'\) y \(r\) constantes.
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item La riqueza intertemporal aumenta exactamente en \(\Delta y\).
+    \item La restricción presupuestaria se desplaza paralelamente hacia afuera.
+    \item Si ambos consumos son bienes normales, \(c\uparrow\) y \(c'\uparrow\).
+    \item Como el hogar distribuye el incremento entre ambos periodos,
+      \[
+        0<\Delta c<\Delta y
+        \quad\Longrightarrow\quad
+        \Delta s=\Delta y-\Delta c>0.
+      \]
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 317--319.}
+\end{frame}
+
+\begin{frame}[t]{El hogar distribuye un aumento transitorio del ingreso}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      El ingreso actual aumenta de \(y_1\) a \(y_2\):
+      \begin{itemize}
+        \item la pendiente no cambia;
+        \item \(c\) aumenta de \(c_1\) a \(c_2\);
+        \item \(c'\) también aumenta;
+        \item parte del incremento se ahorra.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[5.1cm]{fig_9_5_ingreso_actual.png}
+      \fuentefigura{Williamson (2018), figura 9.5.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.5 y pp. 317--319.}
+\end{frame}
+
+\begin{frame}{Un aumento del ingreso futuro}
+  Considere \(\Delta y'>0\), manteniendo las demás variables constantes.
+  \[
+    \Delta\omega=\frac{\Delta y'}{1+r}>0.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Aumentan el consumo actual y el futuro.
+    \item El hogar puede elevar \(c\) antes de recibir el ingreso mediante endeudamiento.
+    \item Por tanto, el ahorro actual disminuye:
+      \[
+        \Delta s=-\Delta c<0.
+      \]
+  \end{itemize}
+
+  La expectativa de mayor ingreso futuro modifica decisiones actuales.
+  \notafuentes{Williamson (2018), pp. 321--323.}
+\end{frame}
+
+\begin{frame}[t]{Las expectativas sobre ingreso futuro importan hoy}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      Cuando \(y'\) aumenta:
+      \begin{itemize}
+        \item la riqueza aumenta;
+        \item la restricción se desplaza hacia afuera;
+        \item \(c\) y \(c'\) aumentan;
+        \item el hogar ahorra menos o se endeuda más.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[5.0cm]{fig_9_8_ingreso_futuro.png}
+      \fuentefigura{Williamson (2018), figura 9.8.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.8 y pp. 321--323.}
+\end{frame}
+
+\begin{frame}[t]{Cambios transitorios y permanentes en el ingreso}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \item Un aumento transitorio eleva únicamente \(y\).
+        \item Un aumento permanente eleva \(y\) y \(y'\).
+        \item El segundo cambio aumenta más la riqueza intertemporal.
+        \item Por ello, su efecto sobre \(c\) es mayor.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[5.05cm]{fig_9_9_temporal_permanente.png}
+      \fuentefigura{Williamson (2018), figura 9.9.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.9 y pp. 323--325.}
+\end{frame}
+
+\begin{frame}{Propensiones marginales a consumir}
+  Bajo preferencias CRRA, defina
+  \[
+    \kappa(r)
+    \equiv
+    \frac{1}{1+\beta^{1/\sigma}(1+r)^{1/\sigma-1}}.
+  \]
+  Entonces,
+  \[
+    \frac{\partial c}{\partial y}=\kappa(r),
+    \qquad
+    \frac{\partial c}{\partial y'}=\frac{\kappa(r)}{1+r}.
+  \]
+  Si \(y\) y \(y'\) aumentan conjuntamente en \(\Delta\),
+  \[
+    \frac{dc}{d\Delta}
+    =\kappa(r)\left(1+\frac{1}{1+r}\right)
+    >\frac{\partial c}{\partial y}.
+  \]
+
+  La propensión a consumir es mayor cuando el cambio en el ingreso es más persistente.
+  \notafuentes{Kurlat (2020), ecuaciones 6.2.10--6.2.11.}
+\end{frame}
+
+\begin{frame}{Hipótesis del ingreso permanente}
+  \begin{block}{Idea central}
+    El consumo depende de los recursos esperados durante toda la vida, no únicamente del ingreso corriente.
+  \end{block}
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Los cambios transitorios del ingreso generan respuestas pequeñas del consumo.
+    \item Los cambios persistentes generan respuestas mayores.
+    \item El ahorro absorbe buena parte de las fluctuaciones transitorias.
+    \item La distinción relevante es entre innovaciones permanentes y transitorias del ingreso.
+  \end{itemize}
+
+  Este mecanismo ayuda a reconciliar la relación consumo-ingreso observada entre hogares con la estabilidad de la participación del consumo en el ingreso agregado.
+  \notafuentes{Kurlat (2020), pp. 111--114; Friedman (1957).}
+\end{frame}
+
+\begin{frame}[t]{Riqueza financiera y consumo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.38\textwidth}
+      \small
+      \begin{itemize}
+        \item Los precios de activos contienen información sobre riqueza esperada.
+        \item Consumo y precios accionarios se mueven positivamente en promedio.
+        \item Los precios accionarios son mucho más volátiles que el consumo.
+        \item Correlación no implica por sí sola causalidad.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.0cm]{fig_9_10_riqueza_consumo.png}
+      \fuentefigura{Williamson (2018), figura 9.10.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.10 y pp. 325--327.}
+\end{frame}
+
+% =============================================================================
+\section{Tasa real}
+% =============================================================================
+
+\begin{frame}{Un aumento en la tasa de interés real}
+  Si \(r_2>r_1\), el precio del consumo futuro cae:
+  \[
+    \frac{1}{1+r_2}<\frac{1}{1+r_1}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item La restricción gira alrededor del punto de dotación \((y-t,y'-t')\).
+    \item Su pendiente pasa de \(-(1+r_1)\) a \(-(1+r_2)\).
+    \item El cambio genera un efecto sustitución y un efecto ingreso.
+    \item El efecto ingreso depende de la posición financiera inicial del hogar.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 327--329; Kurlat (2020), pp. 109--110.}
+\end{frame}
+
+\begin{frame}[t]{La restricción gira alrededor de la dotación}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      El hogar siempre puede consumir su ingreso disponible en cada fecha. Por ello, el punto de dotación sigue siendo factible para cualquier \(r\).
+
+      \vspace{0.15cm}
+      Una tasa mayor recompensa más el ahorro y encarece el endeudamiento.
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.2cm]{fig_9_12_tasa_interes.png}
+      \fuentefigura{Williamson (2018), figura 9.12.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.12 y pp. 327--329.}
+\end{frame}
+
+\begin{frame}{Efectos sustitución e ingreso}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item \textbf{Efecto sustitución:} al aumentar \(r\), el consumo actual se vuelve relativamente más caro.
+      \[
+        c\downarrow,
+        \qquad c'\uparrow,
+        \qquad s\uparrow.
+      \]
+    \item \textbf{Efecto ingreso para un prestamista:} recibe un mayor rendimiento sobre su ahorro; su riqueza aumenta.
+    \item \textbf{Efecto ingreso para un deudor:} aumenta el costo de pagar su deuda; su riqueza disminuye.
+  \end{itemize}
+
+  \begin{alertblock}{Resultado general}
+    La respuesta total del consumo y del ahorro a la tasa real no puede determinarse sin conocer preferencias y posición financiera.
+  \end{alertblock}
+  \notafuentes{Williamson (2018), pp. 328--332; Kurlat (2020), pp. 109--110.}
+\end{frame}
+
+\begin{frame}[t]{Una tasa mayor para un prestamista}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      \begin{itemize}
+        \item Sustitución: \(c\downarrow\), \(c'\uparrow\).
+        \item Ingreso: \(c\uparrow\), \(c'\uparrow\).
+        \item \(c'\) aumenta inequívocamente.
+        \item El efecto sobre \(c\) y \(s\) es ambiguo.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.2cm]{fig_9_13_tasa_prestamista.png}
+      \fuentefigura{Williamson (2018), figura 9.13.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.13 y pp. 329--331.}
+\end{frame}
+
+\begin{frame}[t]{Una tasa mayor para un deudor}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      \begin{itemize}
+        \item Sustitución: \(c\downarrow\), \(c'\uparrow\).
+        \item Ingreso: \(c\downarrow\), \(c'\downarrow\).
+        \item \(c\) disminuye inequívocamente.
+        \item El efecto sobre \(c'\) es ambiguo.
+        \item El endeudamiento disminuye: \(s\uparrow\).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.2cm]{fig_9_14_tasa_deudor.png}
+      \fuentefigura{Williamson (2018), figura 9.14.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.14 y pp. 330--332.}
+\end{frame}
+
+\begin{frame}{La ecuación de Euler y la tasa real}
+  Bajo CRRA,
+  \[
+    \frac{c'}{c}=[\beta(1+r)]^{1/\sigma}.
+  \]
+  Por tanto,
+  \[
+    \frac{\partial\log(c'/c)}{\partial\log(1+r)}
+    =\frac{1}{\sigma}>0.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Una tasa mayor inclina el perfil óptimo hacia el consumo futuro.
+    \item \(1/\sigma\) mide la intensidad de esta sustitución.
+    \item Esta condición determina el crecimiento relativo del consumo, no necesariamente su nivel.
+    \item El efecto sobre \(c\) también incorpora el cambio en la riqueza intertemporal.
+  \end{itemize}
+  \notafuentes{Kurlat (2020), pp. 110--111.}
+\end{frame}
+
+% =============================================================================
+\section{Mercado de crédito}
+% =============================================================================
+
+\begin{frame}{El gobierno también puede ahorrar o endeudarse}
+  Sus restricciones presupuestarias son
+  \[
+    G=T+B,
+    \qquad
+    G'+(1+r)B=T',
+  \]
+  donde \(B>0\) es deuda pública emitida actualmente.
+
+  Eliminando \(B\),
+  \[
+    \boxed{
+    G+\frac{G'}{1+r}
+    =T+\frac{T'}{1+r}
+    }.
+  \]
+
+  El valor presente de las compras públicas debe financiarse con el valor presente de los impuestos.
+  \notafuentes{Williamson (2018), ecuaciones 9-17--9-19.}
+\end{frame}
+
+\begin{frame}{Equilibrio competitivo de la economía de dos periodos}
+  Dadas las variables exógenas, un equilibrio competitivo consiste en una asignación, una posición financiera y una tasa real \(r^*\) tales que:
+  \begin{enumerate}
+    \setlength{\itemsep}{0.55em}
+    \item cada hogar elige óptimamente \((c_i^*,c_i'^*,s_i^*)\), tomando \(r^*\) como dado;
+    \item el gobierno satisface su restricción presupuestaria intertemporal;
+    \item el mercado de crédito se vacía.
+  \end{enumerate}
+
+  \begin{block}{Variable de ajuste}
+    La tasa de interés real se determina endógenamente para hacer compatibles los planes de ahorro y endeudamiento.
+  \end{block}
+  \notafuentes{Williamson (2018), pp. 335--336.}
+\end{frame}
+
+\begin{frame}{Vaciado del mercado de crédito}
+  El ahorro privado agregado es
+  \[
+    S^p(r)=\sum_{i=1}^{N}s_i(r).
+  \]
+  La condición de equilibrio es
+  \[
+    \boxed{S^p(r^*)=B}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item Los bonos comprados por los hogares deben ser iguales a los bonos emitidos por el gobierno.
+    \item No hay inversión ni activos externos.
+    \item Por tanto, el ahorro nacional es cero:
+      \[
+        S=S^p+S^g=S^p-B=0.
+      \]
+  \end{itemize}
+  \notafuentes{Williamson (2018), ecuación 9-20.}
+\end{frame}
+
+\begin{frame}{El mercado de bienes también se vacía}
+  Por definición,
+  \[
+    S^p=Y-T-C,
+    \qquad
+    B=G-T.
+  \]
+  Sustituyendo en \(S^p=B\),
+  \[
+    Y-T-C=G-T,
+  \]
+  por lo que
+  \[
+    \boxed{Y=C+G}.
+  \]
+
+  \begin{block}{Ley de Walras}
+    Una vez satisfechas las restricciones presupuestarias, el vaciado del mercado de crédito implica el vaciado del mercado de bienes.
+  \end{block}
+  \notafuentes{Williamson (2018), ecuaciones 9-20--9-23.}
+\end{frame}
+
+% =============================================================================
+\section{Equivalencia ricardiana}
+% =============================================================================
+
+\begin{frame}{Un cambio en el momento de los impuestos}
+  Considere una reducción de los impuestos actuales financiada con deuda:
+  \[
+    \Delta T<0,
+    \qquad
+    \Delta B=-\Delta T>0.
+  \]
+  Para mantener constante el valor presente de los impuestos,
+  \[
+    \Delta T'=-(1+r)\Delta T>0.
+  \]
+
+  \begin{itemize}
+    \item El ingreso disponible actual aumenta.
+    \item El ingreso disponible futuro disminuye en valor presente por la misma cantidad.
+    \item La riqueza intertemporal del sector privado no cambia.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 337--339.}
+\end{frame}
+
+\begin{frame}{Teorema de equivalencia ricardiana}
+  \begin{block}{Resultado}
+    Manteniendo constante la trayectoria de gasto público, un cambio en la distribución temporal de impuestos que preserve su valor presente no modifica el consumo, el bienestar ni la tasa de interés real de equilibrio.
+  \end{block}
+
+  Bajo una distribución uniforme de la carga tributaria,
+  \[
+    t+\frac{t'}{1+r}
+    =\frac{1}{N}
+    \left(G+\frac{G'}{1+r}\right).
+  \]
+  Por tanto, la restricción del hogar es
+  \[
+    c+\frac{c'}{1+r}
+    =y+\frac{y'}{1+r}
+    -\frac{1}{N}\left(G+\frac{G'}{1+r}\right),
+  \]
+  que no depende del momento en que se cobran los impuestos.
+  \notafuentes{Williamson (2018), ecuaciones 9-24--9-26.}
+\end{frame}
+
+\begin{frame}[t]{La restricción del hogar no cambia}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.41\textwidth}
+      \small
+      \begin{itemize}
+        \item El recorte actual mueve la dotación de \(E_1\) a \(E_2\).
+        \item El aumento futuro de impuestos compensa exactamente el recorte en valor presente.
+        \item La restricción intertemporal y la elección \(A\) no cambian.
+        \item El hogar ahorra íntegramente el recorte tributario.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.15cm]{fig_9_16_equivalencia_ricardiana.png}
+      \fuentefigura{Williamson (2018), figura 9.16.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.16 y pp. 338--339.}
+\end{frame}
+
+\begin{frame}{Ahorro privado y ahorro público}
+  Aunque el consumo no cambia, la composición del ahorro sí:
+  \[
+    S^p=Y-T-C,
+    \qquad
+    S^g=T-G=-B.
+  \]
+  Ante un recorte tributario actual,
+  \[
+    \Delta S^p=-\Delta T>0,
+    \qquad
+    \Delta S^g=\Delta T<0.
+  \]
+  Por tanto,
+  \[
+    \Delta S=\Delta S^p+\Delta S^g=0.
+  \]
+
+  El mayor ahorro privado compensa exactamente la reducción del ahorro público.
+  \notafuentes{Williamson (2018), pp. 338--340.}
+\end{frame}
+
+\begin{frame}[t]{Equivalencia ricardiana en el mercado de crédito}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \item La deuda pública aumenta de \(B_1\) a \(B_2\).
+        \item La oferta privada de crédito se desplaza exactamente en la misma magnitud.
+        \item La tasa de interés permanece en \(r_1\).
+        \item No existe desplazamiento del consumo privado.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[4.95cm]{fig_9_17_mercado_credito.png}
+      \fuentefigura{Williamson (2018), figura 9.17.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 9.17 y pp. 339--341.}
+\end{frame}
+
+\begin{frame}{¿Cuándo puede fallar la equivalencia ricardiana?}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.52em}
+    \item \textbf{Redistribución:} el recorte y los impuestos futuros recaen sobre hogares distintos.
+    \item \textbf{Generaciones distintas:} quienes reciben el beneficio actual no pagan la deuda futura.
+    \item \textbf{Impuestos distorsionantes:} cambiar su momento modifica precios marginales y decisiones.
+    \item \textbf{Mercados de crédito imperfectos:} algunos hogares no pueden endeudarse o enfrentan tasas diferentes.
+  \end{enumerate}
+
+  \begin{alertblock}{Lectura correcta del teorema}
+    Es un punto de referencia para identificar qué fricción hace que la deuda y el momento de los impuestos tengan efectos reales.
+  \end{alertblock}
+  \notafuentes{Williamson (2018), pp. 341--343.}
+\end{frame}
+
+\begin{frame}{La deuda pública no es riqueza neta bajo equivalencia}
+  Para el sector privado consolidado,
+  \[
+    \underbrace{B}_{\text{activo privado}}
+    \quad\text{tiene como contraparte}\quad
+    \underbrace{\frac{T'-G'}{1+r}}_{\text{obligación tributaria futura}}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item La deuda pública es simultáneamente un activo privado y un pasivo fiscal futuro.
+    \item Emitir deuda no crea recursos: modifica el momento de la tributación.
+    \item La deuda sí puede tener efectos reales cuando redistribuye recursos, relaja restricciones financieras o altera distorsiones tributarias.
+  \end{itemize}
+
+  \centering
+  \cidehighlight{Un recorte de impuestos financiado con deuda no es gratuito.}
+  \notafuentes{Williamson (2018), pp. 340--343.}
+\end{frame}
+
+% =============================================================================
+\section{Síntesis}
+% =============================================================================
+
+\begin{frame}{Del comportamiento individual al equilibrio general}
+  \[
+    \begin{array}{c}
+      \text{preferencias }(\beta,\sigma)
+      +\text{ recursos }(y,y')
+      +\text{ política }(G,G',T,T')
+      \\[0.2cm]
+      \Downarrow
+      \\[0.2cm]
+      \text{reglas de decisión }c_i(r),\ c_i'(r),\ s_i(r)
+      \\[0.2cm]
+      \Downarrow
+      \\[0.2cm]
+      \sum_i s_i(r^*)=B
+      \\[0.2cm]
+      \Downarrow
+      \\[0.2cm]
+      \text{tasa real y asignación de equilibrio}.
+    \end{array}
+  \]
+
+  La tasa real coordina decisiones intertemporales descentralizadas.
+  \notafuentes{Williamson (2018), cap. 9; Kurlat (2020), cap. 6.}
+\end{frame}
+
+\begin{frame}{Resultados centrales}
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item El consumo depende de la riqueza intertemporal, no solo del ingreso corriente.
+    \item La ecuación de Euler caracteriza la asignación marginal de consumo entre fechas.
+    \item El ahorro permite suavizar consumo frente a variaciones del ingreso.
+    \item Los cambios permanentes del ingreso afectan más al consumo que los transitorios.
+    \item La respuesta a la tasa real combina efectos sustitución e ingreso.
+    \item El equilibrio del mercado de crédito determina endógenamente \(r^*\).
+    \item Bajo condiciones estrictas, el momento de los impuestos es neutral.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias}
+  \begin{itemize}
+    \setlength{\itemsep}{0.8em}
+    \item Williamson, Stephen D. (2018). \textit{Macroeconomics}, 6th ed. Pearson. Capítulo 9: ``A Two-Period Model: The Consumption-Savings Decision and Credit Markets''.
+    \item Kurlat, Pablo (2020). \textit{A Course in Modern Macroeconomics}. Capítulo 6: ``Consumption and Saving''.
+    \item Friedman, Milton (1957). \textit{A Theory of the Consumption Function}. Princeton University Press.
+  \end{itemize}
+\end{frame}
+
+\end{document}
