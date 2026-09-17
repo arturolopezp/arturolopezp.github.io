@@ -165,6 +165,10 @@ async function main() {
   assert.equal(await page.locator(".ge-range-field label > span").count(), 12);
   assert.equal(await page.locator("#ge-equations .ge-solution-box").count(), 2);
   assert.doesNotMatch(await page.locator("#ge-equations").textContent(), /I\(w\)|\\Phi_w|D=/);
+  assert.ok((await page.locator("#ge-equations").textContent()).includes(String.raw`\max_{C,\ell}\;U(C,\ell)`));
+  assert.ok((await page.locator("#ge-equations").textContent()).includes(String.raw`C=wN^s+\pi-T`));
+  assert.ok((await page.locator("#ge-equations").textContent()).includes(String.raw`w\ell=\psi C`));
+  assert.match(await page.locator("#ge-equations").textContent(), /Government:.*\\\(G=T\\\)/s);
   await assertOneEquationPerLine();
   if (process.env.GE_LAB_SCREENSHOT) await page.screenshot({ path: process.env.GE_LAB_SCREENSHOT, fullPage: true });
 
@@ -197,7 +201,7 @@ async function main() {
       String.raw`U(C,N)=\frac{C^{1-\sigma}}{1-\sigma}-\frac{N^{1+\varphi}}{1+\varphi}`
     )
   );
-  assert.ok((await page.locator("#ge-equations").textContent()).includes(String.raw`wC^{-\sigma}=N^\varphi`));
+  assert.ok((await page.locator("#ge-equations").textContent()).includes(String.raw`wC^{-\sigma}=(N^s)^\varphi`));
   assert.ok(
     (await page.locator("#ge-equations").textContent()).includes(
       String.raw`wN^s(w)+(1-\alpha)z\left(\frac{\alpha z}{w}\right)^{\frac{\alpha}{1-\alpha}}-G=w^{\frac{1}{\sigma}}\left[N^s(w)\right]^{-\frac{\varphi}{\sigma}}`
@@ -207,6 +211,8 @@ async function main() {
   assert.equal(await page.locator("#ge-psi-field").evaluate((el) => el.hidden), true);
   assert.equal(await page.locator("#ge-phi-field").evaluate((el) => el.hidden), false);
   assert.doesNotMatch(await page.locator("#ge-equations").textContent(), /\\eta|\\psi|I\(w\)|\\Phi_w|D=/);
+  assert.ok((await page.locator("#ge-equations").textContent()).includes(String.raw`\max_{C,N^s}\;U(C,N^s)`));
+  assert.match(await page.locator("#ge-equations").textContent(), /wealth effect/);
   await assertOneEquationPerLine();
 
   await page.locator("#ge-sigma").evaluate((el) => {
@@ -233,6 +239,8 @@ async function main() {
   );
   assert.equal(await page.locator("#ge-equations .ge-solution-box").count(), 2);
   assert.doesNotMatch(await page.locator("#ge-equations").textContent(), /I\(w\)|\\Phi_w|D=/);
+  assert.ok((await page.locator("#ge-equations").textContent()).includes(String.raw`w=\psi(N^s)^\varphi`));
+  assert.match(await page.locator("#ge-equations").textContent(), /eliminate the wealth effect/);
   await assertOneEquationPerLine();
   assert.ok(
     (await page.locator("#ge-equations").textContent()).includes(
