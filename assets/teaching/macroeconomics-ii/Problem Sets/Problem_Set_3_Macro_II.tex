@@ -1,0 +1,242 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% la versión instalada de Hyperref.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}
+\pagestyle{plain}
+
+\let\enumerateoriginal\enumerate
+\let\endenumerateoriginal\endenumerate
+\renewenvironment{enumerate}{%
+  \enumerateoriginal
+  \setlength{\itemsep}{0.5em}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\topsep}{0.4em}%
+}{\endenumerateoriginal}
+
+\newcounter{problema}
+\newenvironment{problema}[1]{%
+  \par
+  \refstepcounter{problema}%
+  \addvspace{0.9em}%
+  \noindent\textbf{Ejercicio \theproblema. #1}
+  \par\nobreak\smallskip
+}{\par}
+
+\begin{document}
+
+\begin{center}
+  {\large\textbf{Centro de Investigación y Docencia Económicas}}\\[0.25em]
+  {\large\textbf{Macroeconomía II}}\\[0.2em]
+  {\large\textbf{Problem Set 3: Consumo intertemporal y mercados de crédito}}\\[0.35em]
+  LECO -- Otoño 2026
+\end{center}
+
+\vspace{0.6em}
+\hrule
+\vspace{0.6em}
+
+
+
+\begin{problema}{Cambios transitorios y permanentes en los impuestos}
+Considere un hogar con preferencias estrictamente crecientes y estrictamente convexas sobre $(c,c')$, que recibe ingresos $(y,y')$ y paga impuestos de suma fija $(\tau,\tau')$. Puede ahorrar o endeudarse libremente a la tasa de interés real $r$. Suponga que ambos consumos son bienes normales.
+
+Para cada uno de los siguientes casos, utilice un diagrama en el plano $(c,c')$ para analizar el efecto sobre el consumo presente, el consumo futuro y el ahorro actual.
+
+\begin{enumerate}
+  \item El gobierno anuncia un aumento de los impuestos en $\Delta\tau>0$ únicamente en el periodo actual.
+
+  \item El gobierno anuncia un aumento de impuestos permanente: tanto $\tau$ como $\tau'$ aumentan en $\Delta\tau$.
+
+  \item Compare los resultados de los dos incisos. Explique por qué la respuesta del consumo depende de si el cambio en el ingreso disponible es transitorio o permanente. Relacione su respuesta con la hipótesis del ingreso permanente.
+\end{enumerate}
+\end{problema}
+
+
+
+\begin{problema}{Efectos ingreso y sustitución de la tasa de interés real}
+
+Para cada uno de los siguientes casos, utilice un diagrama en el plano $(c,c')$ para analizar los efectos de un aumento de la tasa de interés real. Grafique las restricciones presupuestarias inicial y final y construya una recta presupuestaria compensada para realizar una descomposición del cambio en la elección óptima en un efecto sustitución y un efecto ingreso. En cada caso, determine el signo del efecto sustitución, del efecto ingreso y del efecto total sobre $c$, $c'$ y $s$.
+
+\begin{enumerate}
+    \item Un hogar \textbf{ahorrador} para el cual, en la determinación de $c$, el efecto sustitución domina al efecto ingreso.
+
+    \item Un hogar \textbf{ahorrador} para el cual, en la determinación de $c$, el efecto ingreso domina al efecto sustitución.
+
+    \item Un hogar \textbf{deudor} para el cual, en la determinación de $c'$, el efecto sustitución domina al efecto ingreso.
+
+    \item Un hogar \textbf{deudor} para el cual, en la determinación de $c'$, el efecto ingreso domina al efecto sustitución.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+
+\begin{problema}{Hipótesis del ingreso permanente y función de consumo keynesiana}
+
+Compare la función de consumo keynesiana con la hipótesis del ingreso permanente. En particular, explique:
+
+\begin{enumerate}
+    \item qué medida del ingreso determina el consumo presente en cada teoría;
+
+    \item cómo responde el consumo corriente ante aumentos transitorios y permanentes del ingreso;
+
+    \item cuál es el papel del ahorro y del endeudamiento en la determinación del consumo;
+
+    \item qué evidencia empírica permitiría distinguir entre ambas explicaciones del comportamiento del consumo.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+
+\begin{problema}{Estudio de caso}
+
+Suponga que es un asesor del Secretario de Hacienda. El gobierno federal está diseñando un paquete fiscal para estimular la demanda agregada mediante un aumento de las transferencias y necesita proyectar sus efectos sobre el consumo y la producción.
+
+Uno de los asesores estima la siguiente función de consumo:
+\[
+    C=1.04+0.54(Y-T+\mathrm{TR}),
+\]
+donde $Y-T+\mathrm{TR}$ es el ingreso disponible. Para realizar sus proyecciones, el asesor calcula el siguiente multiplicador fiscal:
+    \[
+        \mu_{\mathrm{TR}}
+        =
+        \frac{0.54}{1-0.54} \approx 1.17
+    \]
+Por lo tanto, proyecta que, por cada peso adicional de transferencias, la producción aumentará aproximadamente $1.17$ pesos.
+\begin{enumerate}
+    \item El asesor propone utilizar este multiplicador para proyectar los efectos de cualquier programa de transferencias. A la luz de la hipótesis del ingreso permanente, ¿considera apropiado utilizar estas estimaciones para realizar sus proyecciones? Argumente su respuesta.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+
+
+
+
+\begin{problema}{Problema de dos periodos con riqueza inicial}
+\label{Ej:P2P}
+Suponga que un hogar resuelve el siguiente problema de consumo y ahorro en dos periodos:
+\[
+    \max_{c_1,s,c_2}\; u(c_1)+\beta u(c_2)
+\]
+sujeto a
+\[
+    s=s_0+y_1-\tau_1-c_1,
+\]
+\[
+    c_2=y_2-\tau_2+(1+r)s,
+\]
+
+donde $c_1$ es el consumo en el periodo 1; $c_2$ es el consumo en el periodo 2; $y_1$ es el ingreso del hogar en el periodo 1; $y_2$ es su ingreso en el periodo 2; $\tau_1$ y $\tau_2$ son los impuestos pagados en los periodos 1 y 2, respectivamente; $s_0$ es la riqueza inicial del hogar; $s$ es el ahorro elegido en el primer periodo; $r$ es la tasa de interés real; y $\beta$ es el factor subjetivo de descuento.
+
+Suponemos que el hogar tiene preferencias CRRA en cada periodo: 
+
+\[
+    u(c)=\frac{c^{1-\sigma}-1}{1-\sigma}, \qquad \sigma >0.
+\]
+
+\begin{enumerate}
+    \item Obtenga la ecuación de Euler.
+    \item Muestre que, bajo preferencias CRRA, la elasticidad de sustitución intertemporal es $1/\sigma$.\footnote{La elasticidad de sustitución intertemporal mide el cambio porcentual en la razón entre elección de consumo futuro y consumo presente ante un cambio porcentual en el rendimiento real. Es decir,
+      \[
+        \frac{\partial\log(c_2/c_1)}{\partial\log(1+r)}
+      \].} Explique por qué un valor bajo de $1/\sigma$ implica una menor disposición a sustituir consumo entre periodos ante cambios en la tasa de interés real y, por tanto, una mayor preferencia por suavizar el consumo.
+
+    \item Obtenga expresiones en forma cerrada para las elecciones óptimas del hogar, $c_1^*$, $c_2^*$ y $s^*$.\footnote{Una solución está en \textit{forma cerrada} cuando la variable de interés puede expresarse explícitamente como una función de otras variables y parámetros. Por ejemplo, si se solicita resolver para una variable $x$, una expresión como $x=y^2-z$ constituye una solución en forma cerrada. En cambio, una ecuación como $e^x+x-b=0$ determina implícitamente a $x$, pero no es una solución en forma cerrada.}
+
+    \item ¿Cómo depende la razón $c_1^*/y_1$ del ingreso futuro $y_2$? ¿Qué ocurriría con el consumo presente si los hogares se volvieran repentinamente más optimistas acerca de su ingreso futuro? Interprete económicamente.
+
+    \item ¿Cómo depende la razón $c_1^*/y_1$ de la riqueza inicial $s_0$? Interprete económicamente.
+
+    \item ¿Cómo depende la razón $c_1^*/y_1$ del factor subjetivo de descuento $\beta$? Interprete económicamente.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+
+
+
+\begin{problema}{Restricciones de crédito y la Equivalencia Ricardiana}
+
+Suponga que un hogar resuelve la siguiente variante del problema del
+Ejercicio~\ref{Ej:P2P}:
+\[
+    \max_{c_1,a,c_2}\;u(c_1)+\beta u(c_2)
+\]
+sujeto a
+\[
+    s=y_1-\tau_1-c_1,
+\]
+\[
+    c_2=y_2-\tau_2+(1+r)s,
+\]
+y
+\begin{equation}
+    s\geq-b.
+    \label{eq:restriccion-credito}
+\end{equation}
+
+\begin{enumerate}
+    \item ¿Qué significa la restricción
+    \eqref{eq:restriccion-credito}? ¿Qué representa $b$?
+
+    \item Grafique la restricción presupuestaria del hogar. En la misma gráfica, represente la restricción \eqref{eq:restriccion-credito}.
+
+    \item Resuelva las elecciones óptimas $c_1^*$, $c_2^*$ y $s^*$.
+
+    \textit{Hint:} observe que la restricción
+    \eqref{eq:restriccion-credito} es una desigualdad débil. Por lo tanto, la restricción puede saturarse o no saturarse. Si no se satura, puede utilizar la solución obtenida en el Ejercicio~\ref{Ej:P2P}. Después, determine qué ocurre cuando la restricción se satura y establezca las condiciones bajo las cuales se presenta cada caso.
+
+    \item Muestre que, manteniendo todo lo demás constante, es más probable que la restricción \eqref{eq:restriccion-credito} se sature cuando:
+    \begin{enumerate}
+        \renewcommand{\labelenumii}{\textnormal{(\roman{enumii})}}
+        \item el ingreso disponible futuro $y_2-\tau_2$ es alto;
+        \item el ingreso disponible presente $y_1-\tau_1$ es bajo;
+        \item el límite de endeudamiento $b$ es bajo.
+    \end{enumerate}
+    Interprete cada una de estas condiciones.
+
+    \item Suponga que el gobierno anuncia un paquete de estímulo fiscal de tamaño $\Delta$. El programa consiste en reducir $\tau_1$ en $\Delta$ y aumentar $\tau_2$ en $\Delta(1+r)$, de modo que el valor presente de los impuestos permanece constante.
+
+    ¿Cómo responde $c_1$ al paquete de estímulo si la economía parte de una situación en la que la restricción \eqref{eq:restriccion-credito} no se satura? ¿Cómo responde $c_1$ si la economía parte de una situación en la que la restricción sí se satura? Explique.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+\end{document}
