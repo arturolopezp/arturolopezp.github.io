@@ -1,0 +1,1471 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% los paquetes Beamer/Hyperref instalados.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+\makeatletter
+\@namedef{ver@epstopdf-base.sty}{9999/12/31}
+\makeatother
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 5: MODELO INTERTEMPORAL REAL CON INVERSION
+% =============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\uselanguage{English}
+\languagepath{English}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+\usepackage{array,tabularx}
+
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{remark}[theorem]{Observación}
+\newtheorem{assumption}[theorem]{Supuesto}
+
+\AtBeginDocument{\justifying}
+\patchcmd{\itemize}{\raggedright}{\justifying}{}{}
+\patchcmd{\enumerate}{\raggedright}{\justifying}{}{}
+\patchcmd{\description}{\raggedright}{\justifying}{}{}
+\addtobeamertemplate{block begin}{}{\justifying}
+\addtobeamertemplate{block alerted begin}{}{\justifying}
+\addtobeamertemplate{block example begin}{}{\justifying}
+\makeatletter
+\patchcmd{\beamer@columnenv}{\raggedright}{\justifying}{}{}
+\patchcmd{\beamer@columncom}{\raggedright}{\justifying}{}{}
+\makeatother
+
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+\setbeamertemplate{section in head/foot}{\color{white}\insertsectionhead}
+\setbeamertemplate{section in head/foot shaded}{\color{white!55}\insertsectionhead}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,ht=3.05ex,dp=1.05ex,
+    leftskip=0.42cm,rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+  }%
+  \vskip0pt
+}
+
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+\setbeamertemplate{background}{%
+  \vbox to \paperheight{%
+    \vfill
+    \hbox to \paperwidth{%
+      \hfill
+      \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      \hspace{0.18cm}%
+    }%
+    \vspace{0.68cm}%
+  }%
+}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+\newcommand{\FigurasSesion}{Figuras/05_Modelo Intertemporal con Inversion}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+\title[Macroeconomía II]{Sesión 5 \\ Modelo intertemporal del sector real con inversión}
+\subtitle{Macroeconomía II}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Punto de partida}
+
+
+\begin{frame}{Objetivos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Integrar las decisiones de consumo, ahorro, trabajo e inversión en un modelo dinámico de equilibrio general.
+    \item Construir un modelo que sirva como base para analizar cómo choques macroeconómicos afectan a la economía, y para evaluar el papel de la política macroeconómica.
+    \item Un modelo intertemporal del sector real de la economía: mostrar mostrar cómo se determinan la producción real agregada, el consumo real, la inversión real, el empleo, el salario real y la tasa de interés real en la macroeconomía.
+    \item Para predecir variables nominales, necesitamos añadir dinero al modelo intertemporal del sector real (próximas sesiones).
+    \item El aspecto dinámico del modelo consiste en que hogares y empresas toman decisiones intertemporales: \textit{trade-offs} entre el presente y el futuro.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Decisión intertemporal de la empresa: Inversión}
+  \small
+  \begin{itemize}
+    \item Inversión: gasto en maquinaria, equipo, plantas productivas, etc.
+    \item Los \textbf{bienes de inversión} son producidos hoy para su uso futuro en la producción de bienes y servicios.
+    \item La capacidad productiva utilizada para producir bienes de inversión podría utilizarse para producir bienes de consumo presente; por otro lado, los bienes de inversión \textbf{incrementan la capacidad productiva futura: el stock de capital futuro}.
+    \item Por lo tanto, las empresas hacen un \textbf{\textit{trade-off} entre beneficios presentes y mayores beneficios futuros}.
+    \item \textbf{Determinantes de la inversión}: el nivel presente de stock de capital, mayor productividad total de los factores esperada y la tasa de interés real.
+    \item Un determinante adicional: percepción de \textbf{riesgo crediticio}. Si los prestamistas (bancos e instituciones financieras) perciben el crédito como más riesgoso en general, las empresas tendrán mayor dificultad en obtener crédito para financiar sus proyectos de inversión.
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Setup del modelo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \textbf{Agentes}
+      \begin{itemize}
+        \item Hogar representativo.
+        \item Empresa representativa.
+        \item Gobierno.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{Mercados}
+      \begin{itemize}
+        \item Laboral, con precio \(w\).
+        \item Bienes y servicios, cuyo precio se normaliza a uno.
+        \item Crédito, con rendimiento \(r\).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{0.4cm}
+  \begin{itemize}
+    \item Especificamos el modelo en términos de curvas de oferta y demanda.
+    \item Podrémos capturar la conducta esencial en el modelo al examinar la \textbf{interacción entre el hogar representativo, la empresa representativa y el gobierno en dos mercados: el mercado laboral en el periodo presente y el merado de bienes y servicios en el periodo presente}.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 401--402.}
+\end{frame}
+
+\begin{frame}{Secuencia económica del modelo}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.58em}
+    \item El hogar elige consumo y ocio en ambos periodos para maximizar su utilidad.
+    \item La empresa contrata trabajo, produce el bien de consumo y elige inversión presente.
+    \item La inversión determina el capital disponible en el periodo futuro: $K'=(1-\delta)K+I$.
+    \item Gobierno, hogar y empresa demandan el bien presente; gobierno y hogar demandan el bien futuro.
+    \item \(w, w'\) y \(r\) se ajustan para hacer compatibles todas las decisiones.
+  \end{enumerate}
+\end{frame}
+
+\section{Hogar representativo}
+
+\begin{frame}{El hogar representativo}
+  El hogar dispone de \(h\) unidades de tiempo en cada periodo y elige
+  \[
+    (C,\ell,C',\ell',S^p).
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.45em}
+    \item Oferta laboral: \(N^s=h-\ell\) y \(N^{s\prime}=h-\ell'\).
+    \item Ingreso laboral: \(w(h-\ell)\) y \(w'(h-\ell')\).
+    \item Recibe beneficios \((\pi,\pi')\) porque es propietario de la empresa.
+    \item Paga impuestos de suma fija \((T,T')\).
+    \item Toma \((w,w',r)\) como dados.
+  \end{itemize}
+  \notafuentes{Williamson (2018), pp. 401--402.}
+\end{frame}
+
+\begin{frame}{Restricciones presupuestarias por periodo}
+  En el presente,
+  \[
+    C+S^p=w(h-\ell)+\pi-T.
+  \]
+  En el futuro, el hogar consume todos sus recursos:
+  \[
+    C'=w'(h-\ell')+\pi'-T'+(1+r)S^p.
+  \]
+  \begin{itemize}
+    \item \(S^p>0\): el hogar es ahorrador.
+    \item \(S^p<0\): el hogar es deudor.
+  \end{itemize}
+  \notafuentes{Williamson (2018), ecuaciones 11-1 y 11-2.}
+\end{frame}
+
+\begin{frame}{Restricción presupuestaria intertemporal}
+  Eliminando \(S^p\), obtenemos
+  \[
+    \boxed{
+    C+\frac{C'}{1+r}
+    =w(h-\ell)+\pi-T
+    +\frac{w'(h-\ell')+\pi'-T'}{1+r}
+    }.
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.48em}
+    \item El lado izquierdo es el valor presente del consumo.
+    \item El lado derecho es la \textit{riqueza intertemporal disponible}.
+    \item A diferencia del modelo del Cap. 9 (equilibrio parcial), el ingreso disponible por periodo es \textbf{endógeno} (equilibrio general).
+  \end{itemize}
+  \notafuentes{Williamson (2018), ecuación 11-3.}
+\end{frame}
+
+\begin{frame}{Problema del hogar}
+  El hogar resuelve
+  \[
+    \max_{C,C',\ell,\ell'} U(C,\ell,C',\ell') = u(C, \ell) + \beta u(C', \ell')
+  \]
+  sujeto a
+  \[
+    C+\frac{C'}{1+r}
+    \leq w(h-\ell)+\pi-T
+    +\frac{w'(h-\ell')+\pi'-T'}{1+r}.
+  \]
+  Suponemos que \(U\) es creciente en consumo y ocio, estrictamente cuasicóncava y diferenciable, de modo que la solución interior es única.
+  \notafuentes{Williamson (2018), pp. 402--403.}
+\end{frame}
+
+\begin{frame}{CPOs}
+  \begin{align*}
+    &C: \ u_C - \lambda = 0                         \tag{1} \\[4pt]
+    &C': \  \beta u_{C'} - \frac{\lambda}{1+r} = 0    \tag{2}  \\[4pt]
+    &\ell: \  u_\ell - w\lambda = 0                      \tag{3}  \\[4pt]
+    &\ell': \  \beta u_{\ell'} - \frac{w'\lambda}{1+r} = 0 \tag{4} \\[4pt]
+    &\lambda: \ w(h-\ell)+\pi-T +\frac{w'(h-\ell')+\pi'-T'}{1+r} - C - \frac{C'}{1+r} = 0 \tag{5}
+  \end{align*}
+\end{frame}
+
+\begin{frame}{Tres condiciones de optimalidad}
+  Sustituyendo (1) en (2):
+  $$
+  \boxed{u_C = \beta (1+r) u_{C'}} \qquad \text{\textbf{Ecuación de Euler}}
+  $$
+  Sustituyendo (1) en (3):
+  $$
+  \boxed{\mathrm{MRS}_{\ell,C}=w} \qquad \text{\textbf{Elección de ocio presente}}
+  $$
+  Sustituyendo (2) en (4):
+  $$
+  \boxed{\mathrm{MRS}_{\ell',C'}=w'} \qquad \text{\textbf{Elección de ocio futura}}
+  $$
+  \begin{itemize}
+    \item El salario real presente (futuro) es el costo de oportunidad del ocio presente (futuro).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Oferta laboral en el tiempo}
+  \textbf{¿En qué periodo el hogar elegirá trabajar más?}
+  
+  \vspace{.2cm}
+
+  Sustituyendo (3) en (4):
+  \begin{align*}
+    \frac{u_\ell}{u_{\ell'}} = \beta(1+r) \frac{w}{w'}
+  \end{align*}
+  \begin{itemize}
+    \small
+    \item El ocio será relativamente más alto en el periodo en que el salario sea relativamente más bajo: en periodos de mayor nivel salarial, habrá mayor oferta laboral.
+    \item Además, aumentos en $r$ incrementan la oferta laboral: mayor retorno al ahorro $\implies$ mayores incentivos a obtener ingresos laborales $\implies$ mayor ocio y consumo en el futuro.
+    \item Esta respuesta de la oferta laboral, motivada por esta \textbf{sustitución intertemporal de trabajo}, está en el corazón de las fluctuaciones de empleo en este modelo.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Determinantes de la oferta laboral presente}
+  Las decisiones óptimas generan una función de oferta laboral
+  \[
+    N^s=N^s(w,r; \omega),
+  \]
+  donde \(\omega\) denomina la riqueza intertemporal.
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item \(N^s_w>0\): un salario real mayor encarece el costo de oportunidad del ocio (suponemos que el efecto sustitución domina al efecto ingreso).
+    \item \(N^s_r>0\): una tasa mayor encarece el ocio presente respecto del ocio futuro (suponemos que el efecto sustitución domina al efecto ingreso).
+    \item \(N^s_\omega<0\): aumentar la riqueza intertemporal genera un efecto ingreso.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Respuesta de la oferta laboral presente: $w$}
+    \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.41\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.48em}
+        \item Si \(w\uparrow\), el costo de oportunidad del ocio aumenta.
+        \item El hogar sustituye ocio por consumo, suponiendo que domina el efecto sustitución.
+        \item Por lo tanto, la curva de oferta laboral tiene pendiente positiva.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_1_w.png}
+      \fuentefigura{Williamson (2018), figura 11.1.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}[t]{Respuesta de la oferta laboral presente: $r$}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.41\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.48em}
+        \item Si \(r\uparrow\), trabajar y ahorrar hoy permite adquirir más consumo y ocio mañana.
+        \item El hogar sustituye ocio presente por ocio futuro.
+        \item Para todo \(w\), \(N^s\) aumenta.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_2_oferta_labor_tasa.png}
+      \fuentefigura{Williamson (2018), figura 11.2.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Respuesta de la oferta laboral presente: $\omega$}
+    \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.41\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.48em}
+        \item Si la riqueza intertemporal aumenta \(\omega\uparrow\), se genera un efecto ingreso.
+        \item El hogar demanda mayor consumo y ocio (bienes normales).
+        \item Para todo \(w\), \(N^s\) cae.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_3_oferta_laboral_we.png}
+      \fuentefigura{Williamson (2018), figura 11.3.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+\begin{frame}[t]{Demanda de consumo presente}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \small
+      \begin{itemize}
+        \item La regla de decisión puede escribirse como
+        \[
+          C^d=C^d(Y,r;\omega).
+        \]
+        donde $Y$ es el ingreso corriente.
+        \item La propensión marginal a consumir satisface
+        \[
+          0<C_Y^d<1.
+        \]
+        \item Parte de un aumento del ingreso presente se ahorra (por suavización del consumo).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[4.7cm]{fig_11_4_consumo_ingreso.png}
+      \fuentefigura{Williamson (2018), figura 11.4.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.4 y pp. 406--407.}
+\end{frame}
+
+\begin{frame}{Desplazamientos de la demanda de consumo presente}
+  Manteniendo constante el ingreso presente \(Y\):
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item Si \(r\uparrow \Rightarrow C^d\downarrow\), suponiendo que domina el efecto sustitución intertemporal.
+    \item Si \(Y'\uparrow \Rightarrow C^d\uparrow\), por suavización del consumo.
+    \item Si \(\omega \uparrow \Rightarrow C^d\uparrow\), por suavización del consumo.
+    \item Por HIP, el desplazamiento de la curva de demanda de consumo debe ser mayor cuando aumenta $\omega$ respecto a cuando aumentan $Y$ o $Y'$.
+  \end{itemize}
+\end{frame}
+
+\section{Empresa representativa}
+
+
+\begin{frame}{Tecnología en los dos periodos}
+  La empresa produce utilizando capital y trabajo como insumos productivos:
+  \[
+    Y=zF(K,N),
+    \qquad
+    Y'=z'F(K',N').
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item \(z\) y \(z'\) son la productividad total de los factores presente y futura.
+    \item \(K\) está predeterminado al inicio del periodo presente.
+    \item \(K'\) es elegido indirectamente mediante la inversión actual.
+    \item \(F\) tiene productos marginales positivos y decrecientes.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Acumulación de capital}
+  La ley de movimiento del capital es
+  \[
+    \boxed{K'=(1-\delta)K+I},
+    \qquad 0\leq\delta\leq1.
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item Una unidad de producto presente se transforma uno a uno en una unidad de capital futuro.
+    \item \((1-\delta)K\) es el capital presente que sobrevive hasta el futuro.
+    \item Al final del segundo periodo, el capital remanente se vende como bien de consumo.
+  \end{itemize}
+  \notafuentes{Williamson (2018), ecuación 11-9.}
+\end{frame}
+
+\begin{frame}{Beneficios presentes y futuros}
+  Los beneficios son
+  \[
+    \pi=Y-wN-I,
+  \]
+  \[
+    \pi'=Y'-w'N'+(1-\delta)K'.
+  \]
+  La empresa maximiza el valor presente de sus beneficios:
+  \[
+    \boxed{V=\pi+\frac{\pi'}{1+r}}.
+  \]
+  \begin{itemize}
+    \item Invertir reduce los dividendos presentes en una unidad por unidad invertida.
+    \item El beneficio aparece mañana mediante mayor producción y mayor valor de liquidación.
+  \end{itemize}
+  \notafuentes{Williamson (2018), ecuaciones 11-10--11-12.}
+\end{frame}
+
+\begin{frame}{Problema de la empresa}
+  Tomando \((w,w',r)\) como dados, la empresa resuelve
+  \[
+    \max_{N,N',I}\;
+    V = zF(K,N)-wN-I
+    +\frac{z'F((1-\delta)K+I,N')-w'N'+(1-\delta)K'}{1+r}.
+  \]
+  CPO:
+  \begin{align*}
+    &N: \ zF_N - w = 0 \tag{1} \\[4pt]
+    &N': \ \frac{z'F_{N'} - w'}{1+r} = 0 \tag{2} \\[4pt]
+    &I': \ -1 + \frac{z'F_{K'} +(1-\delta)}{1+r} = 0 \tag{3}
+  \end{align*}
+\end{frame}
+
+
+
+\begin{frame}{Condiciones de optimalidad}
+  De (1) y (2), las relgas de decisión de demanda laboral son:
+  \[
+    \boxed{\mathrm{MPN}=w},
+    \qquad
+    \boxed{\mathrm{MPN}'=w'}.
+  \]
+\end{frame}
+
+
+\begin{frame}[t]{Demanda de trabajo presente}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \item La empresa contrata trabajo hasta que
+        \[
+          zF_N(K,N)=w.
+        \]
+        \item Como \(F_{NN}<0\), la demanda de trabajo tiene pendiente negativa.
+        \item \(z\uparrow\) o \(K\uparrow\) desplazan \(N^d\) a la derecha (el $\mathrm{MPN}$ aumenta para todo $N$).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[5.1cm]{fig_11_7_demanda_labor.png}
+      \fuentefigura{Williamson (2018), figura 11.7.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.7 y pp. 410--411.}
+\end{frame}
+
+
+\begin{frame}{Regla óptima de inversión}
+  La condición (3) indica que, en el óptimo, el costo marginal en valor presente de la inversión, que es igual a 1, es igual al beneficio marginal en valor presente de la inversión:
+  \[
+  \boxed{
+    \frac{\mathrm{MPK'} + 1-\delta}{1+r} = 1
+  }
+  \]
+  Reordenando la condición de optimalidad, obtenemos la \textbf{regla óptima de inversión}
+  \[
+  \boxed{
+    \mathrm{MPK'} -\delta = r
+  }
+  \] 
+  La empresa invierte hasta el punto en que el \textbf{producto marginal neto del capital}, $\mathrm{MPK'} - \delta$, es igual a la tasa de interés real.
+\end{frame}
+
+
+\begin{frame}{Interpretación de la regla óptima de inversión}
+    \begin{itemize}
+    \item \(\mathrm{MPK}'-\delta\) es el rendimiento marginal neto del capital.
+    \item \(r\) es el costo de oportunidad (el rendimiento disponible en bonos) y el costo efectivo de los proyectos de inversión.
+    \item Si \(\mathrm{MPK}'-\delta>r\), la empresa incrementa \(I\).
+    \item Si \(\mathrm{MPK}'-\delta<r\), la empresa reduce \(I\).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Demanda de inversión}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \item Como \(F_{KK}<0\), un mayor \(K'\) reduce \(\mathrm{MPK}'\).
+        \item Dado \(K\), más \(I\) implica más \(K'\).
+        \item Por tanto,
+        \[
+          I^d=I^d(r;K,z',\delta),
+          \qquad I_r^d<0.
+        \]
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_9_inversion_optima.png}
+      \fuentefigura{Williamson (2018), figura 11.9.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.9 y pp. 413--415.}
+\end{frame}
+
+\begin{frame}[t]{Desplazamientos de la demanda de inversión}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      \(I^d(r;K,z',\delta)\) se desplaza a la derecha si:
+      \begin{itemize}
+        \item \(z'\uparrow\): aumenta la productividad futura del capital;
+        \item \(K\downarrow\): aumenta el producto marginal futuro del capital;
+        \item \(\delta\downarrow\): una fracción mayor del capital sobrevive.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[4.65cm]{fig_11_10_inversion_desplazamiento.png}
+      \fuentefigura{Williamson (2018), figura 11.10.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.10 y pp. 414--416.}
+\end{frame}
+
+\begin{frame}{¿Por qué la inversión es tan volátil?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.63em}
+    \item El consumo responde a incentivos de suavización intertemporal.
+    \item La inversión responde al rendimiento marginal esperado de proyectos productivos.
+    \item Cambios relativamente pequeños en \(r\), \(z'\), \(K\) o el riesgo de crédito pueden generar cambios grandes en \(I\).
+    \item La inversión absorbe una parte importante del ajuste ante choques agregados.
+  \end{itemize}
+  \begin{block}{Predicción}
+    La inversión debe ser más volátil que el consumo y, típicamente, más volátil que el producto.
+  \end{block}
+  \notafuentes{Williamson (2018), pp. 415--416.}
+\end{frame}
+
+\begin{frame}{Información asimétrica y prima de incumplimiento}
+  Si los bancos no distinguen empresas buenas de malas, las empresas deudoras enfrentan
+  \[
+    r^L=r+x,
+  \]
+  donde \(x>0\) es la prima de incumplimiento. Su regla de inversión es
+  \[
+    \boxed{\mathrm{MPK}'-\delta=r+x}
+    \qquad\Longleftrightarrow\qquad
+    \mathrm{MPK}'-\delta-x=r.
+  \]
+  Una mayor incertidumbre crediticia eleva \(x\) y reduce la inversión para cualquier tasa segura \(r\).
+  \notafuentes{Williamson (2018), ecuación 11-17 y pp. 417--419.}
+\end{frame}
+
+\begin{frame}[t]{Una prima mayor reduce la inversión}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \item \(x_2>x_1\) aumenta el costo de financiamiento externo.
+        \item La curva relevante se desplaza hacia abajo.
+        \item Incluso empresas solventes invierten menos si el mercado no puede identificarlas.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_11_prima_incumplimiento.png}
+      \fuentefigura{Williamson (2018), figura 11.11.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.11 y pp. 418--419.}
+\end{frame}
+
+\begin{frame}[t]{Inversión y diferenciales de tasas}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.37\textwidth}
+      \small
+      \begin{itemize}
+        \item El diferencial BAA--AAA aproxima la prima de riesgo corporativo.
+        \item La inversión y el diferencial exhiben una correlación negativa.
+        \item En recesiones, el diferencial tiende a aumentar cuando la inversión cae.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.59\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_12_inversion_spread.png}
+      \fuentefigura{Williamson (2018), figura 11.12.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figuras 11.12--11.13 y pp. 419--421.}
+\end{frame}
+
+\section{Equilibrio}
+
+\begin{frame}{Gobierno}
+  El gobierno fija exógenamente \((G,G')\), cobra impuestos de suma fija \((T,T')\) y puede emitir deuda. Su restricción intertemporal es
+  \[
+    \boxed{G+\frac{G'}{1+r}=T+\frac{T'}{1+r}}.
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item El valor presente del gasto debe financiarse con el valor presente de impuestos.
+    \item Un aumento de \(G\) o \(G'\) reduce la riqueza intertemporal privada.
+    \item El momento de los impuestos no altera la riqueza bajo equivalencia ricardiana.
+  \end{itemize}
+  \notafuentes{Williamson (2018), ecuación 11-18.}
+\end{frame}
+
+\begin{frame}{Definición de equilibrio competitivo}
+  Dadas las variables exógenas \((K,z,z',G,G')\), un equilibrio competitivo consiste en:
+  \begin{enumerate}
+    \setlength{\itemsep}{0.48em}
+    \item el hogar maximiza su utilidad tomando precios, impuestos y beneficios como dados;
+    \item la empresa maximiza el valor presente de sus beneficios tomando precios como dados;
+    \item el gobierno satisface su restricción presupuestaria intertemporal;
+    \item los mercados de trabajo y de bienes se vacían en ambos periodos.
+  \end{enumerate}
+  \notafuentes{Williamson (2018), pp. 422--433.}
+\end{frame}
+
+\begin{frame}{Condiciones de vaciado de mercado}
+  En el periodo presente,
+  \[
+    \boxed{N=h-\ell},
+    \qquad
+    \boxed{Y=C+I+G}.
+  \]
+  En el periodo futuro,
+  \[
+    \boxed{N'=h-\ell'},
+    \qquad
+    \boxed{Y'+(1-\delta)K'=C'+G'}.
+  \]
+  \begin{block}{Ley de Walras}
+    Una vez satisfechas las restricciones presupuestarias de hogar, empresa y gobierno, el vaciado de los mercados de bienes y trabajo implica el vaciado del mercado de crédito.
+  \end{block}
+\end{frame}
+
+\begin{frame}[t]{Mercado laboral para una tasa real dada}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      Para un valor dado de \(r\):
+      \begin{enumerate}
+        \item \(N^s(w,r)\) y \(N^d(w)\) determinan \((w,N)\).
+        \item La función de producción determina
+        \[
+          Y=zF(K,N).
+        \]
+        \item Repitiendo para cada \(r\), obtenemos \(Y^s(r)\).
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.2cm]{fig_11_14_labor_produccion.png}
+      \fuentefigura{Williamson (2018), figura 11.14.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.14 y pp. 422--424.}
+\end{frame}
+
+\begin{frame}{Construcción de la oferta de producto}
+  El equilibrio del mercado laboral, dado \(r\), satisface
+  \[
+    N^s(w,r;\Omega)=N^d(w;K,z).
+  \]
+  Esta ecuación determina \(w(r)\) y \(N(r)\). Por tanto,
+  \[
+    \boxed{Y^s(r)=zF(K,N(r))}.
+  \]
+  Como \(N_r>0\) bajo el supuesto de sustitución intertemporal del ocio,
+  \[
+    \frac{dY^s}{dr}=zF_N(K,N)\frac{dN}{dr}>0.
+  \]
+  \notafuentes{Williamson (2018), pp. 423--425.}
+\end{frame}
+
+\begin{frame}[t]{La curva de oferta de producto}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      \begin{itemize}
+        \item \(r\uparrow\) desplaza la oferta laboral a la derecha.
+        \item \(w\downarrow\) y \(N\uparrow\).
+        \item Con \(K\) y \(z\) dados, \(Y\uparrow\).
+        \item Por ello, \(Y^s\) tiene pendiente positiva en el plano \((Y,r)\).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.25cm]{fig_11_15_oferta_producto.png}
+      \fuentefigura{Williamson (2018), figura 11.15.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.15 y pp. 424--425.}
+\end{frame}
+
+\begin{frame}{Desplazamientos de la oferta de producto}
+  \(Y^s(r)\) se desplaza a la derecha cuando:
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item \(z\uparrow\): aumenta la productividad y la demanda de trabajo;
+    \item \(K\uparrow\): aumenta la productividad marginal del trabajo;
+    \item \(G\uparrow\) o \(G'\uparrow\): el valor presente de impuestos aumenta, la riqueza privada cae y la oferta laboral sube.
+  \end{itemize}
+  \begin{alertblock}{Movimiento versus desplazamiento}
+    Un cambio en \(r\) genera un movimiento sobre \(Y^s\); cambios en \(z\), \(K\) o la riqueza desplazan la curva.
+  \end{alertblock}
+  \notafuentes{Williamson (2018), figuras 11.16--11.17 y pp. 425--428.}
+\end{frame}
+
+\begin{frame}[t]{Productividad y oferta de producto}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.38\textwidth}
+      \small
+      \begin{itemize}
+        \item \(z\uparrow\) desplaza \(N^d\) a la derecha.
+        \item La función de producción se desplaza hacia arriba.
+        \item Para cada \(r\), aumentan empleo y producto.
+        \item \(Y^s\) se desplaza a la derecha.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.25cm]{fig_11_17_ptf_oferta_producto.png}
+      \fuentefigura{Williamson (2018), figura 11.17.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.17 y pp. 426--428.}
+\end{frame}
+
+\begin{frame}{Demanda de producto: un punto fijo}
+  La demanda total de bienes presentes es
+  \[
+    Y^d=C^d(Y^d,r;\Omega)+I^d(r;K,z',\delta)+G.
+  \]
+  Para un \(r\) dado, el nivel demandado \(Y^d(r)\) es el punto fijo que satisface
+  \[
+    \boxed{Y=C^d(Y,r;\Omega)+I^d(r;K,z',\delta)+G}.
+  \]
+  La condición \(0<C_Y^d<1\) garantiza que el gasto inducido aumenta menos que proporcionalmente con el ingreso.
+  \notafuentes{Williamson (2018), ecuación 11-19 y pp. 426--430.}
+\end{frame}
+
+\begin{frame}{Pendiente de la demanda de producto}
+  Diferenciando implícitamente respecto de \(r\),
+  \[
+    \frac{dY^d}{dr}
+    =\frac{C_r^d+I_r^d}{1-C_Y^d}.
+  \]
+  Bajo los supuestos
+  \[
+    C_r^d<0,\qquad I_r^d<0,\qquad 0<C_Y^d<1,
+  \]
+  se obtiene
+  \[
+    \boxed{\frac{dY^d}{dr}<0}.
+  \]
+  Una tasa real mayor reduce consumo e inversión y, mediante el multiplicador, disminuye el producto demandado.
+\end{frame}
+
+\begin{frame}[t]{Construcción de la demanda de producto}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.38\textwidth}
+      \small
+      \begin{itemize}
+        \item Para cada \(r\), la intersección con la línea de \(45^\circ\) determina \(Y^d(r)\).
+        \item \(r_2>r_1\) reduce \(C^d+I^d+G\).
+        \item La curva \(Y^d\) tiene pendiente negativa.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.25cm]{fig_11_19_demanda_producto.png}
+      \fuentefigura{Williamson (2018), figura 11.19.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.19 y pp. 429--431.}
+\end{frame}
+
+\begin{frame}{Desplazamientos de la demanda de producto}
+  \(Y^d(r)\) se desplaza a la derecha si:
+  \begin{itemize}
+    \setlength{\itemsep}{0.54em}
+    \item \(G\uparrow\): aumenta directamente la demanda de bienes;
+    \item el valor presente de impuestos disminuye: aumenta \(C^d\);
+    \item \(Y'\uparrow\): aumenta la riqueza y el consumo presente;
+    \item \(z'\uparrow\): aumenta el rendimiento esperado y \(I^d\);
+    \item \(K\downarrow\): aumenta \(\mathrm{MPK}'\) y \(I^d\).
+  \end{itemize}
+  \notafuentes{Williamson (2018), figura 11.20 y pp. 431--432.}
+\end{frame}
+
+\begin{frame}{Equilibrio en el mercado de bienes}
+  El equilibrio real intertemporal satisface
+  \[
+    \boxed{Y^s(r^*)=Y^d(r^*)}.
+  \]
+  La intersección determina simultáneamente
+  \[
+    (Y^*,r^*).
+  \]
+  Dado \(r^*\), el mercado laboral determina
+  \[
+    (N^*,w^*).
+  \]
+  Finalmente, las reglas de decisión de los agentes determinan \(C^*\), \(I^*\), \(\ell^*\) y \(K^{\prime *}\).
+\end{frame}
+
+\begin{frame}[t]{El modelo intertemporal real completo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.36\textwidth}
+      \small
+      \begin{itemize}
+        \item Panel (b): \(Y^d=Y^s\) determina \(r^*\) y \(Y^*\).
+        \item Panel (a): dado \(r^*\), \(N^d=N^s\) determina \(w^*\) y \(N^*\).
+        \item Los dos mercados se resuelven simultáneamente.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.60\textwidth}
+      \centering
+      \figura[4.95cm]{fig_11_21_modelo_completo.png}
+      \fuentefigura{Williamson (2018), figura 11.21.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.21 y pp. 432--434.}
+\end{frame}
+
+\begin{frame}{Orden práctico para resolver el modelo}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.62em}
+    \item Derivar \(N^s(w,r)\), \(C^d(Y,r)\), \(N^d(w)\) e \(I^d(r)\).
+    \item Imponer \(N^s=N^d\) para construir \(Y^s(r)\).
+    \item Imponer \(Y=C^d+I^d+G\) para construir \(Y^d(r)\).
+    \item Resolver \(Y^s(r^*)=Y^d(r^*)\).
+    \item Recuperar \(Y^*,w^*,N^*,C^*,I^*\) y \(K^{\prime *}\).
+  \end{enumerate}
+  \begin{block}{Experimentación}
+    Un choque modifica una o más reglas de decisión; esas modificaciones desplazan curvas y producen un nuevo vector de precios y asignaciones.
+  \end{block}
+\end{frame}
+
+\section{Experimentos}
+
+\begin{frame}{Cómo leer un choque en equilibrio general}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.55em}
+    \item Identificar la variable exógena que cambia y el mercado donde aparece directamente.
+    \item Determinar qué reglas de decisión se modifican.
+    \item Traducir esos cambios en desplazamientos de \(Y^s(r)\), \(Y^d(r)\) o de las curvas del mercado laboral.
+    \item Encontrar el nuevo \((Y^*,r^*)\) y, después, el nuevo \((N^*,w^*)\).
+    \item Seguir la propagación del choque hacia consumo, inversión y capital futuro.
+  \end{enumerate}
+  \begin{alertblock}{Disciplina del análisis}
+    Un movimiento sobre una curva proviene del ajuste de un precio endógeno; un desplazamiento proviene de un cambio exógeno o paramétrico.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Aumento temporal del gasto público}
+  Suponga que \(G\) aumenta en el periodo presente, mientras \(G'\) permanece constante.
+  \begin{itemize}
+    \setlength{\itemsep}{0.48em}
+    \item El choque se origina en el mercado de bienes: la demanda pública aumenta directamente.
+    \item El mayor valor presente de impuestos reduce la riqueza del hogar y desplaza la demanda de consumo hacia abajo.
+    \item La menor riqueza incrementa la oferta laboral y desplaza la oferta de producto hacia la derecha.
+    \item La inversión no se desplaza directamente: se mueve sobre \(I^d(r)\) cuando cambia \(r\).
+  \end{itemize}
+  \[
+    \Delta Y^d
+    =
+    \Delta G+\Delta C^d,
+    \qquad
+    \Delta C^d<0.
+  \]
+\end{frame}
+
+\begin{frame}{Desplazamiento inicial de la demanda de producto}
+  Sea \(m\in(0,1)\) la propensión marginal a consumir respecto de la riqueza intertemporal y sea \(\Delta\) el desplazamiento horizontal de \(Y^d\), manteniendo \(r\) fijo. Entonces,
+  \[
+    \Delta
+    =
+    \Delta G-m\Delta G+m\Delta.
+  \]
+  Por lo tanto,
+  \[
+    (1-m)\Delta=(1-m)\Delta G
+    \quad\Longrightarrow\quad
+    \boxed{\Delta=\Delta G}.
+  \]
+  \begin{block}{Interpretación}
+    A una tasa de interés dada, el aumento del gasto desplaza la demanda de producto por el monto de \(\Delta G\); el ajuste endógeno de la producción genera ingreso adicional y consumo inducido.
+  \end{block}
+\end{frame}
+
+\begin{frame}[t]{Equilibrio ante un aumento temporal de \(G\)}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.38\textwidth}
+      \small
+      \begin{itemize}
+        \item \(Y^d\) se desplaza a la derecha.
+        \item \(Y^s\) también se desplaza a la derecha por el efecto riqueza sobre la oferta laboral.
+        \item En el resultado mostrado por Williamson:
+        \[
+          Y\uparrow,\quad r\uparrow,\quad
+          N\uparrow,\quad w\downarrow.
+        \]
+        \item El mayor \(r\) desplaza gasto privado:
+        \[
+          C\downarrow,\qquad I\downarrow.
+        \]
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.05cm]{fig_11_22_gasto_publico.png}
+      \fuentefigura{Williamson (2018), figura 11.22.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.22 y pp. 434--437.}
+\end{frame}
+
+\begin{frame}{Crowding out y multiplicador del gasto}
+  Del vaciado del mercado de bienes,
+  \[
+    \Delta Y=\Delta C+\Delta I+\Delta G.
+  \]
+  Como el aumento de \(G\) eleva la tasa de interés y reduce riqueza,
+  \[
+    \Delta C<0,
+    \qquad
+    \Delta I<0.
+  \]
+  Por consiguiente,
+  \[
+    0<\frac{\Delta Y}{\Delta G}<1
+  \]
+  en la configuración estudiada por Williamson.
+  \begin{block}{Mecanismo}
+    Parte del gasto público adicional desplaza consumo e inversión privados. El producto aumenta, pero menos que proporcionalmente al impulso fiscal.
+  \end{block}
+\end{frame}
+
+\begin{frame}[t]{Gasto público, producto y consumo en los datos}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.34\textwidth}
+      \small
+      \begin{itemize}
+        \item La evidencia descriptiva no identifica por sí sola un efecto causal.
+        \item El gasto puede responder endógenamente al ciclo económico.
+        \item El modelo disciplina qué comovimientos buscar después de un choque fiscal exógeno.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.62\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_23_gasto_pib_consumo.png}
+      \fuentefigura{Williamson (2018), figura 11.23.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.23 y pp. 437--438.}
+\end{frame}
+
+\begin{frame}{Destrucción del acervo de capital}
+  Una caída exógena de \(K\) opera por dos canales:
+  \begin{enumerate}
+    \setlength{\itemsep}{0.52em}
+    \item \textbf{Oferta presente:} cae la productividad marginal del trabajo, de modo que \(N^d\) y \(Y^s\) se desplazan a la izquierda.
+    \item \textbf{Inversión:} aumenta el producto marginal futuro del capital, por lo que \(I^d\) y \(Y^d\) se desplazan a la derecha.
+  \end{enumerate}
+  En el nuevo equilibrio,
+  \[
+    Y\,?,\qquad r\uparrow,\qquad
+    C\downarrow,\qquad I\uparrow,\qquad w\downarrow.
+  \]
+  Los efectos sobre producto y empleo son ambiguos. En la figura, dominan los desplazamientos de oferta y ambas variables disminuyen.
+\end{frame}
+
+\begin{frame}[t]{Equilibrio después de una pérdida de capital}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.37\textwidth}
+      \small
+      \begin{itemize}
+        \item La figura muestra el caso en que la economía produce menos hoy.
+        \item La escasez de capital hace rentable reconstruirlo.
+        \item La tasa real aumenta para reasignar bienes desde consumo hacia inversión.
+        \item En general, el producto puede aumentar o disminuir, según cuál desplazamiento domine.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.59\textwidth}
+      \centering
+      \figura[5.05cm]{fig_11_24_capital.png}
+      \fuentefigura{Williamson (2018), figura 11.24.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.24 y pp. 438--440.}
+\end{frame}
+
+\begin{frame}{Aumento de la productividad presente}
+  Considere un aumento transitorio de \(z\), manteniendo \(z'\) constante.
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item La productividad marginal del trabajo aumenta: \(N^d\) y \(Y^s\) se desplazan a la derecha.
+    \item La curva \(Y^d(r)\) no se desplaza directamente.
+    \item El nuevo equilibrio se alcanza mediante un movimiento sobre \(Y^d(r)\): la tasa real disminuye.
+    \item La menor tasa real eleva consumo e inversión; el mayor ingreso corriente refuerza el aumento del consumo.
+  \end{itemize}
+  En el caso de referencia,
+  \[
+    Y\uparrow,\quad r\downarrow,\quad
+    C\uparrow,\quad I\uparrow,\quad w\uparrow.
+  \]
+\end{frame}
+
+\begin{frame}[t]{Equilibrio ante mayor productividad presente}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.37\textwidth}
+      \small
+      \begin{itemize}
+        \item El choque se origina en la tecnología de producción presente.
+        \item La oferta de producto se desplaza más que la demanda.
+        \item El efecto sobre \(N\) combina una mayor demanda laboral con efectos ingreso y sustitución sobre la oferta.
+        \item Williamson obtiene \(N\uparrow\) bajo su configuración gráfica.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.59\textwidth}
+      \centering
+      \figura[5.05cm]{fig_11_25_ptf_actual.png}
+      \fuentefigura{Williamson (2018), figura 11.25.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.25 y pp. 440--442.}
+\end{frame}
+
+\begin{frame}[t]{Productividad laboral media y ciclo económico}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.34\textwidth}
+      \small
+      \begin{itemize}
+        \item En el modelo, un choque positivo de productividad aumenta producto y productividad laboral.
+        \item Esto genera comovimiento procíclico entre ambas variables.
+        \item Sin embargo, la productividad observada también refleja composición sectorial, utilización del capital y medición.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.62\textwidth}
+      \centering
+      \figura[5.15cm]{fig_11_26_productividad_media.png}
+      \fuentefigura{Williamson (2018), figura 11.26.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.26 y pp. 442--443.}
+\end{frame}
+
+\begin{frame}{Noticias sobre productividad futura}
+  Suponga que aumenta \(z'\), sin cambio en \(z\).
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item El mayor producto marginal futuro del capital desplaza \(I^d(r)\) y \(Y^d(r)\) a la derecha.
+    \item La tasa real aumenta para equilibrar la mayor demanda de bienes.
+    \item La mayor tasa real desplaza trabajo hacia el presente: la oferta laboral aumenta.
+  \end{itemize}
+  El ajuste de equilibrio requiere
+  \[
+    r\uparrow,\qquad Y\uparrow,\qquad N\uparrow,\qquad
+    w\downarrow,\qquad I\uparrow.
+  \]
+  El efecto sobre \(C\) es, en general, ambiguo porque el efecto riqueza positivo compite con el mayor rendimiento del ahorro.
+\end{frame}
+
+\begin{frame}[t]{Equilibrio ante mejores perspectivas futuras}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.37\textwidth}
+      \small
+      \begin{itemize}
+        \item \(Y^d\) se desplaza a la derecha por inversión y consumo.
+        \item \(Y^s(r)\) no se desplaza directamente; la economía se mueve sobre esta curva.
+        \item La tasa real aumenta para contener demanda presente y movilizar recursos hacia inversión.
+        \item El mayor \(r\) aumenta la oferta laboral y reduce el salario real.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.59\textwidth}
+      \centering
+      \figura[5.05cm]{fig_11_27_ptf_futura.png}
+      \fuentefigura{Williamson (2018), figura 11.27.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.27 y pp. 443--446.}
+\end{frame}
+
+\begin{frame}[t]{Inversión y mercado accionario}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.35\textwidth}
+      \small
+      \begin{itemize}
+        \item Los precios accionarios incorporan expectativas sobre beneficios futuros.
+        \item Noticias favorables pueden elevar simultáneamente la valuación de las empresas y la inversión.
+        \item La correlación no prueba que la bolsa cause la inversión: ambas pueden responder a la misma información.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.61\textwidth}
+      \centering
+      \figura[5.10cm]{fig_11_28_inversion_bolsa.png}
+      \fuentefigura{Williamson (2018), figura 11.28.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.28 y pp. 446--448.}
+\end{frame}
+
+\begin{frame}{Aumento de las fricciones financieras}
+  Una mayor prima de incumplimiento \(d\) eleva el costo relevante para financiar inversión:
+  \[
+    1+r+d.
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item \(I^d(r;d)\) se desplaza a la izquierda.
+    \item La menor inversión reduce \(Y^d(r)\).
+    \item Las restricciones de crédito y la mayor tasa efectiva para los deudores inducen más oferta laboral; \(Y^s(r)\) se desplaza a la derecha.
+    \item La tasa real de mercado disminuye, pero no compensa completamente la prima.
+  \end{itemize}
+  El libro obtiene \(Y\downarrow\), \(N\downarrow\), \(r\downarrow\) y \(w\uparrow\); la composición entre \(C\) e \(I\) depende de parámetros.
+\end{frame}
+
+\begin{frame}[t]{Equilibrio con mayores fricciones de crédito}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.37\textwidth}
+      \small
+      \begin{itemize}
+        \item El choque se origina en el mercado de crédito.
+        \item Se encarece la transformación de bienes presentes en capital futuro.
+        \item La inversión cae y la menor demanda se transmite al producto y al empleo.
+        \item Éste es un mecanismo central para interpretar crisis financieras.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.59\textwidth}
+      \centering
+      \figura[5.05cm]{fig_11_29_fricciones_credito.png}
+      \fuentefigura{Williamson (2018), figura 11.29.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.29 y pp. 448--451.}
+\end{frame}
+
+\begin{frame}{Choque sectorial y reasignación}
+  Considere una perturbación que destruye emparejamientos productivos entre trabajadores y empresas.
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item La productividad agregada efectiva disminuye porque parte del trabajo y del capital queda temporalmente mal asignada.
+    \item La oferta de producto se desplaza a la izquierda.
+    \item El desempleo puede aumentar aun cuando la productividad media observada aumente, si primero desaparecen los empleos menos productivos.
+    \item La reasignación toma tiempo, por lo que el choque puede tener efectos persistentes.
+  \end{itemize}
+  \[
+    Y\downarrow,\qquad N\downarrow,\qquad r\uparrow,
+  \]
+  mientras que el efecto sobre \(w\) depende de la composición y de la intensidad de los desplazamientos.
+\end{frame}
+
+\begin{frame}[t]{Equilibrio ante un choque de reasignación}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.37\textwidth}
+      \small
+      \begin{itemize}
+        \item La capacidad productiva corriente cae.
+        \item El producto y el empleo disminuyen.
+        \item La tasa real aumenta para reducir la demanda presente.
+        \item El modelo permite una recesión con productividad media creciente.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.59\textwidth}
+      \centering
+      \figura[5.05cm]{fig_11_30_choque_sectorial.png}
+      \fuentefigura{Williamson (2018), figura 11.30.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.30 y pp. 451--454.}
+\end{frame}
+
+\begin{frame}[t]{Dos recesiones, distintos mecanismos}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{Producto real}
+
+      \figura[3.85cm]{fig_11_32_pib_recesiones.png}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \textbf{Empleo}
+
+      \figura[3.85cm]{fig_11_33_empleo_recesiones.png}
+    \end{column}
+  \end{columns}
+  \begin{itemize}
+    \small
+    \item Tanto la recesión de 1981--1982 como la de 2008--2009 redujeron producto y empleo, pero la composición y persistencia de los movimientos fueron diferentes.
+  \end{itemize}
+  \notafuentes{Williamson (2018), figuras 11.32 y 11.33.}
+\end{frame}
+
+\begin{frame}[t]{Productividad durante dos recesiones}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.35\textwidth}
+      \small
+      \begin{itemize}
+        \item La productividad se comportó de manera distinta en ambas recesiones.
+        \item Una sola perturbación tecnológica no explica necesariamente todos los episodios.
+        \item El diagnóstico requiere confrontar predicciones conjuntas sobre \(Y\), \(N\), productividad, \(C\), \(I\) y \(r\).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.61\textwidth}
+      \centering
+      \figura[5.10cm]{fig_11_34_productividad_recesiones.png}
+      \fuentefigura{Williamson (2018), figura 11.34.}
+    \end{column}
+  \end{columns}
+  \notafuentes{Williamson (2018), figura 11.34 y pp. 454--456.}
+\end{frame}
+
+\section{Síntesis}
+
+\begin{frame}{Predicciones comparativas del modelo}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item \(G\) temporal \(\uparrow\):
+    \(Y\uparrow,\ r\uparrow,\ N\uparrow,\ w\downarrow,\ C\downarrow,\ I\downarrow\).
+    \item \(K\downarrow\):
+    \(Y\,?,\ r\uparrow,\ N\,?,\ w\downarrow,\ C\downarrow,\ I\uparrow\).
+    \item \(z\uparrow\):
+    \(Y\uparrow,\ r\downarrow,\ N\,?,\ w\uparrow,\ C\uparrow,\ I\uparrow\).
+    \item \(z'\uparrow\):
+    \(Y\uparrow,\ r\uparrow,\ N\uparrow,\ w\downarrow,\ C\,?,\ I\uparrow\).
+    \item Fricción financiera \(\uparrow\):
+    \(Y\downarrow,\ r\downarrow,\ N\downarrow,\ w\uparrow,\ C\,?,\ I\,?\).
+    \item Reasignación adversa:
+    \(Y\downarrow,\ r\uparrow,\ N\downarrow,\ w\,?,\ C\downarrow,\ I\downarrow\).
+  \end{itemize}
+  \footnotesize Los signos corresponden a la configuración analizada por Williamson; \(?\) indica ambigüedad sin restricciones adicionales.
+\end{frame}
+
+\begin{frame}{Resultados centrales}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item La inversión conecta el equilibrio presente con la capacidad productiva futura.
+    \item La tasa de interés real coordina ahorro e inversión y equilibra la demanda con la oferta de producto.
+    \item La decisión de invertir iguala el costo marginal presente con el valor descontado del producto marginal futuro del capital.
+    \item Choques fiscales, tecnológicos, financieros y de reasignación se distinguen por sus predicciones conjuntas, no por el movimiento de una sola variable.
+    \item El modelo ofrece un lenguaje disciplinado para identificar el origen, la propagación y los mecanismos de transmisión de las fluctuaciones macroeconómicas.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias}
+  \footnotesize
+  \begin{thebibliography}{9}
+    \bibitem{Williamson2018}
+    Williamson, S. D. (2018).
+    \newblock \textit{Macroeconomics}, 6a ed.
+    \newblock Pearson, capítulo 11: \textit{A Real Intertemporal Model with Investment}.
+  \end{thebibliography}
+\end{frame}
+
+\appendix
+\section{Apéndice}
+
+\begin{frame}{Apéndice: derivación de la inversión óptima}
+  Sustituyendo \(K'=(1-\delta)K+I\), el componente de beneficios que depende de \(I\) es
+  \[
+    -I+\frac{z'F((1-\delta)K+I,N')+(1-\delta)K'}{1+r}.
+  \]
+  La condición de primer orden es
+  \[
+    -1+\frac{z'F_K(K',N')+(1-\delta)}{1+r}=0.
+  \]
+  Por lo tanto,
+  \[
+    \boxed{1+r=z'F_K(K',N')+1-\delta}
+  \]
+  o, equivalentemente,
+  \[
+    \boxed{r=z'F_K(K',N')-\delta}.
+  \]
+\end{frame}
+
+\begin{frame}{Apéndice: crédito y ley de Walras}
+  El ahorro del hogar financia la inversión neta de la empresa y la posición fiscal del gobierno. Al agregar las restricciones presupuestarias privadas y utilizar el presupuesto público, se obtiene
+  \[
+    Y-C-G-I=0.
+  \]
+  Así, una vez que se satisfacen las restricciones presupuestarias y se vacían los mercados de trabajo y crédito, el mercado de bienes también se vacía.
+  \begin{block}{Implicación}
+    No todas las condiciones de vaciado son independientes. La ley de Walras permite omitir una de ellas al resolver el sistema, pero no elimina la obligación de definirla y verificarla.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Apéndice: interpretación mediante la \(q\) de Tobin}
+  Defina el valor marginal de una unidad adicional de capital instalado como
+  \[
+    q
+    \equiv
+    \frac{z'F_K(K',N')+1-\delta}{1+r}.
+  \]
+  Sin costos de ajuste, la condición óptima de inversión es
+  \[
+    q=1.
+  \]
+  \begin{itemize}
+    \item Si \(q>1\), el valor de una unidad adicional de capital excede su costo: conviene invertir más.
+    \item Si \(q<1\), conviene reducir la inversión.
+    \item Con costos convexos de ajuste, la inversión responde gradualmente y \(q\) puede diferir de uno en equilibrio.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Apéndice: alcances y límites}
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item El modelo tiene dos periodos y certidumbre; no describe expectativas estocásticas ni dinámica de largo plazo.
+    \item La empresa puede transformar inversión en capital sin costos de ajuste ni rezagos de instalación.
+    \item Los mercados son competitivos salvo por la prima financiera introducida de forma reducida.
+    \item No hay rigideces nominales, dinero ni política monetaria.
+    \item A pesar de estas simplificaciones, el modelo contiene los márgenes esenciales de consumo, trabajo, ahorro, inversión y acumulación de capital.
+  \end{itemize}
+\end{frame}
+
+\end{document}
