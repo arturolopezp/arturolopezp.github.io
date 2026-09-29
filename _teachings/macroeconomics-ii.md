@@ -34,6 +34,14 @@ schedule:
       - name: Lecture Slides
         url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_03_Equilibrio_General_Economia_Cerrada.pdf
 
+  - week: Lecture 4
+    date: Sept 17
+    topic: The Consumption-Savings Decision
+    description: Introduction to intertemporal decision-making and dynamic modeling through the consumption–saving problem.
+    materials:
+      - name: Lecture Slides
+        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_04_Consumo_Intertemporal.pdf        
+
 problem_sets:
   - week: Problem Set 1
     topic: Consumer and Firm Behavior
@@ -50,6 +58,13 @@ problem_sets:
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_2_Macro_II.pdf
       - name: Solver
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_2_Macro_II_solver.pdf
+
+  - week: Problem Set 3
+    topic: The Consumption-Savings Decision
+    description: Euler equation, consumption responses to real interest rate shocks and transitory and permanent income shocks, the Permanent Income Hypothesis and the Keynesian consumption function, and Ricardian Equivalence.
+    materials:
+      - name: Problem Set
+        url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_3_Macro_II.pdf
 ---
 
 <div class="course">
