@@ -29,7 +29,7 @@ schedule:
   - week: Lecture 3
     date: Sept 3
     topic: General Equilibrium in a One-Period Economy
-    description: General equilibrium in a two-agents-one-period model.
+    description: General equilibrium in a two-agents-one-period model with Government.
     materials:
       - name: Lecture Slides
         url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_03_Equilibrio_General_Economia_Cerrada.pdf
@@ -41,6 +41,15 @@ schedule:
     materials:
       - name: Lecture Slides
         url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_04_Consumo_Intertemporal.pdf        
+
+  - week: Lecture 5
+    date: Sept 24
+    topic: A Real Intertemporal Model with Investment
+    description: General Equilibrium in a Two-Period Real Economy with Investment.
+    materials:
+      - name: Lecture Slides
+        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_05_Modelo_Intertemporal_Real_Inversion.pdf        
+
 
 problem_sets:
   - week: Problem Set 1
