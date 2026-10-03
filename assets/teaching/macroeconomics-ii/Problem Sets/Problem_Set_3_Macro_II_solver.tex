@@ -1,0 +1,1344 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% la versión instalada de Hyperref.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}
+\pagestyle{plain}
+
+\let\enumerateoriginal\enumerate
+\let\endenumerateoriginal\endenumerate
+\renewenvironment{enumerate}{%
+  \enumerateoriginal
+  \setlength{\itemsep}{0.5em}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\topsep}{0.4em}%
+}{\endenumerateoriginal}
+
+\newcounter{problema}
+\newenvironment{problema}[1]{%
+  \par
+  \refstepcounter{problema}%
+  \addvspace{0.9em}%
+  \noindent\textbf{Ejercicio \theproblema. #1}
+  \par\nobreak\smallskip
+}{\par}
+
+
+\usepackage{tikz}
+% La biblioteca babel evita que los atajos activos de babel-spanish
+% interfieran con la sintaxis de las flechas de TikZ.
+\usetikzlibrary{arrows.meta,calc,positioning,babel}
+
+\tikzset{
+  axis/.style={
+    -{Stealth},
+    thick
+  },
+  budget0/.style={
+    very thick,
+    black
+  },
+  budgetT/.style={
+    very thick,
+    blue!70!black
+  },
+  budgetP/.style={
+    very thick,
+    red!75!black
+  },
+  ic/.style={
+    thick,
+    dashed,
+    gray!75
+  },
+  movement/.style={
+    -{Stealth},
+    thick
+  },
+  point/.style={
+    circle,
+    fill,
+    inner sep=1.7pt
+  }
+}
+
+\begin{document}
+
+\begin{center}
+  {\large\textbf{Centro de Investigación y Docencia Económicas}}\\[0.25em]
+  {\large\textbf{Macroeconomía II}}\\[0.2em]
+  {\large\textbf{Problem Set 3: Consumo intertemporal y mercados de crédito} \\
+  Solver}\\[0.35em]
+  LECO -- Otoño 2026
+\end{center}
+
+\vspace{0.6em}
+\hrule
+\vspace{0.6em}
+
+
+
+\begin{problema}{Cambios transitorios y permanentes en los impuestos}
+Considere un hogar con preferencias estrictamente crecientes y estrictamente convexas sobre $(c,c')$, que recibe ingresos $(y,y')$ y paga impuestos de suma fija $(\tau,\tau')$. Puede ahorrar o endeudarse libremente a la tasa de interés real $r$. Suponga que ambos consumos son bienes normales.
+
+Para cada uno de los siguientes casos, utilice un diagrama en el plano $(c,c')$ para analizar el efecto sobre el consumo presente, el consumo futuro y el ahorro actual.
+
+\begin{enumerate}
+  \item El gobierno anuncia un aumento de los impuestos en $\Delta\tau>0$ únicamente en el periodo actual.
+
+  \item El gobierno anuncia un aumento de impuestos permanente: tanto $\tau$ como $\tau'$ aumentan en $\Delta\tau$.
+
+  \item Compare los resultados de los dos incisos. Explique por qué la respuesta del consumo depende de si el cambio en el ingreso disponible es transitorio o permanente. Relacione su respuesta con la hipótesis del ingreso permanente.
+\end{enumerate}
+\end{problema}
+
+
+
+
+\subsection*{Solución}
+
+La restricción presupuestaria intertemporal y el ahorro actual son
+\[
+  c+\frac{c'}{1+r}
+  =
+  y-\tau+\frac{y'-\tau'}{1+r},
+  \qquad
+  s=y-\tau-c.
+\]
+Definimos la riqueza intertemporal como
+\[
+\omega\equiv y-\tau+\frac{y'-\tau'}{1+r}.
+\]
+
+
+
+\subsubsection*{1. Aumento transitorio del impuesto actual}
+La riqueza intertemporal antes y después del aumento transitorio del impuesto es:
+$$
+\omega_0 = y - \tau_0 + \frac{y' - \tau'}{1+r}, 
+\qquad
+\omega_1 = y - \tau_1 + \frac{y' - \tau'}{1+r}.
+$$
+donde \(\omega_0\) es la riqueza intertemporal inicial, \(\omega_1\) es la riqueza intertemporal después del aumento transitorio del impuesto, y \(\tau_1=\tau_0+\Delta\tau\).
+
+Por lo tanto, la riqueza intertemporal después del aumento transitorio del impuesto se puede escribir como
+\[
+  \omega_1=\omega_0-\Delta\tau,
+\]
+La reducción de la riqueza intertemporal desplaza paralelamente la restricción presupuestaria hacia la izquierda. Esto genera un \textbf{efecto ingreso} puro. Como ambos consumos son bienes normales, el consumo presente y el consumo futuro disminuyen.
+
+Para graficar la magnitud del efecto sobre el consumo presente, el consumo futuro y el ahorro actual, definamos sus cambios como
+\[
+  \Delta c=c_1-c_0,
+  \qquad
+  \Delta c'=c'_1-c'_0,
+  \qquad
+  \Delta s=s_1-s_0.
+\]
+Las restricciones presupuestarias intertemporales antes y después del aumento transitorio son
+\[
+  c_0+\frac{c'_0}{1+r}=\omega_0,
+  \qquad
+  c_1+\frac{c'_1}{1+r}=\omega_1.
+\]
+Al restar ambas restricciones, obtenemos
+\[
+  \Delta c+\frac{\Delta c'}{1+r}
+  =
+  -\Delta\tau.
+\]
+Así, \textbf{la pérdida transitoria de ingreso presente se distribuye entre una caída del consumo presente y una caída del consumo futuro en valor presente}.
+
+Necesitamos determinar \textbf{cómo se distribuye la caída de la riqueza intertemporal entre ambos consumos}. Verémos que \textbf{el hogar suaviza el efecto negativo del impuesto por medio del ahorro}. 
+
+Por definición, el consumo presente antes y después del aumento del impuesto satisface
+\[
+  c_0+s_0=y-\tau_0,
+  \qquad
+  c_1+s_1=y-\tau_0-\Delta\tau.
+\]
+Por lo tanto, el cambio en el consumo presente es
+\begin{equation}
+  \boxed{
+    \Delta c
+    =
+    -\Delta\tau-(s_1-s_0).
+    \label{eq:DeltaCTran}
+  }
+\end{equation}
+
+Por otro lado, el consumo futuro antes y después del aumento del impuesto satisface
+\[
+  c'_0=y'-\tau'+(1+r)s_0,
+  \qquad
+  c'_1=y'-\tau'+(1+r)s_1.
+\]
+Por lo tanto, el cambio en el consumo futuro es
+\begin{equation}
+  \boxed{
+    \Delta c'=(1+r)(s_1-s_0).
+    \label{eq:DeltaCpTran}
+  }
+\end{equation}
+
+De la ecuación \eqref{eq:DeltaCpTran}, el cambio en el ahorro es
+\begin{equation}
+  \boxed{
+    s_1-s_0
+    =
+    \frac{\Delta c'}{1+r}<0,
+    \label{eq:DeltasTran}
+  }
+\end{equation}
+donde deducimos que el ahorro actual disminuye ya que $\Delta c' <0$ porque $c'$ es un bien normal.
+
+
+Dado que el ahorro actual disminuye, la ecuación \eqref{eq:DeltaCTran} muestra que \textbf{la caída del consumo presente, $\Delta c$, es menor que la caída del ingreso disponible presente causada por el aumento del impuesto, $-\Delta \tau$}.\footnote{\ Este argumento se puede formular directamente mencionando que, como vimos en clase, la propensión marginal a consumir del consumo presente respecto a la riqueza intertemporal es menor que 1, de modo que
+$$
+\frac{dc}{d\omega} < 1 \implies \Delta c = \frac{dc}{d\omega} \Delta \omega < \Delta \omega,
+$$
+y como $\Delta \omega = \omega_1 - \omega_0 = -\Delta \tau$, entonces:
+$$
+\Delta c < -\Delta\tau
+$$
+Por lo tanto, por la ecuación \eqref{eq:DeltaCTran} deducimos que el cambio en el ahorro tiene que ser necesariamente negativo.} En particular, $-(s_1-s_0)>0$ amortigua el efecto negativo del aumento del impuesto.
+
+
+\subsubsection*{Interpretación}
+
+Las ecuaciones \eqref{eq:DeltaCTran} y \eqref{eq:DeltaCpTran} muestran el \textbf{mecanismo de suavización del consumo}: ante el choque transitorio en el ingreso disponible presente, el hogar reduce su ahorro actual para suavizar el efecto negativo sobre su consumo presente, trasladando así parte de la caída hacia el consumo futuro.
+
+
+El mecanismo opera a través del ahorro. Como \(s_1-s_0<0\), el término
+\[
+  -(s_1-s_0)>0
+\]
+en la ecuación \eqref{eq:DeltaCTran} amortigua el efecto negativo del aumento del impuesto sobre el consumo presente. Si el hogar no redujera su ahorro, el consumo presente tendría que caer en toda la magnitud del impuesto, \(\Delta\tau\). Al reducir su ahorro, consigue que la caída del consumo presente sea menor.
+
+Esta decisión, a su vez, se traduce en una caída del consumo futuro. La ecuación \eqref{eq:DeltaCpTran} muestra que
+\[
+  \Delta c'=(1+r)(s_1-s_0)<0.
+\]
+Es decir, al reducir su ahorro, el hogar pierde consumo futuro igual al ahorro no realizado más su rendimiento. Si no redujera su ahorro, hubiera obtenido \((1+r)(s_1-s_0)\) consumo adicional en el futuro. Por lo tanto, la decisión de reducir el ahorro actual amortigua la caída en el consumo presente y traslada parte del efecto negativo del aumento del impuesto hacia el consumo futuro.
+
+Esto muestra una de las principales características del modelo de elección intertemporal: el consumo presente depende de los recursos de toda la vida, es decir, de la riqueza intertemporal \(\omega\), y no solamente del ingreso disponible actual. Ante un aumento transitorio del impuesto, el hogar evita que todo el ajuste recaiga sobre el consumo presente reduciendo su ahorro y, con ello, trasladando parte del efecto negativo al consumo futuro.\footnote{\ En esta interpretación suponemos que el hogar es ahorrador. Si fuera un hogar deudor, la caída del ingreso disponible corriente a partir del incremento en los impuestos lo llevaría a endeudarse más en el presente, por la cantidad de  \(s_1-s_0<0\). Esto incrementaría sus obligaciones financieras futuras en
+$
+  (1+r)(s_0-s_1)>0,
+$
+de modo que reduciría su consumo futuro en esa misma magnitud. El mecanismo de suavización de consumo es por tanto el mismo, solo cambiando el signo y la interpretación del cambio en el ahorro.} \textbf{La reducción del ahorro es, por tanto, el mecanismo mediante el cual el hogar distribuye el efecto negativo del impuesto entre ambos periodos y suaviza su consumo.}
+
+
+
+
+
+
+
+\subsubsection*{2. Aumento permanente de los impuestos}
+
+La riqueza intertemporal antes y después del aumento permanente de los impuestos es
+\[
+  \omega_0
+  =
+  y-\tau_0+\frac{y'-\tau'_0}{1+r},
+  \qquad
+  \omega_1
+  =
+  y-\tau_1+\frac{y'-\tau'_1}{1+r},
+\]
+donde
+\[
+  \tau_1=\tau_0+\Delta\tau,
+  \qquad
+  \tau'_1=\tau'_0+\Delta\tau.
+\]
+Por lo tanto, la riqueza intertemporal después del aumento permanente puede escribirse como
+\[
+  \omega_1
+  =
+  \omega_0
+  -
+  \Delta\tau
+  -
+  \frac{\Delta\tau}{1+r}.
+\]
+
+La restricción presupuestaria se desplaza paralelamente hacia la izquierda. Esto genera nuevamente un \textbf{efecto ingreso} puro. Sin embargo, el desplazamiento es mayor que en el caso transitorio: ahora disminuyen tanto el ingreso disponible presente como el ingreso disponible futuro.
+
+Como ambos consumos son bienes normales,
+\[
+  \Delta c=c_1-c_0<0,
+  \qquad
+  \Delta c'=c'_1-c'_0<0.
+\]
+
+Las restricciones presupuestarias intertemporales antes y después del aumento permanente son
+\[
+  c_0+\frac{c'_0}{1+r}=\omega_0,
+  \qquad
+  c_1+\frac{c'_1}{1+r}=\omega_1.
+\]
+Al restar ambas restricciones, obtenemos
+\[
+  \Delta c+\frac{\Delta c'}{1+r}
+  =
+  -\Delta\tau-\frac{\Delta\tau}{1+r}.
+\]
+Así, \textbf{la pérdida permanente de riqueza se distribuye entre una caída del consumo presente y una caída del consumo futuro en valor presente}.
+
+
+Para graficar la magnitud de los efectos sobre ambos consumos y sobre el ahorro, necesitamos determinar cómo se distribuye la caída de la riqueza intertemporal entre los dos periodos.
+
+Por definición, el consumo presente antes y después del aumento permanente de los impuestos satisface
+\[
+  c_0+s_0=y-\tau_0,
+  \qquad
+  c_1+s_1=y-\tau_0-\Delta\tau.
+\]
+Por lo tanto,
+\begin{equation}
+  \boxed{
+    \Delta c
+    =
+    -\Delta\tau-(s_1-s_0).
+    \label{eq:DeltaCPerm}
+  }
+\end{equation}
+
+Por otro lado, el consumo futuro antes y después del aumento permanente satisface
+\[
+  c'_0=y'-\tau'_0+(1+r)s_0,
+  \qquad 
+  c'_1
+  =
+  y'-\tau'_0-\Delta\tau+(1+r)s_1.
+\]
+Por lo tanto,
+\begin{equation}
+  \boxed{
+    \Delta c'
+    =
+    -\Delta\tau+(1+r)(s_1-s_0).
+    \label{eq:DeltaCpPerm}
+  }
+\end{equation}
+
+Despejando el cambio en el ahorro,
+\begin{equation}
+  \boxed{
+    s_1-s_0
+    =
+    \frac{\Delta c'+\Delta\tau}{1+r}.
+    \label{eq:DeltasPerm}
+  }
+\end{equation}
+
+A diferencia del caso transitorio, el hecho de que \(\Delta c'<0\) no permite determinar el signo del cambio en el ahorro. La razón es que el consumo futuro ahora disminuye por dos fuerzas: el aumento directo del impuesto futuro y el posible cambio en el ahorro actual.
+
+En particular,
+\[
+\begin{aligned}
+  s_1-s_0>0
+  &\quad\implies\quad
+  -\Delta\tau<\Delta c',  \quad \text{($c'$ cae \textit{menos} que la caída en el ingreso disponible futuro)} \\
+  s_1-s_0=0
+  &\quad\implies\quad
+  \Delta c'=-\Delta\tau,  \quad \text{($c'$ abosrbe toda la caída en el ingreso disponible futuro)} \\
+  s_1-s_0<0
+  &\quad\implies\quad
+  \Delta c'<-\Delta\tau  \quad \text{($c'$ cae \textit{más} que la caída en el ingreso disponible futuro)} .
+\end{aligned}
+\]
+Por tanto, no existe una predicción general sobre el signo del cambio en el ahorro: éste puede aumentar, disminuir o permanecer constante, dependiendo de las preferencias del hogar. 
+
+
+\subsubsection*{Interpretación}
+
+Las ecuaciones \eqref{eq:DeltaCPerm} y \eqref{eq:DeltaCpPerm} muestran el papel del ahorro. Si el hogar aumenta su ahorro, sacrifica más consumo presente para amortiguar la caída del consumo futuro. Si reduce su ahorro, amortigua la caída del consumo presente, pero intensifica la caída del consumo futuro. Por lo tanto, la dirección de suavización del consumo depende de las preferencias del hogar.
+
+
+\subsubsection*{3. Comparación entre el cambio transitorio y el cambio permanente}
+
+Ante un choque transitorio, el ingreso futuro permanece intacto y el hogar puede amortiguar el efecto negativo de hoy reduciendo su ahorro para trasladar parte del ajuste hacia el futuro. Ante un choque permanente, el futuro también está afectado: \textbf{ya no existe un periodo no afectado hacia el cual trasladar inequívocamente parte del choque.}
+
+Por lo anterior, ante el choque permanente no existe una predicción general sobre el signo del cambio en el ahorro. El hogar puede utilizarlo para redistribuir la pérdida entre periodos, pero no existe una dirección unívoca para hacerlo: si aumenta su ahorro, sacrifica más consumo presente para amortiguar la caída del consumo futuro; si reduce su ahorro, amortigua la caída del consumo presente a costa de una caída mayor del consumo futuro.
+
+
+Ante el choque transitorio, la dirección de la suavización está determinada: el hogar reduce su ahorro para evitar que todo el ajuste recaiga sobre un periodo. Ante el choque permanente, en cambio, ambos periodos están directamente afectados y la dirección del ajuste del ahorro depende de las preferencias del hogar.\footnote{\ Dada la convexidad estricta de las preferencias, sabemos que el hogar distribuirá la pérdida de riqueza intertemporal entre ambos periodos: de una forma u otra, suavizará su consumo. Sin embargo, no sabemos si esta distribución óptima lo orille a hacer algún ajuste en su ahorro para amortiguar la caída en un periodo a costa de amplificar el otro.}
+
+Esto muestra una implicación central de la hipótesis del ingreso permanente: un cambio permanente en el ingreso disponible produce una respuesta mayor del consumo porque modifica en mayor medida los recursos de toda la vida.
+
+
+
+Que el choque permanente tenga un efecto mayor que el choque transitorio es bastante obvio, pues
+\[
+  \Delta\omega_T=-\Delta\tau,
+  \qquad
+  \Delta\omega_P
+  =
+  -\Delta\tau-\frac{\Delta\tau}{1+r},
+\]
+y como ambos consumos son bienes normales, entonces tanto el consumo presente como el consumo futuro disminuyen más ante el choque permanente.
+
+
+Lo interesante es que el hogar se preocupa por la riqueza intertemporal, el \textit{ingreso permanente}, y no solo por el ingreso disponible corriente.
+
+La principal implicación de esto es que la \textbf{propensión marginal a consumir} respecto al \textbf{ingreso disponible corriente} varía dependiendo de si el cambio es transitorio o permanente.
+
+En este ejercicio, el ingreso disponible corriente disminuye en \(\Delta\tau\) en ambos casos. Por tanto, la propensión marginal a consumir respecto al ingreso disponible corriente es
+$$
+\frac{d c}{d y_d} \approx
+\frac{\Delta c}{\Delta y_d} = \frac{\Delta c}{-\Delta\tau} = 1 + \frac{s_1 - s_0}{\Delta \tau}.
+$$
+donde $y_d = y - \tau$ es el ingreso disponible corriente.
+
+Cuando el choque es transitorio, $(s_1-s_0) < 0$, lo que implica que
+$$
+\frac{d c}{d y_d} \approx
+\frac{\Delta c}{\Delta y_d} < 1.
+$$
+El hogar reduce su ahorro y, por tanto, el consumo presente disminuye menos que el ingreso disponible corriente.
+
+Cuando el choque es permanente, el signo de $(s_1-s_0)$ es ambiguo, por lo que la propensión marginal a consumir respecto al ingreso disponible corriente puede ser mayor o menor que 1, dependiendo de las preferencias del hogar. En particular, \textbf{si el hogar decide aumentar su ahorro para amortiguar la caída del consumo futuro, entonces \(s_1-s_0>0\), lo que implica que la caída del consumo presente es mayor que la caída del ingreso
+disponible corriente, $\Delta c < -\Delta \tau$, de modo que la propensión marginal a consumir es mayor a 1:
+\[
+  \frac{\Delta c}{\Delta y_d}
+  =
+  \frac{\Delta c}{-\Delta\tau}
+  >1.
+\]}
+
+La función de consumo keynesiana, en la que el consumo presente depende únicamente del ingreso disponible corriente, supone una propensión marginal a consumir estable para cualquier tipo de choque en el ingreso:
+\[
+  c(y_d)= a + b y_d,
+  \qquad
+  \frac{dc}{d y_d}= b.
+\]
+La hipótesis del ingreso permanente propone que la respuesta del consumo al ingreso disponible corriente depende de la naturaleza del choque, porque el consumo presente depende de la riqueza intertemporal y no solamente del ingreso corriente. Por ello, ante una reducción permanente del ingreso disponible, el consumo presente responde más que ante una reducción transitoria de la misma magnitud. Es decir, la propensión marginal a consumir respecto al ingreso disponible corriente varía dependiendo de si el cambio es transitorio o permanente, y no es una constante \(b\) como en la función keynesiana.
+
+
+En el modelo de elección intertemporal de consumo-ahorro, la función de consumo respecto a la riqueza intertemporal,
+\[
+  c=c(\omega),
+\]
+supone una propensión marginal a consumir estable respecto a la riqueza intertemporal:\footnote{Estable en el sentido de que la naturaleza del choque no modifica la respuesta del consumo. Sin embargo, esta propensión marginal puede variar respecto a otras variables endógenas, como por ejemplo, la tasa de interés.}
+\[
+  \frac{dc}{d\omega} = b_P.
+\]
+mientras propone una relación inestable entre consumo corriente e ingreso corriente.
+
+Esta es la implicación central de la hipótesis del ingreso permanente: \textbf{por cada peso de reducción del ingreso disponible corriente, el consumo presente responde más cuando esa reducción forma parte de un choque permanente, porque también viene acompañada de una reducción del ingreso futuro y, por tanto, de una pérdida mayor de riqueza intertemporal.} En contraste, la función keynesiana no distingue entre cambios transitorios y permanentes y propone una propensión marginal a consumir respecto al ingreso corriente única, lo cual puede producir predicciones inadecuadas cuando cambia la persistencia del choque.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{problema}{Efectos ingreso y sustitución de la tasa de interés real}
+
+Para cada uno de los siguientes casos, utilice un diagrama en el plano $(c,c')$ para analizar los efectos de un aumento de la tasa de interés real. Grafique las restricciones presupuestarias inicial y final y construya una recta presupuestaria compensada para realizar una descomposición del cambio en la elección óptima en un efecto sustitución y un efecto ingreso. En cada caso, determine el signo del efecto sustitución, del efecto ingreso y del efecto total sobre $c$, $c'$ y $s$.
+
+\begin{enumerate}
+    \item Un hogar \textbf{ahorrador} para el cual, en la determinación de $c$, el efecto sustitución domina al efecto ingreso.
+
+    \item Un hogar \textbf{ahorrador} para el cual, en la determinación de $c$, el efecto ingreso domina al efecto sustitución.
+
+    \item Un hogar \textbf{deudor} para el cual, en la determinación de $c'$, el efecto sustitución domina al efecto ingreso.
+
+    \item Un hogar \textbf{deudor} para el cual, en la determinación de $c'$, el efecto ingreso domina al efecto sustitución.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+
+
+
+\subsection*{Solución}
+
+Defina el ingreso disponible de cada periodo como
+\[
+  y_d=y-\tau,
+  \qquad
+  y'_d=y'-\tau'.
+\]
+Las restricciones presupuestarias en cada periodo son
+\[
+  c+s=y_d, 
+\qquad
+  c'=y'_d+(1+r)s.
+\]
+La restricción presupuestaria intertemporal es
+\[
+  c+\frac{c'}{1+r}
+  =
+  y_d+\frac{y'_d}{1+r}.
+\]
+
+En cada caso, la tasa de interés aumenta de \(r_0\) a \(r_1\), donde
+\[
+  \Delta r=r_1-r_0>0.
+\]
+La restricción presupuestaria gira alrededor de la dotación
+\[
+  E=(y_d,y'_d)
+\]
+y su pendiente aumenta en valor absoluto:
+\[
+  |1+r_1| > |1+r_0|.
+\]
+
+Para realizar la descomposición, construimos una recta compensada con pendiente
+\[
+  -(1+r_1)
+\]
+que sea tangente a la curva de indiferencia inicial. Denotemos por \(A_0\) la elección inicial, por \(A^C\) la elección compensada y por \(A_1\) la elección final. Para cualquier variable \(x\in\{c,c',s\}\), definimos
+\[
+  \Delta^S x=x^C-x_0,
+  \qquad
+  \Delta^I x=x_1-x^C,
+\]
+de modo que
+\[
+  \Delta x=\Delta^S x+\Delta^I x.
+\]
+
+\subsubsection*{Efecto sustitución}
+
+El aumento de \(r\) eleva el precio relativo del consumo presente y reduce el precio relativo del consumo futuro. Por lo tanto, para todos los hogares,
+\[
+  \Delta^S c<0,
+  \qquad
+  \Delta^S c'>0.
+\]
+Como el ingreso disponible presente no cambia y el ahorro es $s=y_d-c$, entonces:
+\[
+  \Delta^S s=-\Delta^S c>0.
+\]
+
+Por lo tanto, \textbf{para todos los hogares}, el efecto sustitución induce al hogar a consumir menos en el presente, consumir más en el futuro y aumentar su ahorro (o reducir su endeudamiento).
+
+\subsubsection*{Efecto ingreso}
+
+El signo del efecto ingreso depende de la posición financiera inicial del hogar. El ahorro antes del aumento de la tasa de interés real es
+\[
+  s_0=y_d-c_0,
+\]
+y el consumo futuro antes del aumento en la tasa es
+\[
+  c'_0=y'_d+(1+r_0)s_0.
+\]
+
+Suponga ahora que la tasa de interés aumenta de \(r_0\) a \(r_1\), pero que el hogar mantiene su ahorro en \(s_0\). En ese caso, su consumo futuro factible sería
+\[
+  \widehat c'_1
+  =
+  y'_d+(1+r_1)s_0,
+\]
+donde \(\widehat c'_1\) representa el consumo futuro que el hogar podría alcanzar después del aumento de la tasa si mantuviera su posición financiera inicial. En particular, el término
+\[
+  (1+r_1)s_0
+\]
+representa \textbf{el nuevo valor futuro de la posición financiera inicial, medido en unidades de consumo futuro}. Para un hogar ahorrador (deudor), el término $(1+r_1)s_0$ es el nuevo rendimiento de su ahorro incial (nuevo costo de la deuda inicial).
+
+Por lo tanto, el cambio en el poder adquisitivo del hogar en términos de su consumo futuro es:
+\begin{align*}
+  \widehat c'_1-c'_0
+  &=
+  \left[y'_d+(1+r_1)s_0\right]
+  -
+  \left[y'_d+(1+r_0)s_0\right] \\
+  &=
+  (r_1-r_0)s_0 \\
+  &=
+  \Delta r\,s_0.
+\end{align*}
+Esta expresión nos dice que el cambio en el poder adquisitivo del hogar respecto a consumo futuro es igual al cambio en el rendimiento de su ahorro inicial (costo de su deuda inicial). Esto es lo que genera el efecto ingreso: el cambio en lo que el hogar puede consumir en el futuro con su ahorro (deuda) inicial.
+
+Si el hogar es ahorrador, \(s_0>0\), el aumento de \(r\) incrementa el rendimiento de sus activos y produce un efecto ingreso positivo: ahora puede consumir más en el futuro con su ahorro incial. Como ambos consumos son bienes normales,
+\[
+  \Delta^I c>0,
+  \qquad
+  \Delta^I c'>0,
+  \qquad
+  \Delta^I s=-\Delta^I c<0.
+\]
+
+Si el hogar es deudor, \(s_0<0\), el aumento de \(r\) incrementa el costo de su deuda y reduce su poder adquisitivo, por lo que produce un efecto ingreso negativo: ahora puede consumir menos en el futuro con su deuda inicial. Como ambos consumos son bienes normales,
+\[
+  \Delta^I c<0,
+  \qquad
+  \Delta^I c'<0,
+  \qquad
+  \Delta^I s=-\Delta^I c>0.
+\]
+
+
+\subsubsection*{Signos del efecto total}
+
+Para todos los hogares,
+\[
+  \Delta^S c<0,
+  \qquad
+  \Delta^S c'>0,
+  \qquad
+  \Delta^S s=-\Delta^S c>0.
+\]
+Para ahorradores,
+\[
+  \Delta^I c>0,
+  \qquad
+  \Delta^I c'>0,
+  \qquad
+  \Delta^I s=-\Delta^I c<0.
+\]
+Para deudores,
+\[
+  \Delta^I c<0,
+  \qquad
+  \Delta^I c'<0,
+  \qquad
+  \Delta^I s=-\Delta^I c>0.
+\]
+Por lo tanto, para los ahorradores, el signo del efecto total sobre \(c\) depende de si el efecto ingreso ($+$) domina al efecto sustitución ($-$). Para los deudores, el signo del efecto total sobre \(c'\) depende de si el efecto ingreso ($-$) domina al efecto sustitución ($+$).
+
+Además, para los ahorradores, el signo del efecto total sobre $s$ depende de si el efecto ingreso ($-$) domina al efecto sustitución ($+$).
+
+
+\subsubsection*{1. Hogar ahorrador: domina el efecto sustitución sobre \(c\)}
+
+
+Como domina el efecto sustitución,
+\[
+  \boxed{\Delta c<0}.
+\]
+
+Para el consumo futuro, ambos efectos tienen el mismo signo, por lo que
+\[
+  \boxed{\Delta c'>0}.
+\]
+
+Finalmente,
+\[
+  \boxed{\Delta s>0}.
+\]
+
+El mayor rendimiento induce al hogar a sustituir consumo presente por consumo futuro. Aunque el efecto ingreso positivo incrementa ambos consumos a partir del incremento del poder adquisitivo del ahorro en términos de consumo futuro, no es suficiente para compensar la caída de \(c\). El hogar consume menos hoy, ahorra más y consume más mañana.
+
+En el diagrama, \(A_0\) se encuentra a la izquierda de la dotación \(E\). El punto compensado \(A^C\) está al noroeste de \(A_0\), y el punto final \(A_1\) está al noreste de \(A^C\), pero todavía a la izquierda de \(A_0\).
+
+\subsubsection*{2. Hogar ahorrador: domina el efecto ingreso sobre \(c\)}
+
+Como domina el efecto inreso,
+\[
+  \boxed{\Delta c>0}.
+\]
+
+Para el consumo futuro,
+\[
+  \boxed{\Delta c'>0}.
+\]
+
+Como el consumo presente aumenta, entonces el ahorro cae
+\[
+  \boxed{\Delta s<0}.
+\]
+
+El aumento de \(r\) enriquece al hogar ahorrador. Cuando este efecto ingreso domina, el hogar aumenta ambos consumos. Para financiar el aumento del consumo presente, reduce su ahorro actual, aunque continúa beneficiándose del mayor rendimiento de sus activos.
+
+En el diagrama, \(A^C\) se encuentra al noroeste de \(A_0\). El efecto ingreso desplaza la elección hacia el noreste y coloca a \(A_1\) a la derecha y por encima de \(A_0\).
+
+\subsubsection*{3. Hogar deudor: domina el efecto sustitución sobre \(c'\)}
+
+Para el consumo presente,
+\[
+  \boxed{\Delta c<0}.
+\]
+
+Para el consumo futuro, domina el efecto sustitución,
+\[
+  \boxed{\Delta c'>0}.
+\]
+
+Además,
+\[
+  \boxed{\Delta s>0}.
+\]
+
+El aumento de \(r\) encarece la deuda, lo que reduce la riqueza del hogar. Ambos efectos reducen el consumo presente e inducen al hogar a endeudarse menos. En este caso, la reducción del endeudamiento es suficientemente grande para que el consumo futuro aumente, a pesar del efecto ingreso negativo.
+
+En el diagrama, \(A_0\) se encuentra a la derecha de la dotación \(E\). El punto compensado \(A^C\) está al noroeste de \(A_0\). El efecto ingreso negativo mueve la elección hacia el suroeste, pero no lo suficiente para eliminar el aumento de \(c'\).
+
+\subsubsection*{4. Hogar deudor: domina el efecto ingreso sobre \(c'\)}
+
+Para el consumo presente,
+\[
+  \boxed{\Delta c<0}.
+\]
+
+Para el consumo futuro, domina el efecto ingreso,
+\[
+  \boxed{\Delta c'<0}.
+\]
+
+Finalmente,
+\[
+  \boxed{\Delta s>0}.
+\]
+
+El aumento de la tasa de interés encarece la deuda y empobrece al hogar. Aunque el efecto sustitución lo induce a trasladar consumo hacia el futuro, el efecto ingreso negativo domina. Como resultado, disminuyen ambos consumos. El ahorro aumenta en el sentido de que el hogar reduce su endeudamiento actual.
+
+En el diagrama, \(A^C\) se encuentra al noroeste de \(A_0\). El efecto ingreso negativo desplaza la elección hacia el suroeste y coloca a \(A_1\) por debajo y a la izquierda de \(A_0\).
+
+\subsubsection*{Resumen}
+
+\[
+\begin{array}{c|ccc|ccc|ccc}
+ & \multicolumn{3}{c|}{c}
+ & \multicolumn{3}{c|}{c'}
+ & \multicolumn{3}{c}{s} \\
+\text{Caso}
+ & ES & EI & ET
+ & ES & EI & ET
+ & ES & EI & ET \\ \hline
+\text{Ahorrador: domina ES}
+ & - & + & -
+ & + & + & +
+ & + & - & + \\
+\text{Ahorrador: domina EI}
+ & - & + & +
+ & + & + & +
+ & + & - & - \\
+\text{Deudor: domina ES}
+ & - & - & -
+ & + & - & +
+ & + & + & + \\
+\text{Deudor: domina EI}
+ & - & - & -
+ & + & - & -
+ & + & + & +
+\end{array}
+\]
+
+La intuición central es:
+
+\[
+\boxed{
+\begin{aligned}
+\text{Efecto sustitución:}\quad
+& c\downarrow,\quad c'\uparrow,\quad s\uparrow,\\
+\text{Efecto ingreso del ahorrador:}\quad
+& c\uparrow,\quad c'\uparrow,\quad s\downarrow,\\
+\text{Efecto ingreso del deudor:}\quad
+& c\downarrow,\quad c'\downarrow,\quad s\uparrow.
+\end{aligned}}
+\]
+
+\textbf{El aumento de la tasa de interés premia al ahorrador y castiga al deudor. El efecto sustitución siempre desplaza consumo hacia el futuro; el efecto ingreso determina si ese desplazamiento se refuerza o se contrarresta, dependiendo de la posición financiera inicial.}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{problema}{Hipótesis del ingreso permanente y función de consumo keynesiana}
+
+Compare la función de consumo keynesiana con la hipótesis del ingreso permanente. En particular, explique:
+
+\begin{enumerate}
+    \item qué medida del ingreso determina el consumo presente en cada teoría;
+
+    \item cómo responde el consumo corriente ante aumentos transitorios y permanentes del ingreso;
+
+    \item cuál es el papel del ahorro y del endeudamiento en la determinación del consumo;
+
+    \item qué evidencia empírica permitiría distinguir entre ambas explicaciones del comportamiento del consumo.
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+\subsection*{Solución}
+
+Los detalles de las siguientes respuestas se encuentran en la solución del Ejercicio 1. Aquí seré breve.
+
+\begin{enumerate}
+    \item ¿Qué medida del ingreso determina el consumo presente en cada teoría? 
+    
+    \textbf{FK:} El ingreso presente. 
+    
+    \textbf{HIP:} El flujo total de ingresos en el tiempo.
+    
+    \item ¿Cómo responde el consumo corriente ante aumentos transitorios y permanentes del ingreso?
+
+    \textbf{FK:} La función keynesiana no distingue entre cambios transitorios y permanentes. De acuerdo con esta teoría, el consumo presente responde siempre de la misma forma a cambios en el ingreso presente, independientemente de la persistencia del cambio.
+
+    \textbf{HIP:} El consumo presente responde poco ante un aumento transitorio del ingreso. Como el ingreso futuro permanece constante, el hogar ahorra parte del aumento para distribuir los recursos adicionales entre ambos periodos y suavizar su consumo. Ante un aumento permanente, en cambio, aumentan tanto el ingreso presente como el futuro y, por tanto, la riqueza intertemporal aumenta más. En consecuencia, el consumo presente responde en mayor medida.
+
+    \item ¿Cuál es el papel del ahorro y del endeudamiento en la determinación del consumo?
+
+    \textbf{FK:} El consumo depende solo del ingreso disponible presente. El ahorro es solo el residuo que queda después de consumir, mientras que el endeudamiento no desempeña un papel central en la función de consumo.
+
+    \textbf{HIP:} El ahorro y el endeudamiento permiten suavizar el consumo. Ante aumentos transitorios del ingreso, el hogar ahorra parte de los recursos adicionales; ante caídas transitorias, reduce su ahorro o se endeuda. De esta forma, evita que el consumo responda completamente a las fluctuaciones temporales del ingreso.
+
+    \item ¿Qué evidencia empírica permitiría distinguir entre ambas explicaciones del comportamiento del consumo?
+
+    Podría distinguirse entre ambas teorías comparando la respuesta empírica del consumo de los hogares ante aumentos transitorios y permanentes de magnitud similar en el ingreso disponible corriente. Los cambios transitorios podrían ser incentivos fiscales temporales, transferencias monetarias por única vez, becas de corta duración o un seguro de desempleo temporal. Los cambios permanentes podrían incluir reformas fiscales que reduzcan de manera duradera la carga tributaria o transferencias sociales de carácter permanente. Una respuesta del consumo presente similar ante ambos tipos de cambio favorecería la función keynesiana; una respuesta mayor ante los cambios permanentes favorecería la HIP.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{problema}{Estudio de caso}
+
+Suponga que es un asesor del Secretario de Hacienda. El gobierno federal está diseñando un paquete fiscal para estimular la demanda agregada mediante un aumento de las transferencias y necesita proyectar sus efectos sobre el consumo y la producción.
+
+Uno de los asesores estima la siguiente función de consumo:
+\[
+    C=1.04+0.54(Y-T+\mathrm{TR}),
+\]
+donde $Y-T+\mathrm{TR}$ es el ingreso disponible. Para realizar sus proyecciones, el asesor calcula el siguiente multiplicador fiscal:
+    \[
+        \mu_{\mathrm{TR}}
+        =
+        \frac{0.54}{1-0.54} \approx 1.17
+    \]
+Por lo tanto, proyecta que, por cada peso adicional de transferencias, la producción aumentará aproximadamente $1.17$ pesos.
+\begin{enumerate}
+    \item El asesor propone utilizar este multiplicador para proyectar los efectos de cualquier programa de transferencias. A la luz de la hipótesis del ingreso permanente, ¿considera apropiado utilizar estas estimaciones para realizar sus proyecciones? Argumente su respuesta.
+\end{enumerate}
+
+\end{problema}
+
+
+\subsection*{Solución}
+
+Los detalles de esta respuesta se encuentran en la solución del Ejercicio 1. Aquí seré breve.
+
+La función que propone el asesor para realizar las proyecciones del efecto del paquete fiscal es una función de consumo keynesiana con una propensión marginal a consumir de \(0.54\). Utilizarla para proyectar los efectos de cualquier programa de transferencias supone que los hogares responden siempre de la misma manera a un peso adicional de ingreso disponible corriente, independientemente de si el aumento es transitorio o permanente.
+
+Este supuesto contradice la hipótesis del ingreso permanente. Si las transferencias son transitorias, la riqueza intertemporal aumenta relativamente poco y los hogares ahorrarán una parte importante de los recursos adicionales. En consecuencia, el aumento del consumo y el multiplicador sobre la producción serán menores. Si las transferencias son permanentes, la riqueza intertemporal aumenta más y la respuesta del consumo será mayor.
+
+Por lo tanto, a la luz de la HIP, no sería apropiado aplicar automáticamente el multiplicador $\mu_{\mathrm{TR}} \approx 1.17$ a cualquier programa de transferencias. En particular, este multiplicador probablemente sobreestimaría el efecto de una transferencia temporal si el coeficiente \(0.54\) refleja principalmente la respuesta a cambios persistentes en el ingreso. La proyección debería utilizar una propensión marginal a consumir que varíe de acuerdo a la duración esperada del programa; es decir, que esté en línea con las predicciones de la HIP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{problema}{Problema de dos periodos con riqueza inicial}
+\label{Ej:P2P}
+Suponga que un hogar resuelve el siguiente problema de consumo y ahorro en dos periodos:
+\[
+    \max_{c_1,s,c_2}\; u(c_1)+\beta u(c_2)
+\]
+sujeto a
+\[
+    s=s_0+y_1-\tau_1-c_1,
+\]
+\[
+    c_2=y_2-\tau_2+(1+r)s,
+\]
+
+donde $c_1$ es el consumo en el periodo 1; $c_2$ es el consumo en el periodo 2; $y_1$ es el ingreso del hogar en el periodo 1; $y_2$ es su ingreso en el periodo 2; $\tau_1$ y $\tau_2$ son los impuestos pagados en los periodos 1 y 2, respectivamente; $s_0$ es la riqueza inicial del hogar; $s$ es el ahorro elegido en el primer periodo; $r$ es la tasa de interés real; y $\beta$ es el factor subjetivo de descuento.
+
+Suponemos que el hogar tiene preferencias CRRA en cada periodo: 
+
+\[
+    u(c)=\frac{c^{1-\sigma}-1}{1-\sigma}, \qquad \sigma >0.
+\]
+
+\begin{enumerate}
+    \item Obtenga la ecuación de Euler.
+
+    \subsubsection*{Solución}
+
+Sustituyendo las dos restricciones para eliminar $s$, obtenemos la restricción presupuestaria intertemporal:
+\[
+  c_1+\frac{c_2}{1+r} = s_0+y_1-\tau_1+\frac{y_2-\tau_2}{1+r}.
+\]
+
+El Lagrange asociado es:
+$$
+\mathcal{L}(c_1, c_2, \lambda) = u(c_1) + \beta u(c_2) + \lambda\left[s_0+ y_1 - \tau_1+\frac{y_2-\tau_2}{1+r} - c_1 - \frac{c_2}{1+r}\right]
+$$
+C.P.O.:
+\begin{align*}
+  &c_1 : \ u'(c_1) - \lambda = 0 \tag{1} \\
+  &c_2 : \ \beta u'(c_2) - \frac{\lambda}{1 + r} = 0 \tag{2} \\
+  &\lambda : \ s_0+y_1-\tau_1+\frac{y_2-\tau_2}{1+r} -c_1-\frac{c_2}{1+r} = 0 \tag{3}
+\end{align*}
+Sustituyendo (1) en (2), obtenemos la ecuación de Euler:
+$$
+u'(c_1) = \beta(1 + r)u'(c_2)
+$$
+Bajo preferencias CRRA,
+\[
+  \boxed{
+  c_1^{-\sigma}
+  =
+  \beta(1+r)c_2^{-\sigma}
+  }.
+\]
+En el óptimo, la pérdida de utilidad provocada por reducir el consumo presente en una unidad es igual a la ganancia de utilidad que produce ahorrar esa unidad y consumir su rendimiento en el futuro, valorada en el presente mediante el factor de descuento \(\beta\).
+
+En el óptimo, el hogar no tiene incentivos para sustituir consumo en el tiempo: la pérdida marginal de utilidad presente es exactamente igual a la ganancia marginal de utilidad futura, descontada al presente por $\beta$.
+
+
+    \item Muestre que, bajo preferencias CRRA, la elasticidad de sustitución intertemporal es $1/\sigma$.\footnote{La elasticidad de sustitución intertemporal mide el cambio porcentual en la razón entre elección de consumo futuro y consumo presente ante un cambio porcentual en el rendimiento real. Es decir,
+      \[
+        \frac{\partial\log(c_2/c_1)}{\partial\log(1+r)}
+      \].} Explique por qué un valor bajo de $1/\sigma$ implica una menor disposición a sustituir consumo entre periodos ante cambios en la tasa de interés real y, por tanto, una mayor preferencia por suavizar el consumo.
+
+
+\subsubsection*{Solución}
+Bajo preferencias CRRA, la ecuación de Euler es
+\[
+  c_1^{-\sigma}
+  =
+  \beta(1+r)c_2^{-\sigma},
+\]
+por lo que
+\[
+  \frac{c_2}{c_1}
+  =
+  \left[\beta(1+r)\right]^{1/\sigma}.
+\]
+Tomando logaritmos,
+\[
+  \log\left(\frac{c_2}{c_1}\right)
+  =
+  \frac{1}{\sigma}
+  \left[\log\beta+\log(1+r)\right].
+\]
+Por lo tanto,
+\[
+  \boxed{
+  \frac{\partial\log(c_2/c_1)}
+  {\partial\log(1+r)}
+  =
+  \frac{1}{\sigma}
+  }.
+\]
+
+Un valor bajo de \(1/\sigma\) implica que la razón \(c_2/c_1\) responde poco a cambios en la tasa de interés. El hogar está menos dispuesto a sustituir consumo entre periodos ante cambios en el costo de oportunidad $r$ y prefiere mantener una trayectoria de consumo más estable.
+
+
+
+
+    \item Obtenga expresiones en forma cerrada para las elecciones óptimas del hogar, $c_1^*$, $c_2^*$ y $s^*$.\footnote{Una solución está en \textit{forma cerrada} cuando la variable de interés puede expresarse explícitamente como una función de otras variables y parámetros. Por ejemplo, si se solicita resolver para una variable $x$, una expresión como $x=y^2-z$ constituye una solución en forma cerrada. En cambio, una ecuación como $e^x+x-b=0$ determina implícitamente a $x$, pero no es una solución en forma cerrada.}
+    
+
+\subsubsection*{Solución}
+
+De la ecuación de Euler,
+\[
+  c_2^*
+  =
+  \left[\beta(1+r)\right]^{1/\sigma}c_1^*.
+\]
+Sustituyendo en la restricción intertemporal,
+\[
+  c_1+\frac{\left[\beta(1+r)\right]^{1/\sigma}c_1^*}{1+r} = s_0+y_1-\tau_1+\frac{y_2-\tau_2}{1+r}.
+\]
+Factorizando $c_1^*$,
+\[
+  c_1^*\left(\frac{1 + r + \left[\beta(1 + r)\right]^{1/\sigma}}{1 + r}\right) = s_0+y_1-\tau_1+\frac{y_2-\tau_2}{1+r}.
+\]
+Despejando, obtenemos la solución para $c_1^*$:
+\[
+  \boxed{
+  c_1^*
+  =
+  \frac{(1+r)(s_0+y_1-\tau_1)+(y_2-\tau_2)}
+       {1+r+\left[\beta(1+r)\right]^{1/\sigma}}
+  }.
+\]
+Sustituyendo la solución $c_1^*$ en la ecuación de Euler, obtenemos $c_2^*$:
+\[
+  \boxed{
+  c_2^*
+  =
+  \left[\beta(1+r)\right]^{1/\sigma}
+  \frac{(1+r)(s_0+y_1-\tau_1)+(y_2-\tau_2)}
+       {1+r+\left[\beta(1+r)\right]^{1/\sigma}}
+  }.
+\]
+Finalmente, dado que $s^* = s_0+y_1-\tau_1 - c_1^*$, entonces:
+\[
+  \boxed{
+  s^*
+  =
+  \frac{
+  \left[\beta(1+r)\right]^{1/\sigma}
+  (s_0+y_1-\tau_1)-(y_2-\tau_2)}
+  {1+r+\left[\beta(1+r)\right]^{1/\sigma}}
+  }.
+\]
+
+    \item ¿Cómo depende la razón $c_1^*/y_1$ del ingreso futuro $y_2$? ¿Qué ocurriría con el consumo presente si los hogares se volvieran repentinamente más optimistas acerca de su ingreso futuro? Interprete económicamente.
+
+    \item ¿Cómo depende la razón $c_1^*/y_1$ de la riqueza inicial $s_0$? Interprete económicamente.
+
+    \item ¿Cómo depende la razón $c_1^*/y_1$ del factor subjetivo de descuento $\beta$? Interprete económicamente.
+    
+    \subsubsection*{Solución}
+    Dividiendo \(c_1^*\) entre \(y_1\), obtenemos
+      \[
+      \frac{c_1^*}{y_1}
+      =
+      \frac{1}{y_1}
+      \frac{(1+r)(s_0+y_1-\tau_1)+(y_2-\tau_2)}
+      {1+r+\left[\beta(1+r)\right]^{1/\sigma}}
+      \]
+    \begin{itemize}
+      \item La razón \(c_1^*/y_1\) es creciente en \(y_2\). Si los hogares se vuelven más optimistas respecto a su ingreso futuro, aumentan su consumo presente y reducen su ahorro (o se endeudan más) para suavizar el consumo entre periodos. Por lo tanto, la proporción de ingreso presente que el hogar consume hoy depende del ingreso futuro.
+
+      \item La razón \(c_1^*/y_1\) es creciente en \(s_0\). Un hogar con mayor riqueza inicial puede consumir más en el presente en relación con su ingreso corriente.
+
+      \item La razón \(c_1^*/y_1\) es decreciente en \(\beta\). Un hogar con un mayor factor de descuento valora más el consumo futuro y, por tanto, consume menos de su ingreso presente y ahorra más.
+    \end{itemize}
+
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+
+
+
+\begin{problema}{Restricciones de crédito y la Equivalencia Ricardiana}
+
+Suponga que un hogar resuelve la siguiente variante del problema del
+Ejercicio~\ref{Ej:P2P}:
+\[
+    \max_{c_1,a,c_2}\;u(c_1)+\beta u(c_2)
+\]
+sujeto a
+\[
+    s=y_1-\tau_1-c_1,
+\]
+\[
+    c_2=y_2-\tau_2+(1+r)s,
+\]
+y
+\begin{equation}
+    s\geq-b.
+    \label{eq:restriccion-credito}
+\end{equation}
+
+\begin{enumerate}
+
+\item ¿Qué significa la restricción \eqref{eq:restriccion-credito}? ¿Qué representa \(b\)?
+
+\subsubsection*{Solución}
+
+La restricción $s\geq-b$ es una restricción de endeudamiento. El parámetro \(b\geq0\) representa la cantidad máxima que el hogar puede pedir prestada. Si $s<0$, entonces $s$ a lo mucho puede ser $-b$.
+
+\item Grafique la restricción presupuestaria del hogar. En la misma gráfica, represente la restricción \eqref{eq:restriccion-credito}.
+
+\subsubsection*{Solución}
+
+La restricción presupuestaria intertemporal es
+\[
+  c_1+\frac{c_2}{1+r}
+  =
+  y_1-\tau_1+\frac{y_2-\tau_2}{1+r}.
+\]
+Por otro lado,
+\[
+  s=y_1-\tau_1-c_1\geq-b
+\]
+implica
+\[
+  c_1\leq y_1-\tau_1+b.
+\]
+Por lo tanto, la restricción de crédito impone un límite máximo al consumo presente. Gráficamente, elimina la parte de la restricción presupuestaria situada a la derecha de
+\[
+  c_1=y_1-\tau_1+b.
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.85cm,y=0.65cm]
+
+\draw[-{Stealth},thick] (0,0) -- (7.4,0) node[right] {$c_1$};
+\draw[-{Stealth},thick] (0,0) -- (0,8) node[above] {$c_2$};
+
+% Conjunto presupuestario factible
+\fill[blue!8]
+  (0,0) -- (0,7.2) -- (4.5,2.22) -- (4.5,0) -- cycle;
+
+% Restricción presupuestaria completa
+\draw[thick,gray]
+  (0,7.2) -- (6.5,0)
+  node[pos=0.83,above right] {Restricción presupuestaria};
+
+% Segmento factible
+\draw[very thick,blue!70!black]
+  (0,7.2) -- (4.5,2.22);
+
+% Restricción de crédito
+\draw[dashed,very thick,red!70!black]
+  (4.5,0) -- (4.5,7.5);
+
+\node[below,align=center] at (4.5,0)
+  {$y_1-\tau_1+b$};
+
+\node[point,fill=red!70!black] at (4.5,2.22) {};
+\node[above right] at (4.5,2.22)
+  {$s=-b$};
+
+\node[blue!70!black,align=center] at (2.2,2.4)
+  {Conjunto\\factible};
+
+\node[red!70!black] at (5.7,5.5)
+  {No factible};
+
+\end{tikzpicture}
+\caption{Restricción presupuestaria y límite de endeudamiento.}
+\end{figure}
+
+\item Resuelva las elecciones óptimas \(c_1^*\), \(c_2^*\) y \(s^*\).
+
+\subsubsection*{Solución}
+ Si la restricción de crédito no se satura, entonces la solución es simplemente la del Ejercicio~\ref{Ej:P2P} con $s_0 = 0$:
+\[
+  c_1^*
+  =
+  \frac{(1+r)(y_1-\tau_1)+(y_2-\tau_2)}
+  {1+r+\left[\beta(1+r)\right]^{1/\sigma}},
+\]
+\[
+  c_2^*
+  =
+  \left[\beta(1+r)\right]^{1/\sigma}
+  \frac{(1+r)(y_1-\tau_1)+(y_2-\tau_2)}
+  {1+r+\left[\beta(1+r)\right]^{1/\sigma}},
+\]
+y
+\[
+  s^*
+  =
+  \frac{
+  \left[\beta(1+r)\right]^{1/\sigma}(y_1-\tau_1)
+  -(y_2-\tau_2)}
+  {1+r+\left[\beta(1+r)\right]^{1/\sigma}}.
+\]
+
+Es decir, esta solución es válida si satisface
+\[
+  s^*\geq-b.
+\]
+Equivalentemente, la restricción no se satura si
+\[
+  \frac{(1+r)(y_1-\tau_1)+(y_2-\tau_2)}
+  {1+r+\left[\beta(1+r)\right]^{1/\sigma}}
+  \leq
+  y_1-\tau_1+b.
+\]
+
+Si sucede que $s^* < -b$, el hogar desearía endeudarse por encima del límite permitido. En ese caso, la restricción se satura y el hogar se endeuda hasta el límite de crédito:
+\[
+  \boxed{
+  s^*=-b.
+  }
+\]
+Las elecciones óptimas en este caso son
+\[
+  \boxed{
+    c_1^*=y_1-\tau_1+b,
+    \qquad
+    c_2^*=y_2-\tau_2-(1+r)b.
+  },
+\]
+Es decir, en el presente el hogar consume su ingreso disponible más el monto máximo que puede pedir prestado, mientras que en el futuro consume su ingreso disponible neto del pago de la deuda y sus intereses.
+
+
+\item Muestre que, manteniendo todo lo demás constante, es más probable que la restricción \eqref{eq:restriccion-credito} se sature cuando:
+\begin{enumerate}
+\renewcommand{\labelenumii}{\textnormal{(\roman{enumii})}}
+\item el ingreso disponible futuro \(y_2-\tau_2\) es alto;
+\item el ingreso disponible presente \(y_1-\tau_1\) es bajo;
+\item el límite de endeudamiento \(b\) es bajo.
+\end{enumerate}
+
+\subsubsection*{Solución}
+
+La restricción no se satura cuando
+\[
+  \frac{(1+r)(y_1-\tau_1)+(y_2-\tau_2)}
+  {1+r+\left[\beta(1+r)\right]^{1/\sigma}}
+  \leq
+  y_1-\tau_1+b.
+\]
+
+La expresión del lado izquierdo es creciente en $y_2-\tau_2$. Por lo tanto, un ingreso disponible futuro alto aumenta la probabilidad de que se viole la desigualdad.
+
+Ambos lados son crecientes en $y_1-\tau_1$, pero el lado derecho aumenta uno a uno con el ingreso disponible presente, mientras que el lado izquierdo aumenta menos que proporcionalmente. Por lo tanto, un ingreso disponible presente bajo aumenta la probabilidad de que la desigualdad se viole.
+
+Finalmente, un nivel bajo de $b$ reduce el lado derecho y, por tanto, aumenta la probabilidad de que el endeudamiento óptimo deseado exceda el límite permitido y la restricción se sature.
+
+A continuación, la intuición económica de esto.
+
+\begin{enumerate}
+\renewcommand{\labelenumii}{\textnormal{(\roman{enumii})}}
+
+\item Un ingreso disponible futuro alto aumenta los recursos futuros del hogar. Para suavizar su consumo, el hogar desea pedir prestado contra ese ingreso y consumir más en el presente. Por tanto, es más probable que alcance el límite de endeudamiento.
+
+\item Un ingreso disponible presente bajo incrementa la necesidad de pedir prestado para sostener el consumo actual. Por lo tanto, es más probable que la restricción se sature.
+
+\item Un valor bajo de \(b\) reduce la cantidad máxima que el hogar puede pedir prestada. Por lo tanto, incluso una necesidad relativamente pequeña de endeudamiento puede hacer que la restricción se sature.
+
+\end{enumerate}
+
+\item Suponga que el gobierno anuncia un paquete de estímulo fiscal de tamaño \(\Delta\). El programa consiste en reducir \(\tau_1\) en \(\Delta\) y aumentar \(\tau_2\) en \(\Delta(1+r)\), de modo que el valor presente de los impuestos permanece constante.
+
+¿Cómo responde \(c_1\) al paquete de estímulo si la economía parte de una situación en la que la restricción \eqref{eq:restriccion-credito} no se satura? ¿Cómo responde \(c_1\) si la economía parte de una situación en la que la restricción sí se satura? Explique.
+
+\subsubsection*{Solución}
+
+Si la restricción no se satura, la restricción presupuestaria después del paquete es
+\begin{align*}
+  c_1+\frac{c_2}{1+r}
+  &=
+  y_1-(\tau_1-\Delta)
+  +
+  \frac{y_2-\left[\tau_2+\Delta(1+r)\right]}{1+r}
+  \\
+  &=
+  y_1-\tau_1
+  +
+  \frac{y_2-\tau_2}{1+r}.
+\end{align*}
+La reducción del impuesto presente se cancela exactamente con el valor presente del aumento del impuesto futuro. Por lo tanto, la riqueza intertemporal no cambia y
+\[
+  \boxed{\Delta c_1=0}.
+\]
+El hogar ahorra la reducción del impuesto actual para pagar el aumento del impuesto futuro. Éste es el resultado de la Equivalencia Ricardiana.
+
+Si la restricción se satura y continúa saturada después del paquete,
+\[
+  s^*=-b.
+\]
+Antes del estímulo,
+\[
+  c_1^*=y_1-\tau_1+b.
+\]
+Después del estímulo,
+\[
+  \widetilde c_1^*
+  =
+  y_1-(\tau_1-\Delta)+b
+  =
+  c_1^*+\Delta.
+\]
+Por tanto,
+\[
+  \boxed{
+    \widetilde c_1^*-c_1^*=\Delta
+  }.
+\]
+
+El hogar restringido no puede pedir prestado contra su ingreso futuro. La reducción del impuesto actual le proporciona recursos líquidos que puede consumir inmediatamente. Por ello, su consumo presente aumenta peso por peso con el estímulo y la Equivalencia Ricardiana no se cumple.
+
+
+\end{enumerate}
+
+\end{problema}
+
+
+
+
+
+\end{document}
