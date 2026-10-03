@@ -74,6 +74,8 @@ problem_sets:
     materials:
       - name: Problem Set
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_3_Macro_II.pdf
+      - name: Solver
+        url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_3_Macro_II_solver.pdf
 ---
 
 <div class="course">
