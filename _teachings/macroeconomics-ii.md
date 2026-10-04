@@ -76,6 +76,13 @@ problem_sets:
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_3_Macro_II.pdf
       - name: Solver
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_3_Macro_II_solver.pdf
+
+  - week: Mock Exam I
+    topic: First term
+    description: General Equilibrium in a One-Period Economy, Consumption-Savings Decision and A Real Intertemporal Model with Investment.
+    materials:
+      - name: Mock Exam
+        url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Mock_Exam_Macro_II.pdf
 ---
 
 <div class="course">
