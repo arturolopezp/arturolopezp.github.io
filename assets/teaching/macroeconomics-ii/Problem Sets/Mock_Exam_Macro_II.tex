@@ -1,0 +1,241 @@
+\documentclass[12pt]{article}
+
+% Configuración de página
+\usepackage[margin=.85in]{geometry}
+
+% Referencias
+\usepackage{natbib}
+\usepackage{nicefrac}
+% Colores principales
+\usepackage[table]{xcolor}
+\definecolor{mainblue}{HTML}{2c3e50}
+\definecolor{darkblue}{HTML}{003366}
+\definecolor{lightgray}{HTML}{f7f9fb}
+
+% Fuentes y tipografía
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Configuración de títulos
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% Configuración del título principal
+\usepackage{titling}
+\pretitle{\begin{center}\LARGE\bfseries\vskip -3em}
+\posttitle{\par\end{center}\vskip -3em}
+\preauthor{\begin{center} \vskip -2.8em}
+\postauthor{\par\end{center} \vskip -2.5em}
+\predate{\begin{center} \vskip -2.6em}
+\postdate{\par\end{center}\vskip -1em}
+
+% Headers y footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Macroeconomía II: Primer Parcial - Mock Exam}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\leaders\hrule height \headrulewidth\hfill}}
+
+% Configuración del TOC
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\bfseries}
+\renewcommand{\cftsubsecfont}{}
+\renewcommand{\cftsecpagefont}{}
+\renewcommand{\cftsubsecpagefont}{}
+
+% Espaciado y márgenes
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+
+% Configuración de enlaces
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=darkblue, citecolor=darkblue}
+
+% Configuración de código para saltos de línea y tamaño
+\usepackage{framed}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{etoolbox}
+\definecolor{codebg}{RGB}{250, 250, 255}        % Blanco azuleado
+\definecolor{shadecolor}{named}{codebg}
+\makeatletter
+\@ifundefined{Shaded}{
+  \newenvironment{Shaded}{\begin{snugshade}\scriptsize}{\end{snugshade}}
+}{
+  \renewenvironment{Shaded}{\begin{snugshade}\scriptsize}{\end{snugshade}}
+}
+\makeatother
+\fvset{breaklines=true, breaksymbol=\textcolor{gray}{\tiny$\hookrightarrow$}}
+
+% Configuración de tcolorbox
+\usepackage[most]{tcolorbox}
+\tcbset{colframe = blue!30!black, colback = white, breakable, enhanced, boxrule = 0.5mm, sharp corners, fonttitle = \bfseries, coltitle = white, colbacktitle = blue!30!black}
+\newtcolorbox{solution}{title = Solution}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+
+% LaTeX
+\usepackage{bbm}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Math
+\usepackage{amsthm, amsmath, amssymb}        % Notación
+
+\numberwithin{equation}{section}             % Ecuaciones numeradas por sección
+
+\theoremstyle{definition}                    % Estilo tipo texto
+\newtheorem{definition}{Definition} % Numera por sección
+
+\theoremstyle{plain}                         % Estilo en negritas y cursiva
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[theorem]   % Corolario ligado a teorema
+\theoremstyle{remark} % Comentarios tipo remark
+\newtheorem*{remark}{Remark} % Sin numeración
+
+\tcbuselibrary{theorems}
+\tcolorboxenvironment{example}{
+  enhanced,
+  borderline north={0.5pt}{0pt}{black},
+  borderline south={0.5pt}{0pt}{black},
+  boxrule=0pt,
+  frame hidden,
+  before upper={\parindent15pt},
+  footnote style
+}
+\tcolorboxenvironment{exercise}{
+  enhanced,
+  borderline north={0.5pt}{0pt}{black},
+  borderline south={0.5pt}{0pt}{black},
+  boxrule=0pt,
+  frame hidden,
+  before upper={\parindent15pt},
+  footnote style
+}
+\tcolorboxenvironment{remark}{
+  enhanced,
+  borderline north={0.5pt}{0pt}{blue},
+  borderline south={0.5pt}{0pt}{blue},
+  boxrule=0pt,
+  frame hidden,
+  before upper={\parindent15pt},
+  footnote style
+}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\newtheorem*{exercise}{Ex}
+
+% Información del documento
+\title{ \large Macroeconomía II \vspace{0.1cm}}
+\author{Centro de Investigación y Docencia Económicas \\ \vspace{-0.05cm}
+Licenciatura en Economía - Otoño 2026\\ \vspace{-0.05cm}
+Primer Parcial - Mock Exam}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-.5cm}
+
+
+\textbf{Matrícula:} \rule{15cm}{0.4pt}
+
+
+\small Anote su matrícula con pluma, \textbf{no incluya su nombre}. 
+Responda cada inciso de \textbf{forma detallada} y con \textbf{letra legible}. 
+\vspace{.4cm}
+
+
+\normalsize
+
+
+
+\textbf{Ejercicio 1.} Considere el modelo macroeconómico de un solo periodo. Suponga que la productividad total de los factores, $z$, afecta la productividad del gasto público de la misma manera que afecta la producción privada. Es decir, suponga que, cuando el gobierno recauda impuestos, adquiere bienes que posteriormente transforma en bienes públicos de acuerdo con $G=zT$, de modo que se producen $z$ unidades de bienes públicos por cada unidad de impuestos recaudada.
+
+Si el gobierno fija $G$, un aumento de $z$ implica que se requiere una menor cantidad de impuestos para financiar ese nivel de gasto público. En estas circunstancias, utilice un diagrama para determinar los efectos de un aumento de $z$ sobre la producción, el consumo, el ocio y el salario real, considerando $G$ como dado. Explique la intuición de sus resultados. En el diagrama, grafique el caso en que los efectos ingreso y sustitución de la oferta laboral ante incrementos directos en $z$ se cancelan.
+
+
+\textbf{Ejercicio 2.} Considere el modelo macroeconómico de un solo periodo. Suponga que el gasto público aumenta la productividad de la empresa representativa. Por ejemplo, la inversión en infraestructura, como carreteras y puentes, reduce los costos de transporte. Por lo tanto, el gasto público tiene ahora dos efectos: uno directo, derivado del aumento de $G$, y otro indirecto, equivalente al efecto de un incremento en la productividad de la empresa, $z$. 
+
+Muestre que los efectos de equilibrio del aumento del gasto público sobre el consumo y las horas trabajadas son ambiguos, mientras que la producción aumenta de manera inequívoca. Para demostrarlo, considere tanto el efecto ingreso como el efecto sustitución de incrementos en $z$.
+
+
+\textbf{Ejercicio 3.} Considere el modelo macroeconómico de un solo periodo. Suponga que el gobierno introduce un impuesto proporcional $\tau\in(0,1)$ sobre el ingreso laboral del hogar y devuelve la recaudación a los hogares mediante transferencias de suma fija. Cada hogar toma esta transferencia como dada. Por lo tanto, la restricción presupuestaria del hogar es
+$$
+c=(1-\tau)w(h-\ell)+\pi+\mathcal{T},
+$$
+
+\begin{itemize}
+    \item[(a)] Explique cómo el impuesto distorsiona la decisión entre consumo y trabajo.
+    \item[(b)] Argumente por qué el equilibrio general de esta economía no es óptimo en sentido de Pareto.
+\end{itemize}
+
+
+
+\textbf{Ejercicio 4.} Considere los siguientes efectos de una reducción de impuestos para un consumidor:
+\begin{enumerate}
+    \item[(a)] Los impuestos del consumidor disminuyen en $\Delta t$ únicamente en el periodo actual. ¿Cómo afecta esta reducción al consumo presente, al consumo futuro y al ahorro actual?
+    
+    \item[(b)] Los impuestos disminuyen permanentemente en $\Delta t$, tanto en el periodo actual como en el futuro. ¿Cómo afecta esta reducción al consumo presente, al consumo futuro y al ahorro actual? 
+    \item[(c)] Utilizando la hipótesis del ingreso permanente, analice las diferencias entre (a) y (b).
+\end{enumerate}
+
+
+
+
+\textbf{Ejercicio 5.} Considere una economía poblada por un hogar representativo que vive durante dos periodos y elige consumo y ocio para resolver
+\[
+\max_{c_1,\ell_1,c_2,\ell_2}
+\left\{
+\sqrt{c_1} + \frac{\ell_1^{1-\gamma}-1}{1-\gamma}
++\beta  \left[\sqrt{c_2} + \frac{\ell_2^{1-\gamma}-1}{1-\gamma}\right]
+\right\},
+\]
+sujeto a
+\[
+c_1+\frac{c_2}{1+r}
+=
+w_1(1-\ell_1)+\frac{w_2(1-\ell_2)}{1+r},
+\]
+donde \(w_t\) es el salario real, \(r\) es la tasa de interés real y la dotación de tiempo en cada periodo está normalizada a uno.
+Suponga que \(0<\beta<1\), \(\gamma>0\) y \(\gamma\neq1\).
+\begin{enumerate}
+    \item[(a)] Formule el Lagrangiano y obtenga las condiciones de primer orden.
+    \item[(b)] Obtenga la ecuación de Euler.
+    \item[(c)] Derive la condición de optimalidad que determina la elección entre consumo y ocio en cada periodo.
+    \item[(d)] Interprete económicamente ambas condiciones.
+\end{enumerate}
+
+
+
+
+
+
+
+\textbf{Ejercicio 6.} Considere el modelo intertemporal del sector real. Suponga que ocurre un aumento permanente de la productividad total de los factores. Utilizando diagramas, determine sus efectos sobre las variables macroeconómicas actuales y muestre cómo difieren de los efectos de un aumento transitorio de la productividad total de los factores. Explique e interprete sus resultados.
+
+\textbf{Ejercicio 7.} Considere el modelo intertemporal del sector real.  Suponga que ocurre un cambio en las preferencias del consumidor representativo. Como resultado, dada la tasa de interés real de mercado, el consumidor desea disfrutar menos ocio presente y consumir más bienes en el periodo actual. Utilizando diagramas, determine sus efectos sobre las variables macroeconómicas actuales. Explique e interprete sus resultados.
+
+\textbf{Ejercicio 8.} Considere el modelo intertemporal del sector real. Suponga que \(z'\) y \(K\) disminuyen simultáneamente. Muestre que, como resultado, es posible que la tasa de interés real permanezca constante. Explique e interprete sus resultados.
+
+\textbf{Ejercicio 9.} Considere el modelo intertemporal del sector real. Suponga que el gobierno anuncia un aumento del gasto público en el futuro. Utilizando diagramas, determine sus efectos sobre las variables macroeconómicas actuales.
+
+\end{document}
