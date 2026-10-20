@@ -1,0 +1,233 @@
+\documentclass[12pt]{article}
+
+% Configuración de página
+\usepackage[margin=.85in]{geometry}
+
+% Referencias
+\usepackage{natbib}
+\usepackage{nicefrac}
+
+% Colores principales
+\usepackage[table]{xcolor}
+\definecolor{mainblue}{HTML}{2c3e50}
+\definecolor{darkblue}{HTML}{003366}
+\definecolor{lightgray}{HTML}{f7f9fb}
+
+% Fuentes y tipografía
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Configuración de títulos
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% Configuración del título principal
+\usepackage{titling}
+\pretitle{\begin{center}\LARGE\bfseries\vskip -3em}
+\posttitle{\par\end{center}\vskip -3em}
+\preauthor{\begin{center}\vskip -2.8em}
+\postauthor{\par\end{center}\vskip -2.5em}
+\predate{\begin{center}\vskip -2.6em}
+\postdate{\par\end{center}\vskip -1em}
+
+% Headers y footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Macroeconomía II: Quiz 1}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{%
+  \hbox to\headwidth{\leaders\hrule height \headrulewidth\hfill}
+}
+
+% Configuración del TOC
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\bfseries}
+\renewcommand{\cftsubsecfont}{}
+\renewcommand{\cftsecpagefont}{}
+\renewcommand{\cftsubsecpagefont}{}
+
+% Espaciado y márgenes
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+
+% Configuración de enlaces
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=darkblue,
+  citecolor=darkblue
+}
+
+% Configuración de código para saltos de línea y tamaño
+\usepackage{framed}
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{etoolbox}
+\definecolor{codebg}{RGB}{250,250,255}
+\definecolor{shadecolor}{named}{codebg}
+
+\makeatletter
+\@ifundefined{Shaded}{
+  \newenvironment{Shaded}
+    {\begin{snugshade}\scriptsize}
+    {\end{snugshade}}
+}{
+  \renewenvironment{Shaded}
+    {\begin{snugshade}\scriptsize}
+    {\end{snugshade}}
+}
+\makeatother
+
+\fvset{
+  breaklines=true,
+  breaksymbol=\textcolor{gray}{\tiny$\hookrightarrow$}
+}
+
+% Configuración de tcolorbox
+\usepackage[most]{tcolorbox}
+\tcbset{
+  colframe=blue!30!black,
+  colback=white,
+  breakable,
+  enhanced,
+  boxrule=0.5mm,
+  sharp corners,
+  fonttitle=\bfseries,
+  coltitle=white,
+  colbacktitle=blue!30!black
+}
+\newtcolorbox{solution}{title=Solution}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+
+% LaTeX
+\usepackage{bbm}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Math
+\usepackage{amsthm,amsmath,amssymb}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\tcbuselibrary{theorems}
+
+\tcolorboxenvironment{example}{
+  enhanced,
+  borderline north={0.5pt}{0pt}{black},
+  borderline south={0.5pt}{0pt}{black},
+  boxrule=0pt,
+  frame hidden,
+  before upper={\parindent15pt},
+  footnote style
+}
+
+\tcolorboxenvironment{exercise}{
+  enhanced,
+  borderline north={0.5pt}{0pt}{black},
+  borderline south={0.5pt}{0pt}{black},
+  boxrule=0pt,
+  frame hidden,
+  before upper={\parindent15pt},
+  footnote style
+}
+
+\tcolorboxenvironment{remark}{
+  enhanced,
+  borderline north={0.5pt}{0pt}{blue},
+  borderline south={0.5pt}{0pt}{blue},
+  boxrule=0pt,
+  frame hidden,
+  before upper={\parindent15pt},
+  footnote style
+}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\newtheorem*{exercise}{Ex}
+
+% Información del documento
+\title{\large Macroeconomía II \vspace{0.5cm}}
+\author{
+  Centro de Investigación y Docencia Económicas\\
+  \vspace{-0.05cm}
+  Licenciatura en Economía -- Otoño 2026\\
+  \vspace{-0.05cm}
+  Quiz 1
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-.5cm}
+
+\textbf{Matrícula:} \rule{15cm}{0.4pt}
+
+\small
+Anote su matrícula con pluma, \textbf{no incluya su nombre}.
+Responda cada inciso de \textbf{forma detallada} y con
+\textbf{letra legible}.
+
+\vspace{.4cm}
+
+\normalsize
+
+\textbf{Ejercicio 1. (60 puntos)} Considere un hogar con preferencias estrictamente crecientes y estrictamente convexas sobre $(c,c')$, que recibe ingresos $(y,y')$ y paga impuestos de suma fija $(\tau,\tau')$. Puede ahorrar o endeudarse libremente a la tasa de interés real $r$. Suponga que ambos consumos son bienes normales.
+Para cada uno de los siguientes casos, utilice un diagrama en el plano $(c,c')$ para analizar el efecto sobre el consumo presente, el consumo futuro y el ahorro actual.
+
+\begin{enumerate}
+  \item[(a)] El gobierno anuncia una \textbf{reducción} de los impuestos en $\Delta\tau<0$ únicamente en el periodo actual.
+
+  \item[(b)] El gobierno anuncia una \textbf{reducción} de impuestos permanente: tanto $\tau$ como $\tau'$ se reducen en $\Delta\tau<0$.
+
+  \item[(c)] Compare los resultados de los dos incisos. Explique por qué la
+  respuesta del consumo depende de si el cambio en el ingreso disponible es
+  transitorio o permanente.
+\end{enumerate}
+
+\textbf{Ejercicio 2. (40 puntos)} Suponga que un hogar resuelve el siguiente problema de consumo y ahorro en dos periodos:
+\[
+\max_{c_1,s,c_2}\;\frac{c_1^{1-\sigma}-1}{1-\sigma} + \beta \,\frac{c_2^{1-\sigma}-1}{1-\sigma} \qquad
+\sigma>0
+\]
+sujeto a
+\begin{align*}
+s   &= s_0+y_1-\tau_1-c_1,\\
+c_2 &= y_2-\tau_2+(1+r)s,
+\end{align*}
+
+donde $c_1$ es el consumo en el periodo 1; $c_2$ es el consumo en el periodo 2; $y_1$ es el ingreso del hogar en el periodo 1; $y_2$ es su ingreso en el periodo 2; $\tau_1$ y $\tau_2$ son los impuestos pagados en los periodos 1 y 2, respectivamente; $s_0$ es la riqueza inicial del hogar; $s$ es el ahorro elegido en el primer periodo; $r$ es la tasa de interés real; y $\beta$ es el factor subjetivo de descuento.
+
+\begin{enumerate}
+  \item[(a)] Obtenga la restricción presupuestaria intertemporal.
+  \item[(b)] Obtenga la ecuación de Euler e interprétela económicamente.
+\end{enumerate}
+
+\end{document}
