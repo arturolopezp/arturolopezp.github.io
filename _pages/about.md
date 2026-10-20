@@ -23,6 +23,6 @@ latest_posts:
   }
 </style>
 
-Economist with research interests in small open economy macroeconomics, monetary economics, and macroeconometrics.
+Economist in the Directorate General of Economic Research at Banco de México. My research interests lie at the intersection of small open economy macroeconomics, monetary economics, and macroeconometrics.
 
-This website brings together replication files, teaching resources, and independent computational projects.
+This website brings together replication files, teaching materials, and independent computational projects.
