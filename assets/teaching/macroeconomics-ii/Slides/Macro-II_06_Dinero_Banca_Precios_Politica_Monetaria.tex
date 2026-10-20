@@ -1,0 +1,1012 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% los paquetes Beamer/Hyperref instalados.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+\makeatletter
+\@namedef{ver@epstopdf-base.sty}{9999/12/31}
+\makeatother
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 6: DINERO, BANCA, PRECIOS Y POLITICA MONETARIA
+% =============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\uselanguage{English}
+\languagepath{English}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+\usepackage{array,tabularx}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{remark}[theorem]{Observación}
+\newtheorem{assumption}[theorem]{Supuesto}
+
+\tolerance=1000
+\emergencystretch=1em
+\AtBeginDocument{\justifying}
+\addtobeamertemplate{itemize body begin}{\justifying}{}
+\addtobeamertemplate{enumerate body begin}{\justifying}{}
+\addtobeamertemplate{description body begin}{\justifying}{}
+\addtobeamertemplate{block begin}{}{\justifying}
+\addtobeamertemplate{block alerted begin}{}{\justifying}
+\addtobeamertemplate{block example begin}{}{\justifying}
+\AtBeginEnvironment{column}{\justifying}
+
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+\setbeamertemplate{section in head/foot}{\color{white}\insertsectionhead}
+\setbeamertemplate{section in head/foot shaded}{\color{white!55}\insertsectionhead}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,ht=3.05ex,dp=1.05ex,
+    leftskip=0.42cm,rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+  }%
+  \vskip0pt
+}
+
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+\setbeamertemplate{background}{%
+  \vbox to \paperheight{%
+    \vfill
+    \hbox to \paperwidth{%
+      \hfill
+      \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      \hspace{0.18cm}%
+    }%
+    \vspace{0.68cm}%
+  }%
+}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+\newcommand{\FigurasSesion}{Figuras/06_Dinero Banca Precios y Politica Monetaria}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+\title[Macroeconomía II]{Sesión 6 \\ Dinero, Banca, Precios y Política Monetaria}
+\subtitle{Macroeconomía II}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Punto de partida}
+
+\begin{frame}{Objetivos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Incorporar dinero al modelo intertemporal del sector real: \cidehighlight{modelo monetario intertemporal}.
+    \item Derivar una función microfundamentada de demanda de dinero y estudiar el equilibrio del \cidehighlight{mercado monetario}.
+    \item Demostrar la \cidehighlight{neutralidad del dinero} en el modelo clásico y precisar el alcance de ese resultado.
+  \end{itemize}
+  \notafuentes{Williamson (2018), cap. 12, pp. 462--494.}
+\end{frame}
+
+\begin{frame}{¿Por qué introducir dinero?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item El modelo del capítulo 11 determina variables \textbf{reales}: $Y$, $C$, $I$, $N$, $w$ y $r$.
+    \item La introducción del mercado monetario nos ayuda a determinar variables \textbf{nominales}, como el nivel de precios $P$ y la tasa de interés nominal $R$.
+    \item El dinero facilita el intercambio, pero mantenerlo tiene un costo de oportunidad: renunciar al rendimiento de otros activos.
+    \item Los agentes eligen entre distintos medios de pago para realizar sus transacciones, lo que genera una demanda de saldos monetarios.
+    \item \cidehighlight{Cambios en la cantidad de saldos monetarios en la economía cambian la conducta de las personas}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Estructura del modelo monetario intertemporal}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \textbf{Bloque real}
+      \begin{itemize}
+        \item Mercado de trabajo.
+        \item Mercado de bienes.
+        \item Mercado de crédito.
+        \item Determina $Y^*$, $N^*$, $w^*$ y $r^*$.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Bloque nominal}
+      \begin{itemize}
+        \item Oferta nominal de dinero $M^s$.
+        \item Demanda nominal de dinero $M^d$.
+        \item Mercado monetario.
+        \item Determina el nivel de precios $P^*$.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{0.25cm}
+  \begin{block}{Dicotomía clásica}
+    En el modelo, las variables reales se determinan sin referencia al nivel de la oferta monetaria; después, el mercado de dinero determina $P$.
+  \end{block}
+\end{frame}
+
+\section{Dinero y tasas de interés}
+
+\begin{frame}{¿Qué es el dinero?}
+
+  El \cidehighlight{dinero} es cualquier \cidehighlight{activo} que cumpla las siguientes tres funciones:
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item \textbf{Medio de intercambio:} es aceptado a cambio de bienes y servicios por el simple hecho de que puede ser intercambiado por otros bienes y servicios. \cidehighlight{No es demandado para consumo}.
+    \item \textbf{Depósito de valor:} permite transferir poder de compra a través del tiempo, i.e. transferir bienes presentes por bienes futuros.
+    \item \textbf{Unidad de cuenta:} sirve para expresar precios, salarios, contratos y deudas.
+  \end{itemize}
+
+  En el modelo, considerarémos como dinero cualquier activo que cumpla con el primero punto: que sea aceptado como medio de pago en las transacciones.
+  \notafuentes{Williamson (2018), pp. 463--464.}
+\end{frame}
+
+
+
+\begin{frame}{El dinero elimina fricciones}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item En una economía de trueque, una transacción requiere una \textbf{doble coincidencia de deseos}.
+    \item La especialización productiva hace improbable que dos agentes posean exactamente lo que el otro desea (Jevons, 1910).
+    \item Un medio de intercambio aceptado por todos reemplaza la doble coincidencia de deseos por una \textbf{simple coincidencia de deseos}.
+    \item El dinero también reduce problemas de información: no es necesario evaluar la calidad crediticia de cada contraparte en cada compra.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Agregados monetarios}
+  \centering
+  \small
+  \begin{tabularx}{0.94\textwidth}{>{\bfseries}lYY}
+    \toprule
+    Agregado & Componentes principales & Interpretación \\
+    \midrule
+    $M0$ & Billetes y monedas fuera del banco central; reservas de los bancos & Base monetaria o dinero externo \\
+    \addlinespace
+    $M1$ & $M0$ + depósitos a la vista y otros instrumentos transaccionales & Medios de pago líquidos \\
+    \addlinespace
+    $M2$ & $M1$ + depósitos de ahorro y activos cercanos al dinero & Liquidez en sentido amplio \\
+    \bottomrule
+  \end{tabularx}
+  \vspace{0.35cm}
+    
+  
+  No existe una frontera única entre ``dinero'' y ``no dinero'': los agregados se diferencian por su liquidez, su uso transaccional y el \textbf{tipo de pasivo} que representan.
+  \notafuentes{Williamson (2018), tabla 12.1 y pp. 464--465.}
+\end{frame}
+
+\begin{frame}{Precios presentes y futuros}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Sea $P$ el nivel de precios presente y $P'$ el nivel de precios futuro.
+    \item Siguiendo la notación de Williamson, denotamos por $i$ la tasa de inflación:
+      \[
+        i\equiv\frac{P'-P}{P}
+      \]
+    \item $R$ es la tasa de interés \textbf{nominal}: una unidad monetaria invertida hoy paga $1+R$ unidades monetarias mañana.
+    \item $r$ es la tasa de interés \textbf{real}: una unidad de bienes presente se transforma en $1+r$ unidades de bienes futuros.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Relación de Fisher}
+
+\end{frame}
+
+\begin{frame}{Aproximación de la relación de Fisher}
+
+\end{frame}
+
+
+
+\begin{frame}{Tasa de interés real \textit{ex-post}}
+      \centering
+      \figura[5.45cm]{fig_12_2_tasa_real.png}
+      \fuentefigura{Williamson (2018), figura 12.2.}
+\end{frame}
+
+
+\begin{frame}{El efecto de Fisher}
+      \centering
+      \figura[5.45cm]{fig_12_1_tasa_nominal_inflacion.png}
+      \fuentefigura{Williamson (2018), figura 12.1.}
+\end{frame}
+
+
+\begin{frame}{Retorno real de bonos y dinero}
+La tasa de interés real del dinero es menor a la tasa real sobre bonos.
+$$
+1 + r^m = \frac{1 + 0}{1 + i} = \frac{1}{1 + i}
+$$
+Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oportunidad por mantener dinero en efectivo}.
+
+\vspace{0.35cm}
+
+¿Por qué las personas están dispuestas a mantener dinero en efectivo si podrían recibir un mayor retorno real en el activo alternativo, el bono nominal?
+\end{frame}
+
+
+
+
+\section{Bancos y demanda de dinero}
+
+
+\begin{frame}{Medios de pago alternativos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item Los agentes pueden financiar transacciones con efectivo o con servicios bancarios.
+    \item Usar efectivo es tecnológicamente simple, pero obliga a mantener un activo sin rendimiento nominal.
+    \item Utilizar servicios bancarios requiere infraestructura, verificación y procesamiento; por ello tiene un costo real.
+    \item Los bancos eligen cuántos servicios ofrecer; hogares, empresas y gobierno eligen cuánto utilizar.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Elección de medios de pago}
+  \begin{itemize}
+    \item Hogares, empresas y gobierno eligen entre dos medios de pago alternativos para realizar transacciones en el mercado de bienes: dinero en efectivo y tarjetas de crédito.
+    \item Las empresas venden su producto al precio $P$, en términos monetarios (ahora el dinero es el bien numerario).
+    \item Suponemos que cuando un agente realiza una compra de bienes con tarjeta de crédito, adquiere una deuda con el banco que tiene que pagar, sin interés, al final del periodo presente.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Oferta de servicios de tarjetas de crédito}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      \begin{itemize}
+        \item $X$ es la cantidad real de compras realizadas con tarjeta de crédito.
+        \item $q$ es el precio del servicio de crédito.
+        \item La oferta $X^s(q)$ es creciente: costo marginal creciente.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.2cm]{fig_12_3_oferta_servicios_credito.png}
+      \fuentefigura{Williamson (2018), figura 12.3.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Elección entre efectivo y crédito}
+  Comprar una unidad adicional con tarjeta de crédito permite invertir $P$ unidades monetarias a la tasa $R$, pero exige pagar el pagar el servicio de crédito a la tasa $q$:
+  \[
+    \text{beneficio marginal}=P(1+R),
+    \qquad
+    \text{costo marginal}=P(1+q).
+  \]
+  Por lo tanto,
+  \[
+    \begin{cases}
+      R>q &\Rightarrow \text{conviene tarjeta de crédito},\\
+      R<q &\Rightarrow \text{conviene efectivo},\\
+      R=q &\Rightarrow \text{indiferencia}.
+    \end{cases}
+  \]
+  \begin{block}{Demanda de servicios de crédito}
+    La demanda es perfectamente elástica en $q=R$; la tasa nominal es el costo de oportunidad de utilizar efectivo.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Equilibrio en el mercado de tarjetas de crédito}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.41\textwidth}
+      \small
+      \begin{itemize}
+        \item $X^d(q)$ es la cantidad demandada de transacciones con tarjeta de crédito.
+        \item $Y-X^d(q)$ es la cantidad demandada de transacciones con efectivo.
+        \item La demanda horizontal de $X^d(q)$ refleja la condición $q=R$.
+        \item La intersección con $X^s(q)$ determina
+          \[
+            q^*=R,\qquad X^*=X^s(R).
+          \]
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \centering
+      \figura[5.3cm]{fig_12_4_equilibrio_servicios_credito.png}
+      \fuentefigura{Williamson (2018), figura 12.4.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Aumento de la tasa nominal}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \item Si $R_2>R_1$, mantener efectivo se vuelve relativamente más costoso.
+        \item La demanda de servicios de tarjeta de crédito se desplaza hacia arriba.
+        \item En equilibrio, $q$ y $X^*$ aumentan.
+        \item Las compras realizadas con dinero, $Y-X^*(R)$, disminuyen.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.35cm]{fig_12_5_tasa_nominal_servicios_credito.png}
+      \fuentefigura{Williamson (2018), figura 12.5.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Derivación de la demanda de dinero}
+  Si $Y-X^*(R)$ son las unidades compradas con dinero, (i.e. el gasto real utilizando efectivo) entonces la demanda nominal de dinero es
+  \[
+    \boxed{M^d=P\big[Y-X^*(R)\big]}.
+  \]
+  Definiendo
+  \[
+    L(Y,R)\equiv Y-X^*(R),
+  \]
+  obtenemos
+  \[
+    \boxed{M^d=PL(Y,R)},
+    \qquad L_Y>0,\quad L_R<0.
+  \]
+  \begin{itemize}
+    \item Más ingreso real implica un mayor volumen de transacciones.
+    \item Una tasa nominal mayor aumenta el costo de oportunidad, lo que induce sustitución de dinero por medios de pago remunerados.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Saldos reales y costo de oportunidad}
+  Dividiendo la demanda nominal entre el nivel de precios,
+  \[
+    \boxed{\frac{M^d}{P}=L(Y,R)}.
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item $M^d/P$ son los \textbf{saldos monetarios reales}: el poder de compra de la cantidad nominal de dinero.
+    \item La tasa nominal $R$ es el costo de oportunidad de mantener un activo que paga cero interés nominal.
+    \item Usando Fisher,
+      \[
+        M^d=PL(Y,r+i).
+      \]
+    \item Si la inflación de largo plazo permanece estable, entonces $M^d=PL(Y,r)$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Curva de demanda nominal de dinero}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      Para $Y$ y $r$ dados,
+      \[
+        M^d=PL(Y,r).
+      \]
+      La demanda nominal es lineal y creciente en $P$: para mantener saldos reales constantes, un nivel de precios mayor requiere una cantidad nominal proporcionalmente mayor.
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.0cm]{fig_12_6_demanda_nominal_dinero.png}
+      \fuentefigura{Williamson (2018), figura 12.6.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Desplazamientos de la demanda nominal}
+
+\end{frame}
+
+\section{Gobierno y equilibrio}
+
+\begin{frame}{Restricción presupuestaria nominal del gobierno}
+  En el periodo presente, el gobierno compra $G$, paga la deuda nominal financiera heredada $(1+R^-)B^-$ y financia sus egresos con impuestos, deuda nueva y emisión monetaria:
+  \[
+    \boxed{PG+(1+R^-)B^-=PT+B+M-M^-}.
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item $PT$: recaudación nominal.
+    \item $B$: bonos nominales emitidos hoy y pagaderos mañana.
+    \item $M-M^-$: creación de dinero.
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Equilibrio en el mercado de dinero}
+  La oferta monetaria es fijada exógenamente por el gobierno:
+  \[
+    M^s=M.
+  \]
+  El mercado de dinero se vacía cuando
+  \[
+    \boxed{M=PL(Y,r+i)}.
+  \]
+  Si $i=0$,
+  \[
+    \boxed{P^*=\frac{M}{L(Y^*,r^*)}}.
+  \]
+  \begin{block}{Variable de ajuste}
+    Dados $M$, $Y^*$ y $r^*$, el nivel de precios $P$ ajusta los saldos reales $M/P$ hasta igualar la demanda real de dinero.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Mercado monetario}
+      \centering
+      \figura[5.15cm]{fig_12_8_mercado_dinero.png}
+      \fuentefigura{Williamson (2018), figura 12.8.}
+\end{frame}
+
+\begin{frame}{El modelo monetario intertemporal completo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      \begin{enumerate}
+        \item El mercado de bienes determina $(Y^*,r^*)$.
+        \item Dado $r^*$, el mercado laboral determina $(N^*,w^*)$.
+        \item Dados $(Y^*,r^*)$ y $M$, el mercado monetario determina $P^*$.
+      \end{enumerate}
+
+      El bloque real se resuelve primero; el bloque nominal utiliza esa solución.
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.75cm]{fig_12_9_modelo_monetario_completo.png}
+      \fuentefigura{Williamson (2018), figura 12.9.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+
+
+\section{Neutralidad del dinero}
+
+\begin{frame}{Incremento en la oferta monetaria}
+  \centering
+  \figura[5.45cm]{fig_12_10_trayectoria_oferta_dinero.png}
+  \fuentefigura{Williamson (2018), figura 12.10.}
+\end{frame}
+
+\begin{frame}{Neutralidad del dinero}
+  \begin{definition}
+    El dinero es \cidehighlight{neutral} si un cambio en su nivel no altera variables reales y sólo produce un cambio proporcional en el nivel de precios.
+  \end{definition}
+  En el modelo clásico,
+  \[
+    (Y^*,N^*,w^*,r^*)\quad\text{no cambian}.
+  \]
+  Como $L(Y^*,r^*)$ permanece constante,
+  \[
+    P_1=\frac{M_1}{L(Y^*,r^*)},
+    \qquad
+    P_2=\frac{M_2}{L(Y^*,r^*)}.
+  \]
+  Por lo tanto,
+  \[
+    \boxed{\frac{P_2}{P_1}=\frac{M_2}{M_1}}.
+  \]
+\end{frame}
+
+\begin{frame}{Neutralidad y dicotomía clásica}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      \begin{itemize}
+        \item Los mercados de trabajo y bienes no se desplazan.
+        \item La oferta nominal de dinero se desplaza de $M_1$ a $M_2$.
+        \item El nivel de precios aumenta de $P_1$ a $P_2$ en la misma proporción.
+        \item Los saldos reales $M/P$ permanecen constantes.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.75cm]{fig_12_11_neutralidad_dinero.png}
+      \fuentefigura{Williamson (2018), figura 12.11.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Mecanismo de ajuste}
+  \small
+  Inmediatamente después del aumento de $M$, al nivel de precios inicial se tiene
+  \[
+    \frac{M_2}{P_1}>L(Y^*,r^*).
+  \]
+  Los agentes poseen saldos reales excesivos y tratan de gastarlos. Como la producción real está determinada por el bloque real,
+  \[
+    P\uparrow\quad\Longrightarrow\quad \frac{M_2}{P}\downarrow.
+  \]
+  El ajuste termina cuando
+  \[
+    \frac{M_2}{P_2}=L(Y^*,r^*)=\frac{M_1}{P_1}.
+  \]
+\end{frame}
+
+
+
+\section{Desplazamientos de la demanda}
+
+\begin{frame}{Origen de los desplazamientos}
+  La demanda de dinero cambia cuando se modifica la tecnología o el costo de los medios de pago alternativos:
+  \begin{itemize}
+    \setlength{\itemsep}{0.45em}
+    \item innovaciones como cajeros automáticos, tarjetas de débito y transferencias electrónicas;
+    \item nuevos instrumentos financieros y cambios regulatorios;
+    \item variaciones en el riesgo percibido de los bancos;
+    \item interrupciones de redes de pagos o comunicaciones;
+    \item cambios en horarios, frecuencia de pagos o necesidades transaccionales.
+  \end{itemize}
+  Estos factores alteran $X^s(q)$ y, por tanto,
+  \[
+    L(Y,R)=Y-X^*(R).
+  \]
+\end{frame}
+
+\begin{frame}{Caída en la oferta de servicios de crédito}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      \begin{itemize}
+        \item Una interrupción tecnológica desplaza $X^s(q)$ a la izquierda.
+        \item Como la demanda es horizontal en $q=R$, el precio del servicio no cambia.
+        \item $X^*$ cae: más transacciones deben realizarse con dinero.
+        \item La demanda real de dinero aumenta para todo $(Y,R)$.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.3cm]{fig_12_12_oferta_servicios_credito.png}
+      \fuentefigura{Williamson (2018), figura 12.12.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Aumento de la demanda de dinero}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      Con $M$, $Y$ y $r$ fijos,
+      \[
+        M=P_1L_1(Y,r)=P_2L_2(Y,r).
+      \]
+      Si $L_2>L_1$,
+      \[
+        \boxed{P_2<P_1}.
+      \]
+      El nivel de precios cae para elevar la oferta real $M/P$ hasta la nueva demanda.
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.2cm]{fig_12_13_desplazamiento_demanda_dinero.png}
+      \fuentefigura{Williamson (2018), figura 12.13.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Estática comparativa del mercado monetario}
+  Partiendo de
+  \[
+    P=\frac{M}{L(Y,R)},
+  \]
+  y suponiendo $L_Y>0$, $L_R<0$, se obtiene:
+  \[
+    \frac{\partial P}{\partial M}=\frac{1}{L}>0,
+    \qquad
+    \frac{\partial P}{\partial Y}=-\frac{ML_Y}{L^2}<0,
+    \qquad
+    \frac{\partial P}{\partial R}=-\frac{ML_R}{L^2}>0.
+  \]
+  \begin{itemize}
+    \item Más dinero nominal eleva proporcionalmente $P$.
+    \item Más ingreso real aumenta la demanda de saldos reales y reduce $P$.
+    \item Una tasa nominal mayor reduce la demanda de dinero y eleva $P$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Inestabilidad de la demanda de dinero}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      \begin{itemize}
+        \item La relación estimada entre saldos reales e interés parece relativamente estable entre 1959 y 1979.
+        \item Después de 1980, la dispersión aumenta considerablemente.
+        \item Innovación financiera, regulación y cambios en los medios de pago alteran la función $L$.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.35cm]{fig_12_14_inestabilidad_demanda_dinero.png}
+      \fuentefigura{Williamson (2018), figura 12.14.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Implicación para la política monetaria}
+  Si la autoridad fija una meta de crecimiento monetario,
+  \[
+    P=\frac{M}{L(Y,R)},
+  \]
+  sólo puede controlar con precisión $P$ si $L(Y,R)$ es estable y predecible.
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Choques no observados a $L$ generan variaciones no deseadas en el nivel de precios.
+    \item La inestabilidad de la demanda de dinero debilitó el uso de metas monetarias estrictas.
+    \item Los bancos centrales modernos pasaron a implementar la política principalmente mediante una tasa de interés nominal de corto plazo.
+  \end{itemize}
+\end{frame}
+
+\section{Política monetaria}
+
+\begin{frame}{Política monetaria convencional}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item El banco central elige una meta para una tasa nominal de corto plazo.
+    \item Para sostenerla, ajusta la oferta de reservas mediante operaciones de mercado abierto.
+    \item Una compra de bonos crea reservas y sustituye deuda gubernamental por dinero:
+      \[
+        M\uparrow,\qquad B\downarrow.
+      \]
+    \item Fuera del límite inferior, este cambio de liquidez altera las condiciones del mercado interbancario y las tasas de interés.
+  \end{itemize}
+  \begin{block}{Ventaja operativa}
+    Una meta de tasa absorbe automáticamente desplazamientos de muy corto plazo en la demanda de dinero.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Límite inferior de la tasa nominal}
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item El efectivo ofrece un rendimiento nominal igual a cero.
+    \item Si un activo seguro ofreciera un rendimiento nominal muy negativo, los agentes preferirían mantener efectivo.
+    \item Por ello existe un \textbf{límite inferior efectivo} para la tasa nominal.
+    \item El límite puede ser ligeramente negativo debido a costos de almacenamiento, seguro y transacción del efectivo.
+  \end{itemize}
+  \begin{alertblock}{Problema}
+    Cerca del límite inferior, recortar la tasa de política deja de ser un instrumento disponible en la magnitud deseada.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Trampa de liquidez}
+  Cuando $R=0$, el dinero y la deuda pública líquida de corto plazo pagan el mismo rendimiento nominal y se vuelven sustitutos perfectos.
+  \[
+    \text{Oferta de activos líquidos}=M+B.
+  \]
+  Una compra de bonos por el banco central cambia la composición,
+  \[
+    \Delta M=-\Delta B,
+  \]
+  pero no cambia $M+B$. Por lo tanto, no modifica $P$ ni las variables reales.
+  \begin{definition}
+    Una \cidehighlight{trampa de liquidez} es una situación en la que una operación convencional de mercado abierto no afecta precios ni cantidades.
+  \end{definition}
+\end{frame}
+
+\begin{frame}{Representación de la trampa de liquidez}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \item Con $R=0$, la demanda relevante es $PL(Y,0)$.
+        \item La oferta vertical corresponde a $M+B$.
+        \item Intercambiar dinero por deuda corta no desplaza esa oferta.
+        \item La operación abierta convencional es irrelevante en el margen.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.25cm]{fig_12_15_trampa_liquidez.png}
+      \fuentefigura{Williamson (2018), figura 12.15.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Política monetaria no convencional}
+  Cuando la tasa de corto plazo se aproxima a su límite inferior, el banco central puede recurrir a:
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item \textbf{expansión cuantitativa (QE):} compra de activos de mayor vencimiento o riesgo;
+    \item \textbf{guía prospectiva:} comunicación sobre la trayectoria futura esperada de la política;
+    \item \textbf{tasas nominales negativas:} remuneración negativa sobre ciertas reservas o depósitos.
+  \end{itemize}
+  \begin{block}{Diferencia esencial}
+    La política no convencional busca modificar precios relativos, vencimientos, riesgo o expectativas; no consiste únicamente en intercambiar dos activos perfectamente sustitutos.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Expansión cuantitativa}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item El banco central emite reservas para adquirir bonos de largo plazo o valores respaldados por hipotecas.
+    \item Si esos activos no son sustitutos perfectos de las reservas, la compra puede elevar su precio y reducir su rendimiento.
+    \item Los canales potenciales incluyen balance de portafolio, liquidez, señalización y reducción de primas por plazo o riesgo.
+    \item Su efecto sobre inflación, producto y empleo depende de la intensidad de esos canales y del estado de los mercados financieros.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Activos mantenidos por la Reserva Federal}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.37\textwidth}
+      \small
+      \begin{itemize}
+        \item QE1, QE2 y QE3 ampliaron el tamaño del balance.
+        \item Aumentaron bonos del Tesoro de mayor plazo y valores respaldados por hipotecas.
+        \item La composición del activo cambió junto con su tamaño.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.60\textwidth}
+      \centering
+      \figura[5.4cm]{fig_12_16_activos_fed.png}
+      \fuentefigura{Williamson (2018), figura 12.16.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Tasas nominales negativas}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item El límite inferior no tiene que ser exactamente cero: mantener efectivo tiene costos.
+    \item Algunos bancos centrales han aplicado tasas ligeramente negativas a reservas o depósitos.
+    \item El objetivo es reducir las tasas de mercado e incentivar gasto y crédito cuando la tasa convencional ya es muy baja.
+    \item Tasas demasiado negativas pueden inducir sustitución hacia efectivo, comprimir márgenes bancarios o distorsionar la intermediación.
+  \end{itemize}
+  \begin{block}{Límite inferior efectivo}
+    Es el nivel en el que los beneficios de reducir más la tasa son compensados por sustitución hacia efectivo y otras fricciones financieras.
+  \end{block}
+\end{frame}
+
+\section{Síntesis}
+
+\begin{frame}{Predicciones comparativas del modelo}
+  \centering
+  \small
+  \begin{tabularx}{0.96\textwidth}{Yccccc}
+    \toprule
+    Choque & $P$ & $M/P$ & $Y$ & $r$ & $R$ \\
+    \midrule
+    $M\uparrow$ permanente & $+$ & $0$ & $0$ & $0$ & $0$ \\
+    Demanda de dinero $L\uparrow$ & $-$ & $+$ & $0$ & $0$ & $0$ \\
+    $Y\uparrow$ con $M$ fijo & $-$ & $+$ & $+$ & según bloque real & según Fisher \\
+    $R\uparrow$ con $M,Y$ fijos & $+$ & $-$ & $0$ & --- & $+$ \\
+    Mejor tecnología de pagos & $+$ & $-$ & $0$ & $0$ & $0$ \\
+    \bottomrule
+  \end{tabularx}
+  \vspace{0.35cm}
+  \begin{block}{Lectura}
+    Los ceros reflejan la dicotomía clásica; los signos nominales provienen del ajuste de $P=M/L(Y,R)$.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Resultados centrales}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.6em}
+    \item El dinero reduce fricciones de intercambio y compite con medios de pago provistos por los bancos.
+    \item La tasa nominal es el costo de oportunidad de mantener dinero; por ello $L_Y>0$ y $L_R<0$.
+    \item El equilibrio monetario satisface $M=PL(Y,R)$ y determina el nivel de precios.
+    \item En el modelo clásico, un aumento permanente en $M$ es neutral y eleva proporcionalmente $P$.
+    \item La inestabilidad de la demanda de dinero dificulta las metas monetarias.
+    \item En una trampa de liquidez, dinero y deuda corta son sustitutos perfectos; la política debe actuar sobre otros márgenes.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Puente hacia los siguientes modelos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item El capítulo 12 construye una referencia clásica: precios flexibles, dicotomía clásica y neutralidad monetaria.
+    \item La pregunta siguiente es qué sucede cuando los precios no ajustan inmediatamente.
+    \item Con rigideces nominales, una variación monetaria puede modificar saldos reales, tasas reales, gasto y producción en el corto plazo.
+    \item La no neutralidad monetaria exige identificar explícitamente la fricción que conecta el bloque nominal con el bloque real.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias}
+  \footnotesize
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item Williamson, S. D. (2018). \textit{Macroeconomics}, 6th ed. Pearson. Capítulo 12: ``Money, Banking, Prices, and Monetary Policy''.
+    \item Fisher, I. (1930). \textit{The Theory of Interest}. Macmillan.
+    \item Keynes, J. M. (1936). \textit{The General Theory of Employment, Interest and Money}. Macmillan.
+  \end{itemize}
+\end{frame}
+
+\appendix
+\section{Apéndice}
+
+\begin{frame}{Apéndice: derivación exacta de Fisher}
+  Una unidad monetaria compra $1/P$ bienes hoy. Invertida en un bono nominal, paga $(1+R)/P'$ bienes mañana. Por definición,
+  \[
+    1+r=\frac{(1+R)/P'}{1/P}=\frac{1+R}{P'/P}.
+  \]
+  Como
+  \[
+    1+i=\frac{P'}{P},
+  \]
+  entonces
+  \[
+    \boxed{1+r=\frac{1+R}{1+i}}.
+  \]
+  Reordenando,
+  \[
+    R=r+i+ri,
+  \]
+  y la aproximación $R\approx r+i$ omite el término de segundo orden $ri$.
+\end{frame}
+
+\begin{frame}{Apéndice: demanda de dinero}
+  Sea $X^*(R)$ la cantidad real de compras con crédito. Entonces:
+  \begin{align*}
+    \text{compras reales con dinero}&=Y-X^*(R),\\
+    \text{dinero nominal necesario}&=P[Y-X^*(R)].
+  \end{align*}
+  Por tanto,
+  \[
+    M^d=P[Y-X^*(R)]\equiv PL(Y,R).
+  \]
+  Como $X_R^*(R)>0$,
+  \[
+    L_Y=1>0,
+    \qquad
+    L_R=-X_R^*(R)<0.
+  \]
+  Esta función no se postula: resulta de las decisiones óptimas sobre medios de pago y de la oferta bancaria de servicios transaccionales.
+\end{frame}
+
+\begin{frame}{Apéndice: prueba de neutralidad}
+  El equilibrio monetario inicial satisface
+  \[
+    M_1=P_1L(Y^*,r^*).
+  \]
+  Un cambio en $M$ no entra en las ecuaciones del mercado de trabajo ni del mercado de bienes; por tanto, $(Y^*,r^*)$ no cambia. El nuevo equilibrio satisface
+  \[
+    M_2=P_2L(Y^*,r^*).
+  \]
+  Dividiendo ambas ecuaciones,
+  \[
+    \frac{M_2}{M_1}
+    =\frac{P_2L(Y^*,r^*)}{P_1L(Y^*,r^*)}
+    =\boxed{\frac{P_2}{P_1}}.
+  \]
+  Por consiguiente, $M/P$ y todas las variables reales permanecen invariantes.
+\end{frame}
+
+\begin{frame}{Apéndice: glosario}
+  \small
+  \begin{tabularx}{0.96\textwidth}{>{\bfseries}lY}
+    \toprule
+    Concepto & Definición \\
+    \midrule
+    Señoreaje & Recursos que obtiene el gobierno mediante creación de dinero. \\
+    Operación de mercado abierto & Compra o venta de bonos por el banco central contra reservas o dinero. \\
+    Neutralidad del dinero & Invariancia de variables reales ante un cambio proporcional en saldos nominales y precios. \\
+    Dicotomía clásica & Separación entre la determinación de variables reales y nominales. \\
+    Trampa de liquidez & Situación en la que dinero y deuda pública corta son sustitutos perfectos. \\
+    Expansión cuantitativa & Compra de activos de largo plazo o riesgo por el banco central, financiada con reservas. \\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+\end{document}
