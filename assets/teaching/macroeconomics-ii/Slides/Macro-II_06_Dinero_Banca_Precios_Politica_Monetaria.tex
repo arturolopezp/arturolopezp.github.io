@@ -207,7 +207,7 @@
   \titlepage
 \end{frame}
 
-\section{Punto de partida}
+\section{Introducción}
 
 \begin{frame}{Objetivos}
   \begin{itemize}
@@ -230,32 +230,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Estructura del modelo monetario intertemporal}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \textbf{Bloque real}
-      \begin{itemize}
-        \item Mercado de trabajo.
-        \item Mercado de bienes.
-        \item Mercado de crédito.
-        \item Determina $Y^*$, $N^*$, $w^*$ y $r^*$.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \textbf{Bloque nominal}
-      \begin{itemize}
-        \item Oferta nominal de dinero $M^s$.
-        \item Demanda nominal de dinero $M^d$.
-        \item Mercado monetario.
-        \item Determina el nivel de precios $P^*$.
-      \end{itemize}
-    \end{column}
-  \end{columns}
-  \vspace{0.25cm}
-  \begin{block}{Dicotomía clásica}
-    En el modelo, las variables reales se determinan sin referencia al nivel de la oferta monetaria; después, el mercado de dinero determina $P$.
-  \end{block}
-\end{frame}
+
 
 \section{Dinero}
 
@@ -285,26 +260,54 @@
   \end{itemize}
 \end{frame}
 
+
 \begin{frame}{Agregados monetarios}
-  \centering
-  \small
-  \begin{tabularx}{0.94\textwidth}{>{\bfseries}lYY}
-    \toprule
-    Agregado & Componentes principales & Interpretación \\
-    \midrule
-    $M0$ & Billetes y monedas fuera del banco central; reservas de los bancos & Base monetaria o dinero externo \\
-    \addlinespace
-    $M1$ & $M0$ + depósitos a la vista y otros instrumentos transaccionales & Medios de pago líquidos \\
-    \addlinespace
-    $M2$ & $M1$ + depósitos de ahorro y activos cercanos al dinero & Liquidez en sentido amplio \\
-    \bottomrule
-  \end{tabularx}
-  \vspace{0.35cm}
-    
-  
-  Los agregados se diferencian por su liquidez, su uso transaccional y el \textbf{tipo de pasivo} que representan.
-  \notafuentes{Williamson (2018), tabla 12.1 y pp. 464--465.}
+    \centering
+    \small
+
+    \renewcommand{\arraystretch}{1.35}
+
+    \begin{tabularx}{0.92\textwidth}{lX}
+        \toprule
+        \textbf{Agregado} & \textbf{Componentes} \\
+        \midrule
+
+        Base monetaria
+        & Billetes y monedas en circulación y reservas bancarias. \\
+
+        \addlinespace[0.15cm]
+
+        $M0$
+        & Billetes y monedas en circulación. \\
+
+        \addlinespace[0.15cm]
+
+        $M1$
+        & $M0$ + depósitos a la vista. \\
+
+        \addlinespace[0.15cm]
+
+        $M2$
+        & $M1$ + depósitos de ahorro, depósitos a plazo de corto plazo
+        y fondos de inversión del mercado de dinero. \\
+
+        \bottomrule
+    \end{tabularx}
+
+    \vspace{0.45cm}
+
+    \begin{minipage}{0.92\textwidth}
+        \small
+        Los agregados monetarios se diferencian por su
+        \textbf{liquidez}, su capacidad para funcionar
+        como medios de pago y el \textbf{tipo de pasivo}
+        que representan.
+    \end{minipage}
+
+    \notafuentes{Kurlat (2020), p. 192.}
 \end{frame}
+
+
 
 \begin{frame}{Agregados monetarios en México}
         \centering
@@ -321,6 +324,279 @@ Ver \href{https://www.banxico.org.mx/publicaciones-y-prensa/informes-trimestrale
       \figura[6cm]{componentes_m_Mx.png}
 \end{frame}
 
+
+
+
+
+
+\section{Oferta de dinero}
+    
+
+
+\begin{frame}{La oferta monetaria}
+    \begin{itemize}
+        \item La cantidad de dinero en la economía depende
+        tanto del \textbf{banco central} como del
+        \textbf{sistema bancario}.
+
+        \item El banco central controla directamente la
+        \textbf{base monetaria}, compuesta por:
+        \begin{itemize}
+            \item Billetes y monedas en circulación.
+            \item Reservas de los bancos comerciales.
+        \end{itemize}
+
+        \item Los bancos comerciales reciben depósitos
+        y otorgan préstamos, afectando la cantidad de
+        \textit{dinero M1} en circulación.
+
+        \item Para comprender cómo se determina la
+        oferta monetaria, analizaremos los
+        \textbf{balances contables} de tres agentes:
+        \begin{enumerate}
+            \item Banco central.
+            \item Banco comercial representativo.
+            \item Hogar representativo.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Hoja de balance bancaria (I)}
+\centering
+\figura[4.8cm]{Balance_Bancos.png}
+\end{frame}
+
+
+\begin{frame}{Hoja de balance bancaria (II)}
+
+    \begin{itemize}
+    \item Una de las principales fuentes de ingreso de los bancos es el rendimiento obtenido en sus activos. El segundo más importante es ingreso por comisiones de distintos tipos.
+    
+    \item Las reservas son depósitos que los bancos comerciales mantienen en el Banco Central. El Banco Central actúa como \textit{el banco de los bancos} y las reservas bancarias son los depósitos que los bancos mantienen en él.
+    \item Típicamente, las reservas bancarias obtienen rendimientos bajos o nulos. 
+    
+    \item Los bancos mantienen reservas para atender retiros y cumplir con requerimientos regulatorios.
+
+    \item Supongamos que deben mantener una proporción $\rho$ de sus depósitos como reservas: $ R=\rho d$.
+    \item Por lo tanto, las reservas bancarias totales son: $R = \rho d + ER$, donde $ER$ son exceso de reservas.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Balances iniciales}
+    \centering
+    \figura[5cm]{BSh_1.png}
+    
+    \vspace{0.5cm}
+    
+    En esta economía, la base monetaria es igual a $c + \rho d$, $ M0=c$, $M1 = c + d$.
+\end{frame}
+
+
+
+\begin{frame}{Cambios en la oferta monetaria}
+\small
+\begin{itemize}
+    \item Supongamos que el Banco Central quiere modificar la oferta de dinero $M1$.
+
+    \item El Banco Central no controla directamente la cantidad de depósitos a la vista, que en 2019 representaban aproximadamente el $60\%$ de $M1$ en Estados Unidos y, en México, $\approx40\%$ en 2026.
+
+    \item No obstante, afecta indirectamente los depósitos a la vista a través de \cidehighlight{operaciones de mercado abierto}.
+
+    \item Una operación de mercado abierto consiste en la compra o venta de bonos gubernamentales por parte del Banco Central a cambio de reservas bancarias.
+
+    \item Supongamos que el Banco Central compra bonos por un valor de $\Delta$ al banco comercial y paga acreditando $\Delta$ reservas bancarias.
+
+    \item Estas reservas son \textbf{dinero de nueva creación}: el Banco Central las genera al acreditar la cuenta del banco comercial, sin necesidad de disponer previamente de esos fondos.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Impacto en las hojas de balance (I)}
+    \centering
+    \figura[5cm]{BSh_2.png}
+
+    \vspace{0.5cm}
+    
+    Ahora el banco privado tiene \cidehighlight{exceso de reservas} igual a $\Delta$.
+\end{frame}
+
+\begin{frame}{Impacto en las hojas de balance (II)}
+    \centering
+    \figura[5cm]{BSh_3.png}
+
+    \vspace{0.5cm}
+    
+    El banco presta $\Delta$ a los hogares, incrementando sus depósitos en el sistema bancario.
+\end{frame}
+
+\begin{frame}{Impacto en las hojas de balance (III)}
+    \centering
+    \figura[5cm]{BSh_4.png}
+
+    \vspace{0.5cm}
+    
+    El hogar hace un retiro de efectivo igual a una fracción $\chi$ de los nuevos depósitos $\Delta$, de modo que quiere tener $\chi \Delta$ en efectivo y $(1-\chi)\Delta$ en depósitos.
+\end{frame}
+
+
+\begin{frame}{Efecto multiplicador}
+\small
+    \begin{itemize}
+        \item El banco privado tiene ahora $\rho d + (1 - \chi)\Delta$ reservas en el Banco Central.
+        \item Sin embargo, el requerimiento de reservas es $\rho(d + (1-\chi)\Delta)$.
+        \item El banco privado termina entonces con un exceso de reservas igual a:
+        $$
+        ER_1 = \rho d + (1 - \chi)\Delta - \rho(d + (1-\chi)\Delta) = (1 - \rho)(1-\chi)\Delta
+        $$
+        \item El banco vuelve a utilizar sus reservas excedentes para expandir el crédito. En particular, el crédito adicional otorgado en la segunda ronda es:
+        $$
+        \Delta_2 = (1 - \rho)(1-\chi)\Delta
+        $$
+        \item El proceso se repite $n$ rondas, solo que ponderado por $((1 - \rho)(1-\chi))$, y luego por $((1 - \rho)(1-\chi))^2$, y así sucesivamente hasta $((1 - \rho)(1-\chi))^n$.
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Expansión monetaria: $n \to \infty$}
+    \footnotesize
+
+    \begin{align*}
+        \Delta D
+        &= \sum_{n=0}^{\infty} ((1-\rho)(1-\chi))^n
+        \underbrace{(1-\chi)\Delta}_{\substack{
+        \text{Efecto de la}\\\text{primera ronda}}}
+        = \frac{(1-\chi)\Delta}{\rho+\chi-\rho\chi}
+        \\[0.1cm]
+        \Delta C
+        &= \sum_{n=0}^{\infty} ((1-\rho)(1-\chi))^n
+        \underbrace{\chi\Delta}_{\substack{
+        \text{Efecto de la}\\\text{primera ronda}}}
+        = \frac{\chi\Delta}{\rho+\chi-\rho\chi}
+        \\[0.1cm]
+        \Delta R
+        &= \Delta-\Delta C
+        = \frac{\rho(1-\chi)\Delta}{\rho+\chi-\rho\chi}
+        \\[0.1cm]
+        \Delta \text{Base monetaria}
+        &= \Delta C + \Delta R=\Delta
+        \\[0.1cm]
+        \Delta M1
+        &= \Delta D+\Delta C
+        = \frac{\Delta}{\rho+\chi-\rho\chi}
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}{Balances finales}
+    \centering
+    \figura[5cm]{BSh_5.png}
+    
+    \vspace{0.5cm}
+\end{frame}
+
+
+\begin{frame}{El multiplicador monetario}
+    \small
+
+    Al finalizar el proceso de expansión monetaria,
+    los bancos mantienen exactamente las reservas requeridas:
+
+    \[
+        \frac{\text{Reservas}}{\text{Depósitos}}
+        =
+        \frac{
+            \rho d + \dfrac{\rho(1-\chi)}{\rho+\chi-\rho\chi}\Delta
+        }{
+            d + \dfrac{1-\chi}{\rho+\chi-\rho\chi}\Delta
+        }
+        = \rho
+    \]
+
+    \vspace{0.35cm}
+
+    Definimos el \cidehighlight{multiplicador monetario de $M1$} como:
+
+    \[
+        \boxed{
+        \omega \equiv
+        \frac{\Delta M1}{\Delta \text{Base monetaria}}
+        =
+        \frac{1}{\rho+\chi-\rho\chi}
+        }
+    \]
+
+    \vspace{0.2cm}
+
+    \begin{itemize}
+        \item Por cada unidad adicional de base monetaria, $M1$ aumenta en $\omega$ unidades.
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Reservas excedentes}
+\small
+    \begin{itemize}
+        \item El análisis anterior supone que los bancos mantienen las \textbf{menores reservas bancarias posibles}, dado que estas no generan intereses y existen activos alternativos con rendimientos positivos.
+
+        \item Sin embargo, si la tasa de interés nominal es cercana a cero
+        (o si el banco central remunera las reservas a tasas de mercado),
+        los bancos pueden estar dispuestos a mantener
+        \cidehighlight{reservas excedentes}.
+
+        \item En este caso, un aumento de la base monetaria
+        \textbf{no necesariamente se traduce en un aumento de $M1$},
+        pues las nuevas reservas pueden permanecer en los balances
+        bancarios sin generar nuevos préstamos ni depósitos.
+
+        \item A finales de 2008, la Reserva Federal comenzó a remunerar las reservas excedentes.
+        Los bancos aumentaron considerablemente sus reservas y el multiplicador monetario de $M1$ cayó de aproximadamente 2 a menos de 1.
+
+        \item Aunque la base monetaria estadounidense aumentó casi cinco veces, $M1$ creció en una proporción mucho menor.
+    \end{itemize}
+
+    \notafuentes{Kurlat (2020), pp. 197--198.}
+\end{frame}
+
+
+
+\begin{frame}{Multiplicador M1 \textit{post} 2008}
+    \centering
+    \figura[6cm]{ER.png}
+    \fuentefigura{Kurlat, 2020, fig. 10.3.1.}
+\end{frame}
+
+
+
+\section{Demanda de dinero}
+
+\begin{frame}{La demanda de dinero}
+    \begin{itemize}
+        \item En macroeconomía moderna, existen distintas formas de microfundamentar la demanda de dinero (e.g. MIUF, CIA, Baumol-Tobin, etc.)
+
+        \item El objetivo es derivar una función de demanda de dinero de la forma:
+        \[
+            M^d = PL(Y,r),
+            \qquad L_Y>0,\quad L_r<0.
+        \]
+
+        \item En general, estos modelos capturan la existencia de un \cidehighlight{\textit{trade-off} entre los servicios de liquidez del dinero y su costo de oportunidad}.
+
+        \item Una teoría de la demanda de dinero debe explicar \textbf{por qué los agentes desean mantener dinero}, aun cuando existen activos alternativos que ofrecen un rendimiento positivo.
+
+        \item En esta sesión, examinamos una forma de introducir explícitamente el dinero en las decisiones de los agentes económicos: medios de pago alternativos.
+    \end{itemize}
+\end{frame}
+
+
+
 \begin{frame}{Tasa de inflación}
   \begin{itemize}
     \setlength{\itemsep}{0.55em}
@@ -333,6 +609,8 @@ Ver \href{https://www.banxico.org.mx/publicaciones-y-prensa/informes-trimestrale
     \item $r$ es la tasa de interés \textbf{real}: una unidad de bienes presente se transforma en $1+r$ unidades de bienes futuros.
   \end{itemize}
 \end{frame}
+
+
 
 \begin{frame}{Relación de Fisher}
 
@@ -372,8 +650,6 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
 
 
 
-\section{Bancos y demanda de dinero}
-
 
 \begin{frame}{Un modelo monetario: medios de pago alternativos}
   \begin{itemize}
@@ -392,6 +668,35 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
     \item Suponemos que cuando un agente realiza una compra de bienes con tarjeta de crédito, adquiere una deuda con el banco que tiene que pagar, sin interés, al final del periodo presente.
   \end{itemize}
 \end{frame}
+
+
+\begin{frame}{Estructura del modelo monetario intertemporal}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \textbf{Bloque real}
+      \begin{itemize}
+        \item Mercado de trabajo.
+        \item Mercado de bienes.
+        \item Mercado de crédito.
+        \item Determina $Y^*$, $N^*$, $w^*$ y $r^*$.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Bloque nominal}
+      \begin{itemize}
+        \item Oferta nominal de dinero $M^s$.
+        \item Demanda nominal de dinero $M^d$.
+        \item Mercado monetario.
+        \item Determina el nivel de precios $P^*$.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{0.25cm}
+  \begin{block}{Dicotomía clásica}
+    En el modelo, las variables reales se determinan sin referencia al nivel de la oferta monetaria; después, el mercado de dinero determina $P$.
+  \end{block}
+\end{frame}
+
 
 
 \begin{frame}{Oferta de servicios de tarjetas de crédito}
