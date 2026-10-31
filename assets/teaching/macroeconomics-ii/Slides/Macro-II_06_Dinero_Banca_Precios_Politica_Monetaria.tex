@@ -1137,17 +1137,52 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 
 
 
+
 \begin{frame}{Política monetaria moderna}
   \begin{itemize}
     \setlength{\itemsep}{0.55em}
-    \item Desde los 80s, el banco central elige una meta para una tasa nominal de corto plazo.
-    \item Para sostenerla, ajusta la oferta de reservas mediante operaciones de mercado abierto.
-    \item Una compra de bonos crea reservas y sustituye deuda gubernamental por dinero:
-      \[
-        M\uparrow,\qquad B\downarrow.
-      \]
-    \item Este cambio de liquidez altera las condiciones del mercado interbancario y las tasas de interés.
-    \item Una meta de tasa absorbe automáticamente desplazamientos de muy corto plazo en la demanda de dinero.
+
+    \item Actualmente, la mayoría de bancos centrales conducen su política monetaria eligiendo un nivel tasa de interés nominal de corto plazo como \textit{meta operativa}.
+
+    \item Para sostenerla, ajustan la oferta de reservas mediante operaciones de mercado abierto y, en algunos casos, la remuneración de las reservas bancarias.
+
+    \item Una compra de bonos por el banco central incrementa las reservas bancarias y reduce los bonos en manos del sector privado:
+    \[
+      R\uparrow, \ B\downarrow \implies M \uparrow
+    \]
+
+    \item Este cambio de liquidez afecta las tasas de interés del mercado interbancario de corto plazo.
+
+    \item Al fijar una tasa de interés, el banco central puede acomodar fluctuaciones en la demanda de dinero sin modificar su objetivo operativo.
+
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Instrumentos y objetivos de política monetaria}
+  \begin{itemize}
+    \setlength{\itemsep}{0.7em}
+
+    \item Los \textit{instrumentos} son las variables que
+    el banco central utiliza para implementar
+    su política monetaria, como la tasa de interés
+    de corto plazo.
+
+    \item Los \textit{objetivos} son las variables macroeconómicas que busca estabilizar.
+
+    \item La conducción de la política monetaria
+    requiere establecer cómo debe ajustarse
+    el instrumento para alcanzar sus objetivos.
+
+    \item Por ejemplo, una regla de Taylor prescribe
+    ajustes de la tasa de interés en respuesta
+    a desviaciones de la inflación respecto de
+    su meta y de la actividad respecto de su
+    nivel potencial.
+
+    \item Para conocer más sobre la meta operativa del Banco de México, ver
+\href{https://www.banxico.org.mx/politica-monetaria/d/\%7B4B1B17B2-0985-71E5-0E0F-162840DCC9B6\%7D.pdf}
+{Instrumentación de la Política Monetaria a través de un Objetivo Operacional de Tasa de Interés}.
   \end{itemize}
 \end{frame}
 
@@ -1158,37 +1193,48 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
   \begin{itemize}
     \setlength{\itemsep}{0.6em}
     \item El efectivo ofrece un rendimiento nominal igual a cero.
-    \item Si un activo seguro ofreciera un rendimiento nominal muy negativo, los agentes preferirían mantener efectivo.
-    \item Por ello existe un \textbf{límite inferior efectivo} para la tasa nominal.
-    \item El límite puede ser ligeramente negativo debido a costos de almacenamiento, seguro y transacción del efectivo.
+    \item Si un activo seguro ofreciera un rendimiento nominal negativo, habría una \textbf{oportunidad de arbitraje}.
+    \item Por ello existe un \textbf{limite inferior cero} (\textit{Zero Lower Bound}, ZLB) para la tasa nominal.
+    \item El límite inferior puede ser ligeramente negativo debido a costos de almacenamiento, seguro y transacción del efectivo.
+    \item Por ello existe un \textbf{límite inferior efectivo} (\textit{Effective Lower Bound}, ELB) para la tasa nominal.
   \end{itemize}
-  \begin{alertblock}{Problema}
-    Cerca del límite inferior, recortar la tasa de política deja de ser un instrumento disponible en la magnitud deseada.
-  \end{alertblock}
 \end{frame}
 
-\begin{frame}{Trampa de liquidez}
-  Cuando $R=0$, el dinero y la deuda pública líquida de corto plazo pagan el mismo rendimiento nominal y se vuelven sustitutos perfectos.
-  \[
-    \text{Oferta de activos líquidos}=M+B.
-  \]
-  Una compra de bonos por el banco central cambia la composición,
-  \[
-    \Delta M=-\Delta B,
-  \]
-  pero no cambia $M+B$. Por lo tanto, no modifica $P$ ni las variables reales.
-  \begin{definition}
-    Una \cidehighlight{trampa de liquidez} es una situación en la que una operación convencional de mercado abierto no afecta precios ni cantidades.
-  \end{definition}
+
+\begin{frame}{Trampa de liquidez (I)}
+  En el ZLB, $R=0$ de modo que el dinero y la deuda pública líquida de corto plazo pagan el mismo rendimiento nominal y se vuelven sustitutos perfectos.
+  
+  \vspace{0.5cm}
+  
+  \footnotesize
+  \begin{quote}
+    \itshape
+    Una vez que la tasa de interés ha caído hasta cierto nivel,
+    la preferencia por la liquidez puede volverse prácticamente
+    absoluta, en el sentido de que casi todos prefieren mantener
+    efectivo en lugar de títulos de deuda que ofrecen una tasa
+    de interés tan baja. En estas circunstancias, la autoridad
+    monetaria habría perdido el control efectivo sobre la tasa
+    de interés.
+  \end{quote}
+  \begin{flushright}
+    \textbf{Keynes (1936)}
+  \end{flushright}
+
+  \begin{itemize}
+      \item Keynes describe una situación en la que una expansión monetaria adicional deja de reducir la tasa de interés porque los agentes están dispuestos a absorber el dinero adicional sin desprenderse de él a cambio de bonos.
+  \end{itemize}
 \end{frame}
+
+
 
 \begin{frame}{Representación de la trampa de liquidez}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.40\textwidth}
       \small
       \begin{itemize}
-        \item Con $R=0$, la demanda relevante es $PL(Y,0)$.
-        \item La oferta vertical corresponde a $M+B$.
+        \item Los bonos se vuelven virtualmente dinero.
+        \item La oferta de dinero vertical corresponde a $M+B$.
         \item Intercambiar dinero por deuda corta no desplaza esa oferta.
         \item La operación abierta convencional es irrelevante en el margen.
       \end{itemize}
@@ -1202,13 +1248,73 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 \end{frame}
 
 \begin{frame}{Política monetaria no convencional}
-  Cuando la tasa de interés corto plazo se aproxima a su límite inferior, el banco central puede recurrir a:
+  Cuando la tasa de interés corto plazo se aproxima a su ELB, el banco central puede recurrir a política monetaria no convencional:
   \begin{itemize}
     \setlength{\itemsep}{0.6em}
-    \item \textbf{Expansión cuantitativa (QE):} compra de activos privados y gubernamentales de mayor vencimiento;
-    \item \textbf{Guía prospectiva (\textit{forward guidance}):} comunicación sobre la trayectoria futura esperada de la política;
+    \item \textbf{Expansión Cuantitativa (QE):} compra de activos privados y gubernamentales de mayor vencimiento para afectar tasas de interés de largo plazo;
+    \item \textbf{Guía Prospectiva (\textit{Forward Guidance}):} comunicación sobre la trayectoria futura esperada de la política;
     \item \textbf{Tasas de interés nominales negativas:} Rendimiento negativo sobre ciertas reservas o depósitos.
   \end{itemize}
+\end{frame}
+
+\begin{frame}{QE y la Curva de Rendimiento}
+   \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.6em}
+
+        \item En una operación convencional de mercado abierto,
+        el banco central compra deuda pública de corto plazo.
+
+        \item Esto reduce las tasas de interés de corto plazo,
+        mientras que las de largo plazo permanecen
+        relativamente constantes, aumentando la pendiente
+        de la curva de rendimiento.
+
+        \item En una trampa de liquidez, el \textit{QE}
+        busca reducir las tasas de largo plazo.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.25cm]{yield_curve.png}
+      \fuentefigura{Williamson (2018), figura 12.18.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Hoja de Balance de la Reserva Federal}
+      \centering
+      \figura[5.4cm]{fig_12_16_activos_fed.png}
+      \fuentefigura{Williamson (2018), figura 12.16.}
+\end{frame}
+
+
+\begin{frame}{Forward Guidance y la Estructura Temporal de Tasas}
+    \small
+    \begin{itemize}
+        \setlength{\itemsep}{0.7em}
+
+        \item De acuerdo con la \cidehighlight{teoría de expectativas de la estructura temporal}, las tasas de interés de largo plazo se pueden descomponer como el promedio de las tasas de corto plazo esperadas:
+        
+        \begin{equation*}
+            i_{n,t} \approx \frac{1}{n}
+            \sum_{j=0}^{n-1} E_t[i_{t+j}].
+        \end{equation*}
+
+        \item Por lo tanto, las tasas de largo plazo pueden cambiar
+        \textbf{incluso si la tasa de interés actual permanece constante}.
+
+        \item El \cidehighlight{Forward Guidance} consiste en comunicar
+        la trayectoria futura esperada de la política monetaria para
+        influir sobre las expectativas de los agentes respecto a tasas de corto plazo futuras.
+
+        \item Si el banco central anuncia creíblemente
+        que mantendrá bajas las tasas de interés durante más tiempo,
+        las tasas de largo plazo pueden disminuir hoy, estimulando
+        el consumo y la inversión.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Tasas de interés nominal negativas}
@@ -1219,13 +1325,6 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
       \footnotesize
       
       Ver \href{https://www.elibrary.imf.org/view/journals/001/2016/172/article-A001-en.xml?utm_source=chatgpt.com}{Jobst y Lin (2016)}, \href{https://www.nber.org/system/files/working_papers/w25416/w25416.pdf}{Gauti et al. (2019)} y \href{https://www.frbsf.org/wp-content/uploads/wp2022-12.pdf}{Balloch et al. (2022)}. 
-\end{frame}
-
-
-\begin{frame}{Hoja de Balance de la Reserva Federal}
-      \centering
-      \figura[5.4cm]{fig_12_16_activos_fed.png}
-      \fuentefigura{Williamson (2018), figura 12.16.}
 \end{frame}
 
 
