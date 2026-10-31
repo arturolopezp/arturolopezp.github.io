@@ -628,7 +628,7 @@ Ver \href{https://www.banxico.org.mx/publicaciones-y-prensa/informes-trimestrale
 \end{frame}
 
 
-\begin{frame}{El efecto de Fisher}
+\begin{frame}{El \textit{efecto Fisher}}
       \centering
       \figura[5.45cm]{fig_12_1_tasa_nominal_inflacion.png}
       \fuentefigura{Williamson (2018), figura 12.1.}
@@ -862,15 +862,16 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
 
 
 \begin{frame}{Equilibrio en el mercado de dinero}
+\small
   La oferta monetaria es fijada exógenamente por el gobierno:
   \[
     M^s=M.
   \]
-  El mercado de dinero se vacía cuando
+  El mercado de dinero se vacía cuando $M^s = M^d$, es decir:
   \[
-    \boxed{M=PL(Y,r+i)}.
+    \boxed{M=PL(Y,r)}.
   \]
-  Si $i=0$,
+  Por lo tanto, el nivel general de precios en equilibrio es:
   \[
     \boxed{P^*=\frac{M}{L(Y^*,r^*)}}.
   \]
@@ -961,6 +962,40 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
 \end{frame}
 
 
+
+
+
+\begin{frame}{¿Y el efecto ingreso?}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+
+    \item Supongamos que el incremento de la oferta monetaria se dio para financiar una reducción de impuestos $\Delta T<0$:
+    \[
+      M_2-M_1=-P_2\Delta T.
+    \]
+
+    \item El incremento de la oferta monetaria induce un aumento proporcional del nivel de precios:
+    \[
+      \frac{M_2}{M_1}=\frac{P_2}{P_1}.
+    \]
+
+    \item Sustituyendo la primera expresión:
+    \[
+      \underbrace{\left(
+      \frac{M_1}{P_2}-\frac{M_1}{P_1}
+      \right)}_{\text{Pérdida de poder adquisitivo}}
+      -\underbrace{\Delta T}_{\text{Reducción de impuestos}}
+      =0.
+    \]
+
+    \item \cidehighlight{La reducción de impuestos se compensa exactamente con la pérdida de poder adquisitivo de los saldos monetarios iniciales.}
+  \end{itemize}
+\end{frame}
+
+
+
+
 \begin{frame}{Determinantes de la demanda de dinero}
 En el modelo monetario intertemporal, la demanda de dinero está determinada por la elección de los agentes entre medios de pago para sus transacciones. Cualquier cambio que afecte la oferta o demanda de tarjetas de crédito tendrá un impacto en la demanda monetaria:
   \begin{itemize}
@@ -1039,8 +1074,10 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
     mediante aranceles, subsidios estatales, subvenciones
     a la exportación y medidas similares implican casi
     inevitablemente alguna pérdida de bienestar para la sociedad.
-    Por tanto, tales intentos deben considerarse contrarios
+    Por lo tanto, estos intentos deben considerarse contrarios
     a toda razón.
+
+    \medskip
 
     Los precios absolutos, por otra parte ---los precios
     monetarios---, son, en última instancia, una cuestión
@@ -1048,6 +1085,7 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
     patrón de precios que está en nuestras manos establecer.
 \end{quote}
 \begin{flushright}
+\footnotesize
     \textbf{Knut Wicksell}\\
     \textit{Interest and Prices}, 1898, p.~4.\\
     \footnotesize{Citado en Woodford (2003).}
@@ -1055,12 +1093,31 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 \end{frame}
 
 
-\begin{frame}{Política monetaria óptima}
+
+\begin{frame}{El diseño de la política monetaria}
   \small
   \begin{itemize}
-    \item \cidehighlight{¿Cuál es la \textit{mejor} forma de diseñar la política monetaria?}
+    \setlength{\itemsep}{0.55em}
 
-    \item El \textit{monetarismo}, representado por Milton Friedman, sostenía que una política monetaria inadecuada podía ser una de las principales fuentes de fluctuaciones económicas de corto plazo.
+    \item \cidehighlight{¿Cuál es la \textit{mejor} forma de diseñar y conducir la política monetaria?}
+
+    \item Esta pregunta constituye uno de los problemas centrales de la economía monetaria.
+
+    \item La política monetaria influye sobre la trayectoria de las variables nominales y, bajo ciertas condiciones, también puede afectar a las variables reales.
+
+    \item Principalmente, la política monetaria desempeña un papel fundamental en la determinación del nivel general de precios.
+
+    \item La literatura estudia distintos marcos de política monetaria, sus mecanismos de transmisión y sus implicaciones para la estabilidad de precios, la actividad económica y el bienestar.
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Marcos de política monetaria: Monetarismo}
+  \small
+  \begin{itemize}
+    \item El \textit{Monetarismo}, representado por Milton Friedman, sostenía que una política monetaria inadecuada podía ser una de las principales fuentes de fluctuaciones económicas de corto plazo.
     
     \item Friedman argumentaba que los efectos de la política monetaria ocurren con \textit{rezagos largos y variables}, lo que dificulta anticipar sus efectos y utilizarla para estabilizar activamente el ciclo económico.
     
@@ -1068,19 +1125,39 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 
     \item Dada esta estabilidad, los monetaristas proponían diseñar la política monetaria mediante el control de los agregados monetarios utilizando una \textit{regla monetaria}, en lugar de recurrir a intervenciones discrecionales.
 
-    \item Friedman proponía una regla de crecimiento constante de la oferta monetaria, conocida como la regla del $k\%$.
+    \item Friedman proponía una regla de crecimiento constante de la oferta monetaria, conocida como la regla del $k\%$, independientemente de las fluctuaciones económicas de corto plazo.
   \end{itemize}
 \end{frame}
 
 
 
+
+
 \begin{frame}{Política monetaria monetarista}
-  Si la autoridad fija una meta de crecimiento monetario, entonces
-  \[
-    P=\frac{M}{L(Y,R)},
-  \]
-  sólo puede controlar con precisión $P$ si $L(Y,R)$ es estable y predecible.
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.5em}
+    \item El equilibrio monetario implica:
+    \[
+      P=\frac{M}{L(Y,R)}.
+    \]
+
+    \item Tomando logaritmos y primeras diferencias:
+    \[
+      \Delta p = \Delta m - \Delta l,
+    \]
+    donde $x=\log X$ y $\Delta x=x'-x$, para $X\in\{P,M,L\}$.
+
+    \item Si la autoridad fija una meta de crecimiento de la oferta monetaria $\Delta m=k$, entonces:
+    \[
+      \Delta p=k-\Delta l.
+    \]
+
+    \item Si el crecimiento de la demanda de dinero es estable y predecible, una regla de crecimiento monetario constante permite estabilizar la inflación.
+  \end{itemize}
 \end{frame}
+
+
 
 
 \begin{frame}{Inestabilidad de la demanda de dinero}
@@ -1104,14 +1181,19 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 
 
 
-\begin{frame}{Implicaciones de la inestabilidad de $L$}
+\begin{frame}{Implicaciones de la inestabilidad de $L(Y,R)$}
   \begin{itemize}
     \setlength{\itemsep}{0.55em}
-    \item Choques no observados a $L$ generan variaciones no deseadas en el nivel de precios.
-    \item La inestabilidad de la demanda de dinero debilitó el uso de metas monetarias estrictas.
-    \item Los bancos centrales modernos pasaron a implementar la política principalmente mediante relgas monetarias basadas en la fijación de una tasa de interés nominal de corto plazo.
+    \item Choques no observados a $L(Y,R)$ generan variaciones no deseadas en el nivel general de precios.
+    
+    \item La inestabilidad de la demanda de dinero debilitó el uso de reglas estrictas de control de los agregados monetarios como marco de política monetaria.
+    
+    \item Gradualmente, los bancos centrales adoptaron marcos de política monetaria basados principalmente en la fijación de una tasa de interés nominal de corto plazo, en lugar del control directo de la cantidad de dinero.
   \end{itemize}
 \end{frame}
+
+
+
 
 
 \begin{frame}{Política monetaria sin agregados monetarios}
@@ -1142,13 +1224,13 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
   \begin{itemize}
     \setlength{\itemsep}{0.55em}
 
-    \item Actualmente, la mayoría de bancos centrales conducen su política monetaria eligiendo un nivel tasa de interés nominal de corto plazo como \textit{meta operativa}.
+    \item Actualmente, la mayoría de bancos centrales conducen su política monetaria eligiendo un nivel tasa de interés nominal de corto plazo como \cidehighlight{meta operativa}.
 
     \item Para sostenerla, ajustan la oferta de reservas mediante operaciones de mercado abierto y, en algunos casos, la remuneración de las reservas bancarias.
 
     \item Una compra de bonos por el banco central incrementa las reservas bancarias y reduce los bonos en manos del sector privado:
     \[
-      R\uparrow, \ B\downarrow \implies M \uparrow
+      R\uparrow, \ B\downarrow \implies M1 \uparrow
     \]
 
     \item Este cambio de liquidez afecta las tasas de interés del mercado interbancario de corto plazo.
@@ -1159,32 +1241,58 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 \end{frame}
 
 
-\begin{frame}{Instrumentos y objetivos de política monetaria}
+
+\begin{frame}{Ejemplo: política monetaria en México (I)}
+  \small
   \begin{itemize}
-    \setlength{\itemsep}{0.7em}
+    \setlength{\itemsep}{0.5em}
 
-    \item Los \textit{instrumentos} son las variables que
-    el banco central utiliza para implementar
-    su política monetaria, como la tasa de interés
-    de corto plazo.
+    \item Tras la crisis de 1994--1995, México abandonó el régimen de \textit{bandas cambiarias con desliz controlado} y adoptó un régimen de flotación cambiaria.
+    
+    \item La política monetaria pasó a desempeñar el papel de ancla nominal de la economía.
 
-    \item Los \textit{objetivos} son las variables macroeconómicas que busca estabilizar.
+    \item Durante los años siguientes, el Banco de México avanzó gradualmente hacia un régimen de \textit{objetivos de inflación}, adoptado formalmente en 2001.
 
-    \item La conducción de la política monetaria
-    requiere establecer cómo debe ajustarse
-    el instrumento para alcanzar sus objetivos.
+    \item Se estableció una meta puntual de inflación anual de 3\%, con un intervalo de variabilidad de $\pm 1$ punto porcentual.
 
-    \item Por ejemplo, una regla de Taylor prescribe
-    ajustes de la tasa de interés en respuesta
-    a desviaciones de la inflación respecto de
-    su meta y de la actividad respecto de su
-    nivel potencial.
+    \item Hasta 2008, la política monetaria se instrumentaba mediante el \textit{corto}, un \cidehighlight{objetivo operacional} sobre los saldos de las cuentas corrientes de los bancos comerciales en el banco central.
 
-    \item Para conocer más sobre la meta operativa del Banco de México, ver
-\href{https://www.banxico.org.mx/politica-monetaria/d/\%7B4B1B17B2-0985-71E5-0E0F-162840DCC9B6\%7D.pdf}
-{Instrumentación de la Política Monetaria a través de un Objetivo Operacional de Tasa de Interés}.
+    \item Desde el 21 de enero de 2008, el Banco de México utiliza como objetivo operacional la tasa de interés interbancaria a un día.
   \end{itemize}
+  {\footnotesize
+  Ver:
+  \href{https://www.bis.org/publications/paper-143-central-banking-americas-lessons-two-decades.pdf}
+  {Rodríguez et al. (2023)};
+  \href{https://www.banxico.org.mx/politica-monetaria/d/\%7BE0B64CFA-4903-B643-978E-AA348BC3C2CD\%7D.pdf}
+  {Banco de México (2007)}.
+  }
 \end{frame}
+
+
+
+\begin{frame}{Ejemplo: política monetaria en México (II)}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+
+    \item El \textit{objetivo} de la política monetaria del Banco de México es procurar la estabilidad del poder adquisitivo de la moneda, con una meta de inflación de 3\% anual.
+
+    \item Para alcanzarlo, establece un \textit{objetivo operativo}: la tasa de interés interbancaria a un día.
+
+    \item Mediante sus \textit{instrumentos operativos}, como las operaciones de mercado abierto, el banco central administra la liquidez en el merado para alcanzar su objetivo operativo.
+
+    \item Las \textit{reglas de política monetaria} entonces describen cómo debe ajustarse la tasa de interés ante cambios en las condiciones económicas.
+
+    \item Por ejemplo, una regla de Taylor prescribe ajustes de la tasa en respuesta a desviaciones de la inflación respecto de su meta y del producto respecto de su nivel potencial.
+  \end{itemize}
+
+ {\footnotesize
+  Ver:
+\href{https://www.banxico.org.mx/politica-monetaria/d/\%7B4B1B17B2-0985-71E5-0E0F-162840DCC9B6\%7D.pdf}
+{Instrumentación de la Política Monetaria a través de un Objetivo Operacional de Tasa de Interés}
+  }
+\end{frame}
+
 
 
 
@@ -1196,7 +1304,7 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
     \item Si un activo seguro ofreciera un rendimiento nominal negativo, habría una \textbf{oportunidad de arbitraje}.
     \item Por ello existe un \textbf{limite inferior cero} (\textit{Zero Lower Bound}, ZLB) para la tasa nominal.
     \item El límite inferior puede ser ligeramente negativo debido a costos de almacenamiento, seguro y transacción del efectivo.
-    \item Por ello existe un \textbf{límite inferior efectivo} (\textit{Effective Lower Bound}, ELB) para la tasa nominal.
+    \item Por ello existe un \textbf{límite inferior efectivo} (\textit{Effective Lower Bound}, ELB) para la tasa nominal, el cual puede ser negativo.
   \end{itemize}
 \end{frame}
 
@@ -1236,7 +1344,7 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
         \item Los bonos se vuelven virtualmente dinero.
         \item La oferta de dinero vertical corresponde a $M+B$.
         \item Intercambiar dinero por deuda corta no desplaza esa oferta.
-        \item La operación abierta convencional es irrelevante en el margen.
+        \item La operación de mercado abierto convencional es irrelevante en el margen.
       \end{itemize}
     \end{column}
     \begin{column}{0.57\textwidth}
@@ -1248,12 +1356,12 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 \end{frame}
 
 \begin{frame}{Política monetaria no convencional}
-  Cuando la tasa de interés corto plazo se aproxima a su ELB, el banco central puede recurrir a política monetaria no convencional:
+  Cuando la tasa de interés corto plazo se aproxima al ZLB y/o al ELB, el banco central puede recurrir a política monetaria no convencional:
   \begin{itemize}
     \setlength{\itemsep}{0.6em}
-    \item \textbf{Expansión Cuantitativa (QE):} compra de activos privados y gubernamentales de mayor vencimiento para afectar tasas de interés de largo plazo;
-    \item \textbf{Guía Prospectiva (\textit{Forward Guidance}):} comunicación sobre la trayectoria futura esperada de la política;
-    \item \textbf{Tasas de interés nominales negativas:} Rendimiento negativo sobre ciertas reservas o depósitos.
+    \item \textbf{Expansión Cuantitativa (Quantitative Easing, QE):} compra de activos privados y gubernamentales de mayor vencimiento para afectar tasas de interés de largo plazo.
+    \item \textbf{Guía Prospectiva (\textit{Forward Guidance}):} comunicación sobre la trayectoria futura esperada de la política monetaria.
+    \item \textbf{Tasas de interés nominales negativas:} rendimiento efectivo negativo sobre ciertas reservas o depósitos.
   \end{itemize}
 \end{frame}
 
@@ -1267,13 +1375,9 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
         \item En una operación convencional de mercado abierto,
         el banco central compra deuda pública de corto plazo.
 
-        \item Esto reduce las tasas de interés de corto plazo,
-        mientras que las de largo plazo permanecen
-        relativamente constantes, aumentando la pendiente
-        de la curva de rendimiento.
+        \item Esto reduce las tasas de corto plazo, mientras que las de largo plazo permanecen relativamente constantes, aumentando la pendiente de la curva de rendimiento.
 
-        \item En una trampa de liquidez, el \textit{QE}
-        busca reducir las tasas de largo plazo.
+        \item En una trampa de liquidez, el \textit{QE} busca reducir las tasas de largo plazo.
       \end{itemize}
     \end{column}
     \begin{column}{0.57\textwidth}
