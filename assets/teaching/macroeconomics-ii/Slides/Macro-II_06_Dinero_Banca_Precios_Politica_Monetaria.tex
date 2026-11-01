@@ -732,9 +732,6 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
       R=q &\Rightarrow \text{indiferencia}.
     \end{cases}
   \]
-  \begin{block}{Demanda de servicios de crédito}
-    La demanda es perfectamente elástica en $q=R$; la tasa nominal es el costo de oportunidad de utilizar efectivo.
-  \end{block}
 \end{frame}
 
 \begin{frame}{Equilibrio en el mercado de tarjetas de crédito}
@@ -744,11 +741,8 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
       \begin{itemize}
         \item $X^d(q)$ es la cantidad demandada de transacciones con tarjeta de crédito.
         \item $Y-X^d(q)$ es la cantidad demandada de transacciones con efectivo.
-        \item La demanda horizontal de $X^d(q)$ refleja la condición $q=R$.
-        \item La intersección con $X^s(q)$ determina
-          \[
-            q^*=R,\qquad X^*=X^s(R).
-          \]
+        \item La demanda horizontal $X^d(q)$ refleja la condición $q=R$.
+        \item El vaciado de mercado determina la cantidad de transacciones de equilibrio $X^*$ dado el costo de equilibrio $q^*$.
       \end{itemize}
     \end{column}
     \begin{column}{0.56\textwidth}
@@ -766,7 +760,7 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
       \begin{itemize}
         \item Si $R_2>R_1$, mantener efectivo se vuelve relativamente más costoso.
         \item La demanda de servicios de tarjeta de crédito se desplaza hacia arriba.
-        \item En equilibrio, $q$ y $X^*$ aumentan.
+        \item En equilibrio, $q^*$ y $X^*$ aumentan.
         \item Las compras realizadas con dinero, $Y-X^*(R)$, disminuyen.
       \end{itemize}
     \end{column}
@@ -778,8 +772,9 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
   \end{columns}
 \end{frame}
 
-\begin{frame}{Derivación de la demanda de dinero}
-  Si $Y-X^*(R)$ son las unidades compradas con dinero, (i.e. el gasto real utilizando efectivo) entonces la demanda nominal de dinero es
+\begin{frame}{Función de demanda de dinero}
+\small
+  Si $Y-X^*(R)$ son las unidades compradas con dinero (i.e. el gasto real utilizando efectivo) entonces la demanda nominal de dinero es
   \[
     \boxed{M^d=P\big[Y-X^*(R)\big]}.
   \]
@@ -794,36 +789,36 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
   \]
   \begin{itemize}
     \item Más ingreso real implica un mayor volumen de transacciones.
-    \item Una tasa nominal mayor aumenta el costo de oportunidad, lo que induce sustitución de dinero por medios de pago remunerados.
+    \item Precios más altos requieren una cantidad mayor de efectivo para realizar una cantidad fija de transacciones reales.
+    \item Una tasa nominal $R$ mayor aumenta el costo de oportunidad de mantener un activo que paga cero interés nominal.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Saldos reales y costo de oportunidad}
+\begin{frame}{Saldos monetarios reales}
   Dividiendo la demanda nominal entre el nivel de precios,
   \[
     \boxed{\frac{M^d}{P}=L(Y,R)}.
   \]
   \begin{itemize}
     \setlength{\itemsep}{0.55em}
-    \item $M^d/P$ son los \textbf{saldos monetarios reales}: el poder de compra de la cantidad nominal de dinero.
-    \item La tasa nominal $R$ es el costo de oportunidad de mantener un activo que paga cero interés nominal.
-    \item Usando Fisher,
-      \[
-        M^d=PL(Y,r+i).
-      \]
-    \item Si la inflación de largo plazo permanece estable, entonces $M^d=PL(Y,r)$.
+    \item $M^d/P$ es la demanda de \textbf{saldos monetarios reales}: el poder de compra de la cantidad nominal de dinero demandada.
+    \item Por lo tanto, $L(\cdot)$ es una función de demanda de liquidez real.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Curva de demanda nominal de dinero}
+\begin{frame}{Curva de demanda de dinero}
   \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
+    \begin{column}{0.48\textwidth}
       \small
-      Para $Y$ y $r$ dados,
+      \begin{itemize}
+        \item Usando la ecuación de Fisher,
       \[
-        M^d=PL(Y,r).
+        M^d=PL(Y,r+i).
       \]
-      La demanda nominal es lineal y creciente en $P$: para mantener saldos reales constantes, un nivel de precios mayor requiere una cantidad nominal proporcionalmente mayor.
+    \item Si la inflación de largo plazo permanece estable, entonces 
+    $$M^d=PL(Y,r).$$
+
+      \end{itemize}
     \end{column}
     \begin{column}{0.55\textwidth}
       \centering
@@ -919,6 +914,12 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
   \fuentefigura{Williamson (2018), figura 12.10.}
 \end{frame}
 
+\begin{frame}{Dicotomía clásica}
+      \figura[5.75cm]{fig_12_11_neutralidad_dinero.png}
+      \fuentefigura{Williamson (2018), figura 12.11.}
+\end{frame}
+
+
 \begin{frame}{Neutralidad del dinero}
   \begin{definition}
     El dinero es \cidehighlight{neutral} si un cambio en su nivel no altera variables reales y sólo produce un cambio proporcional en el nivel de precios.
@@ -956,14 +957,6 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
 \end{frame}
 
 
-\begin{frame}{Dicotomía clásica}
-      \figura[5.75cm]{fig_12_11_neutralidad_dinero.png}
-      \fuentefigura{Williamson (2018), figura 12.11.}
-\end{frame}
-
-
-
-
 
 \begin{frame}{¿Y el efecto ingreso?}
   \small
@@ -971,25 +964,25 @@ Siempre que $R>0$, $r^m < r$ de modo que habrá un \cidehighlight{costo de oport
     \setlength{\itemsep}{0.5em}
 
     \item Supongamos que el incremento de la oferta monetaria se dio para financiar una reducción de impuestos $\Delta T<0$:
-    \[
-      M_2-M_1=-P_2\Delta T.
-    \]
+    \begin{align*}
+        M_2-M_1=-P_2\Delta T \tag{1}
+    \end{align*}
 
     \item El incremento de la oferta monetaria induce un aumento proporcional del nivel de precios:
-    \[
-      \frac{M_2}{M_1}=\frac{P_2}{P_1}.
-    \]
+    \begin{align*}
+      \frac{M_2}{M_1}=\frac{P_2}{P_1} \tag{2}
+    \end{align*}
 
-    \item Sustituyendo la primera expresión:
+    \item Sustituyendo (1) en (2):
     \[
       \underbrace{\left(
       \frac{M_1}{P_2}-\frac{M_1}{P_1}
       \right)}_{\text{Pérdida de poder adquisitivo}}
       -\underbrace{\Delta T}_{\text{Reducción de impuestos}}
-      =0.
+      =0
     \]
 
-    \item \cidehighlight{La reducción de impuestos se compensa exactamente con la pérdida de poder adquisitivo de los saldos monetarios iniciales.}
+    \item \cidehighlight{La reducción de impuestos se compensa exactamente con la pérdida de poder adquisitivo de los saldos monetarios nominales.}
   \end{itemize}
 \end{frame}
 
@@ -1105,35 +1098,61 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 
     \item La política monetaria influye sobre la trayectoria de las variables nominales y, bajo ciertas condiciones, también puede afectar a las variables reales.
 
-    \item Principalmente, la política monetaria desempeña un papel fundamental en la determinación del nivel general de precios.
+    \item Principalmente, la política monetaria desempeña un papel fundamental en la determinación del nivel general de precios y su tasa de cambio.
 
     \item La literatura estudia distintos marcos de política monetaria, sus mecanismos de transmisión y sus implicaciones para la estabilidad de precios, la actividad económica y el bienestar.
   \end{itemize}
 \end{frame}
 
 
-
-
 \begin{frame}{Marcos de política monetaria: Monetarismo}
   \small
   \begin{itemize}
     \item El \textit{Monetarismo}, representado por Milton Friedman, sostenía que una política monetaria inadecuada podía ser una de las principales fuentes de fluctuaciones económicas de corto plazo.
-    
-    \item Friedman argumentaba que los efectos de la política monetaria ocurren con \textit{rezagos largos y variables}, lo que dificulta anticipar sus efectos y utilizarla para estabilizar activamente el ciclo económico.
-    
-    \item Uno de sus principales postulados era que la demanda de dinero constituía una función estable de un conjunto reducido de variables económicas.
 
-    \item Dada esta estabilidad, los monetaristas proponían diseñar la política monetaria mediante el control de los agregados monetarios utilizando una \textit{regla monetaria}, en lugar de recurrir a intervenciones discrecionales.
+    \item Friedman argumentaba que los efectos de la política monetaria ocurren con \textit{rezagos largos y variables}, lo que dificulta anticipar sus efectos y puede hacer que el intento de estabilizar activamente el ciclo termine desestabilizándolo.
 
-    \item Friedman proponía una regla de crecimiento constante de la oferta monetaria, conocida como la regla del $k\%$, independientemente de las fluctuaciones económicas de corto plazo.
+    \item Además, uno de sus principales postulados era que la demanda de dinero es una función estable de un conjunto reducido de variables económicas.
+
+    \item Dado lo anterior, Friedman propuso (\textit{A Program for Monetary Stability}, 1960; \textit{The Role of Monetary Policy}, 1968) una regla de crecimiento constante de la oferta monetaria, independientemente de las fluctuaciones de corto plazo.
+
+    \item Esta fue conocida como la regla del $k\%$, y reavivó la discusión conocida como \textit{Rules vs Discretion}, que desembocó en la preferencia por \textit{reglas monetarias} frente a intervenciones discrecionales.
+  \end{itemize}
+
+  {\footnotesize
+  Ver
+  \href{https://www.aeaweb.org/articles?id=10.1257/jep.36.3.245}
+  {Dellas y Tavlas (2022)}.
+  }
+\end{frame}
+
+
+\begin{frame}{Política monetaria monetarista en la Teoría Cuantitativa del Dinero}
+\small
+  \begin{itemize}
+    \item La teoría cuantitativa del dinero parte de la identidad:
+    \[
+      MV = PY.
+    \]
+    donde $V$ es la velocidad del dinero.
+    \item Tomando logaritmos y primeras diferencias:
+    \[
+      \Delta m + \Delta v = \Delta p + \Delta y,
+    \]
+    donde $x=\log X$ y $\Delta x = x_t - x_{t-1}$, para $X\in\{M,V,P,Y\}$.
+
+    \item Si la demanda de dinero es una función estable de pocas variables: $\Delta v = 0$.
+
+    \item Si la autoridad fija una meta de crecimiento de la oferta monetaria, $\Delta m = k$, entonces:
+    \[
+      \Delta p = k - \Delta y.
+    \]
+    \item Si además el producto crece a una tasa estable de largo plazo $g$, una regla de crecimiento monetario constante $k = g + \pi^*$ estabiliza la inflación en $\Delta p = \pi^*$.
   \end{itemize}
 \end{frame}
 
 
-
-
-
-\begin{frame}{Política monetaria monetarista}
+\begin{frame}{Regla del $k\%$ en el modelo monetario intertemporal}
   \small
   \begin{itemize}
     \setlength{\itemsep}{0.5em}
@@ -1146,7 +1165,6 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
     \[
       \Delta p = \Delta m - \Delta l,
     \]
-    donde $x=\log X$ y $\Delta x=x'-x$, para $X\in\{P,M,L\}$.
 
     \item Si la autoridad fija una meta de crecimiento de la oferta monetaria $\Delta m=k$, entonces:
     \[
@@ -1165,7 +1183,7 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
     \begin{column}{0.39\textwidth}
       \small
       \begin{itemize}
-        \item La relación estimada entre saldos reales e interés parece relativamente estable entre 1959 y 1979.
+        \item La relación estimada entre saldos reales y tasa de interés parece estable entre 1959 y 1979.
         \item Después de 1980, la dispersión aumenta considerablemente.
         \item Múltiples factores alteran la demanda de dinero en el tiempo.
         \item Esta evidencia causó un abandono de las ideas monetaristas a partir de los años 80.
@@ -1241,32 +1259,70 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
 \end{frame}
 
 
+\begin{frame}{Reglas de tasa de interés}
+  \begin{itemize}
+  \setlength{\itemsep}{0.55em}
+  
+    \item Las reglas de crecimiento de agregados monetarios fueron abandonadas. Sin embargo, la idea de que \cidehighlight{las reglas de política monetaria son preferibles a la discrecionalidad} permaneció.
+
+    \item En la actualidad, los bancos centrales ajustan su tasa de interés operativa mediante reglas que responden a las condiciones económicas y que están orientadas a un objetivo explícito.
+
+    \item En general, este objetivo es una \cidehighlight{meta de inflación} (aunque algunos bancos centrales, como la Fed, tienen un mandato dual que incluye el empleo).
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Regla de Taylor}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      \begin{itemize}
+        \item Regla de Taylor:
+    \[
+      i_t = r^*  + \phi_\pi(\pi_t - \pi^*) + \phi_y(y_t - y^*),
+    \]
+    donde $y^*$ es el producto potencial, $\pi^*$ la meta de inflación y $\phi_\pi > 0$, $\phi_y > 0$.
+
+    \item Regla de Taylor original:
+    $$
+    i_t = 2 + 1.5(\pi_t - 2) + 0.5(y_t - y^*)
+    $$
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.35cm]{taylor_rule.png}
+      \fuentefigura{\href{https://web.stanford.edu/~johntayl/Onlinepaperscombinedbyyear/1993/Discretion_versus_Policy_Rules_in_Practice.pdf}{Taylor (1993)}}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
 
 \begin{frame}{Ejemplo: política monetaria en México (I)}
   \small
   \begin{itemize}
-    \setlength{\itemsep}{0.5em}
+    \setlength{\itemsep}{0.55em}
 
+    % --- Régimen y marco de política monetaria ---
     \item Tras la crisis de 1994--1995, México abandonó el régimen de \textit{bandas cambiarias con desliz controlado} y adoptó un régimen de flotación cambiaria.
-    
-    \item La política monetaria pasó a desempeñar el papel de ancla nominal de la economía.
 
     \item Durante los años siguientes, el Banco de México avanzó gradualmente hacia un régimen de \textit{objetivos de inflación}, adoptado formalmente en 2001.
 
-    \item Se estableció una meta puntual de inflación anual de 3\%, con un intervalo de variabilidad de $\pm 1$ punto porcentual.
+    \item En 2003 adoptó una meta puntual de inflación anual de 3\%, con un intervalo de variabilidad de $\pm 1$ punto porcentual. Ver \href{https://www.banxico.org.mx/politica-monetaria/d/\%7BE0B64CFA-4903-B643-978E-AA348BC3C2CD\%7D.pdf}{Esquema de Objetivos de Inflación}.
 
-    \item Hasta 2008, la política monetaria se instrumentaba mediante el \textit{corto}, un \cidehighlight{objetivo operacional} sobre los saldos de las cuentas corrientes de los bancos comerciales en el banco central.
+    % --- Instrumentación ---
+    \item Para alcanzar esta meta, el banco central define un \cidehighlight{objetivo operacional}. Hasta 2008 fue el \textit{corto}: un objetivo sobre los saldos de las cuentas corrientes de los bancos comerciales en el banco central.
 
-    \item Desde el 21 de enero de 2008, el Banco de México utiliza como objetivo operacional la tasa de interés interbancaria a un día.
+    \item Desde el 21 de enero de 2008, el objetivo operacional es la tasa de interés interbancaria a un día. Ver \href{https://www.banxico.org.mx/politica-monetaria/d/\%7B5EC0B4E4-0EB1-6363-14E5-93EAE6028158\%7D.pdf}{Instrumentación de la Política Monetaria a través de un Objetivo Operacional de Tasa de Interés}.
+
   \end{itemize}
-  {\footnotesize
-  Ver:
-  \href{https://www.bis.org/publications/paper-143-central-banking-americas-lessons-two-decades.pdf}
-  {Rodríguez et al. (2023)};
-  \href{https://www.banxico.org.mx/politica-monetaria/d/\%7BE0B64CFA-4903-B643-978E-AA348BC3C2CD\%7D.pdf}
-  {Banco de México (2007)}.
-  }
 \end{frame}
+
+
+
+
 
 
 
@@ -1275,24 +1331,22 @@ En el modelo monetario intertemporal, la demanda de dinero está determinada por
   \begin{itemize}
     \setlength{\itemsep}{0.55em}
 
-    \item El \textit{objetivo} de la política monetaria del Banco de México es procurar la estabilidad del poder adquisitivo de la moneda, con una meta de inflación de 3\% anual.
+    \item Mediante sus \textit{instrumentos operativos}, como las operaciones de mercado abierto, el banco central administra la liquidez en el mercado para alcanzar dicho objetivo. Ver \href{https://www.banxico.org.mx/politica-monetaria/d/\%7BFE14C513-3019-978E-55A7-3112824E905E\%7D.pdf}{Operaciones de Mercado Abierto en el Banco de México}.
 
-    \item Para alcanzarlo, establece un \textit{objetivo operativo}: la tasa de interés interbancaria a un día.
-
-    \item Mediante sus \textit{instrumentos operativos}, como las operaciones de mercado abierto, el banco central administra la liquidez en el merado para alcanzar su objetivo operativo.
-
-    \item Las \textit{reglas de política monetaria} entonces describen cómo debe ajustarse la tasa de interés ante cambios en las condiciones económicas.
+    % --- Reglas ---
+    \item Las \textit{reglas de política monetaria} describen entonces cómo debe ajustarse la tasa de interés ante cambios en las condiciones económicas.
 
     \item Por ejemplo, una regla de Taylor prescribe ajustes de la tasa en respuesta a desviaciones de la inflación respecto de su meta y del producto respecto de su nivel potencial.
   \end{itemize}
 
- {\footnotesize
+  {\footnotesize
   Ver:
-\href{https://www.banxico.org.mx/politica-monetaria/d/\%7B4B1B17B2-0985-71E5-0E0F-162840DCC9B6\%7D.pdf}
-{Instrumentación de la Política Monetaria a través de un Objetivo Operacional de Tasa de Interés}
+  \href{https://www.bis.org/publications/paper-143-central-banking-americas-lessons-two-decades.pdf}
+  {Rodríguez et al. (2023)};
+  \href{https://www.banxico.org.mx/politica-monetaria/d/\%7BE0B64CFA-4903-B643-978E-AA348BC3C2CD\%7D.pdf}
+  {Banco de México (2007)}.
   }
 \end{frame}
-
 
 
 
