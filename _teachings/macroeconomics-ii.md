@@ -48,7 +48,15 @@ schedule:
     description: General Equilibrium in a Two-Period Real Economy with Investment.
     materials:
       - name: Lecture Slides
-        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_05_Modelo_Intertemporal_Real_Inversion.pdf        
+        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_05_Modelo_Intertemporal_Real_Inversion.pdf    
+
+  - week: Lecture 6
+    date: Oct 22
+    topic: Money, Banking, Prices and Monetary Policy
+    description: A monetary intertemporal model: money market in the real intertemporal model with investment.
+    materials:
+      - name: Lecture Slides
+        url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_06_Dinero_Banca_Precios_Politica_Monetaria.pdf    
 
 
 problem_sets:
