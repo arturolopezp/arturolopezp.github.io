@@ -53,7 +53,7 @@ schedule:
   - week: Lecture 6
     date: Oct 22
     topic: Money, Banking, Prices and Monetary Policy
-    description: A monetary intertemporal model: money market in the real intertemporal model with investment.
+    description: A monetary intertemporal model.
     materials:
       - name: Lecture Slides
         url: /assets/teaching/macroeconomics-ii/Slides/Macro-II_06_Dinero_Banca_Precios_Politica_Monetaria.pdf    
