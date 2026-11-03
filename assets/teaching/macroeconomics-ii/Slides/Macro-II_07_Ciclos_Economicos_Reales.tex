@@ -1,0 +1,1559 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% los paquetes Beamer/Hyperref instalados.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+\makeatletter
+\@namedef{ver@epstopdf-base.sty}{9999/12/31}
+\makeatother
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 7: MODELOS DEL CICLO ECONOMICO CON PRECIOS Y SALARIOS FLEXIBLES
+% =============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\uselanguage{English}
+\languagepath{English}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+\usepackage{array,tabularx}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{remark}[theorem]{Observación}
+\newtheorem{assumption}[theorem]{Supuesto}
+
+\tolerance=1000
+\emergencystretch=1em
+\AtBeginDocument{\justifying}
+\addtobeamertemplate{itemize body begin}{\justifying}{}
+\addtobeamertemplate{enumerate body begin}{\justifying}{}
+\addtobeamertemplate{description body begin}{\justifying}{}
+\addtobeamertemplate{block begin}{}{\justifying}
+\addtobeamertemplate{block alerted begin}{}{\justifying}
+\addtobeamertemplate{block example begin}{}{\justifying}
+\AtBeginEnvironment{column}{\justifying}
+
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+\setbeamertemplate{section in head/foot}{\color{white}\insertsectionhead}
+\setbeamertemplate{section in head/foot shaded}{\color{white!55}\insertsectionhead}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,ht=3.05ex,dp=1.05ex,
+    leftskip=0.42cm,rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+  }%
+  \vskip0pt
+}
+
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+\setbeamertemplate{background}{%
+  \vbox to \paperheight{%
+    \vfill
+    \hbox to \paperwidth{%
+      \hfill
+      \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      \hspace{0.18cm}%
+    }%
+    \vspace{0.68cm}%
+  }%
+}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+\newcommand{\FigurasSesion}{Figuras/07_Ciclos Economicos Reales}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+\title[Macroeconomía II]{Sesión 7 \\ Modelo de ciclos económicos reales (RBC)}
+\subtitle{Ciclos económicos con precios y salarios flexibles}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================================================
+\section{Hechos estilizados}
+% =============================================================================
+
+
+
+\begin{frame}{Objetivos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Revisar los hechos estilizados del ciclo económico.
+    \item Construir el \cidehighlight{modelo de ciclos económicos reales} (\textit{Real Business Cycles}, RBC).
+    \item Analizar la propagación de un choque persistente de productividad y contrastar sus predicciones con los hechos del ciclo.
+  \end{itemize}
+  \notafuentes{Williamson (2018), cap. 13, pp. 498--528.}
+\end{frame}
+
+
+\begin{frame}{¿Qué son los ciclos económicos?}
+  \footnotesize
+  \begin{quote}
+    \textit{``Los ciclos económicos son un tipo de fluctuación en la actividad económica agregada (...) un ciclo consiste en expansiones que ocurren aproximadamente al mismo tiempo en muchas actividades económicas, seguidas por recesiones, contracciones y recuperaciones igualmente generales que se fusionan en la fase de expansión del siguiente ciclo; esta secuencia de cambios es recurrente pero no periódica; en duración, los ciclos económicos varían de más de un año a diez o doce años; no son divisibles en ciclos más cortos de carácter similar...''}
+    \begin{flushright}
+      --- \href{https://www.nber.org/system/files/chapters/c2980/c2980.pdf}{Burns y Mitchell (1946)}
+    \end{flushright}
+  \end{quote}
+  
+  \small
+
+    \begin{itemize}
+    \item Los ciclos económicos son fluctuaciones recurrentes de la actividad económica agregada, caracterizadas por expansiones y contracciones \textbf{simultáneas} de la producción, el empleo y otras variables macroeconómicas.
+    \item Se distinguen de las tendencias de largo plazo, que reflejan el crecimiento económico subyacente.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{El programa de Burns y Mitchell}
+  \begin{itemize}
+    \item Los ciclos económicos, como los entendemos hoy, fueron caracterizados y analizados por Arthur Burns y Wesley Mitchell en su libro de 1946 \href{https://www.nber.org/system/files/chapters/c2980/c2980.pdf}{\textit{Measuring Business Cycles}}.
+    \item Una de sus ideas clave fue que muchos indicadores económicos se mueven juntos.
+    \item \textbf{Mitchell (1913, 1927) y Mitchell y Burns (1938):}
+          \begin{itemize}
+            \item Introducen los \textit{puntos de giro}: picos (\textit{peak}) y valles (\textit{trough}).
+            \item Las variables no se mueven a la vez ni con la misma intensidad.
+            \item Los ciclos son heterogéneos en causas, duración y profundidad.
+          \end{itemize}
+    \item \textbf{Burns y Mitchell (1946):} fluctuaciones significativas y generalizadas de la actividad agregada, con duración de 1 a 12 años.
+          \begin{itemize}
+            \item Perspectiva amplia: los ciclos deben caracterizarse con muchas variables, no solo con el PIB.
+            \item Deben ser \textbf{generalizadas}: no limitarse a unos pocos sectores.
+          \end{itemize}
+    \item \textbf{Fechado de ciclos:} técnicas estadísticas y análisis cualitativo de múltiples variables macroeconómicas.
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Comité de fechados del ciclo económico del NBER (I)}
+  \centering
+  \footnotesize
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{llcccc}
+    \toprule
+     &  & \textbf{Contracción} & \textbf{Expansión} & \multicolumn{2}{c}{\textbf{Ciclo}} \\
+    \cmidrule(lr){5-6}
+    \textbf{Pico} & \textbf{Valle} & $\text{Pico a valle}^{\text{\ 1}}$ & $\text{Valle a pico}^{\text{\ 1}}$ & $\text{Valle a valle}^{\text{\ 1}}$ & $\text{Pico a pico}^{\text{\ 1}}$ \\
+    \midrule
+    Julio 1981     & Noviembre 1982 & 16 & 12  & 28  & 18  \\
+    Julio 1990     & Marzo 1991     & 8  & 92  & 100 & 108 \\
+    Marzo 2001     & Noviembre 2001 & 8  & 120 & 128 & 128 \\
+    Diciembre 2007 & Junio 2009     & 18 & 73  & 91  & 81  \\
+    Febrero 2020   & Abril 2020     & 2  & 128 & 130 & 146 \\
+    \midrule
+    \multicolumn{2}{l}{\textbf{Promedio por periodo}} & & & & \\
+    \multicolumn{2}{l}{1854--2020} & 17.0 & 41.4 & 58.4 & 59.2 \\
+    \multicolumn{2}{l}{1854--1919} & 21.6 & 26.6 & 48.2 & 48.9 \\
+    \multicolumn{2}{l}{1919--1945} & 18.2 & 35.0 & 53.2 & 53.0 \\
+    \multicolumn{2}{l}{1945--2020} & 10.3 & 64.2 & 74.5 & 75.0 \\
+    \bottomrule
+    \noalign{\vspace{0.4em}}
+    \multicolumn{6}{l}{\scriptsize $^1$ Duración en meses. Fuente: \href{https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions}{NBER}.} \\
+  \end{tabular}
+\end{frame}
+
+
+
+\begin{frame}{Comité de fechados del ciclo económico del NBER (II)}
+  \centering
+  \figura[5.5cm]{NBER_dates.png}
+  \fuentefigura{Kurlat (2020), fig. 12.1.2: PIB real en Estados Unidos desde 1947 y recesiones de NBER.}
+\end{frame}
+
+
+
+
+\begin{frame}{Ciclos y tendencia}
+\begin{columns}[T,onlytextwidth]
+  \begin{column}{0.55\textwidth}
+    \begin{itemize}
+      \small
+      \setlength{\itemsep}{0.55em}
+      \item Una característica clave de los ciclos económicos es que pueden interpretarse como fluctuaciones alrededor de una tendencia.
+      
+      \item La tendencia refleja el crecimiento económico subyacente, mientras que el componente cíclico recoge desviaciones transitorias respecto de dicha tendencia.
+      
+      \item Los economistas utilizan distintos métodos para separar ambos componentes, como el filtro de Hodrick--Prescott, modelo de componentes no observados y modelos estructurales (e.g. modelos DSGE, filtros de Kalman, etc.).
+    \end{itemize}
+  \end{column}
+  
+  \begin{column}{0.40\textwidth}
+    \centering
+    \figura[5cm]{ideal_trend.png}
+    \fuentefigura{Williamson (2018), figura 3.1.}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}{Filtro de Hodrick--Prescott}
+\small
+\begin{itemize}
+  \item \href{https://www.minneapolisfed.org/-/media/files/research/prescott/papers/dp451.pdf}{Hodrick y Prescott (1997)} proponen un algoritmo para distinguir un componente cíclico de un componente de tendencia en datos económicos.
+  \item Sea \(X_t>0\) una variable observada durante \(t=1,\ldots,T\), y defina \(x_t\equiv\log X_t\). El filtro de Hodrick--Prescott descompone la serie en una tendencia, $\tau_t$, y una desviación cíclica respecto a dicha tendencia, $c_t$:
+  \[
+    x_t=\tau_t+c_t,
+  \]
+  \item La tendencia de Hodrick--Prescott es la solución del problema
+\[
+\left\{\tau_t^{HP}\right\}_{t=1}^{T}
+=
+\arg\min_{\{\tau_t\}_{t=1}^{T}}
+\left\{
+\sum_{t=1}^{T}(x_t-\tau_t)^2
++
+\lambda
+\sum_{t=2}^{T-1}
+\left[
+(\tau_{t+1}-\tau_t)-(\tau_t-\tau_{t-1})
+\right]^2
+\right\}.
+\]
+Un valor mayor de \(\lambda\) produce una tendencia más suave.
+\end{itemize}
+
+\notafuentes{Hodrick y Prescott (1997). Para datos trimestrales suele utilizarse \(\lambda=1600\).}
+\end{frame}
+
+
+
+\begin{frame}{Tendencia HP y desviación cíclica del PIB real en Estados Unidos}
+  \centering
+  \figura[5.2cm]{HP.png}
+  \fuentefigura{Kurlat (2020), figs. 12.1.3-12.1.4.}
+\end{frame}
+
+
+\begin{frame}{Tendencia HP para distintos valores de \(\lambda\)}
+  \centering
+  \figura[5.5cm]{HP_lambdas.png}
+  \fuentefigura{Kurlat (2020), fig. 12.1.5.}
+\end{frame}
+
+
+
+
+\begin{frame}{Comovimiento de las variables macroeconómicas (I)}
+\small
+
+Una vez obtenidos los componentes cíclicos de dos variables,
+\[
+\widetilde{x}_t=x_t-\tau_t^x,
+\qquad
+\widetilde{y}_t=y_t-\tau_t^y,
+\]
+su \cidehighlight{comovimiento} describe si sus desviaciones respecto de la
+tendencia tienden a ocurrir simultáneamente y en la misma dirección.
+
+\begin{block}{Correlación contemporánea}
+El grado de comovimiento lineal se mide mediante el coeficiente de correlación:
+\[
+\widehat{\rho}_{xy}
+=
+\operatorname{Corr}(\widetilde{x}_t,\widetilde{y}_t)
+=
+\frac{
+\sum_{t=1}^{T}
+(\widetilde{x}_t-\bar{\widetilde{x}})
+(\widetilde{y}_t-\bar{\widetilde{y}})
+}{
+\sqrt{\sum_{t=1}^{T}(\widetilde{x}_t-\bar{\widetilde{x}})^2}
+\sqrt{\sum_{t=1}^{T}(\widetilde{y}_t-\bar{\widetilde{y}})^2}
+},
+\qquad
+-1\leq\widehat{\rho}_{xy}\leq1.
+\]
+\end{block}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Comovimiento de las variables macroeconómicas (II)}
+\small
+
+Tomando como referencia el componente cíclico del producto real
+\(\widetilde{Y}_t\), una variable \(x_t\) se clasifica como:
+
+\[
+\begin{array}{ccl}
+\toprule
+\textbf{Clasificación} & \textbf{Condición} & \textbf{Interpretación} \\ 
+\midrule
+\text{Procíclica}
+& \operatorname{Corr}(\widetilde{x}_t,\widetilde{Y}_t)>0
+& x_t\text{ aumenta durante expansiones} \\[2pt]
+\text{Contracíclica}
+& \operatorname{Corr}(\widetilde{x}_t,\widetilde{Y}_t)<0
+& x_t\text{ aumenta durante recesiones} \\[2pt]
+\text{Acíclica}
+& \operatorname{Corr}(\widetilde{x}_t,\widetilde{Y}_t)\approx0
+& x_t\text{ no presenta un patrón cíclico claro} \\
+\bottomrule
+\end{array}
+\]
+\end{frame}
+
+
+\begin{frame}{Comovimiento de las variables macroeconómicas (III)}
+  \centering
+  \figura[5cm]{comovement2.png}
+  \fuentefigura{Williamson (2018), fig. 3.4}
+\end{frame}
+
+
+\begin{frame}{Comovimiento de las variables macroeconómicas (IV)}
+  \centering
+  \figura[5cm]{comovement.png}
+  \fuentefigura{Williamson (2018), fig. 3.3}
+\end{frame}
+
+
+
+
+\begin{frame}{Hechos estilizados del ciclo económico en Estados Unidos (I)}
+  \centering
+  \figura[6cm]{hechos_ciclo.png}
+  \fuentefigura{Kurlat (2020), Tabla 12.1}
+\end{frame}
+
+
+\begin{frame}{Hechos estilizados del ciclo económico en Estados Unidos (II)}
+  \centering
+  \figura[6cm]{hechos_ciclo2.png}
+  \fuentefigura{Kurlat (2020), Fig. 12.2.1}
+\end{frame}
+
+
+\begin{frame}{La revolución de expectativas racionales}
+  \begin{block}{Dos principios metodológicos}
+    \begin{enumerate}
+      \setlength{\itemsep}{0.65em}
+      \item Los modelos macroeconómicos deben fundamentarse en preferencias, dotaciones, tecnología y decisiones óptimas de hogares y empresas.
+      \item Los modelos con precios y salarios flexibles pueden explicar fenómenos macroeconómicos relevantes.
+    \end{enumerate}
+  \end{block}
+
+  \vspace{0.2cm}
+  La flexibilidad de precios no implica, por sí misma, que la política económica sea irrelevante. La conclusión depende de las fricciones, externalidades y distorsiones incluidas en el modelo.
+
+  \notafuentes{Williamson (2018), pp. 498--500.}
+\end{frame}
+
+\begin{frame}{¿Por qué estudiar más de un modelo del ciclo?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Distintos choques pueden producir comovimientos agregados semejantes.
+    \item Un buen ajuste de las correlaciones del ciclo no identifica necesariamente el mecanismo causal.
+    \item Modelos observacionalmente similares pueden generar recomendaciones de política opuestas.
+    \item La evaluación exige combinar coherencia interna, capacidad cuantitativa, plausibilidad de los choques y evidencia microeconómica.
+  \end{itemize}
+
+  \begin{alertblock}{Lección}
+    Para recomendar política económica debemos identificar primero el choque y el mecanismo que originan la fluctuación.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Dos teorías con precios y salarios flexibles}
+  \small
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{lYY}
+    \toprule
+      & \textbf{Ciclos económicos reales} & \textbf{Fallas de coordinación} \\
+    \midrule
+    Impulso
+      & Choques persistentes a la productividad total de los factores.
+      & Oleadas autorrealizadas de optimismo y pesimismo. \\
+    Mecanismo
+      & Sustitución intertemporal, acumulación de capital y oferta laboral.
+      & Complementariedades estratégicas y rendimientos crecientes agregados. \\
+    Equilibrio
+      & Único y eficiente en el modelo básico.
+      & Puede haber múltiples equilibrios. \\
+    Política
+      & No existe una función estabilizadora en el caso básico.
+      & La política puede coordinar expectativas o eliminar multiplicidad. \\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+% =============================================================================
+\section{Modelo RBC}
+% =============================================================================
+
+\begin{frame}{El modelo de ciclos económicos reales}
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Kydland y Prescott (1982) preguntaron si un modelo neoclásico de crecimiento sometido a choques aleatorios de productividad podía reproducir los ciclos observados.
+    \item Los ciclos son \cidehighlight{reales} porque el impulso proviene de variables reales, no de sorpresas monetarias.
+    \item Hogares y empresas optimizan, forman expectativas racionales y operan en mercados competitivos.
+    \item Los precios y salarios se ajustan para vaciar todos los mercados en cada periodo.
+  \end{itemize}
+
+  \begin{block}{Idea central}
+    Las fluctuaciones agregadas son respuestas de equilibrio de agentes racionales a cambios en sus oportunidades productivas.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Entorno dinámico}
+  \small
+  En cada periodo $t$, la economía produce con capital predeterminado $K_t$, trabajo $N_t$ y productividad $z_t$:
+  \[
+    Y_t=z_tF(K_t,N_t),
+    \qquad F_K,F_N>0,
+    \qquad F_{KK},F_{NN}<0.
+  \]
+  La acumulación de capital satisface
+  \[
+    K_{t+1}=(1-\delta)K_t+I_t,
+    \qquad 0<\delta<1,
+  \]
+  y la restricción agregada de recursos es
+  \[
+    \boxed{C_t+K_{t+1}-(1-\delta)K_t+G_t=z_tF(K_t,N_t)}.
+  \]
+
+  \begin{itemize}
+    \item Variables de estado: $(K_t,z_t)$.
+    \item Variables de control: $(C_t,N_t,K_{t+1})$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Choques persistentes de productividad}
+  Una representación habitual de la productividad es
+  \[
+    \log z_t=\rho\log z_{t-1}+\varepsilon_t,
+    \qquad 0<\rho<1,
+    \qquad E_{t-1}[\varepsilon_t]=0.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item $\varepsilon_t>0$ incrementa la productividad corriente.
+    \item La persistencia $\rho>0$ implica que también aumenta $E_tz_{t+j}$ para $j>0$.
+    \item Como $\rho<1$, el efecto esperado se disipa gradualmente: el choque no es permanente.
+  \end{itemize}
+
+  \begin{block}{Implicación}
+    Un choque a $z_t$ modifica simultáneamente el producto marginal corriente, la riqueza intertemporal y el rendimiento esperado de acumular capital.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Problema del hogar representativo}
+  \small
+  El hogar elige consumo, trabajo y capital para maximizar
+  \[
+    E_0\sum_{t=0}^{\infty}\beta^t
+    U(C_t,h-N_t),
+    \qquad 0<\beta<1,
+  \]
+  sujeto a su restricción presupuestaria secuencial:
+  \[
+    C_t+K_{t+1}
+    \leq
+    w_tN_t+
+    \left(1+q_t-\delta\right)K_t+
+    \Pi_t-T_t.
+  \]
+
+  \begin{itemize}
+    \item $w_t$ es el salario real y $q_t$ es la renta real del capital.
+    \item El hogar toma precios y beneficios como dados.
+    \item El capital elegido hoy aumenta los recursos disponibles mañana.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Problema de la empresa}
+  La empresa representativa elige capital y trabajo para maximizar beneficios en cada periodo:
+  \[
+    \max_{K_t,N_t}\;
+    \Pi_t=z_tF(K_t,N_t)-q_tK_t-w_tN_t.
+  \]
+  En una solución interior,
+  \[
+    \boxed{q_t=z_tF_K(K_t,N_t)},
+    \qquad
+    \boxed{w_t=z_tF_N(K_t,N_t)}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item La empresa contrata cada factor hasta igualar su producto marginal con su precio real.
+    \item Un aumento en $z_t$ eleva los productos marginales de capital y trabajo para una combinación dada de insumos.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Equilibrio competitivo dinámico}
+  \small
+  Dadas las secuencias exógenas $\{z_t,G_t,T_t\}_{t\geq0}$ y $K_0$, un equilibrio competitivo es un sistema de precios
+  \[
+    \{w_t^*,q_t^*\}_{t\geq0}
+  \]
+  y una asignación
+  \[
+    \{C_t^*,N_t^*,K_{t+1}^*,Y_t^*\}_{t\geq0}
+  \]
+  tales que:
+  \begin{enumerate}
+    \setlength{\itemsep}{0.45em}
+    \item el hogar maximiza su utilidad esperada tomando precios como dados;
+    \item la empresa maximiza beneficios tomando precios como dados;
+    \item el presupuesto del gobierno se satisface;
+    \item los mercados de trabajo, capital y bienes se vacían en cada periodo.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Problema del planificador social}
+  \small
+  En ausencia de distorsiones, el primer teorema fundamental del bienestar permite caracterizar la asignación competitiva mediante
+  \[
+    \max_{\{C_t,N_t,K_{t+1}\}_{t\geq0}}
+    E_0\sum_{t=0}^{\infty}\beta^t U(C_t,h-N_t)
+  \]
+  sujeto a
+  \[
+    C_t+K_{t+1}-(1-\delta)K_t+G_t
+    \leq z_tF(K_t,N_t)
+    \quad \forall t.
+  \]
+
+  \begin{block}{Interpretación}
+    El planificador elige la misma asignación real que el equilibrio competitivo porque los precios descentralizan las decisiones eficientes de consumo, trabajo e inversión.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Condiciones de optimalidad}
+  \small
+  Las condiciones necesarias para una solución interior son
+  \[
+    \boxed{
+      \frac{U_{\ell,t}}{U_{C,t}}
+      =z_tF_N(K_t,N_t)=w_t
+    }
+  \]
+  y
+  \[
+    \boxed{
+      U_{C,t}
+      =\beta E_t\!\left[
+        U_{C,t+1}
+        \left(1-\delta+z_{t+1}F_K(K_{t+1},N_{t+1})\right)
+      \right]
+    }.
+  \]
+
+  \begin{itemize}
+    \item La primera condición asigna el tiempo entre trabajo y ocio.
+    \item La ecuación de Euler asigna recursos entre consumo presente y capital futuro.
+    \item Las expectativas sobre $z_{t+1}$ afectan las decisiones corrientes.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hechos del ciclo que debe explicar el modelo}
+  \small
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{lYY}
+    \toprule
+    \textbf{Variable} & \textbf{Comovimiento con el PIB} & \textbf{Variabilidad relativa} \\
+    \midrule
+    Consumo & Procíclico & Menor que la del PIB \\
+    Inversión & Procíclica & Mucho mayor que la del PIB \\
+    Empleo & Procíclico & Persistente \\
+    Salario real & Procíclico & Moderada \\
+    Productividad laboral media & Procíclica & Menor que la del PIB \\
+    Nivel de precios & Contracíclico en parte de la muestra & La correlación cambia entre periodos \\
+    \bottomrule
+  \end{tabularx}
+
+  \vspace{0.25cm}
+  El reto consiste en reproducir conjuntamente comovimientos, volatilidades y persistencia.
+\end{frame}
+
+\begin{frame}{Residuo de Solow y PIB}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.36\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item El residuo de Solow aproxima la productividad total de los factores.
+        \item Ambas series presentan un comovimiento estrecho.
+        \item La productividad estimada es persistente.
+        \item Esta correlación motiva al RBC, pero no demuestra causalidad.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.61\textwidth}
+      \centering
+      \figura[5.3cm]{fig_13_1_residuo_solow_pib.png}
+      \fuentefigura{Williamson (2018), figura 13.1.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Descomposición del choque persistente}
+  Un aumento persistente de productividad combina dos perturbaciones:
+  \[
+    z_t\uparrow
+    \qquad\text{y}\qquad
+    E_tz_{t+1}\uparrow.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item \textbf{Productividad corriente:} eleva $F_N$ y desplaza la demanda laboral y la oferta de producto.
+    \item \textbf{Productividad futura esperada:} eleva el rendimiento esperado del capital y la riqueza del hogar.
+    \item La demanda de inversión y la demanda de consumo aumentan, desplazando la demanda de producto.
+    \item La respuesta final de $r_t$ coordina ahorro e inversión.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Efecto de la productividad corriente}
+  Dada la condición de demanda laboral
+  \[
+    w_t=z_tF_N(K_t,N_t^d),
+  \]
+  la diferenciación implícita respecto de $z_t$ da
+  \[
+    \frac{\partial N_t^d}{\partial z_t}
+    =-
+    \frac{F_N(K_t,N_t^d)}{z_tF_{NN}(K_t,N_t^d)}
+    >0.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Para cada salario real, la empresa desea contratar más trabajo.
+    \item La función de producción se desplaza hacia arriba.
+    \item La curva de oferta de producto $Y^s(r)$ se desplaza a la derecha.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Efecto de la productividad futura esperada}
+  La ecuación de Euler contiene el rendimiento esperado del capital:
+  \[
+    1-\delta+E_t\!\left[z_{t+1}F_K(K_{t+1},N_{t+1})\right].
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item $E_tz_{t+1}\uparrow$ incrementa la demanda de inversión corriente.
+    \item El ingreso futuro esperado aumenta la riqueza intertemporal y eleva la demanda de consumo.
+    \item Ambos efectos desplazan la demanda de producto $Y^d(r)$ hacia la derecha.
+    \item El producto de equilibrio aumenta. El signo de $r_t$ depende de la distribución temporal del choque.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Choque persistente de productividad}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(a) Mercado laboral}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_2a_mercado_laboral.png}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(b) Mercado de bienes}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_2b_mercado_bienes.png}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(c) Mercado de dinero}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_2c_mercado_dinero.png}
+    \end{column}
+  \end{columns}
+  \fuentefigura{Williamson (2018), figura 13.2.}
+\end{frame}
+
+\begin{frame}{¿Por qué disminuye la tasa de interés real?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item El choque eleva el ingreso corriente y el ingreso futuro esperado.
+    \item Como el proceso es persistente pero estacionario, el aumento corriente de $z_t$ es mayor que el aumento esperado de largo plazo.
+    \item El hogar anticipa que el ingreso disminuirá gradualmente desde su nivel corriente elevado.
+    \item Para suavizar consumo, desea ahorrar parte del ingreso extraordinario.
+    \item En equilibrio general, el aumento del ahorro deseado reduce $r_t$ hasta igualar ahorro e inversión.
+  \end{itemize}
+
+  \begin{block}{Resultado del modelo de Williamson}
+    Ante el choque persistente, $Y_t$, $C_t$, $I_t$, $N_t$ y $w_t$ aumentan, mientras $r_t$ y $P_t$ disminuyen.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Respuesta cualitativa del equilibrio RBC}
+  \centering
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabular}{lcccccccc}
+    \toprule
+    Choque & $Y$ & $C$ & $I$ & $N$ & $w$ & $Y/N$ & $r$ & $P$ \\
+    \midrule
+    $z_t$ y $E_tz_{t+1}$ aumentan
+      & $+$ & $+$ & $+$ & $+$ & $+$ & $+$ & $-$ & $-$ \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.55cm}
+  \begin{itemize}
+    \item La inversión responde más que el consumo porque ajusta el stock de capital.
+    \item La suavización intertemporal mantiene al consumo relativamente estable.
+    \item La caída de $P$ supone una oferta nominal de dinero fija.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Productividad laboral media}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item La productividad laboral media es $Y/N$.
+        \item Gráficamente, corresponde a la pendiente del rayo desde el origen.
+        \item El choque desplaza la función de producción hacia arriba.
+        \item Si el empleo aumenta moderadamente, $Y/N$ también aumenta.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \centering
+      \figura[5.3cm]{fig_13_3_productividad_laboral.png}
+      \fuentefigura{Williamson (2018), figura 13.3.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Datos y predicciones del RBC}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[4.2cm]{tabla_13_1_predicciones_rbc.png}
+      \fuentefigura{Williamson (2018), tabla 13.1.}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item El modelo reproduce correctamente los principales signos de los comovimientos.
+        \item Versiones cuantitativas reproducen consumo menos volátil que el PIB e inversión más volátil.
+        \item El éxito cualitativo no basta para establecer que los choques tecnológicos sean la causa dominante.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Fortalezas cuantitativas}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item El RBC combina crecimiento y fluctuaciones dentro de un mismo modelo dinámico de equilibrio general.
+    \item La acumulación de capital amplifica y propaga choques productivos.
+    \item La ecuación de Euler explica la suavización del consumo y la volatilidad de la inversión.
+    \item El modelo disciplina sus parámetros mediante evidencia microeconómica y relaciones de largo plazo.
+    \item Las simulaciones permiten comparar momentos teóricos y empíricos bajo una métrica común.
+  \end{itemize}
+
+  \begin{alertblock}{Criterio de evaluación}
+    Reproducir momentos no equivale a identificar causalmente el choque estructural.
+  \end{alertblock}
+\end{frame}
+
+% =============================================================================
+\section{Dinero y política}
+% =============================================================================
+
+\begin{frame}{Neutralidad monetaria en el RBC}
+  El bloque real determina primero
+  \[
+    \{Y_t,C_t,I_t,N_t,w_t,r_t\}.
+  \]
+  El mercado monetario determina el nivel de precios:
+  \[
+    M_t^s=P_tL(Y_t,r_t)
+    \quad\Longrightarrow\quad
+    \boxed{P_t=\frac{M_t^s}{L(Y_t,r_t)}}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Un cambio proporcional en $M_t^s$ modifica proporcionalmente $P_t$.
+    \item La asignación real permanece inalterada.
+    \item La dicotomía clásica continúa operando en el modelo RBC básico.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Dinero endógeno}
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item En la práctica, los agregados monetarios responden a la actividad económica.
+    \item En una expansión, el crédito y los depósitos bancarios tienden a aumentar.
+    \item El banco central también ajusta la oferta monetaria en respuesta a información sobre producto e inflación.
+    \item Por ello, $M_t$ puede ser procíclico aunque los cambios exógenos en dinero sean neutrales.
+  \end{itemize}
+
+  \begin{block}{Distinción}
+    La endogeneidad de $M_t$ explica una correlación entre dinero y producto sin atribuir al dinero la causa estructural del ciclo.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Oferta monetaria procíclica}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Un choque positivo de PTF eleva $Y$ y reduce $r$.
+        \item La demanda real de dinero $L(Y,r)$ aumenta.
+        \item Sin intervención, el nivel de precios disminuiría.
+        \item Para estabilizar $P$, el banco central aumenta $M^s$.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[4.7cm]{fig_13_4_dinero_endogeno.png}
+      \fuentefigura{Williamson (2018), figura 13.4.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Dinero, predicción y causalidad}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item Históricamente, los agregados monetarios fueron procíclicos y tendieron a anticipar al PIB.
+    \item Una variable $x$ tiene causalidad predictiva sobre $y$ si $x_t$ ayuda a pronosticar $y_{t+1}$.
+    \item La causalidad predictiva no establece que una perturbación exógena a $x$ cause los movimientos de $y$.
+    \item El crédito y los depósitos pueden anticipar producción futura porque financian actividad que todavía no se realiza.
+    \item Un banco central informado puede expandir dinero antes de que el aumento de productividad se refleje en el PIB.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Producto y nivel de precios}
+  Con oferta monetaria fija,
+  \[
+    z_t\uparrow
+    \Longrightarrow
+    Y_t\uparrow,\;r_t\downarrow
+    \Longrightarrow
+    L(Y_t,r_t)\uparrow
+    \Longrightarrow
+    P_t\downarrow.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item El RBC básico predice un nivel de precios contracíclico.
+    \item Si el banco central estabiliza precios, acomoda el aumento en demanda monetaria con $M_t\uparrow$.
+    \item Una política más activa de estabilización reduce la correlación observada entre $P_t$ y $Y_t$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Implicaciones de política del RBC básico}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item Los cambios de nivel en la oferta monetaria son neutrales.
+    \item El equilibrio competitivo es eficiente cuando no existen impuestos distorsionantes, externalidades ni otras fallas de mercado.
+    \item Una recesión causada por menor productividad representa una respuesta óptima a peores oportunidades productivas.
+    \item Variar $G_t$ para estabilizar el PIB modifica la asignación de recursos, pero no corrige una ineficiencia del modelo básico.
+  \end{itemize}
+
+  \begin{alertblock}{Conclusión condicional}
+    La ausencia de una función estabilizadora depende de los supuestos del modelo, no de la flexibilidad de precios por sí sola.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Política óptima con distorsiones}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item Con impuestos distorsionantes, la asignación competitiva deja de ser Pareto eficiente.
+    \item La política fiscal debe minimizar el costo marginal de recaudar recursos a lo largo del tiempo.
+    \item El principio de \cidehighlight{suavización de impuestos} favorece tasas relativamente estables.
+    \item Con una tasa constante, la recaudación aumenta automáticamente en expansiones y disminuye en recesiones.
+  \end{itemize}
+
+  \begin{block}{Interpretación}
+    La política fiscal puede ser contracíclica en sus ingresos sin tener como objetivo estabilizar mecánicamente el producto.
+  \end{block}
+\end{frame}
+
+% =============================================================================
+\section{Críticas al RBC}
+% =============================================================================
+
+\begin{frame}{El residuo de Solow no es PTF pura}
+  Si la tecnología verdadera depende de la utilización de capital $u_t$ y de la intensidad laboral $e_t$,
+  \[
+    Y_t=z_t(u_tK_t)^{\alpha}(e_tN_t)^{1-\alpha}.
+  \]
+  El residuo calculado con capital y empleo medidos es
+  \[
+    \widehat z_t
+    =\frac{Y_t}{K_t^{\alpha}N_t^{1-\alpha}}
+    =z_tu_t^{\alpha}e_t^{1-\alpha}.
+  \]
+
+  \begin{itemize}
+    \item $\widehat z_t$ mezcla tecnología, utilización del capital e intensidad del trabajo.
+    \item La correlación entre $\widehat z_t$ y $Y_t$ puede surgir mecánicamente si la utilización es procíclica.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Utilización de factores y atesoramiento de trabajo}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item En una recesión, parte de la maquinaria permanece inactiva aunque el stock de capital medido no cambie.
+    \item Las empresas pueden conservar trabajadores con capital humano específico aun cuando reduzcan su intensidad de trabajo.
+    \item Esta práctica se conoce como \cidehighlight{atesoramiento de trabajo}.
+    \item Si los servicios efectivos de capital y trabajo disminuyen sin registrarse, el residuo de Solow cae aunque la tecnología no cambie.
+  \end{itemize}
+
+  \begin{alertblock}{Problema de identificación}
+    Una caída del residuo puede ser la causa de la recesión o una consecuencia de la menor utilización de factores.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Ejemplo de sesgo en la PTF medida}
+  Considere
+  \[
+    Y=zK^{0.3}N^{0.7},
+    \qquad z=1.
+  \]
+  Si durante una recesión se utiliza $95\%$ del capital y la intensidad laboral cae a $90\%$, entonces
+  \[
+    \widehat z
+    =(0.95)^{0.3}(0.90)^{0.7}
+    \approx 0.915.
+  \]
+
+  \begin{block}{Resultado}
+    El economista mediría una caída de PTF de aproximadamente $8.5\%$, aun cuando la productividad tecnológica verdadera permaneciera constante.
+  \end{block}
+
+  \notafuentes{Williamson (2018), pp. 508--509.}
+\end{frame}
+
+\begin{frame}{Otras críticas al mecanismo RBC}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item \textbf{Naturaleza de los choques:} algunas recesiones requerirían perturbaciones tecnológicas negativas difíciles de interpretar.
+    \item \textbf{Elasticidad laboral:} la respuesta del empleo puede exigir una sustitución intertemporal del trabajo mayor que la estimada microeconómicamente.
+    \item \textbf{Propagación:} la persistencia endógena del modelo puede ser insuficiente si los choques no son muy persistentes.
+    \item \textbf{Mercados incompletos:} el modelo básico omite heterogeneidad, fricciones financieras y restricciones de crédito.
+    \item \textbf{Identificación:} reproducir momentos agregados no distingue entre mecanismos estructurales alternativos.
+  \end{itemize}
+\end{frame}
+
+% =============================================================================
+\section{Fallas de coordinación}
+% =============================================================================
+
+\begin{frame}{Falla de coordinación}
+  \begin{block}{Definición}
+    Existe una falla de coordinación cuando las decisiones óptimas individuales dependen de las decisiones de otros agentes y la economía puede quedar en un equilibrio inferior, aun cuando todos prefieran otro equilibrio factible.
+  \end{block}
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Los agentes optimizan y los mercados se vacían.
+    \item Los precios y salarios permanecen flexibles.
+    \item La ineficiencia surge de complementariedades estratégicas y multiplicidad, no de rigideces nominales.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Complementariedades estratégicas}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item Una complementariedad estratégica implica que el incentivo de un agente para realizar una actividad aumenta cuando otros realizan más de esa actividad.
+    \item La producción de software es más rentable cuando existe más hardware, y viceversa.
+    \item Una empresa produce más cuando espera mayor demanda proveniente de la producción e ingreso de otras empresas.
+    \item Las expectativas agregadas pueden validarse mediante las decisiones que inducen.
+  \end{itemize}
+
+  \begin{block}{Resultado}
+    Pueden coexistir un equilibrio de alta actividad y otro de baja actividad, ambos consistentes con optimización individual.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Rendimientos crecientes agregados}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.42\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Las complementariedades pueden generar rendimientos crecientes a escala a nivel agregado.
+        \item Con $K$ fijo, la función $Y=zF(K,N)$ puede ser convexa.
+        \item Entonces $F_{NN}>0$ y el producto marginal del trabajo aumenta con el empleo agregado.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+      \centering
+      \figura[5.1cm]{fig_13_5_rendimientos_crecientes.png}
+      \fuentefigura{Williamson (2018), figura 13.5.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Demanda laboral agregada con pendiente positiva}
+  La condición competitiva continúa siendo
+  \[
+    w=zF_N(K,N^d).
+  \]
+  Pero si existen rendimientos crecientes suficientes,
+  \[
+    \frac{dw}{dN^d}=zF_{NN}(K,N^d)>0.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item Más empleo agregado eleva la productividad marginal agregada del trabajo.
+    \item La curva $N^d$ tiene pendiente positiva en el plano $(N,w)$.
+    \item Este resultado no proviene de la tecnología privada de una empresa aislada, sino de externalidades agregadas.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Demanda laboral con rendimientos crecientes}
+  \centering
+  \figura[5.2cm]{fig_13_6_demanda_laboral_creciente.png}
+  \fuentefigura{Williamson (2018), figura 13.6.}
+\end{frame}
+
+\begin{frame}{Condición de pendiente}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \small
+      Para generar el mecanismo de coordinación, la demanda laboral debe ser más inclinada que la oferta:
+      \[
+        \frac{dw^d}{dN}
+        >
+        \frac{dw^s}{dN}
+        >0.
+      \]
+      \begin{itemize}
+        \item La intersección continúa vaciando el mercado laboral.
+        \item La estática comparativa cambia de signo respecto al modelo neoclásico.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \centering
+      \figura[5.0cm]{fig_13_7_mercado_laboral_coordinacion.png}
+      \fuentefigura{Williamson (2018), figura 13.7.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Pendiente de la oferta de producto}
+  Escriba el equilibrio laboral en forma inversa:
+  \[
+    w^d(N)=w^s(N,r),
+  \]
+  donde $w_r^s<0$ porque un aumento en $r$ desplaza la oferta laboral hacia la derecha. Diferenciando,
+  \[
+    \frac{dN}{dr}
+    =\frac{w_r^s}{w_N^d-w_N^s}<0,
+  \]
+  ya que $w_N^d>w_N^s$. Por lo tanto,
+  \[
+    \boxed{
+      \frac{dY^s}{dr}
+      =zF_N(K,N)\frac{dN}{dr}<0
+    }.
+  \]
+
+  La curva de oferta de producto tiene pendiente negativa en el plano $(Y,r)$.
+\end{frame}
+
+\begin{frame}{Construcción de la oferta de producto}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(a) Oferta de producto}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_8a_oferta_producto.png}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(b) Función de producción}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_8b_funcion_produccion.png}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(c) Mercado laboral}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_8c_mercado_laboral.png}
+    \end{column}
+  \end{columns}
+  \fuentefigura{Williamson (2018), figura 13.8.}
+\end{frame}
+
+\begin{frame}{Equilibrios múltiples}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item La demanda de producto $Y^d(r)$ también tiene pendiente negativa.
+    \item Dos curvas decrecientes pueden intersectarse más de una vez.
+    \item Cada intersección determina una asignación que satisface optimalidad individual y vaciado de mercados.
+    \item El equilibrio de alta actividad domina en bienestar al equilibrio de baja actividad, pero la economía no dispone de un mecanismo privado automático para seleccionarlo.
+  \end{itemize}
+
+  \begin{block}{Indeterminación}
+    Los fundamentos económicos pueden ser compatibles con más de una asignación de equilibrio.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Equilibrio bueno y equilibrio malo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(a) Mercado laboral}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_9a_mercado_laboral.png}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(b) Mercado de bienes}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_9b_mercado_bienes.png}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textbf{(c) Mercado de dinero}\par
+      \vspace{0.12cm}
+      \figura[4.65cm]{fig_13_9c_mercado_dinero.png}
+    \end{column}
+  \end{columns}
+  \fuentefigura{Williamson (2018), figura 13.9.}
+\end{frame}
+
+\begin{frame}{Comparación de los dos equilibrios}
+  \centering
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Variable} & \textbf{Equilibrio malo} & \textbf{Equilibrio bueno} \\
+    \midrule
+    Producto $Y$ & Bajo & Alto \\
+    Empleo $N$ & Bajo & Alto \\
+    Salario real $w$ & Bajo & Alto \\
+    Tasa real $r$ & Alta & Baja \\
+    Consumo $C$ & Bajo & Alto \\
+    Inversión $I$ & Baja & Alta \\
+    Nivel de precios $P$ & Alto & Bajo \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.45cm}
+  Los comovimientos son semejantes a los del RBC, aunque el impulso y las implicaciones normativas son distintos.
+\end{frame}
+
+\begin{frame}{Espíritus animales y manchas solares}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item El optimismo coordina decisiones sobre el equilibrio de alta actividad; el pesimismo coordina el equilibrio de baja actividad.
+    \item Keynes denominó \textit{animal spirits} a estas oleadas de confianza.
+    \item Una \cidehighlight{mancha solar} es una variable observable ajena a preferencias, tecnología y dotaciones.
+    \item Si todos creen que la mancha solar selecciona un equilibrio, la creencia puede volverse autorrealizada.
+  \end{itemize}
+
+  \begin{alertblock}{Causalidad aparente}
+    La variable extrínseca no altera posibilidades productivas, pero coordina expectativas y aparece correlacionada con la actividad.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Predicciones de la falla de coordinación}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.53\textwidth}
+      \centering
+      \figura[4.1cm]{tabla_13_2_predicciones_coordinacion.png}
+      \fuentefigura{Williamson (2018), tabla 13.2.}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Consumo, inversión, empleo y salario real son procíclicos.
+        \item La productividad laboral media también es procíclica.
+        \item Los mismos momentos agregados son compatibles con choques fundamentales o extrínsecos.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Productividad laboral y coordinación}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item La función de producción agregada es convexa.
+        \item El equilibrio bueno combina mayor empleo con mayor productividad media.
+        \item La pendiente del rayo al punto $(N_2,Y_2)$ excede la pendiente al punto $(N_1,Y_1)$.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      \centering
+      \figura[5.15cm]{fig_13_10_productividad_coordinacion.png}
+      \fuentefigura{Williamson (2018), figura 13.10.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{El dinero como variable de coordinación}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item El dinero continúa siendo neutral \emph{condicional en el equilibrio seleccionado}.
+    \item Sin embargo, $M_t$ puede funcionar como una mancha solar.
+    \item Si $M_t$ alto coordina optimismo, la economía selecciona el equilibrio bueno.
+    \item Si $M_t$ bajo coordina pesimismo, selecciona el equilibrio malo.
+    \item El dinero parecería causar el ciclo aunque no modifique directamente las condiciones reales de optimalidad.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Oferta monetaria procíclica como mancha solar}
+  \centering
+  \figura[5.15cm]{fig_13_11_dinero_sunspot.png}
+  \fuentefigura{Williamson (2018), figura 13.11.}
+\end{frame}
+
+\begin{frame}{Política en el modelo de coordinación}
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Una autoridad creíble puede coordinar expectativas hacia el equilibrio de alta actividad.
+    \item La política fiscal desplaza simultáneamente $Y^d$ y $Y^s$.
+    \item Williamson muestra que una reducción apropiada de $G$ puede transformar dos equilibrios en uno solo.
+    \item Eliminar multiplicidad reduce incertidumbre, pero puede disminuir el producto medio si el nuevo equilibrio queda entre los dos originales.
+  \end{itemize}
+
+  \begin{block}{Evaluación normativa}
+    Estabilizar la economía no garantiza una mejora de bienestar; importa cuál equilibrio desaparece y cuál asignación queda.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Política fiscal y equilibrio único}
+  \centering
+  \figura[5.3cm]{fig_13_12_politica_fiscal_coordinacion.png}
+  \fuentefigura{Williamson (2018), figura 13.12.}
+\end{frame}
+
+\begin{frame}{Críticas al modelo de coordinación}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+    \item El mecanismo requiere rendimientos crecientes agregados suficientemente grandes.
+    \item La evidencia empírica sobre rendimientos crecientes agregados es débil e imprecisa.
+    \item Los choques de expectativas son difíciles de observar y medir.
+    \item La multiplicidad complica las predicciones fuera de muestra porque el modelo no determina por sí solo qué equilibrio se selecciona.
+    \item Las recomendaciones de política dependen de que la autoridad pueda coordinar creencias de forma creíble.
+  \end{itemize}
+\end{frame}
+
+% =============================================================================
+\section{Gran Recesión}
+% =============================================================================
+
+\begin{frame}{La Gran Recesión como prueba de los modelos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item El RBC atribuiría la caída del producto a una disminución relevante de PTF.
+    \item El modelo de coordinación atribuiría la recesión a un desplazamiento hacia el equilibrio de baja actividad.
+    \item Ambos predicen consumo menos volátil que el producto e inversión mucho más volátil.
+    \item Ambos predicen productividad laboral procíclica y un nivel de precios contracíclico bajo oferta monetaria fija.
+  \end{itemize}
+
+  \begin{block}{Pregunta empírica}
+    ¿Qué hechos de 2008--2009 pueden explicar estos modelos y cuáles requieren mecanismos adicionales?
+  \end{block}
+\end{frame}
+
+\begin{frame}{PIB y residuo de Solow, 2005--2012}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.36\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item El PIB cayó con fuerza durante la recesión.
+        \item El residuo de Solow disminuyó mucho menos.
+        \item La magnitud resulta insuficiente para una explicación RBC simple.
+        \item Además, parte de la caída puede reflejar menor utilización de factores.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.61\textwidth}
+      \centering
+      \figura[5.25cm]{fig_13_13_gran_recesion_ptf.png}
+      \fuentefigura{Williamson (2018), figura 13.13.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Consumo, inversión y PIB, 2005--2012}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.36\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item El consumo cayó menos que el PIB.
+        \item La inversión se contrajo mucho más que el producto.
+        \item Estos patrones coinciden con los hechos generales del ciclo.
+        \item Por sí solos, no distinguen entre RBC y coordinación.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.61\textwidth}
+      \centering
+      \figura[5.25cm]{fig_13_14_gran_recesion_componentes.png}
+      \fuentefigura{Williamson (2018), figura 13.14.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Precios y productividad laboral, 2005--2012}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.36\textwidth}
+      \small
+      \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+        \item El nivel de precios cayó respecto de su tendencia.
+        \item La productividad laboral media aumentó al final de la recesión.
+        \item Ambos hechos contradicen las versiones básicas de los dos modelos.
+        \item La composición del empleo y las fricciones financieras adquieren importancia.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.61\textwidth}
+      \centering
+      \figura[5.25cm]{fig_13_15_gran_recesion_precios_productividad.png}
+      \fuentefigura{Williamson (2018), figura 13.15.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Mecanismos ausentes}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item La crisis se originó en mercados financieros y balances privados.
+    \item Los modelos básicos omiten información asimétrica, restricciones de crédito, colateral y desapalancamiento.
+    \item Una caída del valor del colateral reduce el crédito, la inversión y el gasto aun sin un choque tecnológico grande.
+    \item La incertidumbre puede inducir a empresas a posponer contratación e inversión.
+    \item Un modelo enriquecido con fricciones crediticias puede conservar el núcleo intertemporal e incorporar estos mecanismos.
+  \end{itemize}
+\end{frame}
+
+% =============================================================================
+\section{Síntesis}
+% =============================================================================
+
+\begin{frame}{Comparación de los modelos}
+  \scriptsize
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{lYY}
+    \toprule
+      & \textbf{RBC} & \textbf{Falla de coordinación} \\
+    \midrule
+    Impulso
+      & PTF persistente.
+      & Expectativas autorrealizadas. \\
+    Propagación
+      & Ahorro, inversión, capital y oferta laboral.
+      & Complementariedades y selección de equilibrio. \\
+    Número de equilibrios
+      & Único en el caso básico.
+      & Potencialmente múltiple. \\
+    Eficiencia
+      & Pareto eficiente sin distorsiones.
+      & El equilibrio malo puede estar dominado. \\
+    Dinero
+      & Neutral; endógeno y procíclico.
+      & Neutral, pero puede coordinar expectativas. \\
+    Política
+      & Corrige distorsiones, no fluctúa para estabilizar PTF.
+      & Puede coordinar o eliminar multiplicidad. \\
+    Debilidad principal
+      & Medición e interpretación de los choques de PTF.
+      & Evidencia débil de rendimientos crecientes y choques no observables. \\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{Una lección sobre identificación}
+  \begin{itemize}
+    \setlength{\itemsep}{0.7em}
+    \item Los mismos comovimientos de $C$, $I$, $N$, $w$ y $Y/N$ aparecen en modelos con impulsos diferentes.
+    \item La información agregada contemporánea puede ser insuficiente para distinguir mecanismos.
+    \item La identificación requiere restricciones adicionales: temporalidad, heterogeneidad, evidencia microeconómica y respuesta a choques observables.
+    \item La evaluación de política debe condicionarse al diagnóstico estructural y reconocer incertidumbre de modelo.
+  \end{itemize}
+
+  \begin{alertblock}{Conclusión}
+    Antes de intervenir, debemos explicar qué mercado origina el choque, cómo se propaga y qué falla de mercado pretende corregir la política.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Síntesis}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item El RBC interpreta el ciclo como respuesta eficiente a choques persistentes de productividad.
+    \item El modelo reproduce los principales comovimientos, pero enfrenta problemas de medición e identificación causal.
+    \item El dinero puede ser procíclico y anticipar al producto aun cuando sea neutral.
+    \item Las fallas de coordinación generan ciclos mediante expectativas autorrealizadas y permiten múltiples equilibrios.
+    \item La Gran Recesión muestra la necesidad de incorporar fricciones financieras y otros mecanismos adicionales.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Próxima sesión}
+  \begin{itemize}
+    \item En la siguiente sesión incorporaremos rigideces nominales y estudiaremos cómo la política monetaria puede afectar la actividad real en un \cidehighlight{modelo nuevo keynesiano}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias}
+  \scriptsize
+  \begin{itemize}
+    \setlength{\itemsep}{0.42em}
+    \item Williamson, S. D. (2018). \textit{Macroeconomics}, 6th ed. Pearson. Capítulo 13.
+    \item Kydland, F. E. y Prescott, E. C. (1982). ``Time to Build and Aggregate Fluctuations''. \textit{Econometrica}, 50, 1345--1370.
+    \item Prescott, E. C. (1986). ``Theory Ahead of Business Cycle Measurement''. \textit{Federal Reserve Bank of Minneapolis Quarterly Review}, 10, 9--22.
+    \item Cooley, T. y Hansen, G. (1989). ``The Inflation Tax in a Real Business Cycle Model''. \textit{American Economic Review}, 79, 733--748.
+    \item Benhabib, J. y Farmer, R. (1994). ``Indeterminacy and Increasing Returns''. \textit{Journal of Economic Theory}, 63, 19--41.
+    \item Farmer, R. y Guo, J.-T. (1994). ``Real Business Cycles and the Animal Spirits Hypothesis''. \textit{Journal of Economic Theory}, 63, 42--72.
+    \item Cole, H. y Ohanian, L. (1999). ``Aggregate Returns to Scale: Why Measurement Is Imprecise''. \textit{Federal Reserve Bank of Minneapolis Quarterly Review}, 23, 19--28.
+    \item Christiano, L., Eichenbaum, M. y Trabandt, M. (2014). ``Understanding the Great Recession''. NBER Working Paper 20040.
+    \item Mitchell, W. C. (1913). \textit{Business Cycles}. Berkeley: University of California Press.
+    \item Mitchell, W. C. (1927). \textit{Business Cycles: The Problem and Its Setting}. Cambridge: NBER.
+    \item Mitchell, W. C. y Burns, A. F. (1938). ``Statistical Indicators of Cyclical Revivals''. \textit{NBER Bulletin} 69. \url{http://www.nber.org/chapters/c4251}.
+  \end{itemize}
+\end{frame}
+
+\end{document}
