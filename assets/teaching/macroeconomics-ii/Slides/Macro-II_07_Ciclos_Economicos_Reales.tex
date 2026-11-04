@@ -331,18 +331,18 @@
 \begin{itemize}
   \item \href{https://www.minneapolisfed.org/-/media/files/research/prescott/papers/dp451.pdf}{Hodrick y Prescott (1997)} proponen un algoritmo para distinguir un componente cíclico de un componente de tendencia en datos económicos.
 
-  \item Sea \(X_t>0\) una variable observada durante \(t=1,\ldots,T\).
+  \item Sea \(x_t\) una variable observada durante \(t=1,\ldots,T\).
 
-  \item Vamos a definir una variable artificial $T_t$ y la llamaremos la ``tendencia'' de $X_t$. Queremos que la tendencia tenga las siguientes propiedades:
+  \item Vamos a definir una variable artificial $\tau_t$ y la llamaremos la ``tendencia'' de $x_t$. Queremos que la tendencia tenga las siguientes propiedades:
 
 \begin{enumerate}
-  \item No puede estar demasiado lejos de la variable observada $X_t$.
+  \item No puede estar demasiado lejos de la variable observada $x_t$.
   \item Tiene que moverse suavemente, es decir, la tasa de crecimiento de la tendencia no debe cambiar mucho de un periodo al siguiente.
 \end{enumerate}
   
-  El filtro de Hodrick--Prescott descompone la serie en una tendencia, $T_t$, y una desviación cíclica respecto a dicha tendencia, $C_t$:
+  El filtro de Hodrick--Prescott descompone la serie en una tendencia, $\tau_t$, y una desviación cíclica respecto a dicha tendencia, $c_t$:
   \[
-    X_t=T_t+C_t,
+    x_t=\tau_t+c_t,
   \]
  
 \end{itemize}
@@ -356,10 +356,10 @@
 \begin{itemize}
   \item El filtro de Hodrick--Prescott se define como la solución al siguiente problema:
 \begin{equation*}
-  \min_{\{T_t\}_{t=1}^{T}} \sum_{t=1}^{T}
-  \underbrace{\left(X_t - T_t\right)^2}_{\text{\shortstack{Distancia entre la tendencia\\y la variable observada}}}
+  \min_{\{\tau_t\}_{t=1}^{T}} \sum_{t=1}^{T}
+  \underbrace{\left(x_t - \tau_t\right)^2}_{\text{\shortstack{Distancia entre la tendencia\\y la variable observada}}}
   + \lambda \sum_{t=2}^{T-1}
-  \underbrace{\Big[\big(T_{t+1} - T_t\big) - \big(T_t - T_{t-1}\big)\Big]^2}_{\text{\shortstack{Cambio en la tasa de\\crecimiento de la tendencia}}}
+  \underbrace{\Big[\big(\tau_{t+1} - \tau_t\big) - \big(\tau_t - \tau_{t-1}\big)\Big]^2}_{\text{\shortstack{Cambio en la tasa de\\crecimiento de la tendencia}}}
   \tag{12.1.1}
 \end{equation*}
 Un valor mayor de \(\lambda\) produce una tendencia más suave.
@@ -432,7 +432,7 @@ El grado de comovimiento lineal se mide mediante el coeficiente de correlación:
 \small
 
 Tomando como referencia el componente cíclico del producto real
-\(\widetilde{Y}_t\), una variable \(x_t\) se clasifica como:
+\(\widetilde{y}_t\), una variable \(x_t\) se clasifica como:
 
 \[
 \begin{array}{ccl}
@@ -440,13 +440,13 @@ Tomando como referencia el componente cíclico del producto real
 \textbf{Clasificación} & \textbf{Condición} & \textbf{Interpretación} \\ 
 \midrule
 \text{Procíclica}
-& \operatorname{Corr}(\widetilde{x}_t,\widetilde{Y}_t)>0
+& \operatorname{Corr}(\widetilde{x}_t,\widetilde{y}_t)>0
 & x_t\text{ aumenta durante expansiones} \\[2pt]
 \text{Contracíclica}
-& \operatorname{Corr}(\widetilde{x}_t,\widetilde{Y}_t)<0
+& \operatorname{Corr}(\widetilde{x}_t,\widetilde{y}_t)<0
 & x_t\text{ aumenta durante recesiones} \\[2pt]
 \text{Acíclica}
-& \operatorname{Corr}(\widetilde{x}_t,\widetilde{Y}_t)\approx0
+& \operatorname{Corr}(\widetilde{x}_t,\widetilde{y}_t)\approx0
 & x_t\text{ no presenta un patrón cíclico claro} \\
 \bottomrule
 \end{array}
