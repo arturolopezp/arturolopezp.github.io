@@ -326,34 +326,52 @@
 
 
 
-\begin{frame}{Filtro de Hodrick--Prescott}
+\begin{frame}{Filtro de Hodrick--Prescott (I)}
 \small
 \begin{itemize}
   \item \href{https://www.minneapolisfed.org/-/media/files/research/prescott/papers/dp451.pdf}{Hodrick y Prescott (1997)} proponen un algoritmo para distinguir un componente cíclico de un componente de tendencia en datos económicos.
-  \item Sea \(X_t>0\) una variable observada durante \(t=1,\ldots,T\), y defina \(x_t\equiv\log X_t\). El filtro de Hodrick--Prescott descompone la serie en una tendencia, $\tau_t$, y una desviación cíclica respecto a dicha tendencia, $c_t$:
+
+  \item Sea \(X_t>0\) una variable observada durante \(t=1,\ldots,T\).
+
+  \item Vamos a definir una variable artificial $T_t$ y la llamaremos la ``tendencia'' de $X_t$. Queremos que la tendencia tenga las siguientes propiedades:
+
+\begin{enumerate}
+  \item No puede estar demasiado lejos de la variable observada $X_t$.
+  \item Tiene que moverse suavemente, es decir, la tasa de crecimiento de la tendencia no debe cambiar mucho de un periodo al siguiente.
+\end{enumerate}
+  
+  El filtro de Hodrick--Prescott descompone la serie en una tendencia, $T_t$, y una desviación cíclica respecto a dicha tendencia, $C_t$:
   \[
-    x_t=\tau_t+c_t,
+    X_t=T_t+C_t,
   \]
-  \item La tendencia de Hodrick--Prescott es la solución del problema
-\[
-\left\{\tau_t^{HP}\right\}_{t=1}^{T}
-=
-\arg\min_{\{\tau_t\}_{t=1}^{T}}
-\left\{
-\sum_{t=1}^{T}(x_t-\tau_t)^2
-+
-\lambda
-\sum_{t=2}^{T-1}
-\left[
-(\tau_{t+1}-\tau_t)-(\tau_t-\tau_{t-1})
-\right]^2
-\right\}.
-\]
+ 
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{Filtro de Hodrick--Prescott (II)}
+\small
+\begin{itemize}
+  \item El filtro de Hodrick--Prescott se define como la solución al siguiente problema:
+\begin{equation*}
+  \min_{\{T_t\}_{t=1}^{T}} \sum_{t=1}^{T}
+  \underbrace{\left(X_t - T_t\right)^2}_{\text{\shortstack{Distancia entre la tendencia\\y la variable observada}}}
+  + \lambda \sum_{t=2}^{T-1}
+  \underbrace{\Big[\big(T_{t+1} - T_t\big) - \big(T_t - T_{t-1}\big)\Big]^2}_{\text{\shortstack{Cambio en la tasa de\\crecimiento de la tendencia}}}
+  \tag{12.1.1}
+\end{equation*}
 Un valor mayor de \(\lambda\) produce una tendencia más suave.
 \end{itemize}
 
+Con $\lambda = 1{,}600$, un valor estándar para datos trimestrales, la tendencia resulta ser una versión más suave de la serie observada.
+
 \notafuentes{Hodrick y Prescott (1997). Para datos trimestrales suele utilizarse \(\lambda=1600\).}
 \end{frame}
+
+
+
 
 
 
@@ -464,6 +482,48 @@ Tomando como referencia el componente cíclico del producto real
   \figura[6cm]{hechos_ciclo2.png}
   \fuentefigura{Kurlat (2020), Fig. 12.2.1}
 \end{frame}
+
+
+
+
+
+\begin{frame}{Indicadores adelantados, rezagados y coincidentes (I)}
+\footnotesize
+
+Un elemento importante del comovimiento son las relaciones de adelanto y rezago que existen en los datos macroeconómicos.
+
+\begin{itemize}
+  \item \textbf{Variable adelantada:} ayuda a predecir la trayectoria futura del PIB real.
+  \item \textbf{Variable rezagada:} el PIB real ayuda a predecir su trayectoria futura.
+  \item \textbf{Variable coincidente:} no lidera ni rezaga al PIB real.
+\end{itemize}
+
+\medskip
+
+\textbf{Ejemplo: el mercado bursátil.}
+\begin{itemize}
+  \item La teoría financiera indica que los precios de las acciones reflejan información sobre la rentabilidad futura de las empresas, por lo que sus movimientos son señales sobre el PIB real futuro.
+  \item Sin embargo, es notoriamente volátil: los precios pueden moverse mucho en un día sin una razón aparente relacionada con nueva información útil.
+  \item Paul Samuelson, premio Nobel de economía, dijo que ``el mercado bursátil ha pronosticado nueve de las últimas cinco recesiones''.
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Indicadores adelantados, rezagados y coincidentes (II)}
+      \centering
+  \figura[6cm]{lead_lag.png}
+  \fuentefigura{Williamson (2018), Fig. 3.7}
+\end{frame}
+
+
+\begin{frame}{Hechos estilizados del ciclo económico en México}
+    \centering
+    \figura[6cm]{hechos_mex.png}
+    \fuentefigura{\href{https://www.banxico.org.mx/publications-and-press/banco-de-mexico-working-papers/\%7BF5661D40-F09A-D464-A1B3-6F8E5729C60D\%7D.pdf}{Cuadra (2008).}}
+\end{frame}
+
 
 
 \begin{frame}{La revolución de expectativas racionales}
