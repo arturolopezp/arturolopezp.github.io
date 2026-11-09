@@ -97,7 +97,7 @@ problem_sets:
     description: Credit card market equilibrium and shocks to the monetary intertemporal model.
     materials:
       - name: Problem Set
-        url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_4_Macro_II_solver.pdf
+        url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_4_Macro_II.pdf
 ---
 
 <div class="course">
