@@ -1,0 +1,77 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% la versión instalada de Hyperref.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}
+\pagestyle{plain}
+
+\let\enumerateoriginal\enumerate
+\let\endenumerateoriginal\endenumerate
+\renewenvironment{enumerate}{%
+  \enumerateoriginal
+  \setlength{\itemsep}{0.5em}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\topsep}{0.4em}%
+}{\endenumerateoriginal}
+
+\newcounter{problema}
+\newenvironment{problema}[1]{%
+  \par
+  \refstepcounter{problema}%
+  \addvspace{0.9em}%
+  \noindent\textbf{Ejercicio \theproblema. #1}
+  \par\nobreak\smallskip
+}{\par}
+
+\begin{document}
+
+\begin{center}
+  {\large\textbf{Centro de Investigación y Docencia Económicas}}\\[0.25em]
+  {\large\textbf{Macroeconomía II}}\\[0.2em]
+  {\large\textbf{Problem Set 4: Dinero, Banca, Precios y Política Monetaria}}\\[0.35em]
+  LECO -- Otoño 2026
+\end{center}
+
+\vspace{0.6em}
+
+\textbf{Ejercicio 1.} El gobierno decide que el uso de tarjetas de crédito es perjudicial e introduce un impuesto sobre los saldos en tarjetas de crédito. Es decir, si un consumidor o empresa mantiene un saldo de tarjeta de crédito igual a \(X\) en términos reales, paga un impuesto de \(tX\), donde \(t\) es la tasa impositiva. Determine los efectos de esta medida sobre el precio y la cantidad de equilibrio de saldos de tarjetas de crédito, la demanda de dinero y el nivel de precios. Explique sus resultados.
+
+\vspace{0.5em}
+
+\textbf{Ejercicio 2.} En el modelo monetario intertemporal, suponga que la oferta monetaria permanece fija en todo momento. Determine los efectos de un aumento del salario real, provocado por un incremento de los precios del comercio mundial, sobre la productividad total de los factores, la producción de equilibrio actual, el empleo, la tasa de interés real, la tasa de interés nominal y el nivel de precios. Explique sus resultados.
+
+\vspace{0.5em}
+
+\textbf{Ejercicio 3.} En el modelo monetario intertemporal, suponga que entra en operación una nueva innovación tecnológica. ¿Cuáles son sus efectos actuales sobre la producción agregada, el consumo, la inversión, el empleo, el salario real, la tasa de interés real, la tasa de interés nominal y el nivel de precios? Explique sus resultados.
+
+\vspace{0.5em}
+
+\textbf{Ejercicio 4.} En el modelo monetario intertemporal, suponga que el banco central adopta una meta de PIB nominal. Dentro del modelo, esta meta se interpreta como el objetivo de mantener un determinado nivel de PIB nominal constante.
+\begin{enumerate}
+  \item Suponga un choque positivo permanente en la productividad total de los factores. Dado la meta de política monetaria, ¿qué debe hacer el banco central en respuesta? ¿Cuáles son los efectos sobre las variables agregadas? Explique.
+
+  \item Suponga ahora que ocurre un choque positivo de demanda de dinero. ¿Qué debe hacer el banco central? ¿Cuáles son los efectos sobre las variables agregadas? Explique.
+\end{enumerate}
+
+\vspace{0.5em}
+
+\textbf{Ejercicio 5.} En el modelo monetario intertemporal, suponga que el banco central puede influir sobre las expectativas de inflación prometiendo aumentar la oferta monetaria en el futuro. En una trampa de liquidez, ¿qué efecto tiene esta política? Utilice un diagrama para ilustrar sus resultados y explique.
+
+
+\end{document}
