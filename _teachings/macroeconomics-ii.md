@@ -91,6 +91,13 @@ problem_sets:
     materials:
       - name: Mock Exam
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Mock_Exam_Macro_II.pdf
+
+  - week: Problem Set 4
+    topic: Money, Banking, Prices and Monetary Policy
+    description: Credit card market equilibrium and shocks to the monetary intertemporal model.
+    materials:
+      - name: Problem Set
+        url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_4_Macro_II_solver.pdf
 ---
 
 <div class="course">
