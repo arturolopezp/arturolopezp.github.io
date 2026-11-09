@@ -1,0 +1,8 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Hechos estilizados}{2}{0}{1}
+\beamer@sectionintoc {2}{Modelo RBC}{46}{0}{2}
+\beamer@sectionintoc {3}{Dinero y política}{65}{0}{3}
+\beamer@sectionintoc {4}{Críticas al RBC}{72}{0}{4}
+\beamer@sectionintoc {5}{Fallas de coordinación}{76}{0}{5}
+\beamer@sectionintoc {6}{Gran Recesión}{95}{0}{6}
+\beamer@sectionintoc {7}{Síntesis}{100}{0}{7}

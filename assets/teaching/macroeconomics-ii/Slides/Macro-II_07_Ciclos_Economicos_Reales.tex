@@ -29,6 +29,7 @@
   \providecommand{\toprule}{\hline}
   \providecommand{\midrule}{\hline}
   \providecommand{\bottomrule}{\hline}
+  \providecommand{\cmidrule}[1]{\hline}
 }
 \providecommand{\addlinespace}[1][0.5em]{}
 \usepackage{xcolor}
@@ -526,34 +527,722 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
 
 
 
-\begin{frame}{La revolución de expectativas racionales}
-  \begin{block}{Dos principios metodológicos}
-    \begin{enumerate}
-      \setlength{\itemsep}{0.65em}
-      \item Los modelos macroeconómicos deben fundamentarse en preferencias, dotaciones, tecnología y decisiones óptimas de hogares y empresas.
-      \item Los modelos con precios y salarios flexibles pueden explicar fenómenos macroeconómicos relevantes.
-    \end{enumerate}
+
+\begin{frame}{Dos eras de la macroeconomía moderna}
+  \footnotesize
+  De Vroey distingue dos programas, separados por la ruptura metodológica de los
+  años setenta.
+
+  \renewcommand{\arraystretch}{1.00}
+  \begin{tabularx}{\textwidth}{>{\bfseries}p{2.15cm}Y}
+    \toprule
+    Periodo & Desarrollo principal \\
+    \midrule
+    1936
+      & Keynes publica \textit{The General Theory}: desempleo involuntario,
+        demanda efectiva y política de estabilización. \\
+    1940--1970
+      & IS--LM, síntesis neoclásica, curva de Phillips y grandes modelos
+        macroeconométricos keynesianos. \\
+    1968--1976
+      & Friedman y Phelps introducen la tasa natural; Lucas incorpora
+        expectativas racionales y formula su crítica a la evaluación de políticas. \\
+    Desde 1972
+      & Programa DSGE: equilibrio intertemporal, microfundamentos,
+        expectativas consistentes y choques estocásticos. \\
+    Desde 1982
+      & Kydland y Prescott convierten el programa de Lucas en una metodología
+        cuantitativa mediante los modelos RBC. \\
+    \bottomrule
+  \end{tabularx}
+
+  \begin{block}{La transformación central}
+    Cambiaron la explicación del ciclo y los criterios de validez de los modelos.
   \end{block}
-
-  \vspace{0.2cm}
-  La flexibilidad de precios no implica, por sí misma, que la política económica sea irrelevante. La conclusión depende de las fricciones, externalidades y distorsiones incluidas en el modelo.
-
-  \notafuentes{Williamson (2018), pp. 498--500.}
+  \notafuentes{De Vroey (2016), prefacio y capítulos 1--18.}
 \end{frame}
 
-\begin{frame}{¿Por qué estudiar más de un modelo del ciclo?}
+
+\begin{frame}{Keynes y el nacimiento de la macroeconomía}
+  \small
   \begin{itemize}
-    \setlength{\itemsep}{0.6em}
-    \item Distintos choques pueden producir comovimientos agregados semejantes.
-    \item Un buen ajuste de las correlaciones del ciclo no identifica necesariamente el mecanismo causal.
-    \item Modelos observacionalmente similares pueden generar recomendaciones de política opuestas.
-    \item La evaluación exige combinar coherencia interna, capacidad cuantitativa, plausibilidad de los choques y evidencia microeconómica.
+    \setlength{\itemsep}{0.48em}
+    \item La Gran Depresión planteó una pregunta que la teoría existente no podía
+    responder satisfactoriamente: ¿cómo puede persistir el desempleo masivo en una
+    economía descentralizada?
+
+    \item Keynes buscó explicar el \cidehighlight{desempleo involuntario} sin
+    atribuirlo simplemente a un salario real situado por encima de su nivel de
+    equilibrio.
+
+    \item Su explicación vinculó el empleo con la \cidehighlight{demanda efectiva}:
+    una demanda agregada insuficiente reduce la producción y, por esa vía, la
+    contratación de trabajo.
+
+    \item La política fiscal y una tasa de interés reducida podían elevar la demanda
+    y acercar la economía al pleno empleo.
   \end{itemize}
 
-  \begin{alertblock}{Lección}
-    Para recomendar política económica debemos identificar primero el choque y el mecanismo que originan la fluctuación.
+  \begin{alertblock}{Una distinción histórica}
+    La \textit{economía de Keynes} no coincide exactamente con la
+    \textit{macroeconomía keynesiana} posterior. Hicks, Modigliani y Klein
+    transformaron las ideas de Keynes en modelos más precisos y operativos.
+  \end{alertblock}
+  \notafuentes{De Vroey (2016), capítulos 1--3.}
+\end{frame}
+
+
+\begin{frame}{De Keynes al sistema IS--LM}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.54\textwidth}
+      \footnotesize
+      \begin{itemize}
+        \setlength{\itemsep}{0.45em}
+        \item Hicks (1937) representó las ideas de Keynes mediante un sistema de
+        ecuaciones simultáneas y un equilibrio conjunto en los mercados de bienes
+        y dinero.
+
+        \item Modigliani convirtió esta representación en el modelo IS--LM
+        canónico e hizo de la rigidez del salario nominal la explicación del
+        desempleo persistente.
+
+        \item La curva IS reúne las combinaciones \((Y,r)\) que equilibran el
+        mercado de bienes. La curva LM hace lo propio para el mercado monetario.
+
+        \item Los desplazamientos de IS y LM ofrecían una forma sencilla de
+        estudiar la política fiscal y monetaria.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.42\textwidth}
+      \centering
+      \figura[4.65cm]{devroey_fig_2_1_is_lm.png}
+      \fuentefigura{De Vroey (2016), figura 2.1.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Modelos macroeconométricos keynesianos}
+  \footnotesize
+  Tinbergen, Klein y la Cowles Commission convirtieron el razonamiento
+  keynesiano en grandes sistemas de ecuaciones estimadas:
+  \[
+    A_0\mathbf y_t
+    =
+    A_1\mathbf y_{t-1}
+    +B\mathbf x_t
+    +\boldsymbol{\varepsilon}_t,
+  \]
+  donde \(\mathbf y_t\) contiene variables endógenas y \(\mathbf x_t\) incluye
+  instrumentos de política y otras variables predeterminadas.
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.30em}
+    \item El consumo, la inversión, la demanda de dinero y la formación de salarios
+    y precios se modelaban mediante ecuaciones separadas.
+
+    \item Una vez estimado el sistema, el gobierno podía simular cambios en
+    \(G_t\), \(T_t\) o \(M_t\) y proyectar sus efectos sobre producción y empleo.
+
+    \item Los modelos resultaron útiles para pronosticar, pero crecieron hasta
+    contener cientos de ecuaciones y numerosos parámetros.
+  \end{itemize}
+
+  \begin{block}{Una distinción importante}
+    Eran modelos \textit{estructurales} en el sentido econométrico de Cowles, pero sus
+    coeficientes no necesariamente representaban preferencias, tecnologías y
+    restricciones invariantes ante cambios de política.
+  \end{block}
+  \notafuentes{De Vroey (2016), capítulos 1--3 y 9.}
+\end{frame}
+
+
+\begin{frame}{Síntesis neoclásica y política de estabilización}
+  \small
+  La \cidehighlight{síntesis neoclásica} admitía dos descripciones de la misma
+  economía:
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item En el corto plazo, precios y salarios se ajustan lentamente. La demanda
+    agregada determina la producción y el empleo, por lo que la política monetaria
+    y fiscal tiene efectos reales.
+
+    \item En el largo plazo, los precios se ajustan y la economía converge hacia un
+    equilibrio determinado por la tecnología, las dotaciones y las preferencias.
+
+    \item La curva de Phillips parecía proporcionar un menú estable entre inflación
+    y desempleo que las autoridades podían aprovechar.
+  \end{itemize}
+
+  \begin{block}{Dos interpretaciones}
+    Como programa teórico, la síntesis intentaba integrar a Keynes con el equilibrio
+    walrasiano. Como posición metodológica, defendía el uso de un modelo keynesiano
+    en el corto plazo y uno neoclásico en el largo plazo.
+  \end{block}
+
+  \notafuentes{De Vroey (2016), capítulos 2--5.}
+\end{frame}
+
+
+\begin{frame}{Friedman, Phelps y la tasa natural de desempleo}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.52\textwidth}
+      \small
+      La curva de Phillips aumentada por expectativas puede escribirse como
+      \[
+        \pi_t
+        =
+        \pi_t^e-\alpha(u_t-u^n)+\nu_t,
+        \qquad \alpha>0.
+      \]
+
+      \begin{itemize}
+        \setlength{\itemsep}{0.38em}
+        \item Una inflación no anticipada puede reducir transitoriamente
+        \(u_t\) por debajo de la tasa natural \(u^n\).
+
+        \item Cuando las expectativas se ajustan,
+        \(\pi_t=\pi_t^e\), de modo que \(u_t=u^n\).
+
+        \item No existe una disyuntiva permanente entre inflación y desempleo:
+        sostener \(u_t<u^n\) requiere una inflación cada vez mayor.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \centering
+      \figura[4.9cm]{devroey_fig_5_2_phillips.png}
+      \fuentefigura{De Vroey (2016), figura 5.2.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{La estanflación y el quiebre del consenso keynesiano}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.54em}
+    \item Durante la década de 1970 coexistieron inflación elevada, bajo crecimiento
+    y desempleo alto. La experiencia contradecía una curva de Phillips estable.
+
+    \item Friedman y Phelps habían anticipado que el desempleo regresaría a su tasa
+    natural cuando los trabajadores ajustaran sus expectativas de inflación.
+
+    \item Los grandes modelos keynesianos conservaban relaciones agregadas
+    estimadas con datos generados bajo un régimen histórico particular.
+
+    \item También persistían problemas conceptuales: el desempleo involuntario, la
+    rigidez, el ajuste lento y el equilibrio no recibían definiciones uniformes.
+  \end{itemize}
+
+  \begin{alertblock}{El problema de fondo}
+    El fracaso empírico de la curva de Phillips y la debilidad de los fundamentos
+    individuales abrieron espacio para una reconstrucción completa de la disciplina.
+  \end{alertblock}
+  \notafuentes{De Vroey (2016), capítulos 5 y 8--10.}
+\end{frame}
+
+
+\begin{frame}{La alternativa keynesiana de desequilibrio}
+  \small
+  Patinkin, Clower, Leijonhufvud y los modelos no walrasianos estudiaron economías
+  en las que los agentes enfrentan racionamiento a precios dados.
+
+  \[
+    c_t^{\,n}
+      =\arg\max_{c_t,\ell_t}u(c_t,\ell_t)
+      \quad\text{sujeto a la restricción presupuestaria nocional,}
+  \]
+  pero, si el hogar solo puede vender \(\bar n_t\) unidades de trabajo,
+  \[
+    n_t\leq \bar n_t
+    \quad\Longrightarrow\quad
+    c_t^{\,e}
+      =c\!\left(w_t\bar n_t+\pi_t-T_t\right)
+      <c_t^{\,n}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.37em}
+    \item La cantidad efectivamente vendida en un mercado restringe la demanda
+    efectiva en otros mercados. El racionamiento se propaga entre mercados.
+
+    \item Barro--Grossman, Bénassy, Drèze y Malinvaud formalizaron estos
+    \cidehighlight{efectos de derrame} bajo precios o salarios rígidos.
+
+    \item Estos modelos avanzaron en microfundamentos, pero permanecieron
+    principalmente estáticos. El programa de Lucas ofreció una dinámica
+    intertemporal más sistemática.
+  \end{itemize}
+  \notafuentes{De Vroey (2016), capítulos 3, 6 y 7.}
+\end{frame}
+
+
+\begin{frame}{Explicaciones del desempleo antes de Lucas}
+  \centering
+  \figura[5.35cm]{devroey_fig_8_1_arbol.png}
+  \fuentefigura{De Vroey (2016), figura 8.1. El árbol resume las rutas clásica,
+  keynesiana y de búsqueda.}
+\end{frame}
+
+
+\begin{frame}{La revolución de las expectativas racionales}
+  \small
+  Muth (1961) propuso que las expectativas subjetivas utilicen la misma estructura
+  probabilística que describe el modelo:
+  \[
+    E_t x_{t+1}
+      \equiv
+      \mathbb E\!\left[x_{t+1}\mid\mathcal I_t\right].
+  \]
+  El error de pronóstico es
+  \[
+    \varepsilon_{t+1}^{x}
+      \equiv x_{t+1}-E_t x_{t+1},
+    \qquad
+    E_t\varepsilon_{t+1}^{x}=0.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.46em}
+    \item Expectativas racionales no significa previsión perfecta. Los agentes
+    pueden equivocarse, pero sus errores no son sistemáticamente predecibles con
+    la información disponible.
+
+    \item Las expectativas dependen de las leyes de movimiento de la economía y,
+    por lo tanto, de la regla de política económica.
+
+    \item Lucas integró esta hipótesis con decisiones intertemporales y equilibrio
+    general. Las expectativas dejaron de ser una ecuación agregada independiente.
+  \end{itemize}
+  \notafuentes{De Vroey (2016), capítulo 9.}
+\end{frame}
+
+
+\begin{frame}{Ciclos de equilibrio y extracción de señales}
+  \small
+  En el modelo de islas de Lucas, cada productor observa el precio de su propio
+  bien, pero no distingue inmediatamente entre un cambio en su precio relativo y
+  un cambio en el nivel general de precios:
+  \[
+    y_t(z)
+      =
+      \bar y
+      +\alpha\!\left[p_t(z)-E_t p_t\right],
+      \qquad \alpha>0.
+  \]
+  Al agregar los mercados, las fluctuaciones reales dependen únicamente del
+  componente monetario no anticipado:
+  \[
+    y_t-\bar y
+      =
+      \phi\!\left(m_t-E_{t-1}m_t\right),
+      \qquad \phi>0.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.42em}
+    \item Una expansión monetaria anticipada se incorpora a los precios y no eleva
+    la producción en el modelo básico.
+
+    \item Una sorpresa monetaria puede afectar temporalmente la producción porque
+    los agentes la confunden con una variación de precios relativos.
+
+    \item El ciclo ocurre en equilibrio: los agentes optimizan, forman expectativas
+    racionales y los mercados se vacían en cada fecha.
+  \end{itemize}
+  \notafuentes{Lucas (1972); De Vroey (2016), capítulo 9.}
+\end{frame}
+
+
+\begin{frame}{La crítica de Lucas}
+  \small
+  Sea \(\boldsymbol{\theta}\) el vector de parámetros de preferencias y tecnología,
+  y sea \(\boldsymbol{\psi}\) la regla de política. Las decisiones óptimas toman la
+  forma
+  \[
+    \mathbf a_t
+      =
+      h(\mathbf s_t;\boldsymbol{\theta},\boldsymbol{\psi}).
+  \]
+  Por lo tanto, los coeficientes \(\boldsymbol{\gamma}\) de una forma reducida
+  dependen de ambos objetos:
+  \[
+    \boldsymbol{\gamma}
+      =
+      \Gamma(\boldsymbol{\theta},\boldsymbol{\psi}).
+  \]
+
+  Si la política cambia de \(\boldsymbol{\psi}_0\) a
+  \(\boldsymbol{\psi}_1\), en general se cumple
+  \[
+    \Gamma(\boldsymbol{\theta},\boldsymbol{\psi}_0)
+    \neq
+    \Gamma(\boldsymbol{\theta},\boldsymbol{\psi}_1).
+  \]
+
+  \begin{block}{Implicación}
+    Una relación estimada bajo una regla de política no puede utilizarse para
+    evaluar mecánicamente otra regla. La evaluación de políticas requiere modelar
+    preferencias, tecnología, restricciones, expectativas y la propia regla de
+    política.
+  \end{block}
+  \notafuentes{Lucas (1976); De Vroey (2016), capítulo 9.}
+\end{frame}
+
+
+\begin{frame}{Ejemplo: consumo y microfundamentos}
+  \footnotesize
+  Un modelo keynesiano podía postular una relación agregada estable:
+  \[
+    C_t=c_0+c_1(Y_t-T_t),
+  \]
+  y utilizar \(c_1\) para evaluar transferencias o cambios tributarios.
+
+  En un modelo microfundamentado, el hogar resuelve
+  \[
+    \max_{\{C_{t+j},A_{t+j+1}\}}
+    E_t\sum_{j=0}^{\infty}\beta^j u(C_{t+j})
+  \]
+  sujeto a sus restricciones presupuestarias intertemporales. La condición de Euler es
+  \[
+    u'(C_t)
+      =
+      \beta E_t\!\left[(1+r_{t+1})u'(C_{t+1})\right].
+  \]
+
+  \begin{block}{Diferencia conceptual}
+    La primera ecuación postula una relación agregada. La segunda deriva la
+    trayectoria del consumo de una decisión intertemporal óptima.
+  \end{block}
+\end{frame}
+
+
+\begin{frame}{La respuesta del consumo depende de la política}
+  \footnotesize
+  La regla de decisión del consumo tiene la forma
+  \[
+    C_t
+      =
+      \mathcal C\!\left(
+      A_t,\,
+      E_t\{Y_{t+j},T_{t+j},r_{t+j+1}\}_{j\geq0};
+      \beta,\sigma
+      \right).
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.30em}
+    \item Un cambio temporal del ingreso genera una respuesta distinta de un
+    cambio permanente en los recursos del hogar.
+
+    \item Una política anunciada modifica las expectativas antes de implementarse;
+    una sorpresa afecta primero las decisiones corrientes.
+
+    \item Los impuestos futuros y la forma de financiamiento determinan el efecto
+    de una transferencia sobre la riqueza intertemporal.
+
+    \item Las restricciones de crédito pueden aumentar la sensibilidad del consumo
+    al ingreso disponible corriente.
+  \end{itemize}
+
+  \begin{alertblock}{Crítica de Lucas}
+    La propensión marginal estimada \(c_1\) depende de la regla de política y no es
+    necesariamente invariante.
   \end{alertblock}
 \end{frame}
+
+
+\begin{frame}{La ruptura metodológica}
+  \scriptsize
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabularx}{\textwidth}{p{2.55cm}YY}
+    \toprule
+      & \textbf{Macroeconomía keynesiana} & \textbf{Programa de Lucas} \\
+    \midrule
+    Objeto central
+      & Desempleo y subempleo.
+      & Fluctuaciones del ciclo económico. \\
+    Equilibrio
+      & Estado de reposo o desequilibrio temporal.
+      & Equilibrio intertemporal estocástico. \\
+    Expectativas
+      & Frecuentemente adaptativas.
+      & Racionales y consistentes con el modelo. \\
+    Microfundamentos
+      & Convenientes, pero no indispensables.
+      & Requisito de construcción. \\
+    Impulso principal
+      & Variaciones de la demanda agregada.
+      & Choques y respuestas óptimas de los agentes. \\
+    Método empírico
+      & Sistemas de ecuaciones simultáneas.
+      & Parámetros estructurales y crítica de Lucas. \\
+    Política
+      & Administración de la demanda.
+      & Reglas, credibilidad y límites a la estabilización. \\
+    Prioridad
+      & Ajuste a los datos e intuición económica.
+      & Consistencia interna y disciplina de equilibrio. \\
+    \bottomrule
+  \end{tabularx}
+
+  \notafuentes{Adaptado de De Vroey (2016), tabla 10.1.}
+\end{frame}
+
+
+\begin{frame}{El significado de DSGE}
+  \footnotesize
+  El programa iniciado por Lucas se conoce como
+  \textit{Dynamic Stochastic General Equilibrium}:
+
+  \begin{description}
+    \setlength{\itemsep}{0.30em}
+    \item[\cidehighlight{Dinámico}.]
+      Las decisiones presentes dependen de oportunidades futuras:
+      \[
+        E_0\sum_{t=0}^{\infty}\beta^t u(C_t,1-N_t).
+      \]
+
+    \item[\cidehighlight{Estocástico}.]
+      La economía recibe choques cuya evolución se especifica probabilísticamente:
+      \[
+        z_{t+1}=\rho z_t+\varepsilon_{t+1}.
+      \]
+
+    \item[\cidehighlight{Equilibrio general}.]
+      Las decisiones óptimas de hogares, empresas y gobierno son mutuamente
+      consistentes y todos los mercados incluidos en el modelo se vacían.
+
+    \item[\cidehighlight{Expectativas consistentes}.]
+      Las distribuciones utilizadas por los agentes coinciden con las leyes de
+      movimiento que genera el propio equilibrio.
+  \end{description}
+
+  \notafuentes{De Vroey (2016), capítulos 9 y 10.}
+\end{frame}
+
+
+\begin{frame}{La primera respuesta nuevo-keynesiana}
+  \footnotesize
+  Los nuevos keynesianos aceptaron parte de la crítica de Lucas, pero rechazaron
+  que la optimización y las expectativas racionales implicaran neutralidad monetaria.
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.35em}
+    \item Los contratos escalonados de Fischer y Taylor explicaron la rigidez nominal
+    mediante salarios fijados por varios periodos.
+
+    \item Los salarios de eficiencia de Shapiro y Stiglitz generaron desempleo como
+    parte de un mecanismo de incentivos.
+
+    \item Los costos de menú y la competencia imperfecta mostraron por qué cambios
+    nominales pequeños pueden tener efectos reales.
+
+    \item Estos trabajos proporcionaron microfundamentos para rigideces particulares,
+    pero la primera generación permaneció fragmentada y recurrió principalmente a
+    modelos de equilibrio parcial.
+  \end{itemize}
+
+  \begin{block}{Resultado histórico}
+    Las expectativas racionales sobrevivieron. El debate pasó a concentrarse en las
+    fricciones y en la estructura de los mercados.
+  \end{block}
+  \notafuentes{De Vroey (2016), capítulos 12 y 13.}
+\end{frame}
+
+
+\begin{frame}{Ejemplo: salarios de eficiencia}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \footnotesize
+      \begin{itemize}
+        \setlength{\itemsep}{0.30em}
+        \item La empresa paga \(w^*\) para que perder el empleo resulte costoso y
+        los trabajadores no eludan esfuerzo.
+
+        \item La condición de no elusión (\(NSC\)) y la demanda de trabajo
+        \(D^L\) determinan el empleo \(L^*\).
+
+        \item En el equilibrio,
+        \[
+          L^*<L^{FE},
+        \]
+        aunque trabajadores desempleados aceptarían trabajar al salario vigente.
+
+        \item El desempleo surge de una fricción de incentivos, no de imponer
+        exógenamente un salario mínimo.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \figura[4.55cm]{devroey_fig_13_1_salario_eficiencia.png}
+      \fuentefigura{De Vroey (2016), figura 13.1, a partir de
+      Shapiro y Stiglitz (1984).}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}{Los límites del modelo monetario de Lucas}
+  \small
+  El modelo de sorpresas monetarias introdujo una nueva metodología, pero no se
+  convirtió en el modelo cuantitativo dominante del ciclo.
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item La publicación rápida de los agregados monetarios hacía poco plausible
+    que los productores confundieran durante mucho tiempo un choque agregado con
+    un cambio de precio relativo.
+
+    \item La evidencia posterior atribuyó a las sorpresas monetarias una fracción
+    reducida de la variabilidad del producto y el empleo.
+
+    \item El mecanismo de extracción de señales tenía dificultades para generar la
+    persistencia observada de los ciclos.
+
+    \item Lucas reconoció estas limitaciones y adoptó posteriormente el programa de
+    Kydland y Prescott.
+  \end{itemize}
+
+  \begin{alertblock}{La transición}
+    El impulso monetario fue reemplazado por choques tecnológicos persistentes,
+    pero se conservaron las expectativas racionales, la optimización intertemporal
+    y la disciplina de equilibrio general.
+  \end{alertblock}
+  \notafuentes{De Vroey (2016), capítulos 9, 11 y 15.}
+\end{frame}
+
+
+\begin{frame}{Kydland y Prescott: el nacimiento de RBC}
+  \small
+  El modelo básico estudia el problema de una economía competitiva mediante la
+  asignación elegida por un planificador:
+  \[
+    \max_{\{C_t,N_t,K_{t+1}\}_{t=0}^{\infty}}
+    E_0\sum_{t=0}^{\infty}\beta^t u(C_t,1-N_t)
+  \]
+  sujeto a
+  \[
+    C_t+K_{t+1}
+      =
+      Z_tF(K_t,N_t)+(1-\delta)K_t,
+  \]
+  \[
+    \log Z_{t+1}
+      =
+      \rho\log Z_t+\varepsilon_{t+1},
+      \qquad |\rho|<1.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.4em}
+    \item Bajo competencia perfecta y ausencia de distorsiones, la asignación del
+    planificador puede descentralizarse como equilibrio competitivo.
+
+    \item Los ciclos son respuestas óptimas a cambios persistentes en la
+    productividad total de los factores.
+
+    \item Producción, consumo, inversión y trabajo se determinan conjuntamente.
+  \end{itemize}
+  \notafuentes{Kydland y Prescott (1982); De Vroey (2016), capítulo 15.}
+\end{frame}
+
+
+\begin{frame}{De la teoría cualitativa a la teoría cuantitativa}
+  \footnotesize
+  Kydland y Prescott convirtieron el programa de Lucas en un procedimiento
+  empírico reproducible:
+
+  \begin{enumerate}
+    \setlength{\itemsep}{0.36em}
+    \item Especificar una economía artificial con preferencias, tecnología,
+    restricciones y procesos estocásticos explícitos.
+
+    \item Calibrar sus parámetros con evidencia microeconómica, cuentas nacionales
+    y regularidades de largo plazo.
+
+    \item Resolver numéricamente las reglas de decisión y simular series artificiales.
+
+    \item Aplicar a las series simuladas y observadas la misma transformación
+    estadística.
+
+    \item Comparar volatilidades, correlaciones, persistencia y comovimientos.
+  \end{enumerate}
+
+  \begin{block}{Cambio de método}
+    El objetivo inmediato dejó de ser estimar cada ecuación por separado. El modelo
+    completo debía reproducir conjuntamente los hechos estilizados del ciclo.
+  \end{block}
+  \notafuentes{De Vroey (2016), capítulo 15.}
+\end{frame}
+
+
+\begin{frame}{Kydland y Prescott frente a los datos}
+  \centering
+  \figura[5.35cm]{devroey_tabla_15_1_rbc.png}
+  \fuentefigura{De Vroey (2016), tabla 15.1; datos de Hansen y Wright (1992).}
+\end{frame}
+
+
+\begin{frame}{Logros y limitaciones del modelo RBC inicial}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item La desviación estándar simulada del producto fue \(1.30\), frente a
+    \(1.92\) en los datos. El modelo generó cerca de dos tercios de la volatilidad
+    observada.
+
+    \item El modelo reprodujo el orden de las volatilidades:
+    \[
+      \sigma_C<\sigma_Y<\sigma_I.
+    \]
+
+    \item La volatilidad relativa de las horas resultó demasiado baja:
+    \[
+      \frac{\sigma_H}{\sigma_Y}=0.49
+      \quad\text{en el modelo, frente a}\quad
+      0.96\quad\text{en los datos.}
+    \]
+
+    \item La correlación entre horas y productividad fue \(0.93\) en el modelo,
+    pero \(-0.14\) en los datos. Este resultado reveló un problema importante en
+    el mecanismo del mercado laboral.
+  \end{itemize}
+
+  \notafuentes{De Vroey (2016), capítulo 15.}
+\end{frame}
+
+
+\begin{frame}{RBC consolidó la revolución de Lucas}
+  \footnotesize
+  \begin{itemize}
+    \setlength{\itemsep}{0.38em}
+    \item Lucas estableció los criterios del nuevo programa: equilibrio
+    intertemporal, expectativas racionales, microfundamentos y evaluación de
+    políticas consistente con la conducta de los agentes.
+
+    \item Kydland y Prescott añadieron una estrategia cuantitativa basada en
+    calibración, simulación y comparación de momentos.
+
+    \item Un modelo pequeño y coherente logró reproducir varios comovimientos que
+    los grandes sistemas de ecuaciones intentaban explicar con muchos parámetros.
+
+    \item RBC proporcionó una plataforma común que podía ampliarse con nuevos
+    choques, heterogeneidad, fricciones reales y, posteriormente, rigideces
+    nominales.
+  \end{itemize}
+
+  \begin{block}{Importancia histórica}
+    Kydland y Prescott hicieron por Lucas algo comparable a lo que Hicks y Klein
+    hicieron por Keynes: convirtieron una innovación teórica en un programa
+    operativo.
+  \end{block}
+
+  \notafuentes{De Vroey (2016), capítulos 15--18.}
+\end{frame}
+
+
 
 \begin{frame}{Dos teorías con precios y salarios flexibles}
   \small
