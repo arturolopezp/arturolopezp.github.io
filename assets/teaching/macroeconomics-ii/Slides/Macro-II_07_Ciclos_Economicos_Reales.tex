@@ -875,6 +875,34 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
 \end{frame}
 
 
+
+
+\begin{frame}{El residuo de Solow}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.45em}
+
+    \item Supongamos que la producción agregada está dada por una función tipo Cobb--Douglas:
+    \[
+      Y=z K^{\alpha}N^{1-\alpha},
+      \qquad 0<\alpha<1.
+    \]
+
+    \item Bajo competencia perfecta y rendimientos constantes a escala, \(\alpha\) corresponde a la participación del capital en el ingreso y \(1-\alpha\) a la participación del trabajo:
+    $$
+    \frac{wN}{Y} = 1 - \alpha, \qquad \frac{rK}{Y} = \alpha
+    $$
+    
+    \item Una calibración habitual para Estados Unidos es \(\alpha = 0.3\).
+
+    \item Como la productividad total de los factores \(z\) no se observa directamente, puede obtenerse como un residuo, conocido como el \cidehighlight{residuo de Solow}:
+    \[
+      z=\frac{Y}{K^{0.3}N^{0.7}}
+    \]
+  \end{itemize}
+
+\end{frame}
+
 \begin{frame}{Residuo de Solow y PIB}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.36\textwidth}
@@ -883,7 +911,6 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
         \setlength{\itemsep}{0.55em}
         \item El residuo de Solow aproxima la productividad total de los factores.
         \item Ambas series presentan un comovimiento estrecho.
-        \item La productividad estimada es persistente.
         \item Esta correlación motiva al RBC.
       \end{itemize}
     \end{column}
@@ -909,75 +936,29 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
 
 
 \begin{frame}{Datos y predicciones del RBC}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.53\textwidth}
       \centering
       \figura[4.2cm]{tabla_13_1_predicciones_rbc.png}
       \fuentefigura{Williamson (2018), tabla 13.1.}
-    \end{column}
-    \begin{column}{0.44\textwidth}
-      \small
-      \begin{itemize}
-        \setlength{\itemsep}{0.55em}
-        \item El modelo reproduce correctamente los principales signos de los comovimientos.
-        \item El éxito cualitativo no basta para establecer que los choques tecnológicos sean la causa dominante.
-      \end{itemize}
-    \end{column}
-  \end{columns}
 \end{frame}
 
-\begin{frame}{Fortalezas cuantitativas}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item El RBC combina crecimiento y fluctuaciones dentro de un mismo modelo dinámico de equilibrio general.
-    \item La acumulación de capital amplifica y propaga choques productivos.
-    \item La ecuación de Euler explica la suavización del consumo y la volatilidad de la inversión.
-    \item El modelo disciplina sus parámetros mediante evidencia microeconómica y relaciones de largo plazo.
-    \item Las simulaciones permiten comparar momentos teóricos y empíricos bajo una métrica común.
-  \end{itemize}
 
-  \begin{alertblock}{Criterio de evaluación}
-    Reproducir momentos no equivale a identificar causalmente el choque estructural.
-  \end{alertblock}
-\end{frame}
 
-% =============================================================================
-\section{Dinero y política}
-% =============================================================================
-
-\begin{frame}{Neutralidad monetaria en el RBC}
-  El bloque real determina primero
-  \[
-    \{Y_t,C_t,I_t,N_t,w_t,r_t\}.
-  \]
-  El mercado monetario determina el nivel de precios:
-  \[
-    M_t^s=P_tL(Y_t,r_t)
-    \quad\Longrightarrow\quad
-    \boxed{P_t=\frac{M_t^s}{L(Y_t,r_t)}}.
-  \]
-
-  \begin{itemize}
-    \setlength{\itemsep}{0.55em}
-    \item Un cambio proporcional en $M_t^s$ modifica proporcionalmente $P_t$.
-    \item La asignación real permanece inalterada.
-    \item La dicotomía clásica continúa operando en el modelo RBC básico.
-  \end{itemize}
-\end{frame}
 
 \begin{frame}{Dinero endógeno}
+  \small
   \begin{itemize}
     \setlength{\itemsep}{0.6em}
-    \item En la práctica, los agregados monetarios responden a la actividad económica.
-    \item En una expansión, el crédito y los depósitos bancarios tienden a aumentar.
-    \item El banco central también ajusta la oferta monetaria en respuesta a información sobre producto e inflación.
-    \item Por ello, $M_t$ puede ser procíclico aunque los cambios exógenos en dinero sean neutrales.
+    \item La evidencia empírica muestra que los agregados monetarios son procíclicos.
+    \item Los monetaristas interpretaron esta correlación como evidencia de que las perturbaciones de política monetaria eran una causa importante de los ciclos económicos.
+    \item Sin embargo, el dinero podría responder endógenamente a las fluctuaciones cíclicas y no ser la causa de ellas.
+    \item En una expansión, aumenta la demanda de transacciones, lo que impulsa el crédito y los depósitos bancarios.
+    \item El banco central también ajusta la oferta monetaria en respuesta a la actividad económica.
+    \item Por ello, $M$ puede ser procíclico por endogeneidad.
+    \item La neutralidad del dinero en el RBC permite que el dinero responda sin tener efectos sobre la actividad.
+    \item Lo anterior implica que movimientos en la oferta monetaria sean consecuencia y no causa del ciclo.
   \end{itemize}
-
-  \begin{block}{Distinción}
-    La endogeneidad de $M_t$ explica una correlación entre dinero y producto sin atribuir al dinero la causa estructural del ciclo.
-  \end{block}
 \end{frame}
+
 
 \begin{frame}{Oferta monetaria procíclica}
   \begin{columns}[T,onlytextwidth]
@@ -999,505 +980,73 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
   \end{columns}
 \end{frame}
 
-\begin{frame}{Dinero, predicción y causalidad}
-  \begin{itemize}
-    \setlength{\itemsep}{0.65em}
-    \item Históricamente, los agregados monetarios fueron procíclicos y tendieron a anticipar al PIB.
-    \item Una variable $x$ tiene causalidad predictiva sobre $y$ si $x_t$ ayuda a pronosticar $y_{t+1}$.
-    \item La causalidad predictiva no establece que una perturbación exógena a $x$ cause los movimientos de $y$.
-    \item El crédito y los depósitos pueden anticipar producción futura porque financian actividad que todavía no se realiza.
-    \item Un banco central informado puede expandir dinero antes de que el aumento de productividad se refleje en el PIB.
-  \end{itemize}
-\end{frame}
 
-\begin{frame}{Producto y nivel de precios}
+\begin{frame}{Nivel de precios}
   Con oferta monetaria fija,
   \[
-    z_t\uparrow
+    z\uparrow
     \Longrightarrow
-    Y_t\uparrow,\;r_t\downarrow
+    Y\uparrow,\;r\downarrow
     \Longrightarrow
-    L(Y_t,r_t)\uparrow
+    L(Y,r)\uparrow
     \Longrightarrow
-    P_t\downarrow.
+    P\downarrow.
   \]
 
   \begin{itemize}
     \setlength{\itemsep}{0.6em}
     \item El RBC básico predice un nivel de precios contracíclico.
-    \item Si el banco central estabiliza precios, acomoda el aumento en demanda monetaria con $M_t\uparrow$.
-    \item Una política más activa de estabilización reduce la correlación observada entre $P_t$ y $Y_t$.
+    \item Si el banco central estabiliza precios, acomoda el aumento en demanda monetaria con $M\uparrow$.
+    \item Una política más activa de estabilización reduce la correlación observada entre $P$ y $Y$.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Implicaciones de política del RBC básico}
+\begin{frame}{Implicaciones de política económica}
   \begin{itemize}
     \setlength{\itemsep}{0.65em}
     \item Los cambios de nivel en la oferta monetaria son neutrales.
-    \item El equilibrio competitivo es eficiente cuando no existen impuestos distorsionantes, externalidades ni otras fallas de mercado.
-    \item Una recesión causada por menor productividad representa una respuesta óptima a peores oportunidades productivas.
-    \item Variar $G_t$ para estabilizar el PIB modifica la asignación de recursos, pero no corrige una ineficiencia del modelo básico.
-  \end{itemize}
-
-  \begin{alertblock}{Conclusión condicional}
-    La ausencia de una función estabilizadora depende de los supuestos del modelo, no de la flexibilidad de precios por sí sola.
-  \end{alertblock}
-\end{frame}
-
-\begin{frame}{Política óptima con distorsiones}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item Con impuestos distorsionantes, la asignación competitiva deja de ser Pareto eficiente.
-    \item La política fiscal debe minimizar el costo marginal de recaudar recursos a lo largo del tiempo.
-    \item El principio de \cidehighlight{suavización de impuestos} favorece tasas relativamente estables.
-    \item Con una tasa constante, la recaudación aumenta automáticamente en expansiones y disminuye en recesiones.
-  \end{itemize}
-
-  \begin{block}{Interpretación}
-    La política fiscal puede ser contracíclica en sus ingresos sin tener como objetivo estabilizar mecánicamente el producto.
-  \end{block}
-\end{frame}
-
-% =============================================================================
-\section{Críticas al RBC}
-% =============================================================================
-
-\begin{frame}{El residuo de Solow no es PTF pura}
-  Si la tecnología verdadera depende de la utilización de capital $u_t$ y de la intensidad laboral $e_t$,
-  \[
-    Y_t=z_t(u_tK_t)^{\alpha}(e_tN_t)^{1-\alpha}.
-  \]
-  El residuo calculado con capital y empleo medidos es
-  \[
-    \widehat z_t
-    =\frac{Y_t}{K_t^{\alpha}N_t^{1-\alpha}}
-    =z_tu_t^{\alpha}e_t^{1-\alpha}.
-  \]
-
-  \begin{itemize}
-    \item $\widehat z_t$ mezcla tecnología, utilización del capital e intensidad del trabajo.
-    \item La correlación entre $\widehat z_t$ y $Y_t$ puede surgir mecánicamente si la utilización es procíclica.
+    \item El equilibrio competitivo es eficiente; e.g. una recesión causada por menor productividad representa una respuesta óptima a peores oportunidades productivas, no una falla de los mecanismos de mercado.
+    \item Variar $G$ para estabilizar el PIB modifica la asignación de recursos.
+    \item Bajo impuestos lump-sum, eso sólo lleva de un equilibrio eficiente a otro; bajo impuestos distorsionantes, la asignación deja de ser Pareto eficiente.
+    \item Por lo tanto, la política fiscal no debe intentar eliminar las fluctuaciones eficientes del producto. Debe concentrarse en evitar distorsiones y mantener reglas predecibles.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Utilización de factores y atesoramiento de trabajo}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item En una recesión, parte de la maquinaria permanece inactiva aunque el stock de capital medido no cambie.
-    \item Las empresas pueden conservar trabajadores con capital humano específico aun cuando reduzcan su intensidad de trabajo.
-    \item Esta práctica se conoce como \cidehighlight{atesoramiento de trabajo}.
-    \item Si los servicios efectivos de capital y trabajo disminuyen sin registrarse, el residuo de Solow cae aunque la tecnología no cambie.
-  \end{itemize}
 
-  \begin{alertblock}{Problema de identificación}
-    Una caída del residuo puede ser la causa de la recesión o una consecuencia de la menor utilización de factores.
-  \end{alertblock}
-\end{frame}
 
-\begin{frame}{Ejemplo de sesgo en la PTF medida}
-  Considere
-  \[
-    Y=zK^{0.3}N^{0.7},
-    \qquad z=1.
-  \]
-  Si durante una recesión se utiliza $95\%$ del capital y la intensidad laboral cae a $90\%$, entonces
-  \[
-    \widehat z
-    =(0.95)^{0.3}(0.90)^{0.7}
-    \approx 0.915.
-  \]
 
-  \begin{block}{Resultado}
-    El economista mediría una caída de PTF de aproximadamente $8.5\%$, aun cuando la productividad tecnológica verdadera permaneciera constante.
-  \end{block}
-
-  \notafuentes{Williamson (2018), pp. 508--509.}
-\end{frame}
-
-\begin{frame}{Otras críticas al mecanismo RBC}
+\begin{frame}{Críticas al RBC}
+  \small
   \begin{itemize}
     \setlength{\itemsep}{0.58em}
+    \item \textbf{El residuo de Solow:} al igual que con la oferta monetaria, el comovimiento podría estar causado por un tercer factor confundante.
     \item \textbf{Naturaleza de los choques:} algunas recesiones requerirían perturbaciones tecnológicas negativas difíciles de interpretar.
-    \item \textbf{Elasticidad laboral:} la respuesta del empleo puede exigir una sustitución intertemporal del trabajo mayor que la estimada microeconómicamente.
-    \item \textbf{Propagación:} la persistencia endógena del modelo puede ser insuficiente si los choques no son muy persistentes.
-    \item \textbf{Mercados incompletos:} el modelo básico omite heterogeneidad, fricciones financieras y restricciones de crédito.
-    \item \textbf{Identificación:} reproducir momentos agregados no distingue entre mecanismos estructurales alternativos.
+    \item \textbf{Elasticidad laboral:} la elevada volatilidad del empleo suele exigir una sustitución intertemporal del trabajo mayor que la estimada microeconómicamente.
+    \item \textbf{Propagación y amplificación:} para reproducir la duración de los ciclos, se necesitan choques de productividad muy persistentes.
+    \item \textbf{Fallas de mercado:} el modelo omite mercados incompletos, fricciones, desempleo involuntario, heterogeneidad y otras distorsiones potencialmente relevantes.
+    \item \textbf{Identificación:} reproducir momentos no distingue entre mecanismos estructurales alternativos.
   \end{itemize}
 \end{frame}
 
-% =============================================================================
-\section{Fallas de coordinación}
-% =============================================================================
-
-\begin{frame}{Falla de coordinación}
-  \begin{block}{Definición}
-    Existe una falla de coordinación cuando las decisiones óptimas individuales dependen de las decisiones de otros agentes y la economía puede quedar en un equilibrio inferior, aun cuando todos prefieran otro equilibrio factible.
-  \end{block}
-
-  \begin{itemize}
-    \setlength{\itemsep}{0.6em}
-    \item Los agentes optimizan y los mercados se vacían.
-    \item Los precios y salarios permanecen flexibles.
-    \item La ineficiencia surge de complementariedades estratégicas y multiplicidad, no de rigideces nominales.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Complementariedades estratégicas}
-  \begin{itemize}
-    \setlength{\itemsep}{0.65em}
-    \item Una complementariedad estratégica implica que el incentivo de un agente para realizar una actividad aumenta cuando otros realizan más de esa actividad.
-    \item La producción de software es más rentable cuando existe más hardware, y viceversa.
-    \item Una empresa produce más cuando espera mayor demanda proveniente de la producción e ingreso de otras empresas.
-    \item Las expectativas agregadas pueden validarse mediante las decisiones que inducen.
-  \end{itemize}
-
-  \begin{block}{Resultado}
-    Pueden coexistir un equilibrio de alta actividad y otro de baja actividad, ambos consistentes con optimización individual.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Rendimientos crecientes agregados}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.42\textwidth}
-      \small
-      \begin{itemize}
-        \setlength{\itemsep}{0.55em}
-        \item Las complementariedades pueden generar rendimientos crecientes a escala a nivel agregado.
-        \item Con $K$ fijo, la función $Y=zF(K,N)$ puede ser convexa.
-        \item Entonces $F_{NN}>0$ y el producto marginal del trabajo aumenta con el empleo agregado.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.55\textwidth}
-      \centering
-      \figura[5.1cm]{fig_13_5_rendimientos_crecientes.png}
-      \fuentefigura{Williamson (2018), figura 13.5.}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Demanda laboral agregada con pendiente positiva}
-  La condición competitiva continúa siendo
-  \[
-    w=zF_N(K,N^d).
-  \]
-  Pero si existen rendimientos crecientes suficientes,
-  \[
-    \frac{dw}{dN^d}=zF_{NN}(K,N^d)>0.
-  \]
-
-  \begin{itemize}
-    \setlength{\itemsep}{0.58em}
-    \item Más empleo agregado eleva la productividad marginal agregada del trabajo.
-    \item La curva $N^d$ tiene pendiente positiva en el plano $(N,w)$.
-    \item Este resultado no proviene de la tecnología privada de una empresa aislada, sino de externalidades agregadas.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Demanda laboral con rendimientos crecientes}
-  \centering
-  \figura[5.2cm]{fig_13_6_demanda_laboral_creciente.png}
-  \fuentefigura{Williamson (2018), figura 13.6.}
-\end{frame}
-
-\begin{frame}{Condición de pendiente}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.43\textwidth}
-      \small
-      Para generar el mecanismo de coordinación, la demanda laboral debe ser más inclinada que la oferta:
-      \[
-        \frac{dw^d}{dN}
-        >
-        \frac{dw^s}{dN}
-        >0.
-      \]
-      \begin{itemize}
-        \item La intersección continúa vaciando el mercado laboral.
-        \item La estática comparativa cambia de signo respecto al modelo neoclásico.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.54\textwidth}
-      \centering
-      \figura[5.0cm]{fig_13_7_mercado_laboral_coordinacion.png}
-      \fuentefigura{Williamson (2018), figura 13.7.}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Pendiente de la oferta de producto}
-  Escriba el equilibrio laboral en forma inversa:
-  \[
-    w^d(N)=w^s(N,r),
-  \]
-  donde $w_r^s<0$ porque un aumento en $r$ desplaza la oferta laboral hacia la derecha. Diferenciando,
-  \[
-    \frac{dN}{dr}
-    =\frac{w_r^s}{w_N^d-w_N^s}<0,
-  \]
-  ya que $w_N^d>w_N^s$. Por lo tanto,
-  \[
-    \boxed{
-      \frac{dY^s}{dr}
-      =zF_N(K,N)\frac{dN}{dr}<0
-    }.
-  \]
-
-  La curva de oferta de producto tiene pendiente negativa en el plano $(Y,r)$.
-\end{frame}
-
-\begin{frame}{Construcción de la oferta de producto}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.32\textwidth}
-      \centering
-      \textbf{(a) Oferta de producto}\par
-      \vspace{0.12cm}
-      \figura[4.65cm]{fig_13_8a_oferta_producto.png}
-    \end{column}
-    \begin{column}{0.32\textwidth}
-      \centering
-      \textbf{(b) Función de producción}\par
-      \vspace{0.12cm}
-      \figura[4.65cm]{fig_13_8b_funcion_produccion.png}
-    \end{column}
-    \begin{column}{0.32\textwidth}
-      \centering
-      \textbf{(c) Mercado laboral}\par
-      \vspace{0.12cm}
-      \figura[4.65cm]{fig_13_8c_mercado_laboral.png}
-    \end{column}
-  \end{columns}
-  \fuentefigura{Williamson (2018), figura 13.8.}
-\end{frame}
-
-\begin{frame}{Equilibrios múltiples}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item La demanda de producto $Y^d(r)$ también tiene pendiente negativa.
-    \item Dos curvas decrecientes pueden intersectarse más de una vez.
-    \item Cada intersección determina una asignación que satisface optimalidad individual y vaciado de mercados.
-    \item El equilibrio de alta actividad domina en bienestar al equilibrio de baja actividad, pero la economía no dispone de un mecanismo privado automático para seleccionarlo.
-  \end{itemize}
-
-  \begin{block}{Indeterminación}
-    Los fundamentos económicos pueden ser compatibles con más de una asignación de equilibrio.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Equilibrio bueno y equilibrio malo}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.32\textwidth}
-      \centering
-      \textbf{(a) Mercado laboral}\par
-      \vspace{0.12cm}
-      \figura[4.65cm]{fig_13_9a_mercado_laboral.png}
-    \end{column}
-    \begin{column}{0.32\textwidth}
-      \centering
-      \textbf{(b) Mercado de bienes}\par
-      \vspace{0.12cm}
-      \figura[4.65cm]{fig_13_9b_mercado_bienes.png}
-    \end{column}
-    \begin{column}{0.32\textwidth}
-      \centering
-      \textbf{(c) Mercado de dinero}\par
-      \vspace{0.12cm}
-      \figura[4.65cm]{fig_13_9c_mercado_dinero.png}
-    \end{column}
-  \end{columns}
-  \fuentefigura{Williamson (2018), figura 13.9.}
-\end{frame}
-
-\begin{frame}{Comparación de los dos equilibrios}
-  \centering
-  \renewcommand{\arraystretch}{1.35}
-  \begin{tabular}{lcc}
-    \toprule
-    \textbf{Variable} & \textbf{Equilibrio malo} & \textbf{Equilibrio bueno} \\
-    \midrule
-    Producto $Y$ & Bajo & Alto \\
-    Empleo $N$ & Bajo & Alto \\
-    Salario real $w$ & Bajo & Alto \\
-    Tasa real $r$ & Alta & Baja \\
-    Consumo $C$ & Bajo & Alto \\
-    Inversión $I$ & Baja & Alta \\
-    Nivel de precios $P$ & Alto & Bajo \\
-    \bottomrule
-  \end{tabular}
-
-  \vspace{0.45cm}
-  Los comovimientos son semejantes a los del RBC, aunque el impulso y las implicaciones normativas son distintos.
-\end{frame}
-
-\begin{frame}{Espíritus animales y manchas solares}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item El optimismo coordina decisiones sobre el equilibrio de alta actividad; el pesimismo coordina el equilibrio de baja actividad.
-    \item Keynes denominó \textit{animal spirits} a estas oleadas de confianza.
-    \item Una \cidehighlight{mancha solar} es una variable observable ajena a preferencias, tecnología y dotaciones.
-    \item Si todos creen que la mancha solar selecciona un equilibrio, la creencia puede volverse autorrealizada.
-  \end{itemize}
-
-  \begin{alertblock}{Causalidad aparente}
-    La variable extrínseca no altera posibilidades productivas, pero coordina expectativas y aparece correlacionada con la actividad.
-  \end{alertblock}
-\end{frame}
-
-\begin{frame}{Predicciones de la falla de coordinación}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.53\textwidth}
-      \centering
-      \figura[4.1cm]{tabla_13_2_predicciones_coordinacion.png}
-      \fuentefigura{Williamson (2018), tabla 13.2.}
-    \end{column}
-    \begin{column}{0.44\textwidth}
-      \small
-      \begin{itemize}
-        \setlength{\itemsep}{0.55em}
-        \item Consumo, inversión, empleo y salario real son procíclicos.
-        \item La productividad laboral media también es procíclica.
-        \item Los mismos momentos agregados son compatibles con choques fundamentales o extrínsecos.
-      \end{itemize}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Productividad laboral y coordinación}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.40\textwidth}
-      \small
-      \begin{itemize}
-        \setlength{\itemsep}{0.55em}
-        \item La función de producción agregada es convexa.
-        \item El equilibrio bueno combina mayor empleo con mayor productividad media.
-        \item La pendiente del rayo al punto $(N_2,Y_2)$ excede la pendiente al punto $(N_1,Y_1)$.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.57\textwidth}
-      \centering
-      \figura[5.15cm]{fig_13_10_productividad_coordinacion.png}
-      \fuentefigura{Williamson (2018), figura 13.10.}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{El dinero como variable de coordinación}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item El dinero continúa siendo neutral \emph{condicional en el equilibrio seleccionado}.
-    \item Sin embargo, $M_t$ puede funcionar como una mancha solar.
-    \item Si $M_t$ alto coordina optimismo, la economía selecciona el equilibrio bueno.
-    \item Si $M_t$ bajo coordina pesimismo, selecciona el equilibrio malo.
-    \item El dinero parecería causar el ciclo aunque no modifique directamente las condiciones reales de optimalidad.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Oferta monetaria procíclica como mancha solar}
-  \centering
-  \figura[5.15cm]{fig_13_11_dinero_sunspot.png}
-  \fuentefigura{Williamson (2018), figura 13.11.}
-\end{frame}
-
-\begin{frame}{Política en el modelo de coordinación}
-  \begin{itemize}
-    \setlength{\itemsep}{0.6em}
-    \item Una autoridad creíble puede coordinar expectativas hacia el equilibrio de alta actividad.
-    \item La política fiscal desplaza simultáneamente $Y^d$ y $Y^s$.
-    \item Williamson muestra que una reducción apropiada de $G$ puede transformar dos equilibrios en uno solo.
-    \item Eliminar multiplicidad reduce incertidumbre, pero puede disminuir el producto medio si el nuevo equilibrio queda entre los dos originales.
-  \end{itemize}
-
-  \begin{block}{Evaluación normativa}
-    Estabilizar la economía no garantiza una mejora de bienestar; importa cuál equilibrio desaparece y cuál asignación queda.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Política fiscal y equilibrio único}
-  \centering
-  \figura[5.3cm]{fig_13_12_politica_fiscal_coordinacion.png}
-  \fuentefigura{Williamson (2018), figura 13.12.}
-\end{frame}
-
-\begin{frame}{Críticas al modelo de coordinación}
-  \begin{itemize}
-    \setlength{\itemsep}{0.65em}
-    \item El mecanismo requiere rendimientos crecientes agregados suficientemente grandes.
-    \item La evidencia empírica sobre rendimientos crecientes agregados es débil e imprecisa.
-    \item Los choques de expectativas son difíciles de observar y medir.
-    \item La multiplicidad complica las predicciones fuera de muestra porque el modelo no determina por sí solo qué equilibrio se selecciona.
-    \item Las recomendaciones de política dependen de que la autoridad pueda coordinar creencias de forma creíble.
-  \end{itemize}
-\end{frame}
 
 % =============================================================================
 \section{Gran Recesión}
 % =============================================================================
 
-\begin{frame}{La Gran Recesión como prueba de los modelos}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item El RBC atribuiría la caída del producto a una disminución relevante de PTF.
-    \item El modelo de coordinación atribuiría la recesión a un desplazamiento hacia el equilibrio de baja actividad.
-    \item Ambos predicen consumo menos volátil que el producto e inversión mucho más volátil.
-    \item Ambos predicen productividad laboral procíclica y un nivel de precios contracíclico bajo oferta monetaria fija.
-  \end{itemize}
 
-  \begin{block}{Pregunta empírica}
-    ¿Qué hechos de 2008--2009 pueden explicar estos modelos y cuáles requieren mecanismos adicionales?
-  \end{block}
-\end{frame}
-
-\begin{frame}{PIB y residuo de Solow, 2005--2012}
+\begin{frame}{La Gran Recesión}
   \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.36\textwidth}
-      \small
-      \begin{itemize}
-        \setlength{\itemsep}{0.55em}
-        \item El PIB cayó con fuerza durante la recesión.
-        \item El residuo de Solow disminuyó mucho menos.
-        \item La magnitud resulta insuficiente para una explicación RBC simple.
-        \item Además, parte de la caída puede reflejar menor utilización de factores.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.61\textwidth}
+    \begin{column}{0.31\textwidth}
       \centering
       \figura[5.25cm]{fig_13_13_gran_recesion_ptf.png}
       \fuentefigura{Williamson (2018), figura 13.13.}
     \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Consumo, inversión y PIB, 2005--2012}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.36\textwidth}
-      \small
-      \begin{itemize}
-        \setlength{\itemsep}{0.55em}
-        \item El consumo cayó menos que el PIB.
-        \item La inversión se contrajo mucho más que el producto.
-        \item Estos patrones coinciden con los hechos generales del ciclo.
-        \item Por sí solos, no distinguen entre RBC y coordinación.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.61\textwidth}
+    \begin{column}{0.31\textwidth}
       \centering
       \figura[5.25cm]{fig_13_14_gran_recesion_componentes.png}
       \fuentefigura{Williamson (2018), figura 13.14.}
     \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Precios y productividad laboral, 2005--2012}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.36\textwidth}
-      \small
-      \begin{itemize}
-        \setlength{\itemsep}{0.5em}
-        \item El nivel de precios cayó respecto de su tendencia.
-        \item La productividad laboral media aumentó al final de la recesión.
-        \item Ambos hechos contradicen las versiones básicas de los dos modelos.
-        \item La composición del empleo y las fricciones financieras adquieren importancia.
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.61\textwidth}
+    \begin{column}{0.31\textwidth}
       \centering
       \figura[5.25cm]{fig_13_15_gran_recesion_precios_productividad.png}
       \fuentefigura{Williamson (2018), figura 13.15.}
@@ -1508,11 +1057,10 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
 \begin{frame}{Mecanismos ausentes}
   \begin{itemize}
     \setlength{\itemsep}{0.62em}
-    \item La crisis se originó en mercados financieros y balances privados.
-    \item Los modelos básicos omiten información asimétrica, restricciones de crédito, colateral y desapalancamiento.
-    \item Una caída del valor del colateral reduce el crédito, la inversión y el gasto aun sin un choque tecnológico grande.
-    \item La incertidumbre puede inducir a empresas a posponer contratación e inversión.
-    \item Un modelo enriquecido con fricciones crediticias puede conservar el núcleo intertemporal e incorporar estos mecanismos.
+    \item La crisis se originó en mercados financieros.
+    \item El modelo RBC omite información asimétrica, restricciones de crédito, colateral y otras fricciones financieras.
+    \item Por ejemplo, una caída del valor del colateral reduce el crédito, la inversión y el gasto aun sin un choque tecnológico grande.
+    \item La aversión al riesgo y la incertidumbre puede inducir a empresas a posponer contratación e inversión.
   \end{itemize}
 \end{frame}
 
@@ -1520,84 +1068,27 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
 \section{Síntesis}
 % =============================================================================
 
-\begin{frame}{Comparación de los modelos}
-  \scriptsize
-  \renewcommand{\arraystretch}{1.25}
-  \begin{tabularx}{\textwidth}{lYY}
-    \toprule
-      & \textbf{RBC} & \textbf{Falla de coordinación} \\
-    \midrule
-    Impulso
-      & PTF persistente.
-      & Expectativas autorrealizadas. \\
-    Propagación
-      & Ahorro, inversión, capital y oferta laboral.
-      & Complementariedades y selección de equilibrio. \\
-    Número de equilibrios
-      & Único en el caso básico.
-      & Potencialmente múltiple. \\
-    Eficiencia
-      & Pareto eficiente sin distorsiones.
-      & El equilibrio malo puede estar dominado. \\
-    Dinero
-      & Neutral; endógeno y procíclico.
-      & Neutral, pero puede coordinar expectativas. \\
-    Política
-      & Corrige distorsiones, no fluctúa para estabilizar PTF.
-      & Puede coordinar o eliminar multiplicidad. \\
-    Debilidad principal
-      & Medición e interpretación de los choques de PTF.
-      & Evidencia débil de rendimientos crecientes y choques no observables. \\
-    \bottomrule
-  \end{tabularx}
-\end{frame}
 
-\begin{frame}{Una lección sobre identificación}
-  \begin{itemize}
-    \setlength{\itemsep}{0.7em}
-    \item Los mismos comovimientos de $C$, $I$, $N$, $w$ y $Y/N$ aparecen en modelos con impulsos diferentes.
-    \item La información agregada contemporánea puede ser insuficiente para distinguir mecanismos.
-    \item La identificación requiere restricciones adicionales: temporalidad, heterogeneidad, evidencia microeconómica y respuesta a choques observables.
-    \item La evaluación de política debe condicionarse al diagnóstico estructural y reconocer incertidumbre de modelo.
-  \end{itemize}
-
-  \begin{alertblock}{Conclusión}
-    Antes de intervenir, debemos explicar qué mercado origina el choque, cómo se propaga y qué falla de mercado pretende corregir la política.
-  \end{alertblock}
-\end{frame}
 
 \begin{frame}{Síntesis}
   \begin{itemize}
     \setlength{\itemsep}{0.62em}
     \item El RBC interpreta el ciclo como respuesta eficiente a choques persistentes de productividad.
-    \item El modelo reproduce los principales comovimientos, pero enfrenta problemas de medición e identificación causal.
-    \item El dinero puede ser procíclico y anticipar al producto aun cuando sea neutral.
-    \item Las fallas de coordinación generan ciclos mediante expectativas autorrealizadas y permiten múltiples equilibrios.
-    \item La Gran Recesión muestra la necesidad de incorporar fricciones financieras y otros mecanismos adicionales.
+    \item El modelo reproduce los principales comovimientos, pero enfrenta problemas de identificación causal.
+    \item La no-neutralidad del dinero y la Gran Recesión muestran la necesidad de incorporar mecanismos adicionales.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Próxima sesión}
   \begin{itemize}
-    \item En la siguiente sesión incorporaremos rigideces nominales y estudiaremos cómo la política monetaria puede afectar la actividad real en un \cidehighlight{modelo nuevo keynesiano}.
+    \item En la siguiente sesión, estudiaremos un modelo con no-neutralidad del dinero: el \cidehighlight{modelo nuevo keynesiano}.
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Referencias}
-  \scriptsize
   \begin{itemize}
     \setlength{\itemsep}{0.42em}
     \item Williamson, S. D. (2018). \textit{Macroeconomics}, 6th ed. Pearson. Capítulo 13.
-    \item Kydland, F. E. y Prescott, E. C. (1982). ``Time to Build and Aggregate Fluctuations''. \textit{Econometrica}, 50, 1345--1370.
-    \item Prescott, E. C. (1986). ``Theory Ahead of Business Cycle Measurement''. \textit{Federal Reserve Bank of Minneapolis Quarterly Review}, 10, 9--22.
-    \item Cooley, T. y Hansen, G. (1989). ``The Inflation Tax in a Real Business Cycle Model''. \textit{American Economic Review}, 79, 733--748.
-    \item Benhabib, J. y Farmer, R. (1994). ``Indeterminacy and Increasing Returns''. \textit{Journal of Economic Theory}, 63, 19--41.
-    \item Farmer, R. y Guo, J.-T. (1994). ``Real Business Cycles and the Animal Spirits Hypothesis''. \textit{Journal of Economic Theory}, 63, 42--72.
-    \item Cole, H. y Ohanian, L. (1999). ``Aggregate Returns to Scale: Why Measurement Is Imprecise''. \textit{Federal Reserve Bank of Minneapolis Quarterly Review}, 23, 19--28.
-    \item Christiano, L., Eichenbaum, M. y Trabandt, M. (2014). ``Understanding the Great Recession''. NBER Working Paper 20040.
-    \item Mitchell, W. C. (1913). \textit{Business Cycles}. Berkeley: University of California Press.
-    \item Mitchell, W. C. (1927). \textit{Business Cycles: The Problem and Its Setting}. Cambridge: NBER.
-    \item Mitchell, W. C. y Burns, A. F. (1938). ``Statistical Indicators of Cyclical Revivals''. \textit{NBER Bulletin} 69. \url{http://www.nber.org/chapters/c4251}.
   \end{itemize}
 \end{frame}
 
