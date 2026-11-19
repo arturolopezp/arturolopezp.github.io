@@ -1005,7 +1005,7 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
   \begin{itemize}
     \setlength{\itemsep}{0.65em}
     \item Los cambios de nivel en la oferta monetaria son neutrales.
-    \item El equilibrio competitivo es eficiente; e.g. una recesión causada por menor productividad representa una respuesta óptima a peores oportunidades productivas, no una falla de los mecanismos de mercado.
+    \item El equilibrio competitivo es eficiente; e.g. una recesión refleja la respuesta óptima de los agentes a cambios en las condiciones económicas, no una falla de los mecanismos de mercado.
     \item Variar $G$ para estabilizar el PIB modifica la asignación de recursos.
     \item Bajo impuestos lump-sum, eso sólo lleva de un equilibrio eficiente a otro; bajo impuestos distorsionantes, la asignación deja de ser Pareto eficiente.
     \item Por lo tanto, la política fiscal no debe intentar eliminar las fluctuaciones eficientes del producto. Debe concentrarse en evitar distorsiones y mantener reglas predecibles.
@@ -1015,7 +1015,41 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
 
 
 
-\begin{frame}{Críticas al RBC}
+
+\begin{frame}{Crítica al residuo de Solow}
+    \begin{itemize}
+      \item La principal evidencia a favor de la teoría de los ciclos económicos reales es la correlación entre fluctuaciones del PIB y el residuo de Solow.
+
+      \item En las expansiones se utilizan más intensamente el capital
+        y el trabajo. En las recesiones hay maquinaria ociosa y las empresas pueden retener trabajadores para preservar sus habilidades, aun cuando tengan menos tareas que realizar.
+
+        \item El residuo de Solow recoge estos cambios de utilización.
+        Su comovimiento con el PIB puede exagerar la importancia de
+        los choques tecnológicos.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Sesgo en el residuo de Solow}
+    Si \(u_K\) y \(u_N\) miden la utilización del capital y del trabajo,
+    respectivamente, la producción es
+    \[
+        Y = z(u_K K)^{0.3}(u_N N)^{0.7}.
+    \]
+
+    Al calcular el residuo con el capital y el empleo observados,
+    se obtiene
+    \[
+        \widehat z = \frac{Y}{K^{0.3}N^{0.7}}
+        = z\,u_K^{0.3}u_N^{0.7}.
+    \]
+
+    \textbf{Ejemplo.} Si la utilización cae de \(100\%\) a \(95\%\) en
+    el capital y a \(90\%\) en el trabajo, el residuo cae \(8.5\%\),
+    aunque la productividad \(z\) permanezca constante.
+\end{frame}
+
+
+\begin{frame}{Otras críticas al RBC}
   \small
   \begin{itemize}
     \setlength{\itemsep}{0.58em}
@@ -1029,8 +1063,134 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
 \end{frame}
 
 
+\section{Modelo de fallas de coordinación}
+
+\begin{frame}{Modelo keynesiano de fallas de coordinación}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+
+    \item Algunos modelos Keynesianos modernos suponen precios y salarios flexibles y mercados que se vacían.
+
+    \item Estos modelos recuperan una idea presente en la \textit{Teoría General}: \cidehighlight{fallas de coordinación}.
+
+    \item Existen \cidehighlight{complementariedades estratégicas} cuando el incentivo de un agente para realizar una actividad aumenta con la participación de otros agentes.
+
+    \item Por ejemplo, asistir a una fiesta resulta más atractivo cuando se espera que otros asistan. Pueden existir dos equilibrios: todos asisten o nadie asiste.
+
+    \item Ejemplo económico: desarrolladores de software y productores de hardware. La actividad de cada grupo es más atractiva cuando el otro también ejecuta su actividad.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Equilibrios múltiples}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+
+    \item Las complementariedades estratégicas pueden generar varios equilibrios consistentes con decisiones individuales óptimas.
+
+    \item En un equilibrio de alta actividad, la producción, el empleo y la inversión son elevados; en otro, permanecen en niveles bajos.
+
+    \item Los ciclos económicos pueden surgir de fluctuaciones entre estos equilibrios, inducidas por cambios autorrealizados en las expectativas.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Rendimientos crecientes a escala}
+  \small
+  \begin{itemize}
+    \item Una forma de generar complementariedades estratégicas es mediante externalidades productivas que producen rendimientos crecientes a escala agregados:
+    \[
+      zF(\lambda K,\lambda N)
+      =\lambda^{\kappa}zF(K,N),
+      \qquad \kappa>1.
+    \]
+    \item Una mayor actividad agregada eleva la productividad y los incentivos de otros agentes para producir y contratar trabajo.
+  \end{itemize}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.5\textwidth}
+      \centering
+      \figura[3.4cm]{fig_13_5_rendimientos_crecientes.png}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \figura[3.4cm]{fig_13_7_mercado_laboral_coordinacion.png}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Equilibrios múltiples y fallas de coordinación}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \centering
+      \figura[4.3cm]{fig_13_9a.png}
+    \end{column}
+
+    \begin{column}{0.32\textwidth}
+      \centering
+      \figura[4.3cm]{fig_13_9b.png}
+    \end{column}
+
+    \begin{column}{0.32\textwidth}
+      \centering
+      \figura[4.3cm]{fig_13_9c.png}
+    \end{column}
+  \end{columns}
+
+  \fuentefigura{Williamson (2018), figura 13.9.}
+\end{frame}
+
+\begin{frame}{Manchas solares}
+  \begin{itemize}
+    \setlength{\itemsep}{0.65em}
+
+    \item Con equilibrios múltiples, eventos ajenos a los fundamentales económicos pueden resultar en cambios de equilibrio.
+
+    \item A estos eventos se les conoce como \cidehighlight{manchas solares} o \cidehighlight{equilibrios sunspot}.
+
+    \item Si una mancha solar coordina expectativas optimistas, los agentes aumentan conjuntamente su actividad y validan el equilibrio de alta producción. Expectativas pesimistas pueden seleccionar el equilibrio de baja producción.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Predicciones del modelo}
+  \centering
+  \figura[5cm]{T13.2.png}
+  \fuentefigura{Williamson (2018), tabla 13.2.}
+\end{frame}
+
+
+\begin{frame}{Implicaciones de política macroeconómica}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item La política monetaria puede funcionar como una señal pública que coordina las expectativas y selecciona un equilibrio.
+      \end{itemize}
+
+      \centering
+      \figura[4.5cm]{fig_13_11.png}
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item La política fiscal reducir las fluctuaciones del ciclo al llevar a la economía a un equilibrio único.
+      \end{itemize}
+
+      \centering
+      \figura[4.5cm]{fig_13_12.png}
+    \end{column}
+  \end{columns}
+
+  \fuentefigura{Williamson (2018), figuras 13.11 y 13.12.}
+\end{frame}
+
+
+
 % =============================================================================
-\section{Gran Recesión}
+\section{Conclusiones}
 % =============================================================================
 
 
@@ -1054,30 +1214,8 @@ Un elemento importante del comovimiento son las relaciones de adelanto y rezago 
   \end{columns}
 \end{frame}
 
-\begin{frame}{Mecanismos ausentes}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item La crisis se originó en mercados financieros.
-    \item El modelo RBC omite información asimétrica, restricciones de crédito, colateral y otras fricciones financieras.
-    \item Por ejemplo, una caída del valor del colateral reduce el crédito, la inversión y el gasto aun sin un choque tecnológico grande.
-    \item La aversión al riesgo y la incertidumbre puede inducir a empresas a posponer contratación e inversión.
-  \end{itemize}
-\end{frame}
-
-% =============================================================================
-\section{Síntesis}
-% =============================================================================
 
 
-
-\begin{frame}{Síntesis}
-  \begin{itemize}
-    \setlength{\itemsep}{0.62em}
-    \item El RBC interpreta el ciclo como respuesta eficiente a choques persistentes de productividad.
-    \item El modelo reproduce los principales comovimientos, pero enfrenta problemas de identificación causal.
-    \item La no-neutralidad del dinero y la Gran Recesión muestran la necesidad de incorporar mecanismos adicionales.
-  \end{itemize}
-\end{frame}
 
 \begin{frame}{Próxima sesión}
   \begin{itemize}
