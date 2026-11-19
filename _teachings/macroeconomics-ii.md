@@ -100,6 +100,13 @@ problem_sets:
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_4_Macro_II.pdf
       - name: Solver
         url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_4_Macro_II_solver.pdf
+
+  - week: Problem Set 5
+    topic: Business Cycle Models with Flexible Prices and Wages
+    description: Shocks and macroeconomic policy in the Real Business Cycle (RBC) model and the Keynesian coordination failure model.
+    materials:
+      - name: Problem Set
+        url: /assets/teaching/macroeconomics-ii/Problem%20Sets/Problem_Set_5_Macro_II.pdf
 ---
 
 <div class="course">
