@@ -1,0 +1,85 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% la versión instalada de Hyperref.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}
+\pagestyle{plain}
+
+\let\enumerateoriginal\enumerate
+\let\endenumerateoriginal\endenumerate
+\renewenvironment{enumerate}{%
+  \enumerateoriginal
+  \setlength{\itemsep}{0.5em}%
+  \setlength{\parsep}{0pt}%
+  \setlength{\topsep}{0.4em}%
+}{\endenumerateoriginal}
+
+\newcounter{problema}
+\newenvironment{problema}[1]{%
+  \par
+  \refstepcounter{problema}%
+  \addvspace{0.9em}%
+  \noindent\textbf{Ejercicio \theproblema. #1}
+  \par\nobreak\smallskip
+}{\par}
+
+\begin{document}
+
+\begin{center}
+  {\large\textbf{Centro de Investigación y Docencia Económicas}}\\[0.25em]
+  {\large\textbf{Macroeconomía II}}\\[0.2em]
+  {\large\textbf{Problem Set 5: Modelo de Ciclos Económicos Reales (RBC)}}\\[0.35em]
+  LECO -- Otoño 2026
+\end{center}
+
+\vspace{0.6em}
+
+\textbf{Ejercicio 1.} En el modelo RBC, suponga que el gasto público aumenta temporalmente.  
+\begin{enumerate}
+    \item Determine los efectos de equilibrio de este aumento. Explique detalladamente los mecanismos de transmisión.
+    \item ¿Pueden explicarse los ciclos económicos a partir de fluctuaciones en el gasto público? En particular, ¿el modelo reproduce los principales hechos estilizados del ciclo económico cuando la economía está sujeta a choques temporales de gasto gubernamental? Explique.
+\end{enumerate}
+
+
+\vspace{0.5em}
+
+\textbf{Ejercicio 2.} En el modelo RBC, suponga que los aumentos temporales del gasto público generan incrementos permanentes en la productividad total de los factores. Esto podría ocurrir, por ejemplo, si parte del gasto público se destina a mejorar la infraestructura, lo cual eleva la productividad de las empresas privadas. Muestre que choques temporales de gasto público en este escenario pueden generar ciclos económicos consistentes con los principales hechos estilizados. Explique sus resultados.
+
+\vspace{0.5em}
+
+
+\textbf{Ejercicio 3.} En el modelo RBC, suponga que una ola de optimismo conduce a las empresas a revisar al alza sus expectativas sobre la productividad total de los factores futura.
+\begin{enumerate}
+    \item Determine los efectos de equilibrio de este cambio en las expectativas.
+
+    \item Si olas de optimismo y pesimismo de este tipo generan fluctuaciones en el PIB, ¿puede el modelo reproducir los principales hechos estilizados del ciclo económico? Explique.
+
+    \item Suponga que el banco central utiliza la oferta monetaria como instrumento de política y busca estabilizar el nivel de precios. ¿Cómo debe ajustar la oferta monetaria ante la ola de optimismo para cumplir con su objetivo? Explique.
+\end{enumerate}
+
+
+\textbf{Ejercicio 4.} Suponga que el banco central observa una caída del PIB real, pero desconoce su causa.
+\begin{enumerate}
+    \item ¿Cómo respondería el banco central si considerara que la caída del PIB se debió a una disminución de la productividad total de los factores y que la teoría de los ciclos económicos reales es correcta? Explique su respuesta con ayuda de diagramas.
+
+    \item ¿Cómo respondería el banco central si considerara que la caída del PIB se debió a una ola de pesimismo y que el modelo Keynesiano de fallas de coordinación es correcto? Explique su respuesta con ayuda de diagramas.
+\end{enumerate}
+
+
+\end{document}
