@@ -1,0 +1,668 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% los paquetes Beamer/Hyperref instalados.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+\makeatletter
+\@namedef{ver@epstopdf-base.sty}{9999/12/31}
+\makeatother
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 8: NUEVA ECONOMIA KEYNESIANA Y PRECIOS RIGIDOS
+% =============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\uselanguage{English}
+\languagepath{English}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+  \providecommand{\cmidrule}[1]{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+\usepackage{array,tabularx}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{remark}[theorem]{Observación}
+\newtheorem{assumption}[theorem]{Supuesto}
+
+\tolerance=1000
+\emergencystretch=1em
+\AtBeginDocument{\justifying}
+\addtobeamertemplate{itemize body begin}{\justifying}{}
+\addtobeamertemplate{enumerate body begin}{\justifying}{}
+\addtobeamertemplate{description body begin}{\justifying}{}
+\addtobeamertemplate{block begin}{}{\justifying}
+\addtobeamertemplate{block alerted begin}{}{\justifying}
+\addtobeamertemplate{block example begin}{}{\justifying}
+\AtBeginEnvironment{column}{\justifying}
+
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+\setbeamertemplate{section in head/foot}{\color{white}\insertsectionhead}
+\setbeamertemplate{section in head/foot shaded}{\color{white!55}\insertsectionhead}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,ht=3.05ex,dp=1.05ex,
+    leftskip=0.42cm,rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+  }%
+  \vskip0pt
+}
+
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+\setbeamertemplate{background}{%
+  \vbox to \paperheight{%
+    \vfill
+    \hbox to \paperwidth{%
+      \hfill
+      \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      \hspace{0.18cm}%
+    }%
+    \vspace{0.68cm}%
+  }%
+}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+\newcommand{\FigurasSesion}{Figuras/08_Nueva Economia Keynesiana}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+\title[Macroeconomía II]{Sesión 8 \\ Nueva Economía Keynesiana}
+\subtitle{Modelo Nuevo-Keynesiano de Rigidez Nominal}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =============================================================================
+\section{Precios rígidos}
+% =============================================================================
+
+\begin{frame}{Objetivos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Construir un modelo intertemporal con \cidehighlight{precios rígidos} en el corto plazo.
+    \item Explicar por qué el dinero deja de ser neutral y describir el mecanismo de transmisión monetaria.
+    \item Comparar la estabilización mediante política monetaria y política fiscal.
+    \item Retomar la trampa de liquidez, la regla de Taylor y analizar las principales críticas al modelo.
+  \end{itemize}
+  \notafuentes{Williamson (2018), cap. 14, pp. 529--550.}
+\end{frame}
+
+
+\begin{frame}{Precios rígidos}
+  \begin{itemize}
+    \item Los Keynesianos sostienen que los salarios nominales y los precios son \cidehighlight{rígidos} (\textit{sticky}) en el \cidehighlight{corto plazo}.
+    
+    \item Por ello, la oferta y la demanda pueden no coincidir en todos los mercados en cada momento.
+    
+    \item Las fluctuaciones del ciclo pueden entonces reflejar un \cidehighlight{ajuste nominal incompleto}, generando brechas y asignaciones ineficientes.
+    
+    \item En este contexto, la política económica puede suavizar el ciclo y mejorar la asignación de recursos.
+    
+    \item Estos modelos son ampliamente utilizados en la investigación macroeconómica y en el diseño de política económica.
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{¿Por qué pueden ser rígidos los precios?}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item \textbf{Costos de menú:} cambiar precios implica costos administrativos, de información o de relación con clientes (\href{https://www.jstor.org/stable/1885395}{Mankiw, 1985}).
+    \item \textbf{Ajuste aleatorio:} sólo una fracción de las empresas puede revisar su precio en cada periodo (\cidehighlight{Calvo pricing}: \href{https://www.sciencedirect.com/science/article/abs/pii/0304393283900600?via\%3Dihub}{Calvo, 1983}).
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Competencia imperfecta y rigidez de precios}
+  \begin{itemize}
+    \item Hasta ahora hemos supuesto que las empresas operan bajo competencia perfecta y toman los precios como dados.
+    
+    \item Ahora suponemos \cidehighlight{competencia monopolística}: cada empresa produce un bien diferenciado y fija su precio sujeta a la demanda de los hogares.
+    
+    \item La competencia monopolística genera poder de mercado. Sin embargo, la rigidez de precios impide que la empresa reajuste libremente su precio en cada periodo.
+    
+    \item Como el precio puede permanecer fijo durante varios periodos, la empresa lo determina de manera \textit{forward-looking}, considerando la evolución esperada de sus costos y de la demanda.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Supuestos del modelo}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item El precio actual está predeterminado: \(P= P^*\).
+    \item La inflación esperada es cero, por lo que la relación de Fisher implica \(R=r\).
+    \item El banco central opera a través de fijar un objetivo operacional para la tasa de interés \(r^*\), pero controla directamente la oferta monetaria.
+    \item La política monetaria determina directamente la demanda de producto:
+      \[
+        Y^d(r)=C^d(Y,r)+I^d(r)+G,
+      \]
+    \item Las empresas producen la cantidad demandada al precio fijo, aunque preferirían producir otra cantidad.
+    \item Con \(P\) fijo, las empresas ajustan producción y empleo en lugar de reducir inmediatamente su precio.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Determinación del equilibrio de corto plazo}
+  \small
+  \begin{enumerate}
+    \setlength{\itemsep}{0.58em}
+    \item El banco central anuncia la tasa de política monetaria \(r^*\).
+    \item La curva de demanda de producto determina
+      \[
+        Y^*=Y^d(r^*).
+      \]
+    \item Las empresas contratan el trabajo necesario para producir \(Y^*\):
+      \[
+        Y^*=zF(K,N^*).
+      \]
+    \item El salario real se ajusta para inducir a los hogares a ofrecer ese nivel de empleo.
+    \item El banco central inyecta o retira dinero del mercado monetario para alcanzar \(r^*\):
+      \[
+        M^s= P^* L\!\left(Y^d(r^*),r^*\right).
+      \]
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{El modelo Nuevo Keynesiano}
+  \centering
+  \figura[6.0cm]{fig_14_1_modelo_nk.png}
+  \fuentefigura{Williamson (2018), figura 14.1.}
+\end{frame}
+
+
+\begin{frame}{Tasa natural y brecha de producto}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item La \cidehighlight{tasa natural de interés} \(r^m\) es la tasa que vacía el mercado de bienes y servicios:
+      \[
+        Y^d(r^m)=Y^s(r^m)=Y^m.
+      \]
+    \item \(Y^m\) es el nivel eficiente o natural de producción. La diferencia entre el nivel natural de producción y el nivel efectivo es la \cidehighlight{brecha de producto} o \cidehighlight{\textit{output gap}}: 
+    \item       \[
+        Y^m-Y
+      \]
+    \item Si el banco central fija \(r^*>r^m\), entonces \(Y^d(r^*)<Y^m\) y surge una brecha recesiva:
+    \item Cambios en el \textit{output gap} reflejan entonces fluctuaciones de demanda entorno al nivel natural de producción.
+  \end{itemize}
+\end{frame}
+
+% =============================================================================
+\section{No-neutralidad del dinero}
+% =============================================================================
+
+
+\begin{frame}{Una expansión monetaria}
+  \small
+  Suponga que la economía parte de su equilibrio de largo plazo. El banco central reduce su meta de \(r_1\) a \(r_2\):
+  \[
+    r_2<r_1
+    \quad\Longrightarrow\quad
+    C^d\uparrow,\ I^d\uparrow
+    \quad\Longrightarrow\quad
+    Y^d\uparrow.
+  \]
+
+  Como \(P=P_1\) está fijo, las empresas responden aumentando producción y empleo:
+  \[
+    Y_2>Y_1,
+    \qquad N_2>N_1.
+  \]
+
+  Para implementar \(r_2\), el banco central satisface la mayor demanda monetaria:
+  \[
+    M_2=P_1L(Y_2,r_2)>P_1L(Y_1,r_1)=M_1.
+  \]
+\end{frame}
+
+\begin{frame}{No neutralidad del dinero}
+  \centering
+  \figura[6.0cm]{fig_14_2_no_neutralidad.png}
+  \fuentefigura{Williamson (2018), figura 14.2.}
+\end{frame}
+
+\begin{frame}{Mecanismo Keynesiano de transmisión monetaria}
+  \small
+  \[
+    r\downarrow
+    \ \Longrightarrow\ 
+    M^s\uparrow
+    \ \Longrightarrow\ 
+    C^d\uparrow,\ I^d\uparrow
+    \ \Longrightarrow\ 
+    Y^d\uparrow
+    \ \Longrightarrow\ 
+    Y\uparrow,\ N\uparrow.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item La expansión tiene primero efectos en el mercado financiero y después en el gasto agregado.
+    \item La menor tasa reduce la oferta laboral deseada por sustitución intertemporal; el salario real debe aumentar para inducir más empleo actual.
+    \item En el modelo: \(Y\), \(N\), \(w\), \(C\), \(I\) y \(M\) aumentan.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Corto plazo y largo plazo}
+  \small
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{lYY}
+    \toprule
+      & \textbf{Corto plazo} & \textbf{Largo plazo} \\
+    \midrule
+    Nivel de precios
+      & Predeterminado: \(P=P^*\).
+      & Ajusta hasta vaciar los mercados. \\
+    Producción y empleo
+      & Responden a la demanda agregada.
+      & Regresan a sus niveles naturales. \\
+    Dinero
+      & Tiene efectos reales.
+      & Es neutral en el modelo básico. \\
+    Política monetaria
+      & Puede cerrar la brecha de producto.
+      & Determina principalmente variables nominales. \\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+% =============================================================================
+\section{Política de estabilización}
+% =============================================================================
+
+\begin{frame}{¿Por qué estabilizar la economía?}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.6em}
+    \item Dada la falla en los mercados privados para vaciarse en el corto plazo, un choque puede dejar a la economía fuera de su equilibrio de largo plazo.
+    \item En particular, un choque puede dejar al precio vigente por encima del nivel que vaciaría el mercado de bienes.
+    \item La producción demandada queda por debajo de la producción eficiente: \(Y<Y^m\).
+    \item La asignación no es Pareto eficiente porque bienes y trabajo no se intercambian aun cuando sería mutuamente beneficioso hacerlo.
+    \item El ajuste espontáneo ocurre cuando los precios disminuyen, pero puede ser lento.
+    \item La política de estabilización intenta cerrar la brecha antes de que termine el ajuste nominal.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Estabilización mediante política monetaria}
+  \centering
+  \figura[6.35cm]{fig_14_3_estabilizacion_monetaria.png}
+  \fuentefigura{Williamson (2018), figura 14.3.}
+\end{frame}
+
+\begin{frame}{Ajuste espontáneo o intervención monetaria}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Sin intervención}
+        \begin{itemize}
+          \item La oferta monetaria permanece en \(M_1\).
+          \item La debilidad de la demanda reduce gradualmente \(P\).
+          \item Al caer \(P\), aumenta la cantidad real de dinero y disminuye \(r\).
+          \item La economía converge a \((Y_2,r_2,P_2)\).
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Intervención inmediata}
+        \begin{itemize}
+          \item El banco central reduce la tasa a \(r_2\).
+          \item Expande el dinero de \(M_1\) a \(M_2\).
+          \item La demanda aumenta y la brecha se cierra con \(P=P_1\).
+          \item La asignación real de largo plazo se alcanza antes, aunque con un nivel de precios mayor.
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Estabilización mediante política fiscal}
+  \centering
+  \figura[6.25cm]{fig_14_4_estabilizacion_fiscal.png}
+  \fuentefigura{Williamson (2018), figura 14.4.}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Choque de productividad}
+  \centering
+  \figura[6.35cm]{fig_14_5_ptf_politica_optima.png}
+  \fuentefigura{Williamson (2018), figura 14.5.}
+\end{frame}
+
+\begin{frame}{Política endógena e identificación}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Un aumento persistente de la PTF desplaza \(Y^d\) y \(Y^s\) hacia la derecha.
+    \item Sin respuesta monetaria, la producción aumenta sólo a \(Y_3\) y queda una brecha \(Y_2-Y_3\).
+    \item Si el banco central reduce \(r_1\) a \(r_2\), la producción alcanza el nivel eficiente \(Y_2\).
+    \item Con esa respuesta óptima, \(Y\), \(C\), \(I\) y \(N\) se comportan como en un modelo RBC.
+  \end{itemize}
+
+  \begin{alertblock}{Equivalencia observacional}
+    Los mismos datos reales pueden provenir de precios flexibles o de precios rígidos acompañados por una política monetaria óptima. La política endógena dificulta identificar el mecanismo estructural.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Predicciones cíclicas del modelo}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item Ante choques monetarios o de demanda de inversión, el modelo reproduce varios comovimientos de \(Y\), \(C\), \(I\) y \(N\).
+    \item Sin embargo, el nivel de precios no resulta contracíclico como en algunos datos utilizados por Williamson.
+    \item La productividad media del trabajo puede ser contracíclica: las empresas aumentan empleo para satisfacer demanda aun con productividad marginal decreciente.
+    \item Una respuesta óptima del banco central puede ocultar estas diferencias en las series agregadas observadas.
+  \end{itemize}
+
+\end{frame}
+
+% =============================================================================
+\section{Trampa de liquidez}
+% =============================================================================
+
+\begin{frame}{La cota inferior de la tasa nominal}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item La relación de Fisher es
+      \[
+        R=r+\pi^e.
+      \]
+    \item Con efectivo que paga rendimiento cero, la tasa nominal enfrenta una cota inferior efectiva cercana a cero:
+      \[
+        R\geq \underline R\approx 0.
+      \]
+    \item Si la tasa real necesaria para cerrar la brecha satisface \(r^m<\underline R-\pi^e\), el banco central no puede alcanzarla con su instrumento convencional.
+    \item En esa situación, dinero y deuda pública de corto plazo son sustitutos cercanos; intercambiarlos no aumenta la cantidad total de activos líquidos \(M+B\).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Trampa de liquidez}
+  \centering
+  \figura[6.0cm]{fig_14_6_trampa_liquidez.png}
+  \fuentefigura{Williamson (2018), figura 14.6.}
+\end{frame}
+
+\begin{frame}{Choque financiero en la cota inferior}
+  \small
+  \begin{enumerate}
+    \setlength{\itemsep}{0.58em}
+    \item La economía parte de \((Y_1,r_1)\) con \(R=0\) y brecha nula.
+    \item Mayores fricciones de crédito desplazan la demanda de producto a la izquierda.
+    \item La tasa que cerraría la brecha es \(r_2<r_1\), pero la cota impide alcanzarla.
+    \item La tasa permanece en \(r_1\) y la producción cae a \(Y_2\).
+    \item Si una tasa nominal negativa fuera factible, la economía podría alcanzar \(Y_3\), más cerca del nivel eficiente.
+  \end{enumerate}
+
+  \begin{alertblock}{Amplificación}
+    La misma perturbación financiera produce una caída mayor cuando la política convencional está restringida.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Opciones de política en una trampa de liquidez}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item \textbf{Tasas negativas:} amplían el margen convencional, pero pueden inducir sustitución hacia efectivo y presionar la intermediación bancaria.
+    \item \textbf{Mayor inflación esperada:} reduce la tasa real \(r=R-\pi^e\), aunque exige credibilidad.
+    \item \textbf{Política fiscal:} desplaza directamente la demanda cuando la tasa no puede caer.
+    \item \textbf{Provisión de liquidez:} el banco central actúa como prestamista de última instancia.
+    \item \textbf{Compras de activos de largo plazo:} buscan reducir primas por plazo y tasas largas.
+  \end{itemize}
+
+  \begin{block}{Límite del modelo básico}
+    Sin segmentación financiera ni primas por plazo, el modelo no puede evaluar adecuadamente la expansión cuantitativa.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Una regla de Taylor}
+  \small
+  La política monetaria puede representarse mediante una regla que responde a inflación y holgura laboral:
+  \[
+    \boxed{R_t=2.0+1.2\pi_t-1.5\bigl(u_t-u_t^n\bigr)}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item Si la inflación aumenta un punto porcentual, la tasa objetivo aumenta \(1.2\) puntos.
+    \item Si el desempleo excede su tasa natural en un punto, la tasa objetivo disminuye \(1.5\) puntos.
+    \item La regla resume una respuesta sistemática del banco central, no una relación causal estimada de manera aislada.
+  \end{itemize}
+  \notafuentes{Williamson (2018), ecuación 14.1.}
+\end{frame}
+
+\begin{frame}{Regla de Taylor y la crisis financiera}
+  \centering
+  \figura[6.35cm]{fig_14_7_regla_taylor.png}
+  \fuentefigura{Williamson (2018), figura 14.7.}
+\end{frame}
+
+\begin{frame}{Expansión cuantitativa: interpretación y cautela}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item La regla estimada para 1988--2007 recomendaba una tasa negativa entre 2009T1 y 2011T1.
+    \item Como la tasa efectiva permaneció cerca de cero, la Reserva Federal compró activos de largo plazo mediante programas de \textit{quantitative easing}.
+    \item El objetivo era reducir tasas largas y estimular el gasto cuando la tasa de corto plazo ya no podía caer.
+    \item Pero el modelo nuevo keynesiano simple no contiene los detalles financieros necesarios para cuantificar ese canal.
+  \end{itemize}
+
+  \begin{alertblock}{Lección metodológica}
+    Una recomendación de política no es más sólida que el mecanismo financiero que el modelo representa explícitamente.
+  \end{alertblock}
+\end{frame}
+
+% =============================================================================
+\section{Evidencia y evaluación}
+% =============================================================================
+
+\begin{frame}{¿Qué tan rígidos son los precios?}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item La frecuencia de ajuste es muy heterogénea: gasolina y alimentos frescos cambian con frecuencia; otros precios permanecen fijos por meses.
+    \item Bils y Klenow (2004) encuentran que, para la mitad de los bienes y servicios de su muestra, el precio cambia cada \(4.3\) meses o menos.
+    \item Los cambios de precios individuales son más grandes y volátiles que lo sugerido por modelos simples de ajuste escalonado.
+    \item La evidencia no elimina el canal de precios rígidos, pero cuestiona calibraciones con rigideces excesivas y homogéneas.
+  \end{itemize}
+
+  \begin{block}{Objeto empírico correcto}
+    No basta medir cuánto dura un precio: también importa el tamaño, la sincronización y la respuesta de los ajustes a choques agregados.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Críticas al modelo nuevo keynesiano}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.48em}
+    \item \textbf{Fundamento de la rigidez:} con frecuencia el precio fijo se impone en lugar de derivarse de una decisión óptima.
+    \item \textbf{Magnitud de los costos:} los costos administrativos de cambiar precios pueden ser pequeños frente a los costos de modificar producción.
+    \item \textbf{Evidencia microeconómica:} la frecuencia y volatilidad de los cambios no siempre coinciden con el ajuste escalonado del modelo.
+    \item \textbf{Información y rezagos:} la autoridad no observa de inmediato el producto natural ni los choques.
+    \item \textbf{Identificación:} una política endógena puede hacer que el modelo produzca los mismos datos que un modelo RBC.
+    \item \textbf{Mercados financieros:} la versión básica es demasiado simple para evaluar crisis y políticas no convencionales.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{RBC y nueva economía keynesiana}
+  \footnotesize
+  \renewcommand{\arraystretch}{1.28}
+  \begin{tabularx}{\textwidth}{lYY}
+    \toprule
+      & \textbf{RBC} & \textbf{Nueva economía keynesiana} \\
+    \midrule
+    Precios y salarios
+      & Flexibles.
+      & Rígidos en el corto plazo. \\
+    Mercados
+      & Se vacían en cada periodo.
+      & Bienes y trabajo pueden no vaciarse. \\
+    Dinero
+      & Neutral.
+      & No neutral en el corto plazo. \\
+    Fluctuaciones
+      & Respuestas eficientes a choques reales.
+      & Pueden incluir brechas ineficientes de demanda. \\
+    Política
+      & La estabilización básica no mejora bienestar.
+      & Puede cerrar la brecha si es oportuna e informada. \\
+    Evidencia
+      & Choques y propagación son discutibles.
+      & Rigidez e identificación son discutibles. \\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{Ideas principales}
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item Un precio predeterminado rompe la equivalencia entre oferta y demanda de bienes en el corto plazo.
+    \item La tasa de interés fija el gasto agregado; la cantidad de dinero se acomoda para implementar esa tasa.
+    \item El dinero deja de ser neutral: una menor tasa eleva consumo, inversión, producción y empleo.
+    \item La política monetaria y la fiscal pueden cerrar la brecha, pero alteran de manera distinta la composición del gasto.
+    \item En la cota inferior, la política convencional pierde potencia y cobran importancia expectativas, política fiscal y herramientas no convencionales.
+    \item La utilidad del modelo depende de que las rigideces, la información y la transmisión de la política sean empíricamente plausibles.
+  \end{itemize}
+\end{frame}
+
+\end{document}
