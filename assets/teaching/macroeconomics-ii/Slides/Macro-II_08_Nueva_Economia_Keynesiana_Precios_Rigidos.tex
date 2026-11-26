@@ -282,6 +282,7 @@
   \small
   \begin{enumerate}
     \setlength{\itemsep}{0.58em}
+    \item Antes del periodo presente, las empresas determinan el nivel general de precios \(P= P^*\).
     \item El banco central anuncia la tasa de política monetaria \(r^*\).
     \item La curva de demanda de producto determina
       \[
@@ -425,31 +426,7 @@
   \fuentefigura{Williamson (2018), figura 14.3.}
 \end{frame}
 
-\begin{frame}{Ajuste espontáneo o intervención monetaria}
-  \small
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Sin intervención}
-        \begin{itemize}
-          \item La oferta monetaria permanece en \(M_1\).
-          \item La debilidad de la demanda reduce gradualmente \(P\).
-          \item Al caer \(P\), aumenta la cantidad real de dinero y disminuye \(r\).
-          \item La economía converge a \((Y_2,r_2,P_2)\).
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Intervención inmediata}
-        \begin{itemize}
-          \item El banco central reduce la tasa a \(r_2\).
-          \item Expande el dinero de \(M_1\) a \(M_2\).
-          \item La demanda aumenta y la brecha se cierra con \(P=P_1\).
-          \item La asignación real de largo plazo se alcanza antes, aunque con un nivel de precios mayor.
-        \end{itemize}
-      \end{block}
-    \end{column}
-  \end{columns}
-\end{frame}
+
 
 \begin{frame}{Estabilización mediante política fiscal}
   \centering
@@ -483,38 +460,24 @@
   \end{alertblock}
 \end{frame}
 
-\begin{frame}{Predicciones cíclicas del modelo}
-  \small
-  \begin{itemize}
-    \setlength{\itemsep}{0.55em}
-    \item Ante choques monetarios o de demanda de inversión, el modelo reproduce varios comovimientos de \(Y\), \(C\), \(I\) y \(N\).
-    \item Sin embargo, el nivel de precios no resulta contracíclico como en algunos datos utilizados por Williamson.
-    \item La productividad media del trabajo puede ser contracíclica: las empresas aumentan empleo para satisfacer demanda aun con productividad marginal decreciente.
-    \item Una respuesta óptima del banco central puede ocultar estas diferencias en las series agregadas observadas.
-  \end{itemize}
-
-\end{frame}
 
 % =============================================================================
 \section{Trampa de liquidez}
 % =============================================================================
 
-\begin{frame}{La cota inferior de la tasa nominal}
+\begin{frame}{Política monetaria en el ZLB}
   \small
-  \begin{itemize}
-    \setlength{\itemsep}{0.55em}
-    \item La relación de Fisher es
-      \[
-        R=r+\pi^e.
-      \]
-    \item Con efectivo que paga rendimiento cero, la tasa nominal enfrenta una cota inferior efectiva cercana a cero:
-      \[
-        R\geq \underline R\approx 0.
-      \]
-    \item Si la tasa real necesaria para cerrar la brecha satisface \(r^m<\underline R-\pi^e\), el banco central no puede alcanzarla con su instrumento convencional.
-    \item En esa situación, dinero y deuda pública de corto plazo son sustitutos cercanos; intercambiarlos no aumenta la cantidad total de activos líquidos \(M+B\).
-  \end{itemize}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.58em}
+    \item Supongamos que la economía se encuentra en el ZLB: $R=0$.
+    \item La economía parte de \((Y_1,r_1)\) con brecha nula.
+    \item Ocurre un choque negativo de demanda agregada.
+    \item La tasa que cerraría la brecha es \(r_2<r_1\).
+    \item La tasa permanece en \(r_1\) y la producción cae a \(Y_2\).
+    \item Si una tasa nominal negativa fuera factible, la economía podría alcanzar su nivel de producto potencial.
+  \end{enumerate}
 \end{frame}
+
 
 \begin{frame}{Trampa de liquidez}
   \centering
@@ -522,147 +485,16 @@
   \fuentefigura{Williamson (2018), figura 14.6.}
 \end{frame}
 
-\begin{frame}{Choque financiero en la cota inferior}
-  \small
-  \begin{enumerate}
-    \setlength{\itemsep}{0.58em}
-    \item La economía parte de \((Y_1,r_1)\) con \(R=0\) y brecha nula.
-    \item Mayores fricciones de crédito desplazan la demanda de producto a la izquierda.
-    \item La tasa que cerraría la brecha es \(r_2<r_1\), pero la cota impide alcanzarla.
-    \item La tasa permanece en \(r_1\) y la producción cae a \(Y_2\).
-    \item Si una tasa nominal negativa fuera factible, la economía podría alcanzar \(Y_3\), más cerca del nivel eficiente.
-  \end{enumerate}
 
-  \begin{alertblock}{Amplificación}
-    La misma perturbación financiera produce una caída mayor cuando la política convencional está restringida.
-  \end{alertblock}
-\end{frame}
 
-\begin{frame}{Opciones de política en una trampa de liquidez}
-  \small
-  \begin{itemize}
-    \setlength{\itemsep}{0.52em}
-    \item \textbf{Tasas negativas:} amplían el margen convencional, pero pueden inducir sustitución hacia efectivo y presionar la intermediación bancaria.
-    \item \textbf{Mayor inflación esperada:} reduce la tasa real \(r=R-\pi^e\), aunque exige credibilidad.
-    \item \textbf{Política fiscal:} desplaza directamente la demanda cuando la tasa no puede caer.
-    \item \textbf{Provisión de liquidez:} el banco central actúa como prestamista de última instancia.
-    \item \textbf{Compras de activos de largo plazo:} buscan reducir primas por plazo y tasas largas.
-  \end{itemize}
-
-  \begin{block}{Límite del modelo básico}
-    Sin segmentación financiera ni primas por plazo, el modelo no puede evaluar adecuadamente la expansión cuantitativa.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Una regla de Taylor}
-  \small
-  La política monetaria puede representarse mediante una regla que responde a inflación y holgura laboral:
-  \[
-    \boxed{R_t=2.0+1.2\pi_t-1.5\bigl(u_t-u_t^n\bigr)}.
-  \]
-
-  \begin{itemize}
-    \setlength{\itemsep}{0.58em}
-    \item Si la inflación aumenta un punto porcentual, la tasa objetivo aumenta \(1.2\) puntos.
-    \item Si el desempleo excede su tasa natural en un punto, la tasa objetivo disminuye \(1.5\) puntos.
-    \item La regla resume una respuesta sistemática del banco central, no una relación causal estimada de manera aislada.
-  \end{itemize}
-  \notafuentes{Williamson (2018), ecuación 14.1.}
-\end{frame}
-
-\begin{frame}{Regla de Taylor y la crisis financiera}
+\begin{frame}{Regla de Taylor y el ZLB}
   \centering
   \figura[6.35cm]{fig_14_7_regla_taylor.png}
   \fuentefigura{Williamson (2018), figura 14.7.}
 \end{frame}
 
-\begin{frame}{Expansión cuantitativa: interpretación y cautela}
-  \small
-  \begin{itemize}
-    \setlength{\itemsep}{0.58em}
-    \item La regla estimada para 1988--2007 recomendaba una tasa negativa entre 2009T1 y 2011T1.
-    \item Como la tasa efectiva permaneció cerca de cero, la Reserva Federal compró activos de largo plazo mediante programas de \textit{quantitative easing}.
-    \item El objetivo era reducir tasas largas y estimular el gasto cuando la tasa de corto plazo ya no podía caer.
-    \item Pero el modelo nuevo keynesiano simple no contiene los detalles financieros necesarios para cuantificar ese canal.
-  \end{itemize}
 
-  \begin{alertblock}{Lección metodológica}
-    Una recomendación de política no es más sólida que el mecanismo financiero que el modelo representa explícitamente.
-  \end{alertblock}
-\end{frame}
 
-% =============================================================================
-\section{Evidencia y evaluación}
-% =============================================================================
 
-\begin{frame}{¿Qué tan rígidos son los precios?}
-  \small
-  \begin{itemize}
-    \setlength{\itemsep}{0.58em}
-    \item La frecuencia de ajuste es muy heterogénea: gasolina y alimentos frescos cambian con frecuencia; otros precios permanecen fijos por meses.
-    \item Bils y Klenow (2004) encuentran que, para la mitad de los bienes y servicios de su muestra, el precio cambia cada \(4.3\) meses o menos.
-    \item Los cambios de precios individuales son más grandes y volátiles que lo sugerido por modelos simples de ajuste escalonado.
-    \item La evidencia no elimina el canal de precios rígidos, pero cuestiona calibraciones con rigideces excesivas y homogéneas.
-  \end{itemize}
-
-  \begin{block}{Objeto empírico correcto}
-    No basta medir cuánto dura un precio: también importa el tamaño, la sincronización y la respuesta de los ajustes a choques agregados.
-  \end{block}
-\end{frame}
-
-\begin{frame}{Críticas al modelo nuevo keynesiano}
-  \small
-  \begin{itemize}
-    \setlength{\itemsep}{0.48em}
-    \item \textbf{Fundamento de la rigidez:} con frecuencia el precio fijo se impone en lugar de derivarse de una decisión óptima.
-    \item \textbf{Magnitud de los costos:} los costos administrativos de cambiar precios pueden ser pequeños frente a los costos de modificar producción.
-    \item \textbf{Evidencia microeconómica:} la frecuencia y volatilidad de los cambios no siempre coinciden con el ajuste escalonado del modelo.
-    \item \textbf{Información y rezagos:} la autoridad no observa de inmediato el producto natural ni los choques.
-    \item \textbf{Identificación:} una política endógena puede hacer que el modelo produzca los mismos datos que un modelo RBC.
-    \item \textbf{Mercados financieros:} la versión básica es demasiado simple para evaluar crisis y políticas no convencionales.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{RBC y nueva economía keynesiana}
-  \footnotesize
-  \renewcommand{\arraystretch}{1.28}
-  \begin{tabularx}{\textwidth}{lYY}
-    \toprule
-      & \textbf{RBC} & \textbf{Nueva economía keynesiana} \\
-    \midrule
-    Precios y salarios
-      & Flexibles.
-      & Rígidos en el corto plazo. \\
-    Mercados
-      & Se vacían en cada periodo.
-      & Bienes y trabajo pueden no vaciarse. \\
-    Dinero
-      & Neutral.
-      & No neutral en el corto plazo. \\
-    Fluctuaciones
-      & Respuestas eficientes a choques reales.
-      & Pueden incluir brechas ineficientes de demanda. \\
-    Política
-      & La estabilización básica no mejora bienestar.
-      & Puede cerrar la brecha si es oportuna e informada. \\
-    Evidencia
-      & Choques y propagación son discutibles.
-      & Rigidez e identificación son discutibles. \\
-    \bottomrule
-  \end{tabularx}
-\end{frame}
-
-\begin{frame}{Ideas principales}
-  \small
-  \begin{itemize}
-    \setlength{\itemsep}{0.58em}
-    \item Un precio predeterminado rompe la equivalencia entre oferta y demanda de bienes en el corto plazo.
-    \item La tasa de interés fija el gasto agregado; la cantidad de dinero se acomoda para implementar esa tasa.
-    \item El dinero deja de ser neutral: una menor tasa eleva consumo, inversión, producción y empleo.
-    \item La política monetaria y la fiscal pueden cerrar la brecha, pero alteran de manera distinta la composición del gasto.
-    \item En la cota inferior, la política convencional pierde potencia y cobran importancia expectativas, política fiscal y herramientas no convencionales.
-    \item La utilidad del modelo depende de que las rigideces, la información y la transmisión de la política sean empíricamente plausibles.
-  \end{itemize}
-\end{frame}
 
 \end{document}
