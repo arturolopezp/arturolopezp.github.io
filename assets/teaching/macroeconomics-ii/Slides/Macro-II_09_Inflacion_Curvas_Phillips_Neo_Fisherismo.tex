@@ -1,0 +1,710 @@
+% Compatibilidad con instalaciones MiKTeX cuyo formato base es anterior a
+% los paquetes Beamer/Hyperref instalados.
+\providecommand{\IfFormatAtLeastTF}[3]{#3}
+\providecommand{\IfFormatAtLeastT}[2]{}
+\providecommand{\IfFormatAtLeastF}[2]{#2}
+\providecommand{\IfDocumentMetadataTF}[2]{#2}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\providecommand{\IfDocumentMetadataF}[1]{#1}
+\makeatletter
+\@namedef{ver@epstopdf-base.sty}{9999/12/31}
+\makeatother
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% =============================================================================
+% MACROECONOMIA II | LICENCIATURA EN ECONOMIA | CIDE
+% SESION 9: INFLACION, CURVAS DE PHILLIPS Y NEO-FISHERISMO
+% =============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\uselanguage{English}
+\languagepath{English}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\IfFileExists{booktabs.sty}{
+  \usepackage{booktabs}
+}{
+  \providecommand{\toprule}{\hline}
+  \providecommand{\midrule}{\hline}
+  \providecommand{\bottomrule}{\hline}
+  \providecommand{\cmidrule}[1]{\hline}
+}
+\providecommand{\addlinespace}[1][0.5em]{}
+\usepackage{xcolor}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+\usepackage{array,tabularx}
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{remark}[theorem]{Observación}
+\newtheorem{assumption}[theorem]{Supuesto}
+
+\tolerance=1000
+\emergencystretch=1em
+\AtBeginDocument{\justifying}
+\addtobeamertemplate{itemize body begin}{\justifying}{}
+\addtobeamertemplate{enumerate body begin}{\justifying}{}
+\addtobeamertemplate{description body begin}{\justifying}{}
+\addtobeamertemplate{block begin}{}{\justifying}
+\addtobeamertemplate{block alerted begin}{}{\justifying}
+\addtobeamertemplate{block example begin}{}{\justifying}
+\AtBeginEnvironment{column}{\justifying}
+
+\definecolor{CIDENavy}{RGB}{3,25,54}
+\definecolor{CIDEBlue}{RGB}{5,35,75}
+\definecolor{CIDEInk}{RGB}{25,34,45}
+\definecolor{CIDEGray}{RGB}{101,112,126}
+\definecolor{CIDEGrayLight}{RGB}{243,244,246}
+
+\setbeamercolor{normal text}{fg=CIDEInk,bg=white}
+\setbeamercolor{structure}{fg=CIDEBlue}
+\setbeamercolor{alerted text}{fg=CIDEBlue}
+\setbeamercolor{title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{subtitle}{fg=CIDEInk}
+\setbeamercolor{frametitle}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette primary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=CIDEBlue,fg=white}
+\setbeamercolor{palette tertiary}{bg=CIDENavy,fg=white}
+\setbeamercolor{palette quaternary}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot}{bg=CIDENavy,fg=white}
+\setbeamercolor{section in head/foot shaded}{bg=CIDENavy,fg=white!50}
+\setbeamercolor{mini frame}{bg=white,fg=white}
+\setbeamercolor{mini frame shaded}{bg=white!35,fg=white!35}
+\setbeamercolor{upper separation line head}{bg=CIDENavy}
+\setbeamercolor{lower separation line head}{bg=CIDEBlue}
+\setbeamercolor{block title}{bg=CIDEBlue,fg=white}
+\setbeamercolor{block body}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{block title alerted}{bg=CIDENavy,fg=white}
+\setbeamercolor{block body alerted}{bg=CIDEGrayLight,fg=CIDEInk}
+\setbeamercolor{caption name}{fg=CIDEBlue}
+
+\setbeamerfont{author in head/foot}{size=\tiny}
+\setbeamerfont{institute in head/foot}{size=\tiny}
+\setbeamerfont{title in head/foot}{size=\tiny}
+\setbeamersize{text margin left=0.70cm,text margin right=0.70cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\abovecaptionskip}{0.25em}
+\setlength{\belowcaptionskip}{0pt}
+
+\useoutertheme[subsection=false]{miniframes}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{mini frame}[circle]
+\setbeamertemplate{mini frame in current subsection}[circle]
+\setbeamertemplate{section in head/foot}{\color{white}\insertsectionhead}
+\setbeamertemplate{section in head/foot shaded}{\color{white!55}\insertsectionhead}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{itemize item}{\raisebox{0.15ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\raisebox{0.15ex}{\tiny$\bullet$}}
+\setbeamertemplate{enumerate item}[circle]
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,ht=3.05ex,dp=1.05ex,
+    leftskip=0.42cm,rightskip=0.42cm
+  ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \vbox{%
+    \offinterlineskip
+    \hbox{%
+      \begin{beamercolorbox}[wd=.72\paperwidth,ht=2.05ex,dp=.55ex,leftskip=.35cm]{palette secondary}
+        \usebeamerfont{author in head/foot}\insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.28\paperwidth,ht=2.05ex,dp=.55ex,rightskip=.35cm plus1fil]{palette secondary}
+        \hfill\usebeamerfont{institute in head/foot}\insertshortinstitute
+      \end{beamercolorbox}%
+    }%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.86\paperwidth,ht=1.85ex,dp=.50ex,leftskip=.35cm]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.14\paperwidth,ht=1.85ex,dp=.50ex,center]{palette tertiary}
+        \usebeamerfont{title in head/foot}\insertframenumber{} / \inserttotalframenumber
+      \end{beamercolorbox}%
+    }%
+  }%
+  \vskip0pt
+}
+
+\newcommand{\RutaLogoCIDE}{Figuras/General/logocide.png}
+\setbeamertemplate{background}{%
+  \vbox to \paperheight{%
+    \vfill
+    \hbox to \paperwidth{%
+      \hfill
+      \includegraphics[height=0.58cm,keepaspectratio]{\RutaLogoCIDE}%
+      \hspace{0.18cm}%
+    }%
+    \vspace{0.68cm}%
+  }%
+}
+
+\setbeamertemplate{title page}{%
+  \vspace*{0.35cm}
+  \centering
+  \begin{beamercolorbox}[wd=\textwidth,sep=0.24cm,center,rounded=false]{title}
+    \usebeamerfont{title}\inserttitle\par
+  \end{beamercolorbox}
+  \vspace{0.25cm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vfill
+  {\usebeamerfont{author}\insertauthor\par}
+  \vspace{0.35cm}
+  {\usebeamerfont{institute}\insertinstitute\par}
+  \vfill
+  {\usebeamerfont{date}\insertdate\par}
+  \vspace{0.25cm}
+}
+
+\newcommand{\FigurasSesion}{Figuras/09_Inflacion Curvas Phillips Neo Fisherismo}
+\newcommand{\figura}[2][0.65\textheight]{%
+  \includegraphics[width=\linewidth,height=#1,keepaspectratio]{\FigurasSesion/#2}%
+}
+\newcommand{\cidehighlight}[1]{\textcolor{CIDEBlue}{\bfseries #1}}
+\newcommand{\fuentefigura}[1]{%
+  \vspace{0.03cm}\par{\raggedright\tiny\textit{Fuente:} #1\par}%
+}
+\newcommand{\notafuentes}[1]{\note{[Sources] #1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=.,
+  citecolor=.,
+  filecolor=.
+}
+
+\newif\ifsectiontoc
+\sectiontocfalse
+\AtBeginSection[]{%
+  \ifsectiontoc
+    \begin{frame}{Contenido}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  \fi
+}
+
+\title[Macroeconomía II]{Sesión 9 \\ Inflación y curvas de Phillips}
+\subtitle{Política monetaria, expectativas y neo-fisherismo}
+\author[LECO]{Arturo López}
+\institute[CIDE]{Centro de Investigación y Docencia Económicas (CIDE)}
+\date[Otoño 2026]{Licenciatura en Economía, Otoño 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Objetivos de la sesión}
+  \begin{itemize}
+    \setlength{\itemsep}{0.60em}
+    \item Incorporar la inflación al modelo Nuevo-Keynesiano mediante una \cidehighlight{curva de Phillips}.
+    \item Analizar el mandato dual del banco central y los dilemas entre estabilidad de precios y actividad económica.
+    \item Estudiar el límite inferior de la tasa nominal y el mecanismo de la \cidehighlight{orientación futura}.
+    \item Introducir expectativas racionales y derivar los resultados neo-fisherianos del modelo.
+    \item Evaluar las reglas de Taylor, sus posibles problemas de indeterminación y una alternativa neo-fisheriana.
+  \end{itemize}
+\end{frame}
+
+\section{Inflación y curva de Phillips}
+
+\begin{frame}{¿Por qué importa la inflación?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item La inflación anticipada genera costos de ajuste de precios, economías de efectivo y distorsiones tributarias.
+    \item La inflación no anticipada redistribuye riqueza entre acreedores y deudores y altera los rendimientos reales.
+    \item Con precios rígidos, no todas las empresas reajustan al mismo tiempo: la inflación modifica \textbf{precios relativos} y distorsiona la asignación de recursos.
+    \item Por ello, en el modelo Nuevo-Keynesiano la estabilidad de precios tiene valor social, incluso cuando la inflación es perfectamente anticipada.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Del modelo de precios rígidos a la inflación}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item En el capítulo anterior, algunas empresas fijaban su precio antes de observar los choques agregados.
+    \item Para estudiar inflación necesitamos describir cómo evoluciona el nivel general de precios cuando sólo una fracción de las empresas puede reajustarlo.
+    \item La relación resultante conecta la inflación presente con:
+    \begin{itemize}
+      \item el nivel de actividad respecto de la producción con precios flexibles; y
+      \item la inflación futura anticipada.
+    \end{itemize}
+    \item Esta relación es la \cidehighlight{curva de Phillips Nuevo-Keynesiana}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Fijación de precios a la Calvo}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item En cada periodo, cada empresa recibe aleatoriamente la oportunidad de reajustar su precio.
+    \item La probabilidad de reajuste es independiente del tiempo transcurrido desde el último cambio.
+    \item La empresa que reajusta elige un precio \textit{forward-looking}: pondera los costos marginales y la demanda esperados mientras su precio permanezca fijo.
+    \item Las empresas que no reajustan satisfacen la demanda al precio previamente elegido.
+  \end{itemize}
+
+  \begin{block}{Implicación}
+    Un mayor nivel de actividad eleva los costos marginales y el precio óptimo; una mayor inflación futura esperada induce a reajustar más el precio hoy.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Curva de Phillips Nuevo-Keynesiana}
+  Definamos la brecha de producto con la convención usual:
+  \[
+    x_t \equiv Y_t-Y_t^{m},
+  \]
+  donde \(Y_t^{m}\) es la producción que prevalecería con precios flexibles. Entonces,
+  \[
+    \boxed{\pi_t=\kappa x_t+\beta E_t\pi_{t+1}},
+    \qquad \kappa>0,\quad 0<\beta<1.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.45em}
+    \item Si \(Y_t>Y_t^m\), los costos marginales y la inflación aumentan.
+    \item Si \(Y_t<Y_t^m\), la brecha es negativa y la inflación disminuye.
+    \item Una mayor inflación futura esperada eleva la inflación presente.
+  \end{itemize}
+
+  \begin{alertblock}{Convención de Williamson}
+    El libro denomina brecha recesiva a \(Y_t^m-Y_t=-x_t\). Ambas convenciones describen el mismo mecanismo.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Relación de Fisher y tasa natural}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item El banco central controla la tasa de interés nominal \(R_t\), pero las decisiones intertemporales dependen de la tasa real:
+    \[
+      \boxed{r_t=R_t-E_t\pi_{t+1}}.
+    \]
+    \item La \cidehighlight{tasa real natural} \(r_t^n\) es la tasa compatible con \(Y_t=Y_t^m\), es decir, con una brecha de producto igual a cero.
+    \item Si \(r_t>r_t^n\), el gasto presente es insuficiente y \(x_t<0\).
+    \item Si \(r_t<r_t^n\), el gasto presente es elevado y \(x_t>0\).
+  \end{itemize}
+\end{frame}
+
+\section{Modelo Nuevo-Keynesiano básico}
+
+\begin{frame}{El modelo Nuevo-Keynesiano básico}
+  \centering
+  \figura[6.25cm]{fig_15_1_modelo_nk.png}
+  \fuentefigura{Williamson (2018), figura 15.1.}
+\end{frame}
+
+\begin{frame}{Determinación del equilibrio}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.72em}
+    \item El banco central fija la tasa nominal \(R_t\).
+    \item Dada la inflación futura esperada, se determina la tasa real:
+    \[
+      r_t=R_t-E_t\pi_{t+1}.
+    \]
+    \item La tasa real determina el gasto deseado y el producto \(Y_t=Y^d(r_t)\).
+    \item Dado \(Y_t\), la curva de Phillips determina la inflación presente:
+    \[
+      \pi_t=\kappa(Y_t-Y_t^m)+\beta E_t\pi_{t+1}.
+    \]
+  \end{enumerate}
+
+  \begin{block}{Modelo básico}
+    En esta primera versión, \(E_t\pi_{t+1}\) se trata como una variable exógena.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Mandato dual del banco central}
+  \begin{itemize}
+    \setlength{\itemsep}{0.55em}
+    \item El banco central desea estabilizar la inflación alrededor de su meta \(\pi^*\).
+    \item También desea cerrar la brecha de producto: \(Y_t=Y_t^m\).
+    \item Una representación reducida de sus pérdidas es
+    \[
+      \mathcal{L}_t=(\pi_t-\pi^*)^2+\lambda x_t^2,
+      \qquad \lambda>0.
+    \]
+    \item Si \(r_t=r_t^n\) y la inflación esperada es consistente con la meta, ambos objetivos pueden alcanzarse simultáneamente.
+    \item Ante ciertos choques, el banco central enfrenta una disyuntiva entre inflación y actividad.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Caída de la tasa real natural}
+  \centering
+  \figura[6.25cm]{fig_15_2_tasa_natural.png}
+  \fuentefigura{Williamson (2018), figura 15.2.}
+\end{frame}
+
+\begin{frame}{El dilema de política monetaria}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item Una caída de \(r^n\) deja a la tasa real vigente por encima de su nivel natural.
+    \item Si el banco central no modifica \(R\), mantiene la inflación en la meta, pero permite una brecha recesiva.
+    \item Si reduce \(R\) hasta igualar \(r=r^n\), cierra la brecha, pero la inflación supera la meta.
+    \item Si valora ambos objetivos, elige una respuesta intermedia: tolera desviaciones moderadas de inflación y producto.
+  \end{itemize}
+
+  \begin{block}{Idea central}
+    El choque desplaza el nivel de actividad compatible con precios flexibles; la rigidez nominal impide alcanzar simultáneamente ambos objetivos.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Aumento de la inflación futura esperada}
+  \centering
+  \figura[6.25cm]{fig_15_3_inflacion_esperada.png}
+  \fuentefigura{Williamson (2018), figura 15.3.}
+\end{frame}
+
+\begin{frame}{Respuesta ante mayores expectativas de inflación}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item El aumento de \(E_t\pi_{t+1}\) desplaza la curva de Phillips hacia arriba.
+    \item Si \(R_t\) aumenta uno a uno con la inflación esperada, \(r_t\) no cambia: el producto permanece constante, pero la inflación aumenta.
+    \item Para mantener \(\pi_t=\pi^*\), el banco central debe aumentar \(R_t\) más que proporcionalmente, elevando \(r_t\) y reduciendo el producto.
+    \item Una respuesta intermedia distribuye el costo entre inflación por encima de la meta y una brecha recesiva.
+  \end{itemize}
+
+  \begin{alertblock}{Principio de Taylor}
+    La lógica convencional prescribe aumentar la tasa nominal más que uno a uno ante un aumento persistente de la inflación.
+  \end{alertblock}
+\end{frame}
+
+\section{Evidencia y límite inferior}
+
+\begin{frame}{La curva de Phillips en los datos}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item Phillips documentó originalmente una relación negativa entre inflación salarial y desempleo.
+    \item En el modelo moderno, la inflación depende de la brecha de actividad y de las expectativas de inflación.
+    \item Por ello, una correlación simple entre inflación y desempleo no identifica una curva estructural estable.
+    \item Cambios en expectativas, choques de oferta y modificaciones de la regla monetaria desplazan la relación observada.
+  \end{itemize}
+
+  \begin{block}{Predicción condicional}
+    Manteniendo constantes las expectativas y los choques de costos, una mayor actividad económica debería asociarse con mayor inflación.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Una curva de Phillips para Estados Unidos}
+  \centering
+  \figura[6.10cm]{fig_15_4_phillips_1949_2016.png}
+  \fuentefigura{Williamson (2018), figura 15.4.}
+\end{frame}
+
+\begin{frame}{La relación después de la Gran Recesión}
+  \centering
+  \figura[6.10cm]{fig_15_5_phillips_2009_2016.png}
+  \fuentefigura{Williamson (2018), figura 15.5.}
+\end{frame}
+
+\begin{frame}{¿Qué aprendemos de la evidencia?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.64em}
+    \item La relación incondicional entre inflación y holgura económica es débil e inestable.
+    \item Una curva de Phillips estructural no implica que todos los movimientos observados deban ubicarse sobre una misma curva.
+    \item La pendiente estimada puede cambiar con el anclaje de expectativas, la frecuencia de reajuste de precios y la composición de los choques.
+    \item La evidencia exige cautela: la curva de Phillips es un mecanismo del modelo, no una regularidad mecánica e invariable.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{¿Por qué puede ser baja la tasa natural?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item \textbf{Exceso mundial de ahorro:} una mayor oferta de fondos prestables reduce la tasa real de equilibrio.
+    \item \textbf{Estancamiento secular:} la escasez de oportunidades rentables reduce la demanda de inversión.
+    \item \textbf{Fricciones financieras:} una mayor demanda de activos seguros y restricciones de crédito deprimen la tasa segura.
+    \item En los tres casos, \(r_t^n\) puede caer a niveles muy bajos o incluso negativos.
+  \end{itemize}
+
+  \begin{block}{Problema de política}
+    Si la tasa nominal no puede reducirse lo suficiente, la tasa real permanece por encima de su nivel natural.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Límite inferior de la tasa nominal}
+  Si la tasa nominal satisface \(R_t\geq 0\), entonces
+  \[
+    r_t=R_t-E_t\pi_{t+1}\geq -E_t\pi_{t+1}.
+  \]
+  Cuando
+  \[
+    \boxed{r_t^n<-E_t\pi_{t+1}},
+  \]
+  ni siquiera \(R_t=0\) permite alcanzar la tasa real natural.
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.50em}
+    \item La tasa real resulta demasiado alta.
+    \item El producto queda por debajo de \(Y_t^m\).
+    \item La inflación queda por debajo de su meta.
+    \item La política monetaria convencional queda restringida.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Trampa de liquidez}
+  \centering
+  \figura[6.25cm]{fig_15_6_zlb.png}
+  \fuentefigura{Williamson (2018), figura 15.6.}
+\end{frame}
+
+\begin{frame}{Orientación futura}
+  La \cidehighlight{orientación futura} (\textit{forward guidance}) es un compromiso sobre la política monetaria futura.
+
+  \[
+    E_t\pi_{t+1}\uparrow
+    \quad\Longrightarrow\quad
+    r_t=R_t-E_t\pi_{t+1}\downarrow
+    \quad\Longrightarrow\quad
+    Y_t\uparrow,\ \pi_t\uparrow.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.52em}
+    \item En el límite inferior, \(R_t\) no puede caer, pero las expectativas de inflación sí pueden reducir la tasa real.
+    \item El banco central promete mantener una política expansiva en el futuro, incluso después de que la economía se recupere.
+    \item La promesa desplaza la curva de Phillips y estimula el gasto presente.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Orientación futura en el límite inferior}
+  \centering
+  \figura[6.25cm]{fig_15_7_forward_guidance.png}
+  \fuentefigura{Williamson (2018), figura 15.7.}
+\end{frame}
+
+\begin{frame}{Credibilidad e inconsistencia temporal}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item La orientación futura funciona sólo si modifica las expectativas privadas.
+    \item Cuando llegue el futuro, el banco central tendrá incentivos para incumplir la promesa y evitar inflación excesiva.
+    \item Si el público anticipa ese incumplimiento, la promesa no será creíble y no reducirá la tasa real presente.
+    \item La comunicación debe ser clara y estar respaldada por mecanismos de compromiso.
+  \end{itemize}
+
+  \begin{alertblock}{Tensión fundamental}
+    La política que conviene prometer hoy puede no ser la que convenga ejecutar mañana.
+  \end{alertblock}
+\end{frame}
+
+\section{Expectativas racionales y neo-fisherismo}
+
+\begin{frame}{Modelo NK con expectativas racionales}
+  Supongamos ausencia de choques y parámetros constantes. La demanda intertemporal satisface
+  \[
+    Y_t-Y_{t+1}
+    =-\frac{1}{d}\left(R_t-\pi_{t+1}-r^*\right),
+    \qquad d>0.
+  \]
+  Williamson simplifica la curva de Phillips a
+  \[
+    \pi_t=a(Y_t-Y^m),\qquad a>0,
+  \]
+  y, en el periodo siguiente,
+  \[
+    \pi_{t+1}=a(Y_{t+1}-Y^m).
+  \]
+
+  \begin{block}{Expectativas racionales}
+    Sin choques, los valores anticipados coinciden con los realizados: los agentes conocen el modelo y no cometen errores sistemáticos.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Ley de movimiento de la inflación}
+  Al eliminar \(Y_t\) y \(Y_{t+1}\), obtenemos
+  \[
+    \boxed{
+      \pi_{t+1}
+      =
+      \frac{a(R_t-r^*)}{a+d}
+      +
+      \frac{d}{a+d}\pi_t
+    }.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item La inflación presente y la tasa nominal determinan la inflación futura.
+    \item Como \(0<d/(a+d)<1\), para una tasa nominal constante la inflación converge a un estado estacionario.
+    \item La tasa nominal fija el estado estacionario, pero no determina por sí sola la inflación inicial.
+  \end{itemize}
+
+  \begin{alertblock}{Indeterminación}
+    Existen múltiples trayectorias de inflación compatibles con una tasa nominal constante.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Tasa nominal constante}
+  \centering
+  \figura[5.95cm]{fig_15_8_nkre_constante.png}
+  \fuentefigura{Williamson (2018), figura 15.8.}
+\end{frame}
+
+\begin{frame}{Relación de Fisher de largo plazo}
+  En estado estacionario, \(\pi_{t+1}=\pi_t=\pi\). Por lo tanto,
+  \[
+    \boxed{\pi=R-r^*}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.64em}
+    \item Si \(r^*\) permanece constante, un aumento permanente de \(R\) eleva la inflación de largo plazo uno a uno.
+    \item Éste es el \cidehighlight{efecto Fisher de largo plazo}.
+    \item En el modelo, la causalidad va de la tasa nominal fijada por el banco central hacia la inflación de estado estacionario.
+    \item El resultado requiere interpretar el aumento de \(R\) como un cambio permanente y creíble del régimen monetario.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Aumento permanente de la tasa nominal}
+  \centering
+  \figura[5.85cm]{fig_15_9_alza_tasa_nkre.png}
+  \fuentefigura{Williamson (2018), figura 15.9.}
+\end{frame}
+
+\begin{frame}{Dinámica de la inflación}
+  \centering
+  \figura[5.85cm]{fig_15_10_dinamica_inflacion.png}
+  \fuentefigura{Williamson (2018), figura 15.10.}
+\end{frame}
+
+\begin{frame}{La intuición neo-fisheriana}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item Una tasa nominal permanentemente mayor debe ser compatible, en el largo plazo, con una inflación mayor si \(r^*\) no cambia.
+    \item Con expectativas racionales, los agentes anticipan la nueva trayectoria de inflación y ajustan sus decisiones intertemporales desde hoy.
+    \item En el modelo NKRE de Williamson, la inflación no cae inicialmente: converge hacia el nuevo estado estacionario más alto.
+    \item Esto contrasta con el experimento convencional de un aumento transitorio e inesperado de la tasa, que puede ser contractivo y desinflacionario.
+  \end{itemize}
+
+  \begin{alertblock}{Advertencia}
+    El resultado neo-fisheriano depende del carácter permanente, creíble y fiscalmente consistente del régimen; no es una correlación mecánica entre tasas e inflación.
+  \end{alertblock}
+\end{frame}
+
+\section{Reglas de Taylor}
+
+\begin{frame}{Regla de Taylor simplificada}
+  Williamson considera
+  \[
+    \boxed{
+      R_t=\max\left\{0,\,
+      h\pi_t+(1-h)\pi^*+r^*
+      \right\}.
+    }
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.56em}
+    \item \(\pi^*\) es la meta de inflación.
+    \item El operador \(\max\) incorpora el límite inferior \(R_t\geq 0\).
+    \item Si \(h>1\), la regla satisface el \cidehighlight{principio de Taylor}: la tasa nominal responde más que uno a uno a la inflación.
+    \item La intención es elevar la tasa real cuando la inflación aumenta.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Dos estados estacionarios}
+  \centering
+  \figura[5.95cm]{fig_15_11_regla_taylor.png}
+  \fuentefigura{Williamson (2018), figura 15.11.}
+\end{frame}
+
+\begin{frame}{Los peligros de la regla de Taylor}
+  \centering
+  \figura[5.95cm]{fig_15_12_dinamica_taylor.png}
+  \fuentefigura{Williamson (2018), figura 15.12.}
+\end{frame}
+
+\begin{frame}{¿Qué puede salir mal?}
+  \begin{itemize}
+    \setlength{\itemsep}{0.62em}
+    \item La regla tiene un estado estacionario deseado: \(\pi=\pi^*\) y \(R=r^*+\pi^*\).
+    \item También puede tener un estado estacionario no deseado: \(R=0\) y \(\pi=-r^*\).
+    \item Bajo el principio de Taylor, el estado deseado puede ser inestable y múltiples trayectorias convergen al equilibrio de baja inflación.
+    \item El banco central observa inflación insuficiente, desea reducir \(R\), pero ya se encuentra en el límite inferior.
+  \end{itemize}
+
+  \begin{alertblock}{Peligro}
+    Una regla diseñada para estabilizar la inflación puede producir indeterminación y una trampa persistente de baja inflación.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Una regla monetaria neo-fisheriana}
+  Williamson propone una regla por tramos. Si \(\pi_t<\pi^*\),
+  \[
+    R_t=r^*+\frac{a+d}{a}\pi^*-\frac{d}{a}\pi_t.
+  \]
+  Si \(\pi_t\geq\pi^*\),
+  \[
+    R_t=r^*-\frac{d}{a}\pi^*
+        +\frac{a+d}{a}E_t\pi_{t+1}.
+  \]
+
+  \begin{itemize}
+    \setlength{\itemsep}{0.48em}
+    \item Con inflación baja, la regla prescribe una tasa nominal más alta.
+    \item Con presiones inflacionarias futuras, la tasa responde más que proporcionalmente.
+    \item En el modelo, \(\pi_{t+1}=\pi^*\) después de cualquier inflación inicial inferior a la meta.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Inflación bajo la regla neo-fisheriana}
+  \centering
+  \figura[5.75cm]{fig_15_13_regla_neofisheriana.png}
+  \fuentefigura{Williamson (2018), figura 15.13.}
+\end{frame}
+
+\begin{frame}{Dos visiones de la política monetaria}
+  \small
+  \renewcommand{\arraystretch}{1.30}
+  \begin{tabularx}{\textwidth}{lYY}
+    \toprule
+      & \textbf{Visión convencional} & \textbf{Visión neo-fisheriana} \\
+    \midrule
+    Experimento
+      & Cambio transitorio de la tasa nominal.
+      & Cambio permanente y creíble del régimen. \\
+    Mecanismo inicial
+      & Mayor tasa real reduce gasto y actividad.
+      & Expectativas ajustan la trayectoria de inflación. \\
+    Inflación
+      & Una mayor tasa nominal reduce la inflación en el corto plazo.
+      & Una mayor tasa nominal eleva la inflación en el largo plazo y, en el NKRE, también su trayectoria. \\
+    Riesgo
+      & Recesión por endurecimiento excesivo.
+      & Indeterminación, falta de credibilidad o inconsistencia fiscal. \\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{Conclusiones}
+  \begin{itemize}
+    \setlength{\itemsep}{0.58em}
+    \item La curva de Phillips conecta inflación, brecha de producto y expectativas, pero su relación empírica incondicional es débil.
+    \item Una tasa natural baja puede llevar a la economía al límite inferior y volver insuficiente la política convencional.
+    \item La orientación futura intenta reducir la tasa real mediante expectativas, pero exige credibilidad y compromiso.
+    \item Con expectativas racionales, el modelo NK genera la relación de Fisher de largo plazo y resultados neo-fisherianos.
+    \item Las reglas de Taylor pueden admitir múltiples equilibrios; el diseño de política debe considerar expectativas, permanencia y consistencia del régimen.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\LARGE\color{CIDEBlue}\bfseries Inflación, expectativas y política monetaria}
+  \vspace{0.55cm}
+
+  {\large La dinámica depende tanto de la acción presente del banco central\\
+  como de las creencias sobre su conducta futura.}
+  \vfill
+\end{frame}
+
+\end{document}
+
